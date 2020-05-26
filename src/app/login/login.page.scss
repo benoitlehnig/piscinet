@@ -1,0 +1,18 @@
+.backgroundLogin{
+	background-color: var(--ion-color-primary);
+	background: linear-gradient(45deg,   var(--ion-color-primary) 0%,rgba(66, 245, 189,0.4) 100%);
+	height: -webkit-fill-available;
+	width: -webkit-fill-available;
+	position: relative;
+}
+
+.ionCardLogin{
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	min-width:300px;
+	max-width:300px;
+	-ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+	left: 50%;
+}

@@ -1,0 +1,61 @@
+<ion-content>
+	<ion-list>
+		<ion-list-header>
+			<h2>{{'VISIT.AnalyseTitle' | translate}}</h2>
+		</ion-list-header>
+		<ion-item>
+			<ion-label position="stacked">{{'VISIT.AnalyseChlore' | translate}}</ion-label>
+			<ion-input name="chlore" type="text" [(ngModel)]="technical.chlore" (ionChange)="saveTechnical()"></ion-input> 
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'VISIT.AnalysePH' | translate}}</ion-label>
+			<ion-input name="PH" type="text" [(ngModel)]="technical.PH" (ionChange)="saveTechnical()"></ion-input> 
+		</ion-item>
+	</ion-list>
+	<ion-list>
+		<ion-list-header>
+			<h2>{{'VISIT.OtherAnalyseTitle' | translate}}</h2>
+		</ion-list-header>
+		<ion-item>
+			<ion-label position="stacked">{{'VISIT.AnalyseStabiliser' | translate}}</ion-label>
+			<ion-input name="stabilisant" type="text" [(ngModel)]="technical.stabilisant"  (ionChange)="saveTechnical()"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'VISIT.AnalyseTAC' | translate}}</ion-label>
+			<ion-input name="TAC" type="text" [(ngModel)]="technical.TAC" (ionChange)="saveTechnical()" ></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'VISIT.AnalyseSalt' | translate}}</ion-label>
+			<ion-input name="sel" type="text" [(ngModel)]="technical.sel"  (ionChange)="saveTechnical()"></ion-input>
+		</ion-item>
+	</ion-list>
+	<ion-list>
+		<ion-list-header>
+			<h2>{{'VISIT.IntroducedProductsTitle' | translate}}</h2>
+		</ion-list-header>
+		<ion-item>
+			<ion-label position="stacked">{{'VISIT.IntroducedProductChlore' | translate}}</ion-label>
+			<ion-input name="productChlore" type="text" [(ngModel)]="technical.productChlore"  (ionChange)="saveTechnical()"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'VISIT.IntroducedProductPH' | translate}}</ion-label>
+			<ion-input name="productPH" type="text"  [(ngModel)]="technical.productPH"  (ionChange)="saveTechnical()"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'VISIT.IntroducedProductGalet' | translate}}</ion-label>
+			<ion-input name="productGalet" type="text"  [(ngModel)]="technical.productGalet"  (ionChange)="saveTechnical()"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'VISIT.IntroducedProductSalt' | translate}}</ion-label>
+			<ion-input name="productSel" type="text" [(ngModel)]="technical.productSel"  (ionChange)="saveTechnical()"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'VISIT.IntroducedProductFloculent' | translate}}</ion-label>
+			<ion-input name="productFloculent" type="text" [(ngModel)]="technical.productFloculent"  (ionChange)="saveTechnical()"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'VISIT.IntroducedProductOther' | translate}}</ion-label>
+			<ion-input name="productOther" type="text" [(ngModel)]="technical.productOther"  (ionChange)="saveTechnical()"></ion-input>
+		</ion-item>
+	</ion-list>
+</ion-content>

@@ -1,0 +1,21 @@
+<ion-content>
+	<ion-list>
+		<ion-item>
+			<ion-label>{{'VISIT.ClearWater' | translate}}</ion-label>
+			<ion-toggle slot="start" [(ngModel)]="observation.waterGoodClarity" (ionChange)="saveObservation()"></ion-toggle>
+		</ion-item>
+		<ion-item>
+			<ion-label>{{'VISIT.AlgeaOnWall' | translate}}</ion-label>
+			<ion-toggle slot="start" [(ngModel)]="observation.algeaOnWall" (ionChange)="saveObservation()"></ion-toggle>
+		</ion-item>
+
+		<ion-item>
+			<ion-label>{{'VISIT.Brossage' | translate}}</ion-label>
+			<ion-toggle slot="start" [(ngModel)]="observation.brossage" (ionChange)="saveObservation()"></ion-toggle>
+		</ion-item>
+	</ion-list>
+	<ion-item>
+		<ion-label position="stacked">{{'VISIT.OtherObservation' | translate}}</ion-label>
+		<ion-textarea name="otherObservation" type="text" [(ngModel)]="observation.otherObservation" (ionChange)="saveObservation()"></ion-textarea>
+	</ion-item>
+</ion-content>

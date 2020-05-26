@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>{{'EMPLOYEES.Title' | translate}}</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content>
+	<ion-fab vertical="top" horizontal="end" slot="fixed"  [routerLink]="['/edit-employee',{ mode: 'add'}]">
+		<ion-fab-button>
+			<ion-icon name="add"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
+	<ion-list>
+		
+		<ion-item *ngFor="let employee of employees | async" [routerLink]="['/employee/' + employee.key]">
+			<ion-avatar slot="start">
+				<ngx-avatar name="{{ employee.data.firstName }} {{ employee.data.lastName}}"></ngx-avatar>
+			</ion-avatar>
+			<ion-label>
+				<h2>{{ employee.data.firstName }} {{ employee.data.lastName}}</h2>
+				<h3><a href="tel:{{ employee.data.telPhoneNumber}}">{{ employee.data.telPhoneNumber}}</a></h3>
+			</ion-label>
+		</ion-item>
+	</ion-list>
+
+</ion-content>
+

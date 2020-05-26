@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title >{{'VISIT.AddVisitTitle' | translate}}</ion-title>
+		<ion-title size="small" >{{customerInfo.firstName}} {{customerInfo.lastName}} > {{swimmingPoolName}}  </ion-title>
+		<ion-buttons slot="end">
+			<ion-button color="primary" (click)="addVisit()">
+				<ion-icon slot="start" name="save"></ion-icon>
+			{{'VISIT.AddVisitSave' | translate}}</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-tabs>
+		<ion-tab-bar slot="top">
+			<ion-tab-button tab="maintenance" selected>
+				<ion-icon name="construct"></ion-icon>
+				<ion-label>{{'VISIT.MainteanceTitle' | translate}} </ion-label>
+			</ion-tab-button>
+
+			<ion-tab-button tab="technique">
+				<ion-icon name="options"></ion-icon>
+				<ion-label>{{'VISIT.TechnicalTitle' | translate}} </ion-label>
+			</ion-tab-button>
+			<ion-tab-button tab="observation">
+				<ion-icon name="eye"></ion-icon>
+				<ion-label>{{'VISIT.ObservationsTitle' | translate}} </ion-label>
+
+			</ion-tab-button>
+
+		</ion-tab-bar>
+	</ion-tabs>
+</ion-content>

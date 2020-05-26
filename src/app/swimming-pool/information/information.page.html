@@ -1,0 +1,158 @@
+<ion-content>
+	<ion-item  lines="none" *ngIf="swimmingPool.shape ==='rectangular'">
+		<ion-avatar slot="start"  >
+			<ion-icon name="tablet-landscape" class="avatarShape"></ion-icon>
+		</ion-avatar>
+		<ion-label>
+			<h3 >{{'ADDSWIMMINGPOOL.Rectangular' | translate}}</h3>
+			<p>{{swimmingPool.length}}m x {{swimmingPool.width}}m x {{swimmingPool.depth}}m</p>
+		</ion-label>
+	</ion-item>
+	<ion-item  lines="none" *ngIf="swimmingPool.shape ==='square'">
+		<ion-avatar slot="start"  >
+			<ion-icon name="square" class="avatarShape"></ion-icon>
+		</ion-avatar>
+		<ion-label>
+			<h3 >{{'ADDSWIMMINGPOOL.Square' | translate}}</h3>
+			<p>{{swimmingPool.length}}m x {{swimmingPool.width}}m x {{swimmingPool.depth}}m</p>
+		</ion-label>
+	</ion-item>
+	<ion-item  lines="none" *ngIf="swimmingPool.shape ==='swimmingLane'">
+		<ion-avatar slot="start"  >
+			<ion-icon name="phone-landscape" class="avatarShape"></ion-icon>
+		</ion-avatar>
+		<ion-label>
+			<h3 >{{'ADDSWIMMINGPOOL.SwimmingLane' | translate}}</h3>
+			<p>{{swimmingPool.length}}m x {{swimmingPool.width}}m x {{swimmingPool.depth}}m</p>
+		</ion-label>
+	</ion-item>
+	<ion-item  lines="none" *ngIf="swimmingPool.shape ==='bean'">
+		<ion-avatar slot="start"  >
+			<ion-icon name="egg" class="avatarShape"></ion-icon>
+		</ion-avatar>
+		<ion-label>
+			<h3 >{{'ADDSWIMMINGPOOL.Bean' | translate}}</h3>
+			<p>{{swimmingPool.length}}m x {{swimmingPool.width}}m x {{swimmingPool.depth}}m</p>
+		</ion-label>
+	</ion-item>
+	<ion-item lines="none" *ngIf="swimmingPool.environment !==''">
+		<ion-label position="stacked">{{'SWIMMINGPOOL.Environment' | translate}} </ion-label>
+		<ion-text *ngIf="swimmingPool.environment ==='0'" >{{'SWIMMINGPOOL.NoVegetation' | translate}}</ion-text>
+		<ion-text *ngIf="swimmingPool.environment ==='1'" >{{'SWIMMINGPOOL.LittleVegetation' | translate}}</ion-text>
+		<ion-text *ngIf="swimmingPool.environment ==='2'" >{{'SWIMMINGPOOL.LotOfVegetation' | translate}}</ion-text>
+	</ion-item>
+
+	<ion-item lines="none" *ngIf="swimmingPool.state !==''">
+		<ion-label position="stacked">{{'SWIMMINGPOOL.State' | translate}} </ion-label>
+		<ion-text *ngIf="swimmingPool.state ==='3'" >{{'SWIMMINGPOOL.VeryGoodState' | translate}}</ion-text>
+		<ion-text *ngIf="swimmingPool.state ==='2'" >{{'SWIMMINGPOOL.GoodState' | translate}}</ion-text>
+		<ion-text *ngIf="swimmingPool.state ==='1'" >{{'SWIMMINGPOOL.StateOK' | translate}}</ion-text>
+		<ion-text *ngIf="swimmingPool.state ==='0'" >{{'SWIMMINGPOOL.BadState' | translate}}</ion-text>
+	</ion-item>
+	<ion-item lines="none" *ngIf="swimmingPool.cover !==''">
+		<ion-label position="stacked">{{'SWIMMINGPOOL.Cover' | translate}} </ion-label>
+		<ion-text *ngIf="swimmingPool.cover ==='liner'" >{{'SWIMMINGPOOL.Liner' | translate}}</ion-text>
+		<ion-text *ngIf="swimmingPool.cover ==='mosaic'" >{{'SWIMMINGPOOL.Mosaic' | translate}}</ion-text>
+		<ion-text *ngIf="swimmingPool.cover ==='PVC'" >{{'SWIMMINGPOOL.PVC' | translate}}</ion-text>
+		<ion-text *ngIf="swimmingPool.cover ==='polyester'" >{{'SWIMMINGPOOL.Polyester' | translate}}</ion-text>
+		<ion-text *ngIf="swimmingPool.cover ==='coatedConcrete'" >{{'SWIMMINGPOOL.CoatedConcrete' | translate}}</ion-text>
+	</ion-item>
+
+	
+	<ion-item lines="none" *ngIf="swimmingPool.access !==''">
+		<ion-label position="stacked">{{'SWIMMINGPOOL.Access' | translate}} </ion-label>
+		<ion-text *ngIf="swimmingPool.access ==='ladder'" >{{'SWIMMINGPOOL.Ladder' | translate}}</ion-text>
+		<ion-text *ngIf="swimmingPool.access ==='stairs'" >{{'SWIMMINGPOOL.Stairs' | translate}}</ion-text>
+	</ion-item>
+	<ion-item > 
+		<ion-text *ngIf="swimmingPool.warning ===true">{{'SWIMMINGPOOL.AlarmSystemPresent' | translate}}</ion-text>
+		<ion-text *ngIf="swimmingPool.warning ===false">{{'SWIMMINGPOOL.AlarmSystemPNotresent' | translate}}</ion-text>
+	</ion-item>
+	<ion-item > 
+		<ion-text *ngIf="swimmingPool.winterCover ===true">{{'SWIMMINGPOOL.WinterCoverPresent' | translate}}</ion-text>
+		<ion-text *ngIf="swimmingPool.winterCover ===false">{{'SWIMMINGPOOL.WinterCoverNotPresent' | translate}}</ion-text>
+	</ion-item>
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>{{'SWIMMINGPOOL.SandFilter' | translate}}</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-item lines="none">
+				<ion-label position="stacked">{{'SWIMMINGPOOL.BrandSandFilter' | translate}} </ion-label>
+				<ion-text>{{swimmingPool.brandSandFilter}}</ion-text>
+			</ion-item>
+			<ion-item lines="none">
+				<ion-label position="stacked">{{'SWIMMINGPOOL.DateSandFilter' | translate}} </ion-label>
+				<ion-text> {{ swimmingPool.dateSandFilter | date:'mediumDate' }}</ion-text>
+			</ion-item>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>{{'SWIMMINGPOOL.Filtration' | translate}}</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-item lines="none">
+				<ion-label position="stacked">{{'SWIMMINGPOOL.BrandFilter' | translate}} </ion-label>
+				<ion-text>{{swimmingPool.brandFilter}}</ion-text>
+			</ion-item>
+			<ion-item lines="none">
+				<ion-label position="stacked">{{'SWIMMINGPOOL.CVFilter' | translate}} </ion-label>
+				<ion-text>{{swimmingPool.cvFilter}}</ion-text>
+			</ion-item>
+			<ion-item lines="none">
+				<ion-label position="stacked">{{'SWIMMINGPOOL.FilterDate' | translate}} </ion-label>
+				<ion-text  > {{ swimmingPool.dateFilter | date:'mediumDate' }}</ion-text>
+			</ion-item>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>{{'SWIMMINGPOOL.ElectronicalProduct' | translate}}</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-item lines="none">
+				<ion-label position="stacked">{{'SWIMMINGPOOL.ElectronicalProductType' | translate}} </ion-label>
+				<ion-text *ngIf="swimmingPool.electronicalProduct ==='salt'">{{'SWIMMINGPOOL.Salt' | translate}}</ion-text>
+				<ion-text *ngIf="swimmingPool.electronicalProduct ==='copper'">{{'SWIMMINGPOOL.Copper' | translate}}</ion-text>
+				<ion-text *ngIf="swimmingPool.electronicalProduct ==='chlorine'">{{'SWIMMINGPOOL.Chlorine' | translate}}</ion-text>
+			</ion-item>
+			<ion-item lines="none">
+				<ion-label position="stacked">{{'SWIMMINGPOOL.DateElectronicalProduct' | translate}} </ion-label>
+				<ion-text  > {{ swimmingPool.dateElectronicalProduct | date:'mediumDate' }}</ion-text>
+			</ion-item>
+		</ion-card-content>
+	</ion-card>
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>{{'SWIMMINGPOOL.OtherDevices' | translate}}</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-item *ngIf="swimmingPool.PH ===true" lines="none">
+				<ion-label  position="stacked">{{'SWIMMINGPOOL.PHDate' | translate}}</ion-label>
+				<ion-text  >{{ swimmingPool.PHDate | date:'mediumDate' }}</ion-text>
+			</ion-item>
+			<ion-item *ngIf="swimmingPool.pomp ===true" lines="none">
+				<ion-label  position="stacked">{{'SWIMMINGPOOL.PompDate' | translate}}</ion-label>
+				<ion-text  >{{ swimmingPool.pompDate | date:'mediumDate' }}</ion-text>
+			</ion-item>
+			<ion-item *ngIf="swimmingPool.PH ===true">
+				<ion-label  position="stacked">{{'SWIMMINGPOOL.AutomaticFillDate' | translate}}</ion-label>
+				<ion-text  >{{ swimmingPool.automaticFillDate | date:'mediumDate' }}</ion-text>
+			</ion-item>
+		</ion-card-content>
+	</ion-card>
+
+
+
+	<ion-item >
+		<ion-label position="stacked">{{'SWIMMINGPOOL.Observation' | translate}} </ion-label>
+		<ion-text  > {{ swimmingPool.observation  }}</ion-text>
+	</ion-item>
+</ion-content>

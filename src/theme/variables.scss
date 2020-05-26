@@ -225,4 +225,28 @@
 
     --ion-tab-bar-background: #1f1f1f;
   }
+
+
+}
+.paddingToggle{
+    padding-left:4em;
+}
+.maxWidthDate{
+    max-width:40em;
+  }
+.avatarTop{
+  padding-top: 5px;
+}
+.avatarList{
+  font-size: 24px;
+  color:   var(--ion-color-primary);
+}
+.avatarListVisits{
+  font-size: 24px;
+  color:   var(--ion-color-primary);
+  width: min-content;
+  text-align: center;
+  span{
+    font-size:  0.7em;
+  }
 }

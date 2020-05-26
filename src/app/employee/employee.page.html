@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-avatar class="avatarTop" slot="start">
+			<ngx-avatar name="{{employee.firstName }} {{employee.lastName}}"></ngx-avatar>
+		</ion-avatar>
+		<ion-title>{{ employee.firstName}} {{employee.lastName}} </ion-title>
+		<ion-buttons slot="end">
+			<ion-button [routerLink]="['/edit-employee' ,{ mode: 'update', uid:uid, employee:employee }]">
+				<ion-icon name="pencil" ></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-item lines="none">
+		<ion-label position="stacked">{{'EMPLOYEE.TelPhoneNumber' | translate}}</ion-label>
+		<ion-text>
+			<a href="tel:{{employee.telPhoneNumber}}">{{employee.telPhoneNumber}}</a>
+		</ion-text>
+	</ion-item>
+	<ion-item lines="none">
+		<ion-label position="stacked">{{'EMPLOYEE.Email' | translate}}</ion-label>
+		<ion-text>
+			<a href="mailto:{{employee.email}}">{{employee.email}}</a>
+		</ion-text>
+	</ion-item>
+	<ion-item  lines="none">
+		<ion-label position="stacked">{{'EMPLOYEE.Address' | translate}}</ion-label>
+		<ion-text>
+			{{employee.address}} 
+			{{employee.postalCode}}
+			{{employee.town}}
+		</ion-text>
+	</ion-item>
+</ion-content>

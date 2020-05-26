@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-avatar slot="start">
+			<img src="./assets/images/avatar.png">
+		</ion-avatar>
+		<ion-title *ngIf="mode === 'add'">{{'ADDEMPLOYEE.TitleAdd' | translate}}</ion-title>
+		<ion-title *ngIf="mode === 'update'">{{'ADDEMPLOYEE.TitleUpdate' | translate}}</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<form  #form="ngForm" (ngSubmit)="submitForm(form)">
+		<ion-item>
+			<ion-label position="stacked">{{'ADDEMPLOYEE.FirstName' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+			<ion-input  name="firstName" type="text" [(ngModel)]="employee.firstName"  required></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'ADDEMPLOYEE.LastName' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+			<ion-input  name="lastName" type="text" [(ngModel)]="employee.lastName"  required></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'ADDEMPLOYEE.TelPhoneNumber' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+			<ion-input  name="telPhoneNumber" type="number" [(ngModel)]="employee.telPhoneNumber"  required></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'ADDEMPLOYEE.Email' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+			<ion-input  name="email" type="text" [(ngModel)]="employee.email"  required></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'ADDEMPLOYEE.Address' | translate}} </ion-label>
+			<ion-input  name="adress" type="text" [(ngModel)]="employee.address"  ></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'ADDEMPLOYEE.PostalCode' | translate}} </ion-label>
+			<ion-input  name="postalCode" type="number" [(ngModel)]="employee.postalCode"  ></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'ADDEMPLOYEE.Town' | translate}} </ion-label>
+			<ion-input  name="town" type="text" [(ngModel)]="employee.town"  ></ion-input>
+		</ion-item>
+
+		<div padding>
+			<ion-button *ngIf="mode === 'add'" size="large" type="submit" [disabled]="form.invalid" expand="block">{{'ADDEMPLOYEE.AddEmployee' | translate}}</ion-button>
+			<ion-button *ngIf="mode === 'update'" size="large" type="submit" [disabled]="form.invalid" expand="block">{{'ADDEMPLOYEE.UpdateEmployee' | translate}}</ion-button>
+		</div>
+	</form>
+</ion-content>

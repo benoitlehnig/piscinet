@@ -1,0 +1,20 @@
+<ion-content>
+	<ion-list>
+		<ion-item *ngFor="let visit of visits | async" [routerLink]="['/visit/' + visit.key]">
+			<ion-avatar slot="start" class="avatarList">
+				<ion-icon name="shield-checkmark"></ion-icon>
+			</ion-avatar>
+			<ion-label>
+				<h2 *ngIf="visit.dateTime">{{ visit.dateTime | date:'medium' }} </h2>
+				<h3 *ngIf="visit.maintenance">
+					<span *ngIf="visit.maintenance.typeOfVisit ==='full'">{{'VISIT.VisitTypeFull' | translate}}</span>
+					<span *ngIf="visit.maintenance.typeOfVisit ==='controle'">{{'VISIT.VisitTypeControl' | translate}}</span>
+					<span *ngIf="visit.maintenance.typeOfVisit ==='maintenance'">{{'VISIT.VisitTypeMaintenance' | translate}}</span>
+				</h3>
+				<p>{{'VISIT.VisitPerformedBY' | translate}} {{visit.employee.data.firstName }} {{visit.employee.data.lastName}}</p>
+
+			</ion-label>
+		</ion-item>
+	</ion-list>
+
+</ion-content>

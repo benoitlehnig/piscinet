@@ -1,0 +1,87 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-avatar class="avatarTop" slot="start">
+			<ngx-avatar name="{{ customer.firstName }} {{ customer.lastName}}"></ngx-avatar>
+		</ion-avatar>
+		<ion-title>{{ customer.firstName}} {{customer.lastName}} </ion-title>
+		<ion-buttons slot="end">
+			<ion-button [routerLink]="['/edit-customer' ,{ mode: 'update', uid:uid, customer:customer }]">
+				<ion-icon name="pencil" ></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+	<ion-item>
+		<ion-badge color="primary" *ngIf="customer.typeOfContract ==='technical'" >{{'CUSTOMER.CONTRACTTYPETECHNICAL' | translate}}</ion-badge>
+		<ion-badge color="primary" *ngIf="customer.typeOfContract ==='full'">{{'CUSTOMER.CONTRACTTYPEFULL'  | translate}}</ion-badge>
+		<ion-badge color="primary" *ngIf="customer.contractOfProduct ==='included'" class="contractOfProduct">{{'CUSTOMER.CONTRACTPRODUCTINCLUDED' | translate}}</ion-badge>
+
+		<ion-badge color="warning" *ngIf="customer.contractOfProduct ==='notIncluded'"  class="contractOfProduct">{{'CUSTOMER.CONTRACTPRODUCTNOTINCLUDED'  | translate}}</ion-badge>
+	</ion-item>
+
+	<ion-item lines="none">
+		<ion-label position="stacked">{{'CUSTOMER.MOBILEPHONENUMBER' | translate}}</ion-label>
+		<ion-text>
+			<a href="tel:{{customer.telPhoneNumber}}"> {{customer.telPhoneNumber}}</a>
+		</ion-text>
+	</ion-item>
+	<ion-item lines="none">
+		<ion-label position="stacked">{{'CUSTOMER.FIXEDPHONENUMBER' | translate}}</ion-label>
+		<ion-text>
+			<a href="tel:{{customer.telFixNumber}}"> {{customer.telFixNumber}}</a>
+		</ion-text>
+	</ion-item>
+	<ion-item lines="none" *ngIf="customer.guardianNumber != ''">
+		<ion-label position="stacked">{{'CUSTOMER.GUARDIANPHONENUMBER' | translate}}</ion-label>
+		<ion-text>
+			<a href="tel:{{customer.guardianNumber}}"> {{customer.guardianNumber}}</a>
+		</ion-text>
+	</ion-item>
+	<ion-item  lines="none">
+		<ion-label position="stacked">{{'CUSTOMER.EMAIL' | translate}}</ion-label>
+		<ion-text>
+			<a href="mailto:{{customer.email}}"> {{customer.email}}</a>
+		</ion-text>
+	</ion-item>
+	<ion-item  lines="none">
+		<ion-label position="stacked">{{'CUSTOMER.ADDRESS' | translate}}</ion-label>
+		<ion-text>
+			{{customer.address}} 
+			{{customer.postalCode}}
+			{{customer.town}}
+		</ion-text>
+	</ion-item>
+
+	<ion-card *ngFor="let swimmingPool of swimmingPools | async" >
+		<ion-card-header>
+
+			<ion-card-title>
+				<ion-avatar slot="start">
+					<img src="./assets/images/swimmingPoolAvatar.png">
+				</ion-avatar>{{swimmingPool.data.name}} <ion-badge color="primary">{{swimmingPool.data.numberOfVisits}} {{'CUSTOMER.VisitsPerfomed' | translate}}</ion-badge></ion-card-title>
+				<ion-card-subtitle>{{swimmingPool.data.length}}m x {{swimmingPool.data.width}}m x {{swimmingPool.data.depth}}m</ion-card-subtitle>
+			</ion-card-header>
+
+			<ion-card-content>
+				<ion-text  *ngIf="swimmingPool.data.lastVisitDate != ''">Derniere visite effectuee le : {{swimmingPool.data.lastVisitDate | date:'mediumDate'}}</ion-text>
+				<div padding>
+					<ion-button class="submit-btn"  [routerLink]="['add-visit/'+swimmingPool.key,{ uid: uid, swimmingPoolName: swimmingPool.data.name,customerFirstName: 
+					customer.firstName,customerLastName: customer.lastName}]">{{'CUSTOMER.AddVisit' | translate}}</ion-button>
+					<ion-button class="submit-btn"  [routerLink]="['/swimming-pool/'+ swimmingPool.key, { uid: uid, poolId: swimmingPool.key}]">{{'CUSTOMER.SeeSwimmingPoolDetails' | translate}}</ion-button>
+				</div>
+
+			</ion-card-content>
+		</ion-card>
+
+		<div padding>
+			<ion-button class="submit-btn" [routerLink]="['/edit-swimming-pool',{ mode: 'add',uid: uid}]">{{'CUSTOMER.AddPool' | translate}}</ion-button>
+		</div>
+
+	</ion-content>
