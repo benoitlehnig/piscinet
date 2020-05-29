@@ -5,7 +5,7 @@ import { SwimmingPoolPage } from './swimming-pool.page';
 
 const routes: Routes = [
 {
-	path: 'swimmingPool',
+	path: 'tab',
 	component: SwimmingPoolPage,
 	children: [
 	{
@@ -26,6 +26,7 @@ const routes: Routes = [
 		}
 		]
 	},     
+	
 	]
 },
 {
@@ -38,7 +39,7 @@ const routes: Routes = [
 },
 {
 	path: '',
-	redirectTo: 'swimmingPool/information',
+	redirectTo: 'tab/information',
 	pathMatch: 'full'
 }
 ];

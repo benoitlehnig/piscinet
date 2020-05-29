@@ -1,7 +1,23 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>visit</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-avatar slot="start" class="avatarListVisits"  [ngClass]="{'full': visit.maintenance.typeOfVisit ==='full' , 
+			'controle': visit.maintenance.typeOfVisit ==='controle' , 'maintenance': visit.maintenance.typeOfVisit ==='maintenance' }">
+				<ion-icon name="shield-checkmark"></ion-icon>
+				<span *ngIf="visit.maintenance">
+					<span *ngIf="visit.maintenance.typeOfVisit ==='full'">{{'VISIT.VisitTypeFull' | translate}}</span>
+					<span *ngIf="visit.maintenance.typeOfVisit ==='controle'">{{'VISIT.VisitTypeControl' | translate}}</span>
+					<span *ngIf="visit.maintenance.typeOfVisit ==='maintenance'">{{'VISIT.VisitTypeMaintenance' | translate}}</span>
+				</span>
+			</ion-avatar>
+		<ion-title>{{'VISIT.Title' | translate}} {{'VISIT.TitleOn' | translate}} {{ visit.dateTime | date:'short' }}</ion-title>
+			<ion-text class="infoCustomer" size="small">{{'VISIT.TitleFor'  | translate}} {{customer.firstName}} {{customer.lastName}} {{'VISIT.DoneBy' | translate}} {{employee.firstName}} {{employee.lastName}}</ion-text>
+		
+
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>

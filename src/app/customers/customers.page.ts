@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import {Customer} from '../models/customer';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { map } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { map } from 'rxjs/operators';
 	styleUrls: ['./customers.page.scss'],
 })
 export class CustomersPage implements OnInit {
-	public customers: Observable<any>;
+	public customers;
 
 	constructor(
 		public afDatabase: AngularFireDatabase,
@@ -23,7 +24,7 @@ export class CustomersPage implements OnInit {
 	}
 
 	ngOnInit() {
-		this.customers = this.afDatabase.list('/customers',ref => ref.orderByChild('lastName')).snapshotChanges()
+		this.customers = this.afDatabase.list<Customer>('/customers',ref => ref.orderByChild('lastName')).snapshotChanges()
 		.pipe(
 			map(changes => 
 				changes.map(c => ({ key: c.payload.key, data: c.payload.val() }))
@@ -32,6 +33,10 @@ export class CustomersPage implements OnInit {
 		console.log(this.customers);
 	}
 
+	async filterList(evt) {
+	
+	
+	}
 
 	
 

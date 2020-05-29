@@ -5,7 +5,6 @@ import {Customer} from '../models/customer';
 import {SwimmingPool} from '../models/swimming-pool';
 import { Observable, combineLatest, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
-import { uniq, flatten } from 'lodash'
 
 @Component({
 	selector: 'app-customer',
@@ -14,7 +13,14 @@ import { uniq, flatten } from 'lodash'
 })
 export class CustomerPage implements OnInit {
 
-
+	zoom = 18;
+	center: google.maps.LatLngLiteral
+	options: google.maps.MapOptions = {
+		mapTypeId: 'hybrid',
+		zoomControl: false,
+		scrollwheel: true,
+		disableDoubleClickZoom: true,
+	}
 	public uid:string;
 	customer:Customer=new Customer();
 	swimmingPools:Observable<any>;
@@ -34,6 +40,8 @@ export class CustomerPage implements OnInit {
 		this.afDatabase.object<Customer>('customers/'+this.uid).valueChanges().subscribe(
 			(data) =>{
 				this.customer = data;
+				console.log(data)
+				this.center = this.customer.location;
 			})
 		this.swimmingPools = this.afDatabase.list('/pools/'+this.uid).snapshotChanges().pipe(
 			map(changes => 

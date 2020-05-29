@@ -5,6 +5,7 @@ import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { Storage } from '@ionic/storage';
 
 import {SwimmingPool} from '../models/swimming-pool';
 
@@ -29,22 +30,29 @@ export class AddSwimmingPoolPage implements OnInit {
 		private activatedRoute: ActivatedRoute,
 		public afDatabase: AngularFireDatabase,
 		public toastController: ToastController,
-		public translateService : TranslateService
+		public translateService : TranslateService,
+		private storage: Storage,
+
 		)
 	{ }
 
-	ngOnInit() {
+	ionViewWillEnter(){
+		this.uid = this.activatedRoute.snapshot.paramMap.get('id')
+		console.log("this.uid : ",this.uid);
 		this.activatedRoute.params.subscribe(params => {
 			this.mode =  params['mode'];
-			this.uid=  params['uid'];
 			if(this.mode ==="update"){
-				this.poolId=  params['poolId'];
+				this.poolId = this.activatedRoute.snapshot.paramMap.get('sid')
 				this.afDatabase.object<SwimmingPool>('pools/'+this.uid +'/'+this.poolId).valueChanges().subscribe(
 					(data) =>{
 						this.swimmingPool = data;
 					})
 			}
 		});
+
+	}
+	ngOnInit() {
+
 		this.translateService.get(['ADDSWIMMINGPOOL.SuccessAdd', 'ADDSWIMMINGPOOL.SuccessUpdate']).subscribe(
 			value => {
 				// value is our translated string
@@ -54,40 +62,37 @@ export class AddSwimmingPoolPage implements OnInit {
 			});
 	}
 
-	addSwimmingPool(form){
-		let swimmingPool = new SwimmingPool().deserialize(form.value);
-		swimmingPool.customerUid = this.uid;
+	addSwimmingPool(){
+		this.swimmingPool.customerUid = this.uid;
 		const callable = this.functions.httpsCallable('addSwimmingPool');
-		const obs = callable(swimmingPool);
+		const obs = callable(this.swimmingPool);
 
 		obs.subscribe(res => {
 			this.presentToast();
-			this.navCtrl.navigateRoot(['customer/'+this.uid]);
+			this.navCtrl.navigateRoot(['customers/'+this.uid]);
 
 		});
 		
 	}
 
-	updateSwimmingPool(form){
-		let swimmingPool = new SwimmingPool().deserialize(form.value);
-		console.log("swimmingPool", swimmingPool);
-		let swimmingPoolToUpdate={'customerUid':this.uid, 'poolId':this.poolId, 'value' : swimmingPool};
+	updateSwimmingPool(){
+		let swimmingPoolToUpdate={'customerUid':this.uid, 'poolId':this.poolId, 'value' : this.swimmingPool};
 		const callable = this.functions.httpsCallable('updateSwimmingPool');
 		const obs = callable(swimmingPoolToUpdate);
 
 		obs.subscribe(async res => {
 			this.presentToast();
-			console.log("this.uid",this.uid);
-		this.navCtrl.navigateRoot(['swimming-pool/'+this.poolId, { uid: this.uid, poolId: this.poolId}]);
+			this.storage.set('currentPool',{uid:this.uid, poolId:this.poolId,swimmingPool:this.swimmingPool }); 
+			this.navCtrl.navigateRoot(['/customers/'+this.uid+'/swimming-pool/'+this.poolId]);
 		});
 		
 	}
-	submitForm(form){
+	submitForm(){
 		if(this.mode ==='add'){
-			this.addSwimmingPool(form)
+			this.addSwimmingPool()
 		}
 		if(this.mode ==='update'){
-			this.updateSwimmingPool(form)
+			this.updateSwimmingPool()
 		}
 	}
 	async presentToast() {

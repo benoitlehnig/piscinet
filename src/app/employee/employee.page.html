@@ -1,6 +1,7 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
 		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
 		<ion-avatar class="avatarTop" slot="start">
@@ -31,9 +32,16 @@
 	<ion-item  lines="none">
 		<ion-label position="stacked">{{'EMPLOYEE.Address' | translate}}</ion-label>
 		<ion-text>
-			{{employee.address}} 
-			{{employee.postalCode}}
-			{{employee.town}}
+			{{employee.googleAddress}} 
 		</ion-text>
 	</ion-item>
+
+	<google-map height="40%" width="100%" [center]="center">
+		<map-marker
+		[position]="employee.location"></map-marker>
+	</google-map>
+
+	<div padding>
+		<ion-button class="submit-btn" (click)="setAdmin()">set Admin</ion-button>
+	</div>
 </ion-content>

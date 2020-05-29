@@ -1,9 +1,72 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>technical</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+	<ion-list>
+		<ion-list-header>
+			<h2>{{'VISIT.AnalyseTitle' | translate}}</h2>
+		</ion-list-header>
+		<ion-item>
+			<ion-text>{{'VISIT.AnalyseChlore' | translate}}</ion-text>
+			<ion-text *ngIf="visit.technique.chlore !==''" >{{visit.technique.chlore}}</ion-text> 
+			<ion-text *ngIf="visit.technique.chlore ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+		<ion-item>
+			<ion-text>{{'VISIT.AnalysePH' | translate}}</ion-text>
+			<ion-text *ngIf="visit.technique.PH !==''">{{visit.technique.PH}}</ion-text> 
+			<ion-text *ngIf="visit.technique.PH ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+	</ion-list>
+	<ion-list>
+		<ion-list-header>
+			<h2>{{'VISIT.OtherAnalyseTitle' | translate}}</h2>
+		</ion-list-header>
+		<ion-item>
+			<ion-text>{{'VISIT.AnalyseStabiliser' | translate}}</ion-text>
+			<ion-text *ngIf="visit.technique.stabilisant !==''">{{visit.technique.stabilisant}}</ion-text> 
+			<ion-text *ngIf="visit.technique.stabilisant ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+		<ion-item>
+			<ion-text>{{'VISIT.AnalyseTAC' | translate}}</ion-text>
+			<ion-text *ngIf="visit.technique.TAC !==''">{{visit.technique.TAC}}</ion-text> 
+			<ion-text *ngIf="visit.technique.TAC ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+		<ion-item>
+			<ion-text>{{'VISIT.AnalyseSalt' | translate}}</ion-text>
+			<ion-text *ngIf="visit.technique.sel !==''">{{visit.technique.sel}}</ion-text> 
+			<ion-text *ngIf="visit.technique.sel ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+	</ion-list>
+	<ion-list>
+		<ion-list-header>
+			<h2>{{'VISIT.IntroducedProductsTitle' | translate}}</h2>
+		</ion-list-header>
+		<ion-item>
+			<ion-text>{{'VISIT.IntroducedProductChlore' | translate}}</ion-text>
+			<ion-text *ngIf="visit.technique.productChlore !==''">{{visit.technique.productChlore}}</ion-text> 
+			<ion-text *ngIf="visit.technique.productChlore ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+		<ion-item>
+			<ion-text>{{'VISIT.IntroducedProductPH' | translate}}</ion-text>
+			<ion-text *ngIf="visit.technique.productPH !==''">{{visit.technique.productPH}}</ion-text> 
+			<ion-text *ngIf="visit.technique.productPH ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+		<ion-item>
+			<ion-text>{{'VISIT.IntroducedProductGalet' | translate}}</ion-text>
+			<ion-text *ngIf="visit.technique.productGalet !==''">{{visit.technique.productGalet}}</ion-text> 
+			<ion-text *ngIf="visit.technique.productGalet ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+		<ion-item>
+			<ion-text>{{'VISIT.IntroducedProductSalt' | translate}}</ion-text>
+			<ion-text *ngIf="visit.technique.productSel !==''">{{visit.technique.productSel}}</ion-text> 
+			<ion-text *ngIf="visit.technique.productSel ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+		<ion-item>
+			<ion-text>{{'VISIT.IntroducedProductFloculent' | translate}}</ion-text>
+			<ion-text *ngIf="visit.technique.productFloculent !==''">{{visit.technique.productFloculent}}</ion-text> 
+			<ion-text *ngIf="visit.technique.productFloculent ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+		<ion-item *ngIf="visit.technique.productOther !==''">
+			<ion-text>{{'VISIT.IntroducedProductOther' | translate}}</ion-text>
+			<ion-text *ngIf="visit.technique.productOther !==''">{{visit.technique.productOther}}</ion-text> 
+			<ion-text *ngIf="visit.technique.productOther ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+	</ion-list>
 </ion-content>

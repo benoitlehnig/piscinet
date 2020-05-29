@@ -1,7 +1,8 @@
 {
   "name": "piscinet",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

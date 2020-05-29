@@ -6,8 +6,8 @@ export class SwimmingPool {
     width: number=0;
     depth: number=0;
     shape: string="";
-    environment: string="";
-    state: string="";
+    environment: number=0;
+    state: number=0
     cover: string="";
     warning: boolean=true;
     access: string="";

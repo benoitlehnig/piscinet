@@ -1,13 +1,17 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>{{'VISIT.VisitsTitle' | translate}}</ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>{{'VISIT.VisitsTitle' | translate}}</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
 	<ion-list>
-		<ion-item *ngFor="let visit of visits | async" [routerLink]="['/visit/' + visit.visitKey]">
-			<ion-avatar slot="start" class="avatarListVisits">
+		<ion-item *ngFor="let visit of visits | async" [routerLink]="['/visits/' + visit.visitKey]">
+			<ion-avatar slot="start" class="avatarListVisits"  [ngClass]="{'full': visit.maintenance.typeOfVisit ==='full' , 
+			'controle': visit.maintenance.typeOfVisit ==='controle' , 'maintenance': visit.maintenance.typeOfVisit ==='maintenance' }">
 				<ion-icon name="shield-checkmark"></ion-icon>
 				<span *ngIf="visit.maintenance">
 					<span *ngIf="visit.maintenance.typeOfVisit ==='full'">{{'VISIT.VisitTypeFull' | translate}}</span>
@@ -17,7 +21,7 @@
 			</ion-avatar>
 			<ion-label>
 				<h2 *ngIf="visit.dateTime">{{ visit.dateTime | date:'medium' }} </h2>
-				<h2>{{'VISIT.Customer' | translate}}{{ visit.customer.data.fisrtName}} {{ visit.customer.data.lastName}} </h2>
+				<h2>{{'VISIT.Customer' | translate}}{{ visit.customer.data.firstName}} {{ visit.customer.data.lastName}} </h2>
 				
 				<p>{{'VISIT.VisitPerformedBY' | translate}} {{visit.employee.data.firstName }} {{visit.employee.data.lastName}}</p>
 

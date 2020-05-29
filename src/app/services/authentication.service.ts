@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -10,13 +11,37 @@ import { Router } from '@angular/router';
 })
 export class AuthenticationService {
 
-	public authState;
+	public authState=new Observable(state => {return state})
+
 	constructor(
 		private afAuth: AngularFireAuth,
 		private storage:Storage,
 		public router:Router,
 
-		) { }
+		) { 
+		this.afAuth.onAuthStateChanged((user) => {
+			if (user) {
+				user.getIdTokenResult().then(
+					result=> {
+						console.log("result",result);
+						this.storage.set('claims', result.claims); 
+						this.storage.set('loggedIn', true); 
+
+					})
+				console.log('initializeApp User is logged in');
+
+			} else {
+				this.storage.set('loggedIn', false); 
+				console.log('User is not logged in');
+
+			}
+		});
+	}
+
+
+
+	 
+
 
 	registerUser(value) {
 		return new Promise<any>((resolve, reject) => {
@@ -29,12 +54,18 @@ export class AuthenticationService {
 
 	}
 
+	getAuthenticated(): boolean {
+		return this.authState !== null;
+	}
+
+
 	loginUser(form) {
 		return new Promise<any>((resolve, reject) => {
 			console.log("form: ", form.value)
 			this.afAuth.signInWithEmailAndPassword(form.value.email, form.value.password)
 			.then(
 				res => {
+					this.storage.set('loggedIn', true); 
 					resolve(res);
 				},
 				err => reject(err))
@@ -47,6 +78,8 @@ export class AuthenticationService {
 				this.afAuth.signOut()
 				.then(() => {
 					console.log("LOG Out");
+					this.storage.set('loggedIn', false); 
+
 					this.router.navigate(['/login']);
 					resolve();
 				}).catch((error) => {

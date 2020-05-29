@@ -5,7 +5,7 @@ import { VisitPage } from './visit.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'visit',
     component: VisitPage,
      children: [
       {
@@ -13,16 +13,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../visit/maintenance/maintenance.module#MaintenancePageModule'
-          }
-        ]
-      },
-      {
-        path: 'technical',
-        children: [
-          {
-            path: '',
-            loadChildren: '../visit/technical/technical.module#TechnicalPageModule'
+            loadChildren: './maintenance/maintenance.module#MaintenancePageModule'
           }
         ]
       },
@@ -31,14 +22,23 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../visit/observation/observation.module#ObservationPageModule'
+            loadChildren: './observation/observation.module#ObservationPageModule'
           }
         ]
       },
+      {
+        path: 'technical',
+        children: [
+          {
+            path: '',
+            loadChildren: './technical/technical.module#TechnicalPageModule'
+          }
+        ]
+      },
+      
      
     ]
   },
-
   {
     path: 'maintenance',
     loadChildren: () => import('./maintenance/maintenance.module').then( m => m.MaintenancePageModule)
@@ -50,6 +50,11 @@ const routes: Routes = [
   {
     path: 'observation',
     loadChildren: () => import('./observation/observation.module').then( m => m.ObservationPageModule)
+  },
+  {
+    path: '',
+    redirectTo: 'visit/maintenance',
+    pathMatch: 'full'
   }
 ];
 

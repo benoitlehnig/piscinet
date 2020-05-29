@@ -42,13 +42,15 @@ export class VisitsPage implements OnInit {
 	}
 	init(){
 		console.log("this.poolId: ",this.poolId);
-		this.visits = this.afDatabase.list<Visit>('visits',ref => ref.orderByChild('poolId').equalTo(this.poolId)).valueChanges()
+		this.visits = this.afDatabase.list<Visit>('visits',ref => ref.orderByChild('dateTime')).snapshotChanges()
 		.pipe(
+
 			switchMap(visits => {
-				const customerUids = uniq(visits.map(visit  => visit.customerUid));
-				const employeeUids = uniq(visits.map(visit => visit.employeeUid));
+				console.log(visits);
+				const customerUids = uniq(visits.map(visit  => visit.payload.val().customerUid));
+				const employeeUids = uniq(visits.map(visit => visit.payload.val().employeeUid));
 				return combineLatest(
-					of(visits),
+					of(visits.reverse()),
 					combineLatest(
 						customerUids.map(customerUid =>
 							this.afDatabase.object<any>('customers/'+customerUid).valueChanges().pipe(
@@ -58,7 +60,7 @@ export class VisitsPage implements OnInit {
 						) as any,
 					combineLatest(
 						employeeUids.map(employeeUid =>
-
+							
 							this.afDatabase.object<any>('employees/'+employeeUid).valueChanges().pipe(
 								map(employee => ({uid:employeeUid, data:employee}))
 								)
@@ -72,13 +74,16 @@ export class VisitsPage implements OnInit {
 				return visits.map(visit => {
 
 					return {
-						...(visit as object)  ,
-						customer: customers.find(a => a.uid === visit.customerUid),
-						employee: employees.find(a => a.uid === visit.employeeUid)
+
+						...(visit.payload.val() as object)  ,
+						visitKey: visit.key,
+						customer: customers.find(a => a.uid === visit.payload.val().customerUid),
+						employee: employees.find(a => a.uid === visit.payload.val().employeeUid)
 					}
 				})
 			})
 			)
+
 	}
 
 

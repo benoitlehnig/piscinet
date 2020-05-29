@@ -18,13 +18,21 @@ export class InformationPage implements OnInit {
 		private activatedRoute: ActivatedRoute,
 		public afDatabase: AngularFireDatabase,
 		private storage: Storage,
-		) { }
+		) { 
+	}
 
 	ngOnInit() {
+		this.initData()
 
 	}
 	ionViewWillEnter(){
+		this.activatedRoute.data.subscribe(
+			(data) => this.initData())
+	}
 
+	initData(){
+		this.uid = this.activatedRoute.snapshot.paramMap.get('id')
+		this.poolId = this.activatedRoute.snapshot.paramMap.get('sid')
 		this.storage.get("currentPool").then((val) => {
 			this.poolId = val.poolId;
 			this.uid = val.uid;
@@ -32,5 +40,6 @@ export class InformationPage implements OnInit {
 		});
 
 	}
+
 
 }

@@ -7,18 +7,14 @@
 	</ion-toolbar>
 </ion-header>
 
-
-
-
+<ion-fab vertical="top" horizontal="end" slot="fixed"  [routerLink]="['/edit-employee',{ mode: 'add'}]">
+	<ion-fab-button>
+		<ion-icon name="add"></ion-icon>
+	</ion-fab-button>
+</ion-fab>
 <ion-content>
-	<ion-fab vertical="top" horizontal="end" slot="fixed"  [routerLink]="['/edit-employee',{ mode: 'add'}]">
-		<ion-fab-button>
-			<ion-icon name="add"></ion-icon>
-		</ion-fab-button>
-	</ion-fab>
 	<ion-list>
-		
-		<ion-item *ngFor="let employee of employees | async" [routerLink]="['/employee/' + employee.key]">
+		<ion-item *ngFor="let employee of employees | async" [routerLink]="['/employees/' + employee.key]">
 			<ion-avatar slot="start">
 				<ngx-avatar name="{{ employee.data.firstName }} {{ employee.data.lastName}}"></ngx-avatar>
 			</ion-avatar>

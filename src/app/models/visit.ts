@@ -43,7 +43,7 @@ export class Maintenance{
 	public  TLRobotMode: string="";
 	public  TLProjectorMode: string="";
 	public  TLProjectorWater: string="";
-	public  TLCleaningRoom: string="";
+	public  TLCleaningRoom: boolean=false;
 	public  PFEDSaltRAS:  boolean=false;
 	public  PFEDSaltCell:  boolean=false;
 	public  PFEDSaltDescalingCell: boolean=false;

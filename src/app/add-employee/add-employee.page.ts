@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,NgZone } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { ToastController } from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -21,7 +22,14 @@ export class AddEmployeePage implements OnInit {
 	public uid:string="";
 	public successAddText:string="";
 	public successUpdateText:string="";
+	public loadingText:string="";
 
+	public GoogleAutocomplete: google.maps.places.AutocompleteService;
+	public geocoder = new google.maps.Geocoder;
+	public autocomplete: { input: string; };
+	public autocompleteItems: any[];
+	public location: any;
+	public loading ;
 	constructor(
 		private functions: AngularFireFunctions,
 		public navCtrl: NavController,
@@ -29,8 +37,14 @@ export class AddEmployeePage implements OnInit {
 		private activatedRoute: ActivatedRoute,
 		public afDatabase: AngularFireDatabase,
 		public toastController: ToastController,
-		public translateService : TranslateService 
-		) { }
+		public translateService : TranslateService,
+		public zone: NgZone,
+		public loadingController: LoadingController
+		) { 
+		this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
+		this.autocomplete = { input: '' };
+		this.autocompleteItems = [];
+	}
 
 	ngOnInit() {
 		this.activatedRoute.params.subscribe(params => {
@@ -40,67 +54,60 @@ export class AddEmployeePage implements OnInit {
 				this.afDatabase.object<Employee>('employees/'+this.uid).valueChanges().subscribe(
 					(data) =>{
 						this.employee = data;
+						this.autocomplete = { input: this.employee.googleAddress};
 					})
 			}
 		});
-		this.translateService.get(['ADDEMPLOYEE.SuccessAdd', 'ADDEMPLOYEE.SuccessUpdate']).subscribe(
+		this.translateService.get(['ADDEMPLOYEE.SuccessAdd', 'ADDEMPLOYEE.SuccessUpdate','COMMON.Loading']).subscribe(
 			value => {
 				// value is our translated string
 				console.log(value);
 				this.successAddText = value['ADDEMPLOYEE.SuccessAdd']
 				this.successUpdateText = value['ADDEMPLOYEE.SuccessUpdate'];
+				this.loadingText = value['COMMON.Loading'];
 			});
 	}
 
 
-	addEmployee(form){
-		let employee = new Employee().deserialize(form.value);
-		this.afAuth.createUserWithEmailAndPassword(employee.email, 'totototo')
-		.catch(function(error) {
-			// Handle Errors here.
-			var errorCode = error.code;
-			var errorMessage = error.message;
-			console.log(error)
-		})
-		.then( (user:any)=>
-		{
-			console.log(user);
-			console.log(user.user);
-			const uid = user.user.uid;
-			console.log(uid);
-			let employeeToAdd={'uid':uid, 'value' : employee};
-			const callable = this.functions.httpsCallable('addEmployee');
-			const obs = callable(employeeToAdd);
+	addEmployee(){
+		const callable = this.functions.httpsCallable('addEmployee');
+		const obs = callable(this.employee);
 
-			obs.subscribe(async res => {
-				this.presentToast();
-				this.navCtrl.navigateRoot(['employee/'+uid]);
-				console.log(employee.email, 'toto');
-
-			});
+		obs.subscribe(async res => {
+			this.presentToast();
+			this.loading.dismiss();
+			this.navCtrl.navigateRoot(['employees/'+res.key]);
 		});
 	}
 
-	updateEmployee(form){
-		let employee = new Employee().deserialize(form.value);
-		console.log("employee", employee);
-		let employeeToUpdatee={'uid':this.uid, 'value' : employee};
+	updateEmployee(){
+		console.log("employee", this.employee);
+		let employeeToUpdatee={'uid':this.uid, 'value' : this.employee};
 		const callable = this.functions.httpsCallable('updateEmployee');
 		const obs = callable(employeeToUpdatee);
 
 		obs.subscribe(async res => {
+			this.loading.dismiss();
 			this.presentToast();
-			this.navCtrl.navigateRoot(['employee/'+this.uid]);
+			this.navCtrl.navigateRoot(['employees/'+this.uid]);
 		});
 	}
 
-	submitForm(form){
+	async submitForm(){
 		if(this.mode ==='add'){
-			this.addEmployee(form)
+			this.addEmployee()
 		}
 		if(this.mode ==='update'){
-			this.updateEmployee(form)
+			this.updateEmployee()
 		}
+		
+		this.loading = await this.loadingController.create({
+			cssClass: 'my-custom-class',
+			message: this.loadingText,
+			duration: 5000
+		});
+		this.loading.present();
+
 	}
 	async presentToast() {
 		let message = this.employee.firstName +" "+ this.employee.lastName +" "+ this.successUpdateText;
@@ -112,6 +119,36 @@ export class AddEmployeePage implements OnInit {
 			duration: 3000
 		});
 		toast.present();
+	}
+
+	updateSearchResults(){
+		if (this.autocomplete.input == '') {
+			this.autocompleteItems = [];
+			return;
+		}
+
+		this.GoogleAutocomplete.getPlacePredictions({ input: this.autocomplete.input,  componentRestrictions: {country: 'fr'}, types: ['address'] },
+			(predictions, status) => {
+				this.autocompleteItems = [];
+				this.zone.run(() => {
+					predictions.forEach((prediction) => {
+						this.autocompleteItems.push(prediction);
+					});
+				});
+			});
+	}
+	
+	selectSearchResult(item) {
+		console.log(item)
+		this.location = item
+		this.employee.googleAddress = this.location.description;
+		this.geocoder.geocode({'placeId': this.location.place_id}, (results, status) => {
+			console.log(results);
+			this.employee.location = {lat: results[0].geometry.location.lat(),lng :results[0].geometry.location.lng()}; 
+		})
+		console.log('placeid'+ item)
+		this.autocomplete = { input: this.employee.googleAddress};
+		this.autocompleteItems = [];
 	}
 
 }

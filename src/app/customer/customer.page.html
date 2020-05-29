@@ -1,6 +1,7 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
 		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
 		<ion-avatar class="avatarTop" slot="start">
@@ -17,12 +18,10 @@
 
 
 <ion-content>
-
-	<ion-item>
+	<ion-item  lines="none">
 		<ion-badge color="primary" *ngIf="customer.typeOfContract ==='technical'" >{{'CUSTOMER.CONTRACTTYPETECHNICAL' | translate}}</ion-badge>
 		<ion-badge color="primary" *ngIf="customer.typeOfContract ==='full'">{{'CUSTOMER.CONTRACTTYPEFULL'  | translate}}</ion-badge>
 		<ion-badge color="primary" *ngIf="customer.contractOfProduct ==='included'" class="contractOfProduct">{{'CUSTOMER.CONTRACTPRODUCTINCLUDED' | translate}}</ion-badge>
-
 		<ion-badge color="warning" *ngIf="customer.contractOfProduct ==='notIncluded'"  class="contractOfProduct">{{'CUSTOMER.CONTRACTPRODUCTNOTINCLUDED'  | translate}}</ion-badge>
 	</ion-item>
 
@@ -53,35 +52,37 @@
 	<ion-item  lines="none">
 		<ion-label position="stacked">{{'CUSTOMER.ADDRESS' | translate}}</ion-label>
 		<ion-text>
-			{{customer.address}} 
-			{{customer.postalCode}}
-			{{customer.town}}
+			{{customer.googleAddress}} 
 		</ion-text>
 	</ion-item>
 
-	<ion-card *ngFor="let swimmingPool of swimmingPools | async" >
-		<ion-card-header>
+	<google-map height="40%" width="100%" [zoom]="zoom" [center]="center" [options]="options">
+		<map-marker	[position]="customer.location"></map-marker>
+	</google-map>
 
-			<ion-card-title>
-				<ion-avatar slot="start">
-					<img src="./assets/images/swimmingPoolAvatar.png">
-				</ion-avatar>{{swimmingPool.data.name}} <ion-badge color="primary">{{swimmingPool.data.numberOfVisits}} {{'CUSTOMER.VisitsPerfomed' | translate}}</ion-badge></ion-card-title>
-				<ion-card-subtitle>{{swimmingPool.data.length}}m x {{swimmingPool.data.width}}m x {{swimmingPool.data.depth}}m</ion-card-subtitle>
-			</ion-card-header>
+	<ion-list>
+		<ion-list-header>
+			<h2><ion-text  color="primary">Piscines</ion-text></h2>
+		</ion-list-header>
+		<ion-item  *ngFor="let swimmingPool of swimmingPools | async" [routerLink]="['swimming-pool/'+ swimmingPool.key]">
+			<ion-item-options side="start">
+				<ion-item-option [routerLink]="['add-visit/'+swimmingPool.key,{ uid: uid, swimmingPoolName: swimmingPool.data.name,customerFirstName: 
+				customer.firstName,customerLastName: customer.lastName}]" color="primary">{{'CUSTOMER.AddVisit' | translate}}</ion-item-option>
+			</ion-item-options>
+			<ion-avatar slot="start">
+				<img src="./assets/images/swimmingPoolAvatar.png">
+			</ion-avatar>
+			<ion-label>
+				<h2 >{{swimmingPool.data.name}} <ion-badge color="primary">{{swimmingPool.data.numberOfVisits}} {{'CUSTOMER.VisitsPerfomed' | translate}}</ion-badge></h2>
+				<h3><ion-text  color="primary" *ngIf="swimmingPool.data.lastVisitDate != ''">Derniere visite effectuee le {{swimmingPool.data.lastVisitDate | date:'mediumDate'}}</ion-text></h3>
 
-			<ion-card-content>
-				<ion-text  *ngIf="swimmingPool.data.lastVisitDate != ''">Derniere visite effectuee le : {{swimmingPool.data.lastVisitDate | date:'mediumDate'}}</ion-text>
-				<div padding>
-					<ion-button class="submit-btn"  [routerLink]="['add-visit/'+swimmingPool.key,{ uid: uid, swimmingPoolName: swimmingPool.data.name,customerFirstName: 
-					customer.firstName,customerLastName: customer.lastName}]">{{'CUSTOMER.AddVisit' | translate}}</ion-button>
-					<ion-button class="submit-btn"  [routerLink]="['/swimming-pool/'+ swimmingPool.key, { uid: uid, poolId: swimmingPool.key}]">{{'CUSTOMER.SeeSwimmingPoolDetails' | translate}}</ion-button>
-				</div>
+			</ion-label>
+		</ion-item>
+	</ion-list>
 
-			</ion-card-content>
-		</ion-card>
 
-		<div padding>
-			<ion-button class="submit-btn" [routerLink]="['/edit-swimming-pool',{ mode: 'add',uid: uid}]">{{'CUSTOMER.AddPool' | translate}}</ion-button>
-		</div>
+	<div padding>
+		<ion-button class="submit-btn" [routerLink]="['edit-swimming-pool',{ mode: 'add'}]">{{'CUSTOMER.AddPool' | translate}}</ion-button>
+	</div>
 
-	</ion-content>
+</ion-content>

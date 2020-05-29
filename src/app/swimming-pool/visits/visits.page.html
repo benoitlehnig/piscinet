@@ -1,16 +1,18 @@
 <ion-content>
 	<ion-list>
-		<ion-item *ngFor="let visit of visits | async" [routerLink]="['/visit/' + visit.key]">
-			<ion-avatar slot="start" class="avatarList">
+		<ion-item *ngFor="let visit of visits | async" [routerLink]="['/visits/' + visit.visitKey]">
+			<ion-avatar slot="start" class="avatarListVisits" [ngClass]="{'full': visit.maintenance.typeOfVisit ==='full' , 
+			'controle': visit.maintenance.typeOfVisit ==='controle' , 'maintenance': visit.maintenance.typeOfVisit ==='maintenance' }">
 				<ion-icon name="shield-checkmark"></ion-icon>
-			</ion-avatar>
-			<ion-label>
-				<h2 *ngIf="visit.dateTime">{{ visit.dateTime | date:'medium' }} </h2>
-				<h3 *ngIf="visit.maintenance">
+				<span *ngIf="visit.maintenance">
 					<span *ngIf="visit.maintenance.typeOfVisit ==='full'">{{'VISIT.VisitTypeFull' | translate}}</span>
 					<span *ngIf="visit.maintenance.typeOfVisit ==='controle'">{{'VISIT.VisitTypeControl' | translate}}</span>
 					<span *ngIf="visit.maintenance.typeOfVisit ==='maintenance'">{{'VISIT.VisitTypeMaintenance' | translate}}</span>
-				</h3>
+				</span>
+			</ion-avatar>
+			<ion-label>
+				<h2 *ngIf="visit.dateTime">{{ visit.dateTime | date:'medium' }} </h2>
+
 				<p>{{'VISIT.VisitPerformedBY' | translate}} {{visit.employee.data.firstName }} {{visit.employee.data.lastName}}</p>
 
 			</ion-label>

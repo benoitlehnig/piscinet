@@ -1,26 +1,28 @@
 
 <ion-content >
 	<div class="backgroundLogin">
-		<ion-card class="ionCardLogin">
-			<ion-card-header>
-				<ion-card-title>Login</ion-card-title>
-			</ion-card-header>
 
+		<ion-card class="ionCardLogin">
+			<img src="/assets/images/piscinetLogo.jpg" />
+			<ion-card-header>
+				<ion-card-title>{{'LOGIN.Welcome' | translate}}</ion-card-title>
+				<ion-card-subtitle>{{'LOGIN.PleaseConnect' | translate}}</ion-card-subtitle>
+			</ion-card-header>
 			<ion-card-content>
 				<form class="form" #form="ngForm" (ngSubmit)="loginUser(form)">
 
 					<ion-item>
-						<ion-label position="floating" color="primary">Email</ion-label>
+						<ion-label position="floating" color="primary">{{'LOGIN.Email' | translate}}</ion-label>
 						<ion-input  name="email" type="text" placeholder="email" ngModel></ion-input>
 					</ion-item>
 
 					<ion-item>
-						<ion-label position="floating" color="primary">Password</ion-label>
+						<ion-label position="floating" color="primary">{{'LOGIN.Password' | translate}}</ion-label>
 						<ion-input name="password" type="password" placeholder="password" ngModel required></ion-input>
 					</ion-item>
 
 
-					<ion-button class="submit-btn" type="submit" >Log In</ion-button>
+					<ion-button class="submit-btn" type="submit" >{{'LOGIN.LoginButton' | translate}}</ion-button>
 
 					<label class="error-message">{{errorMessage}}</label>
 				</form>

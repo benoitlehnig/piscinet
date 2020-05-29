@@ -8,7 +8,6 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { Storage } from '@ionic/storage';
 
 import { TranslateService } from '@ngx-translate/core';
-import { Router } from '@angular/router';
 
 import { AuthenticationService } from './services/authentication.service';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -21,8 +20,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
-  public isUserLogged= false;
+  public isUserLogged:boolean= false;
   public user;
+  public displayName;
   public claims:any={email: ''};
   public appPages = [
 
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
     icon: 'person'
   },
   {
-    title: 'Visites',
+    title: 'Visits',
     url: 'visits',
     icon: 'shield-checkmark'
   },
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
     icon: 'people-circle'
   }
   ];
-public appPagesCustomer = [
+  public appPagesCustomer = [
 
   {
     title: 'Clients',
@@ -65,7 +65,6 @@ public appPagesCustomer = [
     public translate: TranslateService,
     public authService:AuthenticationService,
     public afAuth:AngularFireAuth,
-    public router:Router,
     private storage: Storage
 
     ) {
@@ -77,38 +76,38 @@ public appPagesCustomer = [
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.translate.setDefaultLang('fr');
-      this.afAuth.onAuthStateChanged((user: firebase.User) => {
-        if (user) {
-         user.getIdTokenResult().then(
-           result=> {
-             console.log(result);
-             this.storage.set('claims', result.claims); 
-             this.claims = result.claims;
-             if(this.claims['customer'] ===true){
-               this.appPages = this.appPagesCustomer
-             }
-           }
-            )
-          console.log('initializeApp User is logged in');
-          this.isUserLogged = true;
-        } else {
-          console.log('User is not logged in');
-             this.isUserLogged = false;
-             this.claims = {};
-        }
-      });
+
     });
   }
 
   ngOnInit() {
-    const path = window.location.pathname.split('folder/')[1];
+    const path = window.location.pathname;
+    console.log("path",path);
     if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
+      this.selectedIndex = this.appPages.findIndex(page => page.url.toLowerCase() === path.toLowerCase().replace('/',""));
     }
+
+    this.afAuth.authState.subscribe( data=>{
+      console.log("data", data);
+      if(data){
+        this.isUserLogged =true;
+        this.displayName = data.displayName;
+      }
+      else{
+        this.isUserLogged =false;
+      }
+    });
+
+    this.storage.get('claims').then((val) => {
+      this.claims = val;
+      if(this.claims['customer'] ===true){
+        this.appPages = this.appPagesCustomer
+      }
+    })
     
   }
 
   logout(){
-      this.authService.logoutUser();
+    this.authService.logoutUser();
   }
 }

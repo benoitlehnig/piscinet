@@ -248,5 +248,30 @@
   text-align: center;
   span{
     font-size:  0.7em;
+    position: relative;
+    top: -6px;
   }
+
+}
+  .full{
+
+  }
+  .controle{
+       color:var(--ion-color-secondary);
+  }
+  .maintenance{
+     color:   var(--ion-color-tertiary);
+  }
+.spanButton{
+  margin-left:0.5em;
+}
+ion-text.unknown{
+  font-style: italic;
+  color:#c0c0c0;
+}
+.statusOK{
+    color: var(--ion-color-primary);
+}
+.statusKO{
+    color: var(--ion-color-warning);
 }

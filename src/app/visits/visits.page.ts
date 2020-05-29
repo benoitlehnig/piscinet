@@ -5,6 +5,7 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { Observable, combineLatest, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 import { uniq, flatten } from 'lodash'
+import * as moment from 'moment';
 
 @Component({
 	selector: 'app-visits',
@@ -31,8 +32,8 @@ export class VisitsPage implements OnInit {
 
 		console.log(this.visits);
 		*/
-
-		this.visits = this.afDatabase.list<Visit>('visits',ref => ref.orderByChild('dateTime')).snapshotChanges()
+    let lastMonth = moment().subtract(1, 'months').format();
+		this.visits = this.afDatabase.list<Visit>('visits',ref => ref.orderByChild('dateTime').startAt(lastMonth)).snapshotChanges()
       .pipe(
 
         switchMap(visits => {
@@ -40,7 +41,7 @@ export class VisitsPage implements OnInit {
           const customerUids = uniq(visits.map(visit  => visit.payload.val().customerUid));
           const employeeUids = uniq(visits.map(visit => visit.payload.val().employeeUid));
           return combineLatest(
-            of(visits),
+            of(visits.reverse()),
             combineLatest(
               customerUids.map(customerUid =>
                 this.afDatabase.object<any>('customers/'+customerUid).valueChanges().pipe(
