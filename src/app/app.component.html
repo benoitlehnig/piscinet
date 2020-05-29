@@ -2,18 +2,18 @@
   <ion-split-pane contentId="main-content" >
     <ion-menu contentId="main-content" type="push" >
       <ion-content>
+        <div><h2>{{'COMMON.Hello' | translate}} <ion-text color="primary">{{displayName}} !</ion-text></h2></div>
+        <ion-button class="submit-btn" (click)="logout()" fill="outline" >{{'COMMON.Logout' | translate}}</ion-button>
         <ion-list id="inbox-list">
-          <ion-list-header>Piscinet</ion-list-header>
-          <ion-note>{{'COMMON.Hello' | translate}} {{displayName}} !</ion-note>
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
+              <ion-label> {{'COMMON.'+ p.title | translate}}</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
-        <ion-button class="submit-btn" (click)="logout()" >{{'COMMON.Logout' | translate}}</ion-button>
+
 
 
 

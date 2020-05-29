@@ -1,0 +1,64 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>{{'MYPROFILE.Title' | translate}} </ion-title>
+	</ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+	<ion-item lines="none">
+		<ion-text><h2>{{'MYPROFILE.YourContracts' | translate}}</h2></ion-text>
+	</ion-item>
+	<ion-item lines="none">
+		<ion-text >{{'MYPROFILE.ContractTitle' | translate}} </ion-text>
+		<ion-text class="bold" color="primary" *ngIf="customer.typeOfContract ==='technical'" >{{'CUSTOMER.CONTRACTTYPETECHNICAL' | translate}}</ion-text>
+		<ion-text class="bold" color="primary" *ngIf="customer.typeOfContract ==='full'">{{'CUSTOMER.CONTRACTTYPEFULL'  | translate}}</ion-text>
+	</ion-item>
+	<ion-item>
+		<ion-text >{{'MYPROFILE.ContractTypeTechnical' | translate}} </ion-text>
+		<ion-text class="bold" color="primary" *ngIf="customer.contractOfProduct ==='included'">{{'CUSTOMER.CONTRACTPRODUCTINCLUDED' | translate}}</ion-text>
+		<ion-text class="bold" color="warning" *ngIf="customer.contractOfProduct ==='notIncluded'">{{'CUSTOMER.CONTRACTPRODUCTNOTINCLUDED'  | translate}}</ion-text>
+	</ion-item>
+	<ion-item lines="none">
+		<ion-text><h2>{{'MYPROFILE.PersonalInformation' | translate}}</h2></ion-text>
+	</ion-item>
+	<ion-item lines="none">
+		<ion-label position="stacked">{{'MYPROFILE.Name' | translate}}</ion-label>
+		<ion-text>{{customer.firstName}} {{customer.lastName}}</ion-text>
+	</ion-item>
+	<ion-item lines="none">
+		<ion-label position="stacked">{{'CUSTOMER.MOBILEPHONENUMBER' | translate}}</ion-label>
+		<ion-text>
+			<a href="tel:{{customer.telPhoneNumber}}"> {{customer.telPhoneNumber}}</a>
+		</ion-text>
+	</ion-item>
+	<ion-item lines="none">
+		<ion-label position="stacked">{{'CUSTOMER.FIXEDPHONENUMBER' | translate}}</ion-label>
+		<ion-text>
+			<a href="tel:{{customer.telFixNumber}}"> {{customer.telFixNumber}}</a>
+		</ion-text>
+	</ion-item>
+	<ion-item lines="none" *ngIf="customer.guardianNumber != ''">
+		<ion-label position="stacked">{{'CUSTOMER.GUARDIANPHONENUMBER' | translate}}</ion-label>
+		<ion-text>
+			<a href="tel:{{customer.guardianNumber}}"> {{customer.guardianNumber}}</a>
+		</ion-text>
+	</ion-item>
+	<ion-item  lines="none">
+		<ion-label position="stacked">{{'CUSTOMER.EMAIL' | translate}}</ion-label>
+		<ion-text>
+			<a href="mailto:{{customer.email}}"> {{customer.email}}</a>
+		</ion-text>
+	</ion-item>
+	<ion-item  lines="none">
+		<ion-label position="stacked">{{'CUSTOMER.ADDRESS' | translate}}</ion-label>
+		<ion-text>
+			{{customer.googleAddress}} 
+		</ion-text>
+	</ion-item>
+
+</ion-content>

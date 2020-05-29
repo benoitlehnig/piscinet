@@ -5,7 +5,11 @@
 		"SelectOne": "Sélectionner une option",
 		"Loading": "En cours :) ",
 		"Logout": "Se deconnecter ",
-		"Hello": "Bonjour"
+		"Hello": "Bonjour",
+		"Customers": "Clients",
+		"MyProfile": "Mon Profil",
+		"Visits": "Visites",
+		"MyPools": "Mes piscines"
 	},
 	"LOGIN":{
 		"Welcome": "Bienvenue sur Piscine.net",
@@ -278,6 +282,15 @@
 		"Customer": "Client :  ",
 		"TitleFor": "Pour ",
 		"TitleOn": " du "
+	},
+	"MYPROFILE":{
+		"Title": "Mon Profil",
+		"YourContracts": "Mes contrats",
+		"ContractTitle": "Contrat annuel d'entretien : ",
+		"ContractTypeTechnical": "Contrat technique : ",
+		"PersonalInformation": "Mes informations personelles",
+		"Name": "Nom"
+
 	}
 
 	

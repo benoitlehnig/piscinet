@@ -75,6 +75,10 @@ const routes: Routes = [
     path: 'visits/:vid',
     loadChildren: () => import('./visit/visit.module').then( m => m.VisitPageModule)
   },
+  {
+    path: 'myProfile',
+    loadChildren: () => import('./customer/my-profile/my-profile.module').then( m => m.MyProfilePageModule)
+  },
   
 ];
 

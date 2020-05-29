@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: CustomerPage
+  },
+  {
+    path: 'my-profile',
+    loadChildren: () => import('./my-profile/my-profile.module').then( m => m.MyProfilePageModule)
   }
 ];
 

@@ -12,6 +12,8 @@ import { Observable } from 'rxjs';
 export class AuthenticationService {
 
 	public authState=new Observable(state => {return state})
+	public user: Observable<firebase.User>;
+	public claims;
 
 	constructor(
 		private afAuth: AngularFireAuth,
@@ -19,21 +21,22 @@ export class AuthenticationService {
 		public router:Router,
 
 		) { 
+		this.user = this.afAuth.authState;
+
 		this.afAuth.onAuthStateChanged((user) => {
 			if (user) {
+
+				this.claims = user.getIdTokenResult();
 				user.getIdTokenResult().then(
 					result=> {
 						console.log("result",result);
+						this.claims = result.claims;
 						this.storage.set('claims', result.claims); 
 						this.storage.set('loggedIn', true); 
 
 					})
-				console.log('initializeApp User is logged in');
-
 			} else {
 				this.storage.set('loggedIn', false); 
-				console.log('User is not logged in');
-
 			}
 		});
 	}
@@ -92,4 +95,5 @@ export class AuthenticationService {
 	userDetails() {
 		return this.afAuth.user
 	}
+
 }
