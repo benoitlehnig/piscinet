@@ -5,9 +5,11 @@
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
 		<ion-title >{{'VISIT.AddVisitTitle' | translate}}</ion-title>
-		<ion-title size="small" >{{customerInfo.firstName}} {{customerInfo.lastName}} > {{swimmingPoolName}}  </ion-title>
+		<div>
+			<ion-text color="primary"><h6 class="subTitle"> {{customer.firstName}} {{customer.lastName}}</h6></ion-text>
+		</div>
 		<ion-buttons slot="end">
-			<ion-button color="primary" (click)="addVisit()">
+			<ion-button fill="outline" color="primary" (click)="addVisit()">
 				<ion-icon slot="start" name="save"></ion-icon>
 			{{'VISIT.AddVisitSave' | translate}}</ion-button>
 		</ion-buttons>

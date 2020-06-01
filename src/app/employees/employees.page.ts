@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import {Employee} from '../models/employee';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { map } from 'rxjs/operators';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
 	selector: 'app-employees',
@@ -14,9 +15,12 @@ export class EmployeesPage implements OnInit {
 
 
 	public employees: Observable<any>;
+	public claims;
 	constructor(
 		public afDatabase: AngularFireDatabase,
-		private functions: AngularFireFunctions
+		private functions: AngularFireFunctions,
+		public authenticationService:AuthenticationService
+
 
 		) { }
 
@@ -27,7 +31,7 @@ export class EmployeesPage implements OnInit {
 				changes.map(c => ({ key: c.payload.key, data: c.payload.val() }))
 				)
 			);
-		console.log(this.employees);
+		this.claims = this.authenticationService.getClaims();
 	}
 
 }

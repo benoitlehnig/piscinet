@@ -9,7 +9,7 @@
 		</ion-avatar>
 		<ion-title>{{ customer.firstName}} {{customer.lastName}} </ion-title>
 		<ion-buttons slot="end">
-			<ion-button [routerLink]="['/edit-customer' ,{ mode: 'update', uid:uid, customer:customer }]">
+			<ion-button [routerLink]="['/edit-customer' ,{ mode: 'update', uid:uid, customer:customerStringified }]">
 				<ion-icon name="pencil" ></ion-icon>
 			</ion-button>
 		</ion-buttons>
@@ -82,7 +82,7 @@
 
 
 	<div padding>
-		<ion-button class="submit-btn" [routerLink]="['edit-swimming-pool',{ mode: 'add'}]">{{'CUSTOMER.AddPool' | translate}}</ion-button>
+		<ion-button class="submit-btn" [routerLink]="['edit-swimming-pool',{ mode: 'add',customer:customerStringified}]">{{'CUSTOMER.AddPool' | translate}}</ion-button>
 	</div>
 
 </ion-content>

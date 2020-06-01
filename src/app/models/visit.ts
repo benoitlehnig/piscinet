@@ -14,7 +14,7 @@ export class Visit {
 }
 
 export class Maintenance{
-	public typeOfVisit:string="";
+	public typeOfVisit:string="full";
 	public  analyse: boolean=false;
 	public  curtain: boolean=false;
 	public  cleaningSkimmer: boolean=false;

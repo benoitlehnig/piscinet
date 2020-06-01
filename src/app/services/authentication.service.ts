@@ -42,9 +42,9 @@ export class AuthenticationService {
 	}
 
 
-
-	 
-
+	getClaims(){
+		return this.claims;
+	}
 
 	registerUser(value) {
 		return new Promise<any>((resolve, reject) => {
@@ -91,7 +91,11 @@ export class AuthenticationService {
 			}
 		})
 	}
-
+	resetPassword(email: string) {
+		return this.afAuth.sendPasswordResetEmail(email)
+		.then(() => console.log("email sent"))
+		.catch((error) => console.log(error))
+	}
 	userDetails() {
 		return this.afAuth.user
 	}

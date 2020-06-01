@@ -11,8 +11,8 @@ import { TranslateService } from '@ngx-translate/core';
 import {AppConstants } from './app-constants';
 import { AuthenticationService } from './services/authentication.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-
-
+import { Observable, Observer, fromEvent, merge } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -25,7 +25,8 @@ export class AppComponent implements OnInit {
   public displayName;
   public claims:any={email: ''};
   public appPages =[];
-  
+  public isOnline:boolean=true;
+  public offlineVisits=[];
 
   constructor(
     private platform: Platform,
@@ -47,6 +48,14 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.translate.setDefaultLang('fr');
+      console.log("desktop",this.platform.is('desktop'))
+      console.log("pwa",this.platform.is('pwa'))
+      console.log("mobileweb",this.platform.is('mobileweb'))
+      this.storage.get('offlineVisits').then(
+        data =>{
+          if(data !==null){this.offlineVisits = data}
+       });
+      this.createOnline$().subscribe(isOnline => this.isOnline = isOnline);
 
     });
   }
@@ -72,6 +81,7 @@ export class AppComponent implements OnInit {
                 this.appPages = this.appConstants.appEmployeePages;
               }
               this.selectTabNavigation();
+              this.initNotification();
             })
         }
         else{
@@ -79,9 +89,6 @@ export class AppComponent implements OnInit {
         }
       }
       );
-
-
-
 
   }
   selectTabNavigation(){
@@ -95,4 +102,28 @@ export class AppComponent implements OnInit {
   logout(){
     this.authService.logoutUser();
   }
+
+  initNotification(){
+      /*
+      PushNotifications.requestPermission().then( result => {
+      if (result.granted) {
+        // Register with Apple / Google to receive push via APNS/FCM
+        PushNotifications.register();
+      } else {
+        // Show some error
+      }
+    });
+    */
+  }
+
+  createOnline$() {
+    return merge<boolean>(
+      fromEvent(window, 'offline').pipe(map(() => false)),
+      fromEvent(window, 'online').pipe(map(() => true)),
+      new Observable((sub: Observer<boolean>) => {
+        sub.next(navigator.onLine);
+        sub.complete();
+      }));
+  }
+
 }

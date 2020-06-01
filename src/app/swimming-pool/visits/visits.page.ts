@@ -30,7 +30,6 @@ export class VisitsPage implements OnInit {
 		this.storage.get("currentPool").then((val) => {
 			this.poolId = val.poolId;
 			this.uid = val.uid;
-			console.log("this.poolId");
 			this.init();
 		});
 
@@ -42,11 +41,10 @@ export class VisitsPage implements OnInit {
 	}
 	init(){
 		console.log("this.poolId: ",this.poolId);
-		this.visits = this.afDatabase.list<Visit>('visits',ref => ref.orderByChild('dateTime')).snapshotChanges()
+		this.visits = this.afDatabase.list<Visit>('visits',ref => ref.orderByChild('dateTime').limitToLast(100)).snapshotChanges()
 		.pipe(
 
 			switchMap(visits => {
-				console.log(visits);
 				const customerUids = uniq(visits.map(visit  => visit.payload.val().customerUid));
 				const employeeUids = uniq(visits.map(visit => visit.payload.val().employeeUid));
 				return combineLatest(

@@ -4,10 +4,14 @@
 			<ion-menu-button></ion-menu-button>
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
-		<ion-title>{{swimmingPool.name}} <div><ion-text size="small"> {{customer.firstName}} {{customer.lastName}}</ion-text></div></ion-title>
+		<ion-title>{{'SWIMMINGPOOL.Title' | translate}} {{swimmingPool.name}}
+			<div>
+				<ion-text color="primary"><h6 class="subTitle"> {{customer.firstName}} {{customer.lastName}}</h6></ion-text>
+			</div>
+		</ion-title>
 
 		<ion-buttons slot="end">
-			<ion-button [routerLink]="['/customers/'+uid+'/swimming-pool/' +poolId+ '/edit-swimming-pool',{ mode: 'update'}]">
+			<ion-button [routerLink]="['/customers/'+uid+'/swimming-pool/' +poolId+ '/edit-swimming-pool',{ mode: 'update', customer:customerStringified}]">
 				<ion-icon name="pencil" ></ion-icon>
 			</ion-button>
 		</ion-buttons>
@@ -15,6 +19,11 @@
 </ion-header>
 
 <ion-content>
+	<ion-fab vertical="top" horizontal="end" slot="fixed"  [routerLink]="['/customers/'+uid+'/swimming-pool/' +poolId+'/add-visit',{ mode: 'add', customer: customerStringified}]" >
+		<ion-fab-button>
+			<ion-icon name="shield-checkmark"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
 	<ion-tabs>
 		<ion-tab-bar slot="top">
 			<ion-tab-button tab="information" selected >

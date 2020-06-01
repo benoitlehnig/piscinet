@@ -5,6 +5,8 @@ import {Customer} from '../models/customer';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { map } from 'rxjs/operators';
 import { first } from 'rxjs/operators';
+import { AuthenticationService } from '../services/authentication.service';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -14,10 +16,12 @@ import { first } from 'rxjs/operators';
 })
 export class CustomersPage implements OnInit {
 	public customers;
-
+	public claims;
 	constructor(
 		public afDatabase: AngularFireDatabase,
-		private functions: AngularFireFunctions
+		private functions: AngularFireFunctions,
+		public authenticationService:AuthenticationService,
+		public storage :Storage
 
 		) { 
 
@@ -30,13 +34,19 @@ export class CustomersPage implements OnInit {
 				changes.map(c => ({ key: c.payload.key, data: c.payload.val() }))
 				)
 			);
-		console.log(this.customers);
+		this.claims = this.authenticationService.getClaims();
+		this.customers.subscribe(
+			data => {
+				console.log("customer",data);
+				this.storage.set('customers', data);
+			})
 	}
 
 	async filterList(evt) {
-	
-	
+
+
 	}
+
 
 	
 

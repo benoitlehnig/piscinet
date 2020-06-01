@@ -13,7 +13,7 @@ const routes: Routes = [
 		children: [
 		{
 			path: '',
-			loadChildren: '../swimming-pool/information/information.module#InformationPageModule'
+			loadChildren: './information/information.module#InformationPageModule'
 		}
 		]
 	},
@@ -22,7 +22,7 @@ const routes: Routes = [
 		children: [
 		{
 			path: '',
-			loadChildren: '../swimming-pool/visits/visits.module#VisitsPageModule'
+			loadChildren: './visits/visits.module#VisitsPageModule'
 		}
 		]
 	},     

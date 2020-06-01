@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'my-profile',
     loadChildren: () => import('./my-profile/my-profile.module').then( m => m.MyProfilePageModule)
+  },
+  {
+    path: 'my-pools',
+    loadChildren: () => import('./my-pools/my-pools.module').then( m => m.MyPoolsPageModule)
   }
 ];
 

@@ -23,8 +23,8 @@ export class CustomerPage implements OnInit {
 	}
 	public uid:string;
 	customer:Customer=new Customer();
+	public customerStringified;string="";
 	swimmingPools:Observable<any>;
-	public swimmingPools2: Observable<any>;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -40,6 +40,7 @@ export class CustomerPage implements OnInit {
 		this.afDatabase.object<Customer>('customers/'+this.uid).valueChanges().subscribe(
 			(data) =>{
 				this.customer = data;
+				this.customerStringified = JSON.stringify(data);
 				console.log(data)
 				this.center = this.customer.location;
 			})

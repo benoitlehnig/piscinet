@@ -6,14 +6,15 @@
 			<img src="/assets/images/piscinetLogo.jpg" />
 			<ion-card-header>
 				<ion-card-title>{{'LOGIN.Welcome' | translate}}</ion-card-title>
-				<ion-card-subtitle>{{'LOGIN.PleaseConnect' | translate}}</ion-card-subtitle>
+				<ion-card-subtitle *ngIf="mode ==='login'">{{'LOGIN.PleaseConnect' | translate}}</ion-card-subtitle>
+				<ion-card-subtitle *ngIf="mode ==='resetPassword'">{{'LOGIN.RequestNewPasswordText' | translate}}</ion-card-subtitle>
 			</ion-card-header>
 			<ion-card-content>
-				<form class="form" #form="ngForm" (ngSubmit)="loginUser(form)">
+				<form class="form" #form="ngForm" (ngSubmit)="loginUser(form)" *ngIf="mode ==='login'">
 
 					<ion-item>
 						<ion-label position="floating" color="primary">{{'LOGIN.Email' | translate}}</ion-label>
-						<ion-input  name="email" type="text" placeholder="email" ngModel></ion-input>
+						<ion-input  name="email" type="text" placeholder="email" ngModel required></ion-input>
 					</ion-item>
 
 					<ion-item>
@@ -24,8 +25,25 @@
 
 					<ion-button class="submit-btn" type="submit" >{{'LOGIN.LoginButton' | translate}}</ion-button>
 
-					<label class="error-message">{{errorMessage}}</label>
+					<ion-item>
+						<label class="error-message">{{errorMessage}}</label>
+					</ion-item>
+					
 				</form>
+				<ion-item lines="none" *ngIf="mode ==='login'">
+					<a><ion-text (click)="requestResetPasswordPage()">{{'LOGIN.ForgottenPassword' | translate}}</ion-text></a>
+				</ion-item>
+				<div *ngIf="mode ==='resetPassword'">
+					<ion-item>
+						<ion-label position="floating" color="primary">{{'LOGIN.Email' | translate}}</ion-label>
+						<ion-input  name="email" type="text" [(ngModel)]="emailResetPassword"></ion-input>
+					</ion-item>
+
+					<ion-item lines="none">
+						<ion-button color="medium" (click)="resetPasswordCancel()" >{{'LOGIN.ResetPasswordCancelButton' | translate}}</ion-button>
+						<ion-button class="submit-btn" (click)="resetPassword()" >{{'LOGIN.ResetPasswordButton' | translate}}</ion-button>
+					</ion-item>
+				</div>
 			</ion-card-content>
 		</ion-card>
 	</div>

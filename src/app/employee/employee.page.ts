@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { AuthenticationService } from '../services/authentication.service';
 
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
@@ -14,6 +15,7 @@ import {Employee} from '../models/employee';
 export class EmployeePage implements OnInit {
 
 	public uid:string;
+	public claims;
 	employee: Employee = new Employee();
 	center: google.maps.LatLngLiteral;
 	options: google.maps.MapOptions = {
@@ -25,12 +27,14 @@ export class EmployeePage implements OnInit {
 		private activatedRoute: ActivatedRoute,
 		public db: AngularFireDatabase,
 		private functions: AngularFireFunctions,
+		public authenticationService:AuthenticationService
 
 		) { }
 
 	ngOnInit() {
 		this.uid = this.activatedRoute.snapshot.paramMap.get('id');
-		console.log(this.uid);
+		this.claims = this.authenticationService.getClaims();
+
 		
 	}
 	ionViewWillEnter(){
@@ -38,8 +42,6 @@ export class EmployeePage implements OnInit {
 			(data) =>{
 				this.employee = data;
 				this.center = this.employee.location;
-				console.log(this.center)
-				console.log(this.employee);
 			})
 
 	}
@@ -48,7 +50,6 @@ export class EmployeePage implements OnInit {
 		const callable = this.functions.httpsCallable('setAdmin');
 		const obs = callable(this.uid);
 		obs.subscribe(async res => {
-			console.log(res);
 		});
 	}
 

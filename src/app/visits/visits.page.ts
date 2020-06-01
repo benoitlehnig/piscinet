@@ -5,6 +5,9 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { Observable, combineLatest, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 import { uniq, flatten } from 'lodash'
+import { Storage } from '@ionic/storage';
+import { ActivatedRoute } from '@angular/router';
+
 import * as moment from 'moment';
 
 @Component({
@@ -15,67 +18,82 @@ import * as moment from 'moment';
 export class VisitsPage implements OnInit {
 
 	public visits: Observable<any>;
+  public offlinevisitMode :boolean = false;
 
-	constructor(
-		public afDatabase: AngularFireDatabase,
-		private functions: AngularFireFunctions
-		) 
-	{ }
+  constructor(
+    public afDatabase: AngularFireDatabase,
+    private functions: AngularFireFunctions,
+    public storage:Storage,
+    public activatedRoute:ActivatedRoute
 
-	ngOnInit() {
-		/*this.visits = this.afDatabase.list('/visits').snapshotChanges()
-		.pipe(
-			map(changes => 
-				changes.map(c => ({ key: c.payload.key, data: c.payload.val() }))
-				)
-			)
+    ) 
+  { }
 
-		console.log(this.visits);
-		*/
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      if(params['mode']==='offlineVisits'){
+        this.offlinevisitMode =true;
+      }
+      if(this.offlinevisitMode ===true){
+        this.initOfflineData();
+      }
+      else{this.initLiverData()}
+
+    });
+
+  }
+  initLiverData(){
     let lastMonth = moment().subtract(1, 'months').format();
-		this.visits = this.afDatabase.list<Visit>('visits',ref => ref.orderByChild('dateTime').startAt(lastMonth)).snapshotChanges()
-      .pipe(
+    this.visits = this.afDatabase.list<Visit>('visits',ref => ref.orderByChild('dateTime').startAt(lastMonth).limitToLast(100)).snapshotChanges()
+    .pipe(
 
-        switchMap(visits => {
-        	console.log(visits);
-          const customerUids = uniq(visits.map(visit  => visit.payload.val().customerUid));
-          const employeeUids = uniq(visits.map(visit => visit.payload.val().employeeUid));
-          return combineLatest(
-            of(visits.reverse()),
-            combineLatest(
-              customerUids.map(customerUid =>
-                this.afDatabase.object<any>('customers/'+customerUid).valueChanges().pipe(
-                  map(customer => ({uid:customerUid, data:customer}))
-                  )
+      switchMap(visits => {
+        console.log(visits);
+        const customerUids = uniq(visits.map(visit  => visit.payload.val().customerUid));
+        const employeeUids = uniq(visits.map(visit => visit.payload.val().employeeUid));
+        return combineLatest(
+          of(visits.reverse()),
+          combineLatest(
+            customerUids.map(customerUid =>
+              this.afDatabase.object<any>('customers/'+customerUid).valueChanges().pipe(
+                map(customer => ({uid:customerUid, data:customer}))
+                )
               )
             ) as any,
-            combineLatest(
-              employeeUids.map(employeeUid =>
-              	
-                this.afDatabase.object<any>('employees/'+employeeUid).valueChanges().pipe(
-                  map(employee => ({uid:employeeUid, data:employee}))
-                  )
+          combineLatest(
+            employeeUids.map(employeeUid =>
+
+              this.afDatabase.object<any>('employees/'+employeeUid).valueChanges().pipe(
+                map(employee => ({uid:employeeUid, data:employee}))
+                )
               )
             )
 
           )  as any
-        }),
-        map(([visits, customers,employees]) => {
-        	console.log(visits,customers,employees);
-          return visits.map(visit => {
+      }),
+      map(([visits, customers,employees]) => {
+        console.log(visits,customers,employees);
+        return visits.map(visit => {
 
-            return {
+          return {
 
-              ...(visit.payload.val() as object)  ,
-              visitKey: visit.key,
-              customer: customers.find(a => a.uid === visit.payload.val().customerUid),
-              employee: employees.find(a => a.uid === visit.payload.val().employeeUid)
-            }
-          })
+            ...(visit.payload.val() as object)  ,
+            visitKey: visit.key,
+            customer: customers.find(a => a.uid === visit.payload.val().customerUid),
+            employee: employees.find(a => a.uid === visit.payload.val().employeeUid)
+          }
         })
+      })
       )
+  }
+  initOfflineData(){
+    this.storage.get('offlineVisits').then(
 
-
-	}
-
+      data => {
+        this.visits = Observable.create( observer => {
+          observer.next(data);
+          observer.complete();
+        });
+      })
+  }
 }

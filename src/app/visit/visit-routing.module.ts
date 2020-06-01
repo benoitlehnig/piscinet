@@ -13,7 +13,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './maintenance/maintenance.module#MaintenancePageModule'
+            loadChildren: '../visit/maintenance/maintenance.module#MaintenancePageModule'
           }
         ]
       },
@@ -22,7 +22,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './observation/observation.module#ObservationPageModule'
+            loadChildren: '../visit/observation/observation.module#ObservationPageModule'
           }
         ]
       },
@@ -31,7 +31,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './technical/technical.module#TechnicalPageModule'
+            loadChildren: '../visit/technical/technical.module#TechnicalPageModule'
           }
         ]
       },
@@ -41,15 +41,15 @@ const routes: Routes = [
   },
   {
     path: 'maintenance',
-    loadChildren: () => import('./maintenance/maintenance.module').then( m => m.MaintenancePageModule)
+    loadChildren: () => import('../visit/maintenance/maintenance.module').then( m => m.MaintenancePageModule)
   },
   {
     path: 'technical',
-    loadChildren: () => import('./technical/technical.module').then( m => m.TechnicalPageModule)
+    loadChildren: () => import('../visit/technical/technical.module').then( m => m.TechnicalPageModule)
   },
   {
     path: 'observation',
-    loadChildren: () => import('./observation/observation.module').then( m => m.ObservationPageModule)
+    loadChildren: () => import('../visit/observation/observation.module').then( m => m.ObservationPageModule)
   },
   {
     path: '',

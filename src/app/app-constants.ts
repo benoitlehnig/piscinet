@@ -24,25 +24,18 @@ export class AppConstants {
 	}
 	];
 	public appCustomerPages = [
-
+	{
+		title: 'myPools',
+		url: 'myPools',
+		icon: 'tablet-landscape'
+	},
 	{
 		title: 'MyProfile',
 		url: 'myProfile',
 		icon: 'person'
-	},
-	{
-		title: 'MyPools',
-		url: 'MyPools',
-		icon: 'tablet-landscape'
-	},
-	{
-		title: 'Visits',
-		url: 'visits',
-		icon: 'shield-checkmark'
 	}
 	];
 	public appEmployeePages = [
-
 	{
 		title: 'Customers',
 		url: 'customers',

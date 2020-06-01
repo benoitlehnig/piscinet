@@ -8,6 +8,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Storage } from '@ionic/storage';
 
 import {SwimmingPool} from '../models/swimming-pool';
+import {Customer} from '../models/customer';
 
 @Component({
 	selector: 'app-add-swimming-pool',
@@ -23,6 +24,7 @@ export class AddSwimmingPoolPage implements OnInit {
 	public swimmingPool:SwimmingPool= new SwimmingPool();
 	public successAddText:string="";
 	public successUpdateText:string="";
+	public customer:Customer=new Customer();
 
 	constructor(
 		private functions: AngularFireFunctions,
@@ -41,6 +43,10 @@ export class AddSwimmingPoolPage implements OnInit {
 		console.log("this.uid : ",this.uid);
 		this.activatedRoute.params.subscribe(params => {
 			this.mode =  params['mode'];
+			this.customer =  JSON.parse(params['customer']);
+			console.log("this.customer",this.customer)
+			console.log("this.customer",this.customer.firstName)
+
 			if(this.mode ==="update"){
 				this.poolId = this.activatedRoute.snapshot.paramMap.get('sid')
 				this.afDatabase.object<SwimmingPool>('pools/'+this.uid +'/'+this.poolId).valueChanges().subscribe(

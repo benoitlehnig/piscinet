@@ -8,7 +8,7 @@
 			<ngx-avatar name="{{employee.firstName }} {{employee.lastName}}"></ngx-avatar>
 		</ion-avatar>
 		<ion-title>{{ employee.firstName}} {{employee.lastName}} </ion-title>
-		<ion-buttons slot="end">
+		<ion-buttons slot="end" *ngIf="claims['admin']">
 			<ion-button [routerLink]="['/edit-employee' ,{ mode: 'update', uid:uid, employee:employee }]">
 				<ion-icon name="pencil" ></ion-icon>
 			</ion-button>
@@ -42,6 +42,6 @@
 	</google-map>
 
 	<div padding>
-		<ion-button class="submit-btn" (click)="setAdmin()">set Admin</ion-button>
+		<ion-button class="submit-btn" (click)="setAdmin()" *ngIf="claims['admin']">set Admin</ion-button>
 	</div>
 </ion-content>

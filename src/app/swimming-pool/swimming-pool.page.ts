@@ -16,6 +16,7 @@ export class SwimmingPoolPage implements OnInit {
 	public uid:string;
 	public swimmingPool:SwimmingPool=new SwimmingPool();
 	public customer:Customer = new Customer();
+	public customerStringified = "";
 
 	constructor(
 		private storage: Storage,
@@ -40,18 +41,13 @@ export class SwimmingPoolPage implements OnInit {
 		this.afDatabase.object<Customer>('customers/'+this.uid).valueChanges().subscribe(
 			(data) =>{
 				this.customer = data;
+				this.customerStringified = JSON.stringify(data);
 			})
 		this.afDatabase.object<SwimmingPool>('pools/'+this.uid +'/'+this.poolId).valueChanges().subscribe(
 			(data) =>{
 				this.swimmingPool = data;
 				this.storage.set('currentPool',{uid:this.uid, poolId:this.poolId,swimmingPool:this.swimmingPool }); 
 			})
-
-		this.afDatabase.object<SwimmingPool>('pools/'+this.uid +'/'+this.poolId).valueChanges().subscribe(
-			(data) =>{
-				this.swimmingPool = data;
-			})
-
 	}
 
 }

@@ -39,7 +39,8 @@ export class AddEmployeePage implements OnInit {
 		public toastController: ToastController,
 		public translateService : TranslateService,
 		public zone: NgZone,
-		public loadingController: LoadingController
+		public loadingController: LoadingController,
+		
 		) { 
 		this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
 		this.autocomplete = { input: '' };

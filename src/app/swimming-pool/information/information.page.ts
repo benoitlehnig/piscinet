@@ -34,6 +34,7 @@ export class InformationPage implements OnInit {
 		this.uid = this.activatedRoute.snapshot.paramMap.get('id')
 		this.poolId = this.activatedRoute.snapshot.paramMap.get('sid')
 		this.storage.get("currentPool").then((val) => {
+			console.log("currentPool",val);
 			this.poolId = val.poolId;
 			this.uid = val.uid;
 			this.swimmingPool = val.swimmingPool;

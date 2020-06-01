@@ -8,15 +8,24 @@
 		"Hello": "Bonjour",
 		"Customers": "Clients",
 		"MyProfile": "Mon Profil",
+		"Employes": "Employés",
 		"Visits": "Visites",
-		"MyPools": "Mes piscines"
+		"myPools": "Mes Piscines",
+		"Offline": "Hors Ligne",
+		"OfflineVisitCreate": "Faire une visite hors ligne",
+		"OfflineVisits": "Mes visites hors-ligne"
 	},
 	"LOGIN":{
 		"Welcome": "Bienvenue sur Piscine.net",
 		"PleaseConnect": "Veuillez-vous connecter",
 		"LoginButton": "Se connecter",
 		"Email": "Email",
-		"Password": "Mot de passe"
+		"Password": "Mot de passe",
+		"ResetPasswordButton": "Valider",
+		"RequestNewPasswordText": "Vous avez oublié votre mot de passe ? Pas de soucis, remplissez votre addresse email et vous vous enverrons par email un nouveau mot de passe.",
+		"ForgottenPassword": "Mot de passe oublié",
+		"ResetPasswordCancelButton": "Annuler",
+		"SuccessEmailSent": "Un email vient de vous etre envoye. A bientot"
 	},
 	"CUSTOMERS":{
 		"TITLE": "Clients"
@@ -56,7 +65,7 @@
 		"ContractTypeProduct": "Produits", 
 		"ContractTypeProductIncluded": "Produits inclus",
 		"ContractTypeProductNotIncluded": "Produits non inclus" ,
-		"AddCustomer": "Ajouter Client",
+		"AddCustomer": "Enregistrer",
 		"UpdateCustomer": "Enregister",
 		"SuccessAdd": "ajouté ! ",
 		"SuccessUpdate": "modifié ! "
@@ -79,12 +88,13 @@
 		"Address": "Rue",
 		"PostalCode": "Code postal",
 		"Town": "Ville",
-		"AddEmployee": "Ajouter Employé",
+		"AddEmployee": "Enregistrer",
 		"UpdateEmployee": "Enregister",
 		"SuccessAdd": "ajouté ! ",
 		"SuccessUpdate": "modifié ! "
 	},
 	"SWIMMINGPOOL":{
+		"Title":"Piscine",
 		"Environment": "Environement",
 		"NoVegetation": "Pas de végétation",
 		"LittleVegetation": "Peu de végétation",
@@ -179,8 +189,8 @@
 		"AutomaticFill": "Remplissage automatique",
 		"AutomaticFillDate": "Date du remplissage automatique",
 		"Observation": "Observations",
-		"AddButton": "Ajouter Piscine",
-		"UpdateButton": "Modifier Piscine",
+		"AddButton": "Enregistrer",
+		"UpdateButton": "Enregistrer",
 		"SuccessAdd": "ajouté ! ",
 		"SuccessUpdate": "modifié ! "
 		
@@ -283,6 +293,10 @@
 		"TitleFor": "Pour ",
 		"TitleOn": " du "
 	},
+	"ADDVISIT":{
+		"SuccessAdd": "ajouté ! ",
+		"SuccessUpdate": "modifié ! "
+	},
 	"MYPROFILE":{
 		"Title": "Mon Profil",
 		"YourContracts": "Mes contrats",
@@ -291,6 +305,9 @@
 		"PersonalInformation": "Mes informations personelles",
 		"Name": "Nom"
 
+	},
+	"MYPOOLS":{
+		"Title": "Piscine"
 	}
 
 	

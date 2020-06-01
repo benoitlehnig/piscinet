@@ -54,7 +54,6 @@ export class AddCustomerPage implements OnInit {
 	ngOnInit() {
 		this.activatedRoute.params.subscribe(params => {
 			this.mode =  params['mode'];
-			console.log(this.mode)
 			if(this.mode ==="update"){
 				this.uid = params['uid'];
 				this.afDatabase.object<Customer>('customers/'+this.uid).valueChanges().subscribe(
@@ -83,10 +82,8 @@ export class AddCustomerPage implements OnInit {
 	}
 
 	addCustomer(){
-		
 		this.customer.typeOfContract = this.typeOfContract;
 		this.customer.contractOfProduct = this.contractOfProduct;
-		console.log("customer", this.customer);
 		const callable = this.functions.httpsCallable('addCustomer');
 		const obs = callable(this.customer);
 		obs.subscribe(async res => {

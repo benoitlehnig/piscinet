@@ -64,7 +64,7 @@ const routes: Routes = [
     loadChildren: () => import('./add-swimming-pool/add-swimming-pool.module').then( m => m.AddSwimmingPoolPageModule)
   },
   {
-    path: 'customers/:id/add-visit/:sid',
+    path: 'customers/:id/swimming-pool/:sid/add-visit',
     loadChildren: () => import('./add-visit/add-visit.module').then( m => m.AddVisitPageModule)
   },
   {
@@ -78,6 +78,10 @@ const routes: Routes = [
   {
     path: 'myProfile',
     loadChildren: () => import('./customer/my-profile/my-profile.module').then( m => m.MyProfilePageModule)
+  },
+  {
+    path: 'myPools',
+    loadChildren: () => import('./customer/my-pools/my-pools.module').then( m => m.MyPoolsPageModule)
   },
   
 ];

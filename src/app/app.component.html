@@ -3,24 +3,36 @@
     <ion-menu contentId="main-content" type="push" >
       <ion-content>
         <div><h2>{{'COMMON.Hello' | translate}} <ion-text color="primary">{{displayName}} !</ion-text></h2></div>
+        <div class="offlineBanner"  *ngIf="isOnline ===false">
+          <ion-icon name="warning" color="warning"> </ion-icon><ion-text color="warning">Offline</ion-text></div>
         <ion-button class="submit-btn" (click)="logout()" fill="outline" >{{'COMMON.Logout' | translate}}</ion-button>
         <ion-list id="inbox-list">
 
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index" >
+            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i"  *ngIf="isOnline ===true">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label> {{'COMMON.'+ p.title | translate}}</ion-label>
+              <ion-label> {{'COMMON.'+ p.title | translate}} <ion-badge *ngIf="p.title === 'OfflineVisits'">{{offlineVisits.length}}</ion-badge></ion-label>
             </ion-item>
           </ion-menu-toggle>
-        </ion-list>
+          
+            <ion-item routerDirection="root" [routerLink]="['visits', {mode: 'offlineVisits'} ]" lines="none" detail="false"   *ngIf="offlineVisits.length>0 && (claims['admin'] || claims['employee'])" >
+              <ion-icon slot="start" [ios]="'shield-checkmark' + '-outline'" [md]="'shield-checkmark' + '-sharp'"></ion-icon>
+              <ion-label> {{'COMMON.OfflineVisits'| translate}} <ion-badge >{{offlineVisits.length}}</ion-badge></ion-label>
+            </ion-item>
+       
+          <ion-button color="warning" fill="outline"  *ngIf="isOnline ===false && (claims['admin'] || claims['employee'])" [routerLink]="['/customers/null/swimming-pool/null/add-visit',{ mode: 'offline' }]">
+            <ion-icon name="shield-checkmark"></ion-icon>
+            {{'COMMON.OfflineVisitCreate' | translate}} 
+          </ion-button>
+      </ion-list>
 
 
 
 
-      </ion-content>
-    </ion-menu>
-    <ion-router-outlet id="main-content"></ion-router-outlet>
-  </ion-split-pane>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-split-pane>
 </ion-app>
 
 <ion-app *ngIf="isUserLogged ===false" >
