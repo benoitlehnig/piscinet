@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
-import {Visit} from '../models/Visit';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ShareVisitService {
 
-	private visit:Visit = new Visit()
+	visit:Visit = new Visit()
 
-		get visit(){
+	getVisit(){
 		return this.visit
+	}
+	setVisit(visit){
+		this.visit = this.visit
 	}
 	constructor() { }
 }

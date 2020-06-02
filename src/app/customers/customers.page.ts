@@ -17,6 +17,8 @@ import { Storage } from '@ionic/storage';
 export class CustomersPage implements OnInit {
 	public customers;
 	public claims;
+	public searchTerm:string ="";
+
 	constructor(
 		public afDatabase: AngularFireDatabase,
 		private functions: AngularFireFunctions,
@@ -31,22 +33,16 @@ export class CustomersPage implements OnInit {
 		this.customers = this.afDatabase.list<Customer>('/customers',ref => ref.orderByChild('lastName')).snapshotChanges()
 		.pipe(
 			map(changes => 
-				changes.map(c => ({ key: c.payload.key, data: c.payload.val() }))
+				changes.map(c => ({ key: c.payload.key, data: c.payload.val(), class:'visible' }))
 				)
 			);
 		this.claims = this.authenticationService.getClaims();
-		this.customers.subscribe(
-			data => {
-				console.log("customer",data);
-				this.storage.set('customers', data);
-			})
+
 	}
 
 	async filterList(evt) {
-
-
+		this.searchTerm = evt.srcElement.value;
 	}
-
 
 	
 

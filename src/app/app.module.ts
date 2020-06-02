@@ -29,6 +29,9 @@ registerLocaleData(localeFr);
 import { IonicStorageModule } from '@ionic/storage';
 import { AvatarModule } from 'ngx-avatar';
 
+import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
+
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -59,6 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [ 
   StatusBar,
+  LaunchNavigator,
   SplashScreen,
   { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   { provide: LOCALE_ID, useValue: "fr-FR" }

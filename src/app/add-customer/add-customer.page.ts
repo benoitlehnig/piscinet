@@ -90,6 +90,7 @@ export class AddCustomerPage implements OnInit {
 			this.loading.dismiss();
 			this.presentToast();
 			this.navCtrl.navigateRoot(['customers/'+res.key]);
+			this.loading.dismiss();
 
 		});
 	}
@@ -105,22 +106,24 @@ export class AddCustomerPage implements OnInit {
 			this.loading.dismiss();
 			this.presentToast();
 			this.navCtrl.navigateRoot(['customers/'+this.uid]);
+			this.loading.dismiss();
 		});
 	}
 
 	async submitForm(){
-		if(this.mode ==='add'){
-			this.addCustomer()
-		}
-		if(this.mode ==='update'){
-			this.updateCustomer()
-		}
 		this.loading = await this.loadingController.create({
 			cssClass: 'my-custom-class',
 			message: this.loadingText,
 			duration: 5000
 		});
 		this.loading.present();
+		if(this.mode ==='add'){
+			this.addCustomer()
+		}
+		if(this.mode ==='update'){
+			this.updateCustomer()
+		}
+		
 	}
 	async presentToast() {
 		let message = this.customer.firstName +" "+ this.customer.lastName +" "+ this.successUpdateText;

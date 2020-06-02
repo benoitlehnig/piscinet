@@ -40,7 +40,6 @@ export class VisitsPage implements OnInit {
 		
 	}
 	init(){
-		console.log("this.poolId: ",this.poolId);
 		this.visits = this.afDatabase.list<Visit>('visits',ref => ref.orderByChild('dateTime').limitToLast(100)).snapshotChanges()
 		.pipe(
 

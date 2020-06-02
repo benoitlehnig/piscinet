@@ -31,7 +31,6 @@ export class VisitsPage implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-
       this.initLiverData()
     });
 
@@ -42,7 +41,6 @@ export class VisitsPage implements OnInit {
     .pipe(
 
       switchMap(visits => {
-        console.log(visits);
         const customerUids = uniq(visits.map(visit  => visit.payload.val().customerUid));
         const employeeUids = uniq(visits.map(visit => visit.payload.val().employeeUid));
         return combineLatest(

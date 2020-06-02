@@ -5,6 +5,9 @@ import {Customer} from '../models/customer';
 import {SwimmingPool} from '../models/swimming-pool';
 import { Observable, combineLatest, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
+import { AuthenticationService } from '../services/authentication.service';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator/ngx';
+
 
 @Component({
 	selector: 'app-customer',
@@ -21,19 +24,24 @@ export class CustomerPage implements OnInit {
 		scrollwheel: true,
 		disableDoubleClickZoom: true,
 	}
+	public claims;
+
 	public uid:string;
-	customer:Customer=new Customer();
+	public customer:Customer=new Customer();
 	public customerStringified;string="";
 	swimmingPools:Observable<any>;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
-		public afDatabase: AngularFireDatabase
+		public afDatabase: AngularFireDatabase,
+		public authenticationService:AuthenticationService,
+		private launchNavigator: LaunchNavigator
+
 		) { }
 
 	ngOnInit() {
 		this.uid = this.activatedRoute.snapshot.paramMap.get('id');
-		console.log(this.uid);
+		this.claims = this.authenticationService.getClaims();
 		
 	}
 	ionViewWillEnter(){
@@ -49,8 +57,13 @@ export class CustomerPage implements OnInit {
 				changes.map(c => ({ key: c.payload.key, data: c.payload.val() }))
 				)
 			);
-		
-
+	}
+	launchNavigatorRequest(){
+		this.launchNavigator.navigate(this.customer.googleAddress)
+		.then(
+			success => console.log('Launched navigator'),
+			error => console.log('Error launching navigator', error)
+			);
 	}
 
 

@@ -10,7 +10,7 @@ android {
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
 
-
+    implementation "com.squareup.okhttp3:okhttp:3.12.0"
 }
 apply from: "../../node_modules/cordova-plugin-googlemaps/src/android/frameworks/tbxml-android.gradle"
 apply from: "../../node_modules/cordova-plugin-googlemaps/src/android/frameworks/pgm-custom.gradle"

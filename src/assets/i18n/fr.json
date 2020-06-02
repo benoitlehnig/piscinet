@@ -28,7 +28,8 @@
 		"SuccessEmailSent": "Un email vient de vous etre envoye. A bientot"
 	},
 	"CUSTOMERS":{
-		"TITLE": "Clients"
+		"TITLE": "Clients",
+		"Filter": "Rechercher ..."
 	},
 	"CUSTOMER":{
 		"MOBILEPHONENUMBER": "Telephone mobile",
@@ -197,6 +198,7 @@
 	},
 	"VISIT":{
 		"Title": "Visite",
+		"Title": "Visite",
 		"AddVisitTitle": "Nouvelle Visite",
 		"MainteanceTitle": "Maintenance",
 		"TechnicalTitle": "Technique",
@@ -289,6 +291,7 @@
 		"VisitPerformedBY": "Effectuée par ",
 		"DoneBy": "Effectuée par ",
 		"VisitsTitle": "Visites",
+		"VisitsOfflineTitle": "Mes visites hors-ligne",
 		"Customer": "Client :  ",
 		"TitleFor": "Pour ",
 		"TitleOn": " du "
@@ -308,6 +311,12 @@
 	},
 	"MYPOOLS":{
 		"Title": "Piscine"
+	},
+	"OFFLINEVISITS":{
+		"AlertHeader": "Suppression de toutes les visites hors ligne",
+		"AlertMesssage": "Etes-vous sur de vouloir supprimer toutes vos visites hors-lignes ? ",
+		"AlertCancel": "Annuler",
+		"AlertOK": "Supprimer"
 	}
 
 	
