@@ -31,14 +31,8 @@ export class VisitsPage implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      if(params['mode']==='offlineVisits'){
-        this.offlinevisitMode =true;
-      }
-      if(this.offlinevisitMode ===true){
-        this.initOfflineData();
-      }
-      else{this.initLiverData()}
 
+      this.initLiverData()
     });
 
   }
@@ -86,14 +80,5 @@ export class VisitsPage implements OnInit {
       })
       )
   }
-  initOfflineData(){
-    this.storage.get('offlineVisits').then(
 
-      data => {
-        this.visits = Observable.create( observer => {
-          observer.next(data);
-          observer.complete();
-        });
-      })
-  }
 }

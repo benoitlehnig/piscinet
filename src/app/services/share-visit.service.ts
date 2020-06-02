@@ -1,27 +1,14 @@
 import { Injectable } from '@angular/core';
+import {Visit} from '../models/Visit';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ShareVisitService {
 
-	private visit: {
-		maintenance:null,
-		technique:null,
-		observation:null
-	};
+	private visit:Visit = new Visit()
 
-	addMaintenance(maintenance:any) {
-		visit.maintenance = maintenance
-	}
-	addTechnique(technique:any) {
-		visit.technique = technique
-	}
-	addObservation(technique:any) {
-		visit.observation = observation
-	}
-
-	get visit(){
+		get visit(){
 		return this.visit
 	}
 	constructor() { }

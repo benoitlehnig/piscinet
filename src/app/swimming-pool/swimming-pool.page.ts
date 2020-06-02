@@ -4,6 +4,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import {Customer} from '../models/customer';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
 	selector: 'app-swimming-pool',
@@ -17,19 +18,26 @@ export class SwimmingPoolPage implements OnInit {
 	public swimmingPool:SwimmingPool=new SwimmingPool();
 	public customer:Customer = new Customer();
 	public customerStringified = "";
+	public visitTypeText= {visitTypeFull: '',visitTypeControl:'', visitTypeMaintenance:'' };
 
 	constructor(
 		private storage: Storage,
 		private activatedRoute: ActivatedRoute,
-		public afDatabase: AngularFireDatabase
+		public afDatabase: AngularFireDatabase,
+		public translateService : TranslateService
 		) { 
 		
 	}
 
-
-
 	ngOnInit() {
-		console.log("enter")
+		this.translateService.get(['VISIT.VisitTypeFull', 'VISIT.VisitTypeControl', 'VISIT.VisitTypeMaintenance']).subscribe(
+			value => {
+				// value is our translated string
+				console.log(value);
+				this.visitTypeText.visitTypeFull = value['VISIT.VisitTypeFull'];
+				this.visitTypeText.visitTypeControl = value['VISIT.VisitTypeControl'];
+				this.visitTypeText.visitTypeMaintenance = value['VISIT.VisitTypeMaintenance'];
+			});
 
 	}
 

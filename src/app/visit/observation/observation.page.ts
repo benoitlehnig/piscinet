@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Visit} from '../../models/Visit';
 import * as moment from 'moment';
-import { Storage } from '@ionic/storage';
+import { DataSharingService } from '../../services/data-sharing.service'
+
 @Component({
 	selector: 'app-observation',
 	templateUrl: './observation.page.html',
@@ -11,7 +12,7 @@ export class ObservationPage implements OnInit {
 
 	public visit:Visit = new Visit();
 	constructor(
-		private storage: Storage,
+		public dataSharingService:DataSharingService
 
 
 		) {
@@ -19,11 +20,11 @@ export class ObservationPage implements OnInit {
 	}
 
 	ngOnInit() {
+		this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
+			this.visit = visit
+		});
 	}
 	ionViewWillEnter(){
-		this.storage.get('visit').then((val) => {
-			console.log('visit val', val);
-			this.visit = val ;
-		});
+		
 	}
 }

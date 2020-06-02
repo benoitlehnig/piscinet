@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Storage } from '@ionic/storage';
-import {Technique} from '../../models/Visit';
+import { DataSharingService } from '../../services/data-sharing.service'
+import {Visit} from '../../models/Visit';
 
 
 @Component({
@@ -11,24 +11,27 @@ import {Technique} from '../../models/Visit';
 export class TechniquePage implements OnInit {
 
 	
-	technical=new Technique();
-	constructor(private storage: Storage) { }
+	visit:Visit=new Visit();
+	constructor(
+		public dataSharingService:DataSharingService
+		) { }
 
 
 	ngOnInit() {
+		this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
+			console.log("visit technique:", visit)
+            this.visit = visit
+        });
 	}
 
 	ionViewWillLeave(){
 		this.saveTechnical();
 	}
 	
+	ionViewWillEnter(){
+		
+	}
 	saveTechnical(){
-		this.storage.get('newVisit').then((val) => {
-			console.log('newVisit', val);
-			val.technique= this.technical;
-			this.storage.set("newVisit",val);
-		});
-
-
+		this.dataSharingService.someDataChanges(this.visit);
 	}
 }

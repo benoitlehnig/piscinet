@@ -294,8 +294,8 @@
 		"TitleOn": " du "
 	},
 	"ADDVISIT":{
-		"SuccessAdd": "ajouté ! ",
-		"SuccessUpdate": "modifié ! "
+		"SuccessAdd": " - nouvelle visite ajoutée ! ",
+		"SuccessUpdate": "- visite modifiée ! "
 	},
 	"MYPROFILE":{
 		"Title": "Mon Profil",

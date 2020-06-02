@@ -82,7 +82,7 @@
    * -------------------------------------------
    */
 
-  body {
+   body {
     --ion-color-primary: #afccff;
     --ion-color-primary-rgb: 175, 204, 255;
     --ion-color-primary-contrast: #000000;
@@ -152,7 +152,7 @@
    * -------------------------------------------
    */
 
-  .ios body {
+   .ios body {
     --ion-background-color: #000000;
     --ion-background-color-rgb: 0,0,0;
 
@@ -190,7 +190,7 @@
    * -------------------------------------------
    */
 
-  .md body {
+   .md body {
     --ion-background-color: #121212;
     --ion-background-color-rgb: 18,18,18;
 
@@ -229,11 +229,11 @@
 
 }
 .paddingToggle{
-    padding-left:4em;
+  padding-left:2em;
 }
 .maxWidthDate{
-    max-width:40em;
-  }
+  max-width:40em;
+}
 .avatarTop{
   padding-top: 5px;
 }
@@ -251,17 +251,21 @@
     position: relative;
     top: -6px;
   }
+  div.typeOfVisitWrapper{
+    width:70px;
+    font-size:  0.7em;
+  }
 
 }
-  .full{
+.full{
 
-  }
-  .controle{
-       color:var(--ion-color-secondary);
-  }
-  .maintenance{
-     color:   var(--ion-color-tertiary);
-  }
+}
+.controle{
+ color:var(--ion-color-secondary);
+}
+.maintenance{
+ color:   var(--ion-color-success);
+}
 .spanButton{
   margin-left:0.5em;
 }
@@ -270,10 +274,10 @@ ion-text.unknown{
   color:#c0c0c0;
 }
 .statusOK{
-    color: var(--ion-color-primary);
+  color: var(--ion-color-primary);
 }
 .statusKO{
-    color: var(--ion-color-warning);
+  color: var(--ion-color-warning);
 }
 .bold{
   font-weight: bold;
@@ -281,4 +285,27 @@ ion-text.unknown{
 .subTitle{
   margin:0px;
   font-size:0.8em;
+}
+ion-fab-button[data-desc] {
+  position: relative;
+}
+
+ion-fab-button[data-desc]::after {
+  position: absolute;
+  content: attr(data-desc);
+  z-index: 1;
+  right: 55px;
+  bottom: 4px;
+  background-color: var(--ion-color-primary);
+  padding: 9px;
+  border-radius: 15px;
+  color: white;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);
+}
+ion-fab-button.controle[data-desc]::after {
+  background-color: var(--ion-color-secondary);
+}
+
+ion-fab-button.maintenance[data-desc]::after {
+  background-color: var(--ion-color-success);
 }

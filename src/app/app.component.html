@@ -15,12 +15,12 @@
             </ion-item>
           </ion-menu-toggle>
           
-            <ion-item routerDirection="root" [routerLink]="['visits', {mode: 'offlineVisits'} ]" lines="none" detail="false"   *ngIf="offlineVisits.length>0 && (claims['admin'] || claims['employee'])" >
+            <ion-item routerDirection="root" [routerLink]="['offlineVisits']" lines="none" detail="false"   *ngIf="offlineVisits.length>0 && (claims['admin'] || claims['employee'])" >
               <ion-icon slot="start" [ios]="'shield-checkmark' + '-outline'" [md]="'shield-checkmark' + '-sharp'"></ion-icon>
               <ion-label> {{'COMMON.OfflineVisits'| translate}} <ion-badge >{{offlineVisits.length}}</ion-badge></ion-label>
             </ion-item>
        
-          <ion-button color="warning" fill="outline"  *ngIf="isOnline ===false && (claims['admin'] || claims['employee'])" [routerLink]="['/customers/null/swimming-pool/null/add-visit',{ mode: 'offline' }]">
+          <ion-button color="warning" fill="outline"  *ngIf="isOnline ===false && (claims['admin'] || claims['employee'])" [routerLink]="['/customers/null/swimming-pool/null/add-visit',{ mode: 'add', offline:true }]">
             <ion-icon name="shield-checkmark"></ion-icon>
             {{'COMMON.OfflineVisitCreate' | translate}} 
           </ion-button>

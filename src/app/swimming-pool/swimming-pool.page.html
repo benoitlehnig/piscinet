@@ -19,10 +19,21 @@
 </ion-header>
 
 <ion-content>
-	<ion-fab vertical="top" horizontal="end" slot="fixed"  [routerLink]="['/customers/'+uid+'/swimming-pool/' +poolId+'/add-visit',{ mode: 'add', customer: customerStringified}]" >
+	<ion-fab  vertical="top" horizontal="end" slot="fixed" >
 		<ion-fab-button>
 			<ion-icon name="shield-checkmark"></ion-icon>
 		</ion-fab-button>
+		<ion-fab-list>
+			<ion-fab-button color="primary" class="full" [attr.data-desc]="visitTypeText.visitTypeFull"  [routerLink]="['/customers/'+uid+'/swimming-pool/' +poolId+'/add-visit',{ mode: 'add', customer: customerStringified,swimmingPoolName:swimmingPool.name,visitType:'full' }]">
+				<ion-icon name="shield-checkmark" fill="solid"></ion-icon>
+			</ion-fab-button>
+			<ion-fab-button color="secondary" class="controle" [attr.data-desc]="visitTypeText.visitTypeControl" [routerLink]="['/customers/'+uid+'/swimming-pool/' +poolId+'/add-visit',{ mode: 'add', customer: customerStringified,swimmingPoolName:swimmingPool.name,visitType:'controle' }]">
+				<ion-icon name="shield-checkmark"></ion-icon>
+			</ion-fab-button>
+			<ion-fab-button color="success" class="maintenance"  [attr.data-desc]="visitTypeText.visitTypeMaintenance" [routerLink]="['/customers/'+uid+'/swimming-pool/' +poolId+'/add-visit',{ mode: 'add', customer: customerStringified,swimmingPoolName:swimmingPool.name,visitType:'maintenance' }]">
+				<ion-icon name="shield-checkmark" ></ion-icon>
+			</ion-fab-button>
+		</ion-fab-list>
 	</ion-fab>
 	<ion-tabs>
 		<ion-tab-bar slot="top">

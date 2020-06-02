@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Visit} from '../../models/Visit';
 import * as moment from 'moment';
-import { Storage } from '@ionic/storage';
+import { DataSharingService } from '../../services/data-sharing.service'
 
 @Component({
 	selector: 'app-maintenance',
@@ -11,27 +11,22 @@ import { Storage } from '@ionic/storage';
 export class MaintenancePage implements OnInit {
 
 	public visit:Visit = new Visit();
-	visitId:string="";
-	customerInfo:any;
-	swimmingPoolName:string="";
 	constructor(
-		private storage: Storage,
-
+		public dataSharingService:DataSharingService
 
 		) {
-
+		this.visit = new Visit();		
 	}
 
 
 	ngOnInit() {
-
 		
 
 	}
 	ionViewWillEnter(){
-		this.storage.get('visit').then((val) => {
-			console.log('visit val', val);
-			this.visit = val ;
+		this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
+			console.log("visit maintenance visit", visit)
+			this.visit = visit
 		});
 	}
 }

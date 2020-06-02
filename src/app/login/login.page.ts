@@ -16,6 +16,17 @@ export class LoginPage implements OnInit {
 	emailResetPassword:string="";
 	mode:string ="login";
 	successEmailSent:string ="";
+	validation_messages = {
+		'email': [
+		{ type: 'required', message: 'Email is required.' },
+		{ type: 'pattern', message: 'Please enter a valid email.' }
+		],
+		'password': [
+		{ type: 'required', message: 'Password is required.' },
+		{ type: 'minlength', message: 'Password must be at least 5 characters long.' }
+		]
+	};
+
 	constructor(
 		public authService:AuthenticationService,
 		public navCtrl: NavController,
@@ -30,16 +41,7 @@ export class LoginPage implements OnInit {
 			});
 	}
 
-	validation_messages = {
-		'email': [
-		{ type: 'required', message: 'Email is required.' },
-		{ type: 'pattern', message: 'Please enter a valid email.' }
-		],
-		'password': [
-		{ type: 'required', message: 'Password is required.' },
-		{ type: 'minlength', message: 'Password must be at least 5 characters long.' }
-		]
-	};
+	
 
 
 	loginUser(form) {

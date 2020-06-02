@@ -6,6 +6,7 @@ export class Visit {
 	public customerUid: string="";
 	public dateTime: string="";
 	public poolId: string="";
+	public typeOfVisit:string="full";
 
 	deserialize(input: any) {
 		Object.assign(this, input);
@@ -14,7 +15,6 @@ export class Visit {
 }
 
 export class Maintenance{
-	public typeOfVisit:string="full";
 	public  analyse: boolean=false;
 	public  curtain: boolean=false;
 	public  cleaningSkimmer: boolean=false;

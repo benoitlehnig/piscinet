@@ -1,8 +1,8 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
 		<ion-buttons slot="start">
-			<ion-back-button></ion-back-button>
 			<ion-menu-button></ion-menu-button>
+			<ion-back-button></ion-back-button>
 		</ion-buttons>
 		<ion-avatar slot="start">
 			<img src="./assets/images/swimmingPoolAvatar.png">
@@ -10,15 +10,15 @@
 		<ion-title >
 			<span *ngIf="mode === 'add'">{{'ADDSWIMMINGPOOL.TitleAdd' | translate}}</span>
 			<span *ngIf="mode === 'update'">{{'ADDSWIMMINGPOOL.TitleUpdate' | translate}}</span>
-		<div>
+			<div>
 				<ion-text color="primary"><h6 class="subTitle"> {{customer.firstName}} {{customer.lastName}}</h6></ion-text>
 			</div>
 		</ion-title>
 		<ion-buttons  slot="end">
 			<ion-button color="primary" fill="outline" (click)="submitForm()" >
 				<ion-icon name="save"></ion-icon>
-				<span *ngIf="mode === 'add'">{{'ADDSWIMMINGPOOL.AddButton' | translate}}</span>
-				<span *ngIf="mode === 'update'">{{'ADDSWIMMINGPOOL.UpdateButton' | translate}}</span>
+				<span *ngIf="mode === 'add'" class="spanButton">{{'ADDSWIMMINGPOOL.AddButton' | translate}}</span>
+				<span *ngIf="mode === 'update'" class="spanButton">{{'ADDSWIMMINGPOOL.UpdateButton' | translate}}</span>
 			</ion-button>
 		</ion-buttons>
 	</ion-toolbar>

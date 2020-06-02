@@ -4,14 +4,15 @@
 			<ion-menu-button></ion-menu-button>
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
-		<ion-avatar slot="start" class="avatarListVisits"  [ngClass]="{'full': visit.maintenance.typeOfVisit ==='full' , 
-		'controle': visit.maintenance.typeOfVisit ==='controle' , 'maintenance': visit.maintenance.typeOfVisit ==='maintenance' }">
+		<ion-avatar slot="start" class="avatarListVisits"  [ngClass]="{'full': visit.typeOfVisit ==='full' , 
+		'controle': visit.typeOfVisit ==='controle' , 'maintenance': visit.typeOfVisit ==='maintenance' }">
 		<ion-icon name="shield-checkmark"></ion-icon>
 		<span *ngIf="visit.maintenance">
-			<span *ngIf="visit.maintenance.typeOfVisit ==='full'">{{'VISIT.VisitTypeFull' | translate}}</span>
-			<span *ngIf="visit.maintenance.typeOfVisit ==='controle'">{{'VISIT.VisitTypeControl' | translate}}</span>
-			<span *ngIf="visit.maintenance.typeOfVisit ==='maintenance'">{{'VISIT.VisitTypeMaintenance' | translate}}</span>
+			<span *ngIf="visit.typeOfVisit ==='full'">{{'VISIT.VisitTypeFull' | translate}}</span>
+			<span *ngIf="visit.typeOfVisit ==='controle'">{{'VISIT.VisitTypeControl' | translate}}</span>
+			<span *ngIf="visit.typeOfVisit ==='maintenance'">{{'VISIT.VisitTypeMaintenance' | translate}}</span>
 		</span>
+		
 	</ion-avatar>
 	<ion-title>
 		{{'VISIT.Title' | translate}} {{'VISIT.TitleOn' | translate}} {{ visit.dateTime | date:'d MMM y' }}
@@ -19,7 +20,11 @@
 			<ion-text color="primary"><h6 class="subTitle">{{'VISIT.TitleFor'  | translate}} {{customer.firstName}} {{customer.lastName}} {{'VISIT.DoneBy' | translate}} {{employee.firstName}} {{employee.lastName}}</h6></ion-text>
 		</div>
 	</ion-title>
-
+	<ion-buttons slot="end" *ngIf="claims['admin']===true || claims['employee'] ===true">
+		<ion-button [routerLink]="['/edit-visit' ,{ visitID:visitId, mode: 'update',customer: customerStringified,swimmingPoolName:swimmingPoolName}]">
+			<ion-icon name="pencil" ></ion-icon>
+		</ion-button>
+	</ion-buttons>
 
 </ion-toolbar>
 </ion-header>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Storage } from '@ionic/storage';
 import {Visit} from '../../models/Visit';
+import { DataSharingService } from '../../services/data-sharing.service'
+
 
 @Component({
 	selector: 'app-technical',
@@ -10,16 +11,18 @@ import {Visit} from '../../models/Visit';
 export class TechnicalPage implements OnInit {
 
 	public visit:Visit = new Visit();
-	constructor(private storage: Storage
+	constructor(
+		public dataSharingService:DataSharingService
+
 		) { }
 
 	ngOnInit() {
+		this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
+			this.visit = visit
+		});
 	}
 	ionViewWillEnter(){
-		this.storage.get('visit').then((val) => {
-			console.log('visit val', val);
-			this.visit = val ;
-		});
+		
 	}
 
 }

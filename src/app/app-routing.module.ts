@@ -76,12 +76,21 @@ const routes: Routes = [
     loadChildren: () => import('./visit/visit.module').then( m => m.VisitPageModule)
   },
   {
+    path: 'edit-visit',
+    loadChildren: () => import('./add-visit/add-visit.module').then( m => m.AddVisitPageModule),
+    canActivate: [AngularFireAuthGuard]
+  },
+  {
     path: 'myProfile',
     loadChildren: () => import('./customer/my-profile/my-profile.module').then( m => m.MyProfilePageModule)
   },
   {
     path: 'myPools',
     loadChildren: () => import('./customer/my-pools/my-pools.module').then( m => m.MyPoolsPageModule)
+  },
+  {
+    path: 'offlineVisits',
+    loadChildren: () => import('./offline-visits/offline-visits.module').then( m => m.OfflineVisitsPageModule)
   },
   
 ];
