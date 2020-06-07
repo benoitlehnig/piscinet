@@ -12,7 +12,8 @@ import {TranslateService} from '@ngx-translate/core';
 import { ToastController } from '@ionic/angular';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { DataSharingService } from '../services/data-sharing.service'
-
+import { Observable, Observer, fromEvent, merge } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-add-visit',
@@ -53,15 +54,11 @@ export class AddVisitPage implements OnInit {
 	}
 
 	ngOnInit() {
+		this.createOnline$().subscribe(isOnline => this.offline = !isOnline);
 		this.activatedRoute.params.subscribe(params => {
-			console.log("parms", params['mode'])
+			this.mode =  params['mode'];
 			if(params['offline'] ){
 				this.offline =params['offline'];
-			}
-			console.log(this.mode);
-			if(this.offline ===false ){
-				this.customer =  JSON.parse(params['customer']);
-				this.swimmingPoolName =  params['swimmingPoolName'];
 			}
 			if(params['visitID'] ){
 				this.visitId = params['visitID']
@@ -69,25 +66,28 @@ export class AddVisitPage implements OnInit {
 			if(params['visitType'] ){
 				this.newVisit.typeOfVisit =params['visitType'];
 			}
-			if(this.offline ===false){
-				if(this.mode !=='update'){
-					this.newVisit.customerUid = this.activatedRoute.snapshot.paramMap.get('id');
-					this.newVisit.poolId =this.activatedRoute.snapshot.paramMap.get('sid');
-					this.newVisit.employeeUid ="";
-					this.authService.userDetails().subscribe( (data)=>{
-						this.newVisit.employeeUid = data.uid
-						this.dataSharingService.someDataChanges(this.newVisit);
-					});
+			this.authService.userDetails().subscribe( (data)=>{
+				this.newVisit.employeeUid = data.uid	
+				if(this.offline ===false){
+					this.customer =  JSON.parse(params['customer']);
+					this.swimmingPoolName =  params['swimmingPoolName'];
+					if(this.mode !=='update'){
+						this.newVisit.customerUid = this.activatedRoute.snapshot.paramMap.get('id');
+						this.newVisit.poolId =this.activatedRoute.snapshot.paramMap.get('sid');
+						this.dataSharingService.someDataChanges(this.newVisit);					
+					}
+					else{
+						this.afDatabase.object<Visit>('visits/'+this.visitId).valueChanges().subscribe(
+							(data) =>{
+								this.newVisit = data;
+							});
+					}	
 				}
 				else{
-					this.afDatabase.object<Visit>('visits/'+this.visitId).valueChanges().subscribe(
-						(data) =>{
-							this.newVisit = data;
-							console.log("this.newVisit update mode",this.newVisit)
-							this.dataSharingService.someDataChanges(this.newVisit);
-						});
-				}	
-			}
+					this.dataSharingService.someDataChanges(this.newVisit);
+				}
+			});
+			
 
 		});
 		this.translateService.get(['ADDVISIT.SuccessAdd', 'ADDVISIT.SuccessUpdate','COMMON.Loading']).subscribe(
@@ -101,12 +101,7 @@ export class AddVisitPage implements OnInit {
 
 	}
 	async addVisit(){
-		this.loading = await this.loadingController.create({
-			cssClass: 'my-custom-class',
-			message: this.loadingText,
-			duration: 5000
-		});
-		this.loading.present();
+		console.log("this.mode addVisit", this.mode)
 		if(this.mode !=='update'){
 			let sub = this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
 				visit.dateTime = moment().format();
@@ -116,23 +111,27 @@ export class AddVisitPage implements OnInit {
 					obs.subscribe(res => {
 						this.navCtrl.navigateRoot(['customers/'+this.newVisit.customerUid +'/swimming-pool/'+this.newVisit.poolId]);
 						this.presentToast();
-						sub.unsubscribe();
 						this.loading.dismiss();
+						sub.unsubscribe();
 					});
 				}
 				else{
 					this.storage.get('offlineVisits').then((offlineVal) => {
-						console.log("offlineVal", offlineVal);
 						if(offlineVal===null){
-							this.storage.set('offlineVisits', [visit])
+							this.storage.set('offlineVisits', JSON.stringify([visit]));
 						}
 						else{
-							offlineVal.push(visit);
-							this.storage.set('offlineVisits', offlineVal);
+							let newOfflineData = JSON.parse(offlineVal);
+							newOfflineData.push(visit);
+							this.storage.set('offlineVisits',JSON.stringify(newOfflineData) );
+							this.dataSharingService.offlineVisitNumberDataChanges(newOfflineData);
+							this.loading.dismiss();
+							sub.unsubscribe();
 						}
+						this.navCtrl.navigateRoot(['offlineVisits']);
 					});
-
 				}
+				
 			});
 		}
 		if(this.mode==='update'){
@@ -151,6 +150,12 @@ export class AddVisitPage implements OnInit {
 				});
 			}
 		}
+		this.loading = await this.loadingController.create({
+			cssClass: 'my-custom-class',
+			message: this.loadingText,
+			duration: 5000
+		});
+		this.loading.present();
 		
 		
 
@@ -165,6 +170,16 @@ export class AddVisitPage implements OnInit {
 			duration: 3000
 		});
 		toast.present();
+	}
+
+	createOnline$() {
+		return merge<boolean>(
+			fromEvent(window, 'offline').pipe(map(() => false)),
+			fromEvent(window, 'online').pipe(map(() => true)),
+			new Observable((sub: Observer<boolean>) => {
+				sub.next(navigator.onLine);
+				sub.complete();
+			}));
 	}
 
 }

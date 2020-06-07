@@ -1,5 +1,5 @@
 {
-	"TITLE": "Piscinet",
+	"TITLE": "Piscine.net",
 	"COMMON": {
 		"Unknown": "Non renseigné",
 		"SelectOne": "Sélectionner une option",
@@ -13,7 +13,9 @@
 		"myPools": "Mes Piscines",
 		"Offline": "Hors Ligne",
 		"OfflineVisitCreate": "Faire une visite hors ligne",
-		"OfflineVisits": "Mes visites hors-ligne"
+		"OfflineVisits": "Mes visites hors-ligne",
+		"UnknownEmployee": "Employé",
+		"AddressSearch": "Rechercher une addresse"
 	},
 	"LOGIN":{
 		"Welcome": "Bienvenue sur Piscine.net",
@@ -46,7 +48,11 @@
 		"AddVisit": "Effectuer une visite",
 		"SwimmingPoolList": "Piscines",
 		"SeeSwimmingPoolDetails": "Voir les details de la piscine",
-		"VisitsPerfomed": " visites éffectuées"
+		"VisitsPerfomed": " visites éffectuées",
+		"Edit": "Modifier",
+		"SendEmailForUserCreation": "Envoyer un email de creation de compte",
+		"EmailSent": "Email envoyé ! "
+
 	},
 	"ADDCUSTOMER":{
 		"TitleAdd": "Ajouter un nouveau client",
@@ -77,7 +83,11 @@
 	"EMPLOYEE":{
 		"TelPhoneNumber": "Télephone mobile",
 		"Email": "Email",
-		"Address": "Adresse"
+		"Address": "Adresse",
+		"Edit": "Modifier",
+		"SendEmailForUserCreation": "Envoyer un email de creation de compte",
+		"EmailSent": "Email envoyé ! ",
+		"SetAdmin": "Donner droits d'admin"
 	},
 	"ADDEMPLOYEE":{
 		"TitleAdd": "Ajouter un nouvel employé",
@@ -298,7 +308,10 @@
 	},
 	"ADDVISIT":{
 		"SuccessAdd": " - nouvelle visite ajoutée ! ",
-		"SuccessUpdate": "- visite modifiée ! "
+		"SuccessUpdate": "- visite modifiée ! ",
+		"SuccessUploadText": "Visite ajoutée ! ",
+		"SelectCustomerAndPool": "Selection du client : ",
+		"PoolNameTitle": "Piscine"
 	},
 	"MYPROFILE":{
 		"Title": "Mon Profil",

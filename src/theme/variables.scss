@@ -309,3 +309,12 @@ ion-fab-button.controle[data-desc]::after {
 ion-fab-button.maintenance[data-desc]::after {
   background-color: var(--ion-color-success);
 }
+.hidden{
+  display:none;
+}
+.visible{
+  display:block
+}
+.modal{
+  --max-width: 1000px;  
+  }

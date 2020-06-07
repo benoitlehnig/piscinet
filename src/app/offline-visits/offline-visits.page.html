@@ -4,7 +4,7 @@
 			<ion-menu-button></ion-menu-button>
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
-		<ion-title>{{'VISIT.VisitsOfflineTitle' | translate}}</ion-title>
+		<ion-title >{{'VISIT.VisitsOfflineTitle' | translate}}</ion-title>
 		<ion-buttons slot="end" >
 			<ion-button (click)="requestRemovalAll()">
 				<ion-icon name="trash" ></ion-icon>
@@ -15,23 +15,42 @@
 
 <ion-content>
 	<ion-list>
-		<ion-item *ngFor="let visit of visits; let i = index"  [routerLink]="['/visits/'+i, {mode:' offline' }]">
+		<ion-item *ngFor="let visit of visits; let i = index"  [routerLink]="['/visits/'+i, {mode:'offline' }]">
 			<ion-avatar slot="start" class="avatarListVisits"  [ngClass]="{'full': visit.typeOfVisit ==='full' , 
 			'controle': visit.typeOfVisit ==='controle' , 'maintenance': visit.typeOfVisit ==='maintenance' }">
-				<ion-icon name="shield-checkmark"></ion-icon>
-				<div *ngIf="visit" class="typeOfVisitWrapper">
-					<span *ngIf="visit.typeOfVisit ==='full'">{{'VISIT.VisitTypeFull' | translate}}</span>
-					<span *ngIf="visit.typeOfVisit ==='controle'">{{'VISIT.VisitTypeControl' | translate}}</span>
-					<span *ngIf="visit.typeOfVisit ==='maintenance'">{{'VISIT.VisitTypeMaintenance' | translate}}</span>
-				</div>
-			</ion-avatar>
-			<ion-label>
-				<h2 *ngIf="visit.dateTime">{{ visit.dateTime | date:'medium' }} </h2>
-				<h2>{{'VISIT.Customer' | translate}} - </h2>
-				
+			<ion-icon name="shield-checkmark"></ion-icon>
+			<div *ngIf="visit" class="typeOfVisitWrapper">
+				<span *ngIf="visit.typeOfVisit ==='full'">{{'VISIT.VisitTypeFull' | translate}}</span>
+				<span *ngIf="visit.typeOfVisit ==='controle'">{{'VISIT.VisitTypeControl' | translate}}</span>
+				<span *ngIf="visit.typeOfVisit ==='maintenance'">{{'VISIT.VisitTypeMaintenance' | translate}}</span>
+			</div>
+		</ion-avatar>
+		<ion-label>
+			<h2 *ngIf="visit.dateTime">{{ visit.dateTime | date:'medium' }} </h2>
+			<h2  *ngIf="visit.customerInfo" >{{'VISIT.Customer' | translate}} : {{ visit.customerInfo.firstName }} </h2>
 
-			</ion-label>
-		</ion-item>
-	</ion-list>
+
+		</ion-label>
+	</ion-item>
+</ion-list>
+<ion-fab  vertical="top" horizontal="end" slot="fixed" >
+	<ion-fab-button   color="warning" *ngIf="isOnline ===false && (claims['admin'] || claims['employee'])">
+		<ion-icon  name="shield-checkmark"></ion-icon>
+	</ion-fab-button>
+	<ion-fab-list>
+		<ion-fab-button color="primary" class="full" [attr.data-desc]="visitTypeText.visitTypeFull" 
+		[routerLink]="['/customers/null/swimming-pool/null/add-visit',{ mode: 'add', customer: '',swimmingPoolName:'',visitType:'full',offline:true }]">
+			<ion-icon name="shield-checkmark" fill="solid"></ion-icon>
+		</ion-fab-button>
+		<ion-fab-button color="secondary" class="controle" [attr.data-desc]="visitTypeText.visitTypeControl" 
+		[routerLink]="['/customers/null/swimming-pool/null/add-visit',{ mode: 'add', customer: '',swimmingPoolName:'',visitType:'controle',offline:true }]">
+			<ion-icon name="shield-checkmark"></ion-icon>
+		</ion-fab-button>
+		<ion-fab-button color="success" class="maintenance"  [attr.data-desc]="visitTypeText.visitTypeMaintenance"
+		 [routerLink]="['/customers/null/swimming-pool/null/add-visit',{ mode: 'add', customer: '',swimmingPoolName:'',visitType:'maintenance',offline:true }]">
+			<ion-icon name="shield-checkmark" ></ion-icon>
+		</ion-fab-button>
+	</ion-fab-list>
+</ion-fab>
 
 </ion-content>

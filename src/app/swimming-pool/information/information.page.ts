@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SwimmingPool} from '../../models/swimming-pool';
-import { AngularFireDatabase } from '@angular/fire/database';
 import { ActivatedRoute } from '@angular/router';
-import { Storage } from '@ionic/storage';
+import { DataSharingService } from '../../services/data-sharing.service'
 
 @Component({
 	selector: 'app-information',
@@ -16,28 +15,30 @@ export class InformationPage implements OnInit {
 	public swimmingPool:SwimmingPool=new SwimmingPool();
 	constructor(
 		private activatedRoute: ActivatedRoute,
-		public afDatabase: AngularFireDatabase,
-		private storage: Storage,
+		public dataSharingService:DataSharingService
+
 		) { 
 	}
 
 	ngOnInit() {
-		this.initData()
 
 	}
 	ionViewWillEnter(){
-		this.activatedRoute.data.subscribe(
-			(data) => this.initData())
+		this.initData();
 	}
 
 	initData(){
 		this.uid = this.activatedRoute.snapshot.paramMap.get('id')
 		this.poolId = this.activatedRoute.snapshot.paramMap.get('sid')
-		this.storage.get("currentPool").then((val) => {
-			console.log("currentPool",val);
-			this.poolId = val.poolId;
-			this.uid = val.uid;
-			this.swimmingPool = val.swimmingPool;
+		let sub = this.dataSharingService.getCurrentPoolChanges().subscribe(
+			data => {
+				if(data){console.log("getCurrentPoolChanges info",data, data.poolId)
+					this.poolId = data.poolId;
+				this.uid = data.uid;
+				this.swimmingPool = data.swimmingPool;
+				console.log(this.swimmingPool);
+			}
+
 		});
 
 	}

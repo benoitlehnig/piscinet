@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { AvatarModule } from 'ngx-avatar';
 
 import { EmployeePageRoutingModule } from './employee-routing.module';
+import { PopoverComponent } from './popover/popover.component';
 
 import { EmployeePage } from './employee.page';
 
@@ -19,8 +20,9 @@ import { EmployeePage } from './employee.page';
     TranslateModule,
     AvatarModule,
     GoogleMapsModule,
+     TranslateModule.forChild(),
     EmployeePageRoutingModule
   ],
-  declarations: [EmployeePage]
+  declarations: [EmployeePage,PopoverComponent]
 })
 export class EmployeePageModule {}

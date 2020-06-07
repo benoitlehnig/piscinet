@@ -1,0 +1,21 @@
+<ion-content>
+	<div class="paddingToggle">
+		<ion-text><h2>{{"ADDVISIT.SelectCustomerAndPool"| translate}}</h2></ion-text>
+		<ion-searchbar    showcancelbutton="" placeholder="{{'CUSTOMERS.Filter' | translate}}"
+		(ionInput)="filterList($event)"
+		></ion-searchbar>
+		<ion-list>
+			<ion-item detail="true" button *ngFor="let customer of customers | async" [ngClass]="{'visible': (customer.data.lastName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 || customer.data.firstName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ),'hidden': (customer.data.lastName.toLowerCase().indexOf(searchTerm.toLowerCase()) === -1 || customer.data.firstName.toLowerCase().indexOf(searchTerm.toLowerCase()) === -1)}" (click)="selectCustomer(customer)">
+				<ion-label>
+					<h2>{{ customer.data.firstName }} {{ customer.data.lastName}}</h2>
+					<ion-list [ngClass]="{'visible': customer.key === selectedCustomerKey,'hidden': customer.key !==selectedCustomerKey}">
+						<ion-item button *ngFor="let pool of selectedCustomerPools " lines="none" (click)="selectCustomerAndPool(customer,pool)">
+							{{'ADDVISIT.PoolNameTitle'  | translate}} {{pool.data.name}}
+						</ion-item>
+					</ion-list>
+				</ion-label>
+
+			</ion-item>
+		</ion-list>
+	</div>
+</ion-content>

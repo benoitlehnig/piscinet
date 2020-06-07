@@ -36,21 +36,22 @@
 			{{'ADDSWIMMINGPOOL.GeneralDimension' | translate}}
 		</ion-list-header>
 		<ion-segment scrollable name="shape" [(ngModel)]="swimmingPool.shape">
-			<ion-segment-button value="rectangular" layout="icon-start" >
+			<ion-segment-button value="rectangular" layout="icon-start" class="segmentButtonOverride">
+				<img src="./assets/images/pool_rectangular.png" alt="{{'ADDSWIMMINGPOOL.Rectangular' | translate}}" class="poolShape" />
 				<ion-label>{{'ADDSWIMMINGPOOL.Rectangular' | translate}}</ion-label>
-				<ion-icon name="tablet-landscape"></ion-icon>
 			</ion-segment-button>
-			<ion-segment-button value="square" layout="icon-start" >
+			<ion-segment-button value="square" layout="icon-start" class="segmentButtonOverride">
+				<img src="./assets/images/pool_square.png" alt="{{'ADDSWIMMINGPOOL.Square' | translate}}" class="poolShape" />
 				<ion-label>{{'ADDSWIMMINGPOOL.Square' | translate}}</ion-label>
-				<ion-icon name="square"></ion-icon>
 			</ion-segment-button>
-			<ion-segment-button value="swimmingLane" layout="icon-start" >
+			<ion-segment-button value="swimmingLane" layout="icon-start" class="segmentButtonOverride">
+				<img src="./assets/images/pool_line.png" alt="{{'ADDSWIMMINGPOOL.SwimmingLane' | translate}}" class="poolShape" />
 				<ion-label>{{'ADDSWIMMINGPOOL.SwimmingLane' | translate}}</ion-label>
-				<ion-icon name="phone-landscape"></ion-icon>
+
 			</ion-segment-button>
-			<ion-segment-button value="bean" layout="icon-start" >
+			<ion-segment-button value="bean" layout="icon-start" class="segmentButtonOverride">
+				<img src="./assets/images/pool_bean.png" alt="{{'ADDSWIMMINGPOOL.Bean' | translate}}" class="poolShape" />
 				<ion-label>{{'ADDSWIMMINGPOOL.Bean' | translate}}</ion-label>
-				<ion-icon name="egg"></ion-icon>
 			</ion-segment-button>
 		</ion-segment>
 		<ion-grid>

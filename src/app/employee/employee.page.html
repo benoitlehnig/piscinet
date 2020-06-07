@@ -9,10 +9,11 @@
 		</ion-avatar>
 		<ion-title>{{ employee.firstName}} {{employee.lastName}} </ion-title>
 		<ion-buttons slot="end" *ngIf="claims['admin']">
-			<ion-button [routerLink]="['/edit-employee' ,{ mode: 'update', uid:uid, employee:employee }]">
-				<ion-icon name="pencil" ></ion-icon>
+			<ion-button (click)="presentPopover($event)" >
+				<ion-icon name="ellipsis-vertical"></ion-icon>
 			</ion-button>
 		</ion-buttons>
+		
 	</ion-toolbar>
 </ion-header>
 

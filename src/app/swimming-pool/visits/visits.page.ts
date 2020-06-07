@@ -5,7 +5,7 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { Observable, combineLatest, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 import { uniq, flatten } from 'lodash'
-import { Storage } from '@ionic/storage';
+import { DataSharingService } from '../../services/data-sharing.service'
 
 @Component({
 	selector: 'app-visits',
@@ -21,26 +21,28 @@ export class VisitsPage implements OnInit {
 	constructor(
 		public afDatabase: AngularFireDatabase,
 		private functions: AngularFireFunctions,
-		private storage: Storage
+		public dataSharingService:DataSharingService
 
 		) 
 	{ }
 
 	ngOnInit() {
-		this.storage.get("currentPool").then((val) => {
-			this.poolId = val.poolId;
-			this.uid = val.uid;
-			this.init();
-		});
-
-		
+		let sub = this.dataSharingService.getCurrentPoolChanges().subscribe(
+			data => {
+				console.log("getCurrentPoolChanges visitPage",data)
+				if(data){
+					this.poolId = data.poolId;
+					this.uid = data.uid;
+					this.init();
+				}
+			});	
 	}
 	onViewWillEnter(){
 
 		
 	}
 	init(){
-		this.visits = this.afDatabase.list<Visit>('visits',ref => ref.orderByChild('dateTime').limitToLast(100)).snapshotChanges()
+		this.visits = this.afDatabase.list<Visit>('visits',ref => ref.orderByChild('poolId').equalTo(this.poolId).limitToLast(100)).snapshotChanges()
 		.pipe(
 
 			switchMap(visits => {

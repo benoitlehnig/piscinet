@@ -5,8 +5,8 @@
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
 		<ion-title *ngIf="mode !=='single'">
-			<ion-item>
-				<ion-select  [(ngModel)]="selectedSwimmingPoolKey" (ionChange)="onSelectPoolChange($event)" [compareWith]="compareById">
+			<ion-item lines="none">
+				<ion-select  [(ngModel)]="selectedSwimmingPoolKey" (ionChange)="onSelectPoolChange($event)" [selectedText]="selectedSwimmingPoolName">
 					<ion-select-option *ngFor="let swimmingPool of swimmingPools | async" value="{{swimmingPool.key}}" >{{swimmingPool.data.name}} </ion-select-option>
 				</ion-select>
 			</ion-item>
@@ -15,6 +15,7 @@
 		<ion-title *ngIf="mode ==='single'">
 			{{'MYPOOLS.Title' | translate}} {{selectedSwimmingPool.data.name }}
 		</ion-title>
+
 
 	</ion-toolbar>
 </ion-header>
@@ -31,6 +32,7 @@
 			<ion-tab-button tab="visits"> 
 				<ion-icon name="shield-checkmark"></ion-icon>
 				<ion-label>{{'SWIMMINGPOOL.Visits' | translate}} </ion-label>
+				<ion-badge color="primary">{{selectedSwimmingPool.data.numberOfVisits}}</ion-badge>
 			</ion-tab-button>
 		</ion-tab-bar>
 	</ion-tabs>

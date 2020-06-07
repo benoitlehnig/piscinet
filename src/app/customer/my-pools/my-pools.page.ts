@@ -3,7 +3,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { AngularFireDatabase } from '@angular/fire/database';
 import {SwimmingPool} from '../../models/swimming-pool';
 import { map } from 'rxjs/operators'
-import { Storage } from '@ionic/storage';
+import { DataSharingService } from '../../services/data-sharing.service'
 
 @Component({
 	selector: 'app-my-pools',
@@ -17,11 +17,13 @@ export class MyPoolsPage implements OnInit {
 	public selectedSwimmingPool: any= {key:'', data :  new SwimmingPool()};
 	public mode:string='single';
 	public selectedSwimmingPoolKey:string='';
+	public selectedSwimmingPoolName:string='';
 
 	constructor(
 		public authService:AuthenticationService,
 		public afDatabase: AngularFireDatabase,
-		public storage : Storage
+		public dataSharingService:DataSharingService
+
 		) { }
 
 	ngOnInit() {
@@ -37,16 +39,17 @@ export class MyPoolsPage implements OnInit {
 						);
 					this.swimmingPools.subscribe(
 						swimmingPools=>{
-							this.selectedSwimmingPool = swimmingPools[0];
-							this.selectedSwimmingPoolKey = swimmingPools[0].key;
-							this.storage.set('currentPool',{uid:this.uid, poolId:this.selectedSwimmingPoolKey,swimmingPool:this.selectedSwimmingPool.data }); 
-							if(swimmingPools.length > 1){
-								this.mode ='multiple';
+							if( swimmingPools[0]){
+								this.selectedSwimmingPool = swimmingPools[0];
+								this.selectedSwimmingPoolKey = swimmingPools[0].key;
+								this.selectedSwimmingPoolName = this.selectedSwimmingPool.data.name;
+								this.dataSharingService.currentPool({uid:this.uid, poolId:this.selectedSwimmingPoolKey,swimmingPool:this.selectedSwimmingPool.data })
+								if(swimmingPools.length > 1){
+									this.mode ='multiple';
+								}
 							}
-						}
-						);
+						});
 				}
-				
 			})
 	}
 
@@ -54,11 +57,15 @@ export class MyPoolsPage implements OnInit {
 		
 
 	}
-	compareById(o1, o2) {
-		return o1.id === o2.id
-	}
+
 	onSelectPoolChange(event){
-		this.storage.set('currentPool',{uid:this.uid, poolId:this.selectedSwimmingPoolKey,swimmingPool:this.selectedSwimmingPool.data }); 
+		console.log(event);
+		this.afDatabase.object<SwimmingPool>('pools/'+this.uid +'/'+event.detail.value).valueChanges().subscribe(
+			(data) =>{
+				this.selectedSwimmingPool = {key:event.detail.value, data :  data};
+				this.selectedSwimmingPoolName = data.name;
+				this.dataSharingService.currentPool({uid:this.uid, poolId:event.detail.value,swimmingPool:data })
+			})
 	}
 
 }

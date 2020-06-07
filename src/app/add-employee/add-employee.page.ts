@@ -140,14 +140,11 @@ export class AddEmployeePage implements OnInit {
 	}
 	
 	selectSearchResult(item) {
-		console.log(item)
 		this.location = item
 		this.employee.googleAddress = this.location.description;
 		this.geocoder.geocode({'placeId': this.location.place_id}, (results, status) => {
-			console.log(results);
 			this.employee.location = {lat: results[0].geometry.location.lat(),lng :results[0].geometry.location.lng()}; 
 		})
-		console.log('placeid'+ item)
 		this.autocomplete = { input: this.employee.googleAddress};
 		this.autocompleteItems = [];
 	}

@@ -31,11 +31,11 @@
 	</ion-item>
 	<ion-item>
 		<ion-label position="stacked">{{'ADDEMPLOYEE.Email' | translate}} <ion-text color="danger">*</ion-text></ion-label>
-		<ion-input  name="email" type="email" [(ngModel)]="employee.email"  required></ion-input>
+		<ion-input  readname="email" [disabled]="mode==='update'" type="email" [(ngModel)]="employee.email"  required></ion-input>
 	</ion-item>
 	<ion-item>
 		<ion-label position="stacked">{{'EMPLOYEE.Address' | translate}} <ion-text color="danger">*</ion-text></ion-label>
-		<ion-input [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="Search for a place" required></ion-input>
+		<ion-input [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="{{'COMMON.AddressSearch' | translate}}" required></ion-input>
 		<ion-list [hidden]="autocompleteItems.length == 0">
 			<ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
 				{{ item.description }}

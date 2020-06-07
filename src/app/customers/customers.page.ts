@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList,AngularFireObject  } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import {Customer} from '../models/customer';
-import { AngularFireFunctions } from '@angular/fire/functions';
 import { map } from 'rxjs/operators';
-import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
-import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -21,9 +18,7 @@ export class CustomersPage implements OnInit {
 
 	constructor(
 		public afDatabase: AngularFireDatabase,
-		private functions: AngularFireFunctions,
 		public authenticationService:AuthenticationService,
-		public storage :Storage
 
 		) { 
 

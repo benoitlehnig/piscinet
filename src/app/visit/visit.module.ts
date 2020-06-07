@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {TranslateModule} from '@ngx-translate/core';
+import {TranslateModule,TranslatePipe} from '@ngx-translate/core';
+import { SelectCustomerComponent } from './select-customer/select-customer.component';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -17,6 +18,7 @@ import { VisitPage } from './visit.page';
     TranslateModule,
     VisitPageRoutingModule
   ],
-  declarations: [VisitPage]
+  declarations: [VisitPage,SelectCustomerComponent],
+  exports:[TranslatePipe]
 })
 export class VisitPageModule {}

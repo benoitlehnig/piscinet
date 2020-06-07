@@ -1,35 +1,27 @@
 <ion-content>
 	<ion-item  lines="none" *ngIf="swimmingPool.shape ==='rectangular'">
-		<ion-avatar slot="start" class="avatarListVisits" >
-			<ion-icon name="tablet-landscape" class="avatarShape"></ion-icon>
-		</ion-avatar>
+		<img src="./assets/images/pool_rectangular.png" alt="{{'ADDSWIMMINGPOOL.Rectangular' | translate}}" class="poolShape" />
 		<ion-label>
 			<h2 >{{'ADDSWIMMINGPOOL.Rectangular' | translate}}</h2>
 			<p>{{swimmingPool.length}}m x {{swimmingPool.width}}m x {{swimmingPool.depth}}m</p>
 		</ion-label>
 	</ion-item>
 	<ion-item  lines="none" *ngIf="swimmingPool.shape ==='square'">
-		<ion-avatar slot="start"  >
-			<ion-icon name="square" class="avatarShape"></ion-icon>
-		</ion-avatar>
+		<img src="assets/images/pool_square.png" alt="{{'ADDSWIMMINGPOOL.Square' | translate}}" class="poolShape" />
 		<ion-label>
 			<h2 >{{'ADDSWIMMINGPOOL.Square' | translate}}</h2>
 			<p>{{swimmingPool.length}}m x {{swimmingPool.width}}m x {{swimmingPool.depth}}m</p>
 		</ion-label>
 	</ion-item>
 	<ion-item  lines="none" *ngIf="swimmingPool.shape ==='swimmingLane'">
-		<ion-avatar slot="start"  >
-			<ion-icon name="phone-landscape" class="avatarShape"></ion-icon>
-		</ion-avatar>
+		<img src="assets/images/pool_line.png" alt="{{'ADDSWIMMINGPOOL.SwimmingLane' | translate}}" class="poolShape" />
 		<ion-label>
 			<h2 >{{'ADDSWIMMINGPOOL.SwimmingLane' | translate}}</h2>
 			<p>{{swimmingPool.length}}m x {{swimmingPool.width}}m x {{swimmingPool.depth}}m</p>
 		</ion-label>
 	</ion-item>
 	<ion-item  lines="none" *ngIf="swimmingPool.shape ==='bean'">
-		<ion-avatar slot="start"  >
-			<ion-icon name="egg" class="avatarShape"></ion-icon>
-		</ion-avatar>
+		<img src="assets/images/pool_bean.png" alt="{{'ADDSWIMMINGPOOL.Bean' | translate}}" class="poolShape" />
 		<ion-label>
 			<h2>{{'ADDSWIMMINGPOOL.Bean' | translate}}</h2>
 			<p>{{swimmingPool.length}}m x {{swimmingPool.width}}m x {{swimmingPool.depth}}m</p>
@@ -169,4 +161,4 @@
 			<ion-text  > {{ swimmingPool.observation  }}</ion-text>
 		</ion-card-content>
 	</ion-card>
-	</ion-content>
+</ion-content>

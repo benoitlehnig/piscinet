@@ -20,7 +20,7 @@ export class TechniquePage implements OnInit {
 	ngOnInit() {
 		this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
 			console.log("visit technique:", visit)
-            this.visit = visit
+            this.visit = visit;
         });
 	}
 

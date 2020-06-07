@@ -28,6 +28,9 @@ export class SwimmingPool {
     observation: string="";
     lastVisitDate: string="";
     numberOfVisits: number=0;
+    lastCurtainCleaningDate:string="";
+    lastTLCleaningDate:string="";
+    lastMaintenanceDate:string="";
 
 	deserialize(input: any) {
 		Object.assign(this, input);

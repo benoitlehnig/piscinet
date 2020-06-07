@@ -1,0 +1,12 @@
+
+<ion-list>
+	<ion-item button [routerLink]="['/edit-customer' ,{ mode: 'update', uid:uid, customer:customerStringified }]" (click)="dismissPopover()">
+		<ion-icon name="pencil" ></ion-icon>
+		<span class="spanButton">{{'CUSTOMER.Edit' | translate}}</span>
+	</ion-item>
+	<ion-item lines="none" button (click)="sendEmailUserCreation()">
+		<ion-icon name="mail-outline" ></ion-icon>
+		<span class="spanButton">{{'CUSTOMER.SendEmailForUserCreation' | translate}}</span>
+	</ion-item>
+
+</ion-list>

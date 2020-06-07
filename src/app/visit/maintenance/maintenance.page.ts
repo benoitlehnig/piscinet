@@ -25,7 +25,6 @@ export class MaintenancePage implements OnInit {
 	}
 	ionViewWillEnter(){
 		this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
-			console.log("visit maintenance visit", visit)
 			this.visit = visit
 		});
 	}

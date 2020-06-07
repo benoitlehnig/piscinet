@@ -10,18 +10,12 @@
 
             <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index;last as isLast" >
               <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i"  *ngIf="isOnline ===true">
-                <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                <ion-icon color="primary" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
                 <ion-label> {{'COMMON.'+ p.title | translate}} <ion-badge *ngIf="p.title === 'OfflineVisits'">{{offlineVisits.length}}</ion-badge></ion-label>
               </ion-item>
               <ion-item routerDirection="root" [routerLink]="['offlineVisits']" lines="none" detail="false"   *ngIf="offlineVisits.length>0 && isLast && (claims['admin'] || claims['employee'])" >
-                <ion-icon slot="start" [ios]="'shield' + '-outline'" [md]="'shield' + '-sharp'"></ion-icon>
+                <ion-icon  color="warning" slot="start" [ios]="'shield' + '-outline'" [md]="'shield' + '-sharp'"></ion-icon>
                 <ion-label> {{'COMMON.OfflineVisits'| translate}} <ion-badge >{{offlineVisits.length}}</ion-badge></ion-label>
-              </ion-item>
-              <ion-item *ngIf="isOnline ===false && (claims['admin'] && isLast || claims['employee'])" [routerLink]="['/customers/null/swimming-pool/null/add-visit',{ mode: 'add', offline:true }]"> 
-                <ion-button color="warning" fill="outline"  >
-                  <ion-icon name="shield"></ion-icon>
-                  {{'COMMON.OfflineVisitCreate' | translate}} 
-                </ion-button>
               </ion-item>
             </ion-menu-toggle>
           </ion-list>

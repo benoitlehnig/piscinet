@@ -13,7 +13,7 @@ export class AuthenticationService {
 
 	public authState=new Observable(state => {return state})
 	public user: Observable<firebase.User>;
-	public claims;
+	public claims={};
 
 	constructor(
 		private afAuth: AngularFireAuth,
@@ -25,8 +25,6 @@ export class AuthenticationService {
 
 		this.afAuth.onAuthStateChanged((user) => {
 			if (user) {
-
-				this.claims = user.getIdTokenResult();
 				user.getIdTokenResult().then(
 					result=> {
 						console.log("result",result);
@@ -42,7 +40,8 @@ export class AuthenticationService {
 	}
 
 
-	getClaims(){
+	 getClaims(){
+
 		return this.claims;
 	}
 
@@ -99,5 +98,6 @@ export class AuthenticationService {
 	userDetails() {
 		return this.afAuth.user
 	}
+
 
 }

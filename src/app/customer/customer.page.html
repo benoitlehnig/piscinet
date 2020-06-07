@@ -9,8 +9,8 @@
 		</ion-avatar>
 		<ion-title>{{ customer.firstName}} {{customer.lastName}} </ion-title>
 		<ion-buttons slot="end" *ngIf="claims['admin']" >
-			<ion-button [routerLink]="['/edit-customer' ,{ mode: 'update', uid:uid, customer:customerStringified }]">
-				<ion-icon name="pencil" ></ion-icon>
+				<ion-button (click)="presentPopover($event)" >
+				<ion-icon name="ellipsis-vertical"></ion-icon>
 			</ion-button>
 		</ion-buttons>
 	</ion-toolbar>
@@ -51,8 +51,8 @@
 	</ion-item>
 	<ion-item  lines="none">
 		<ion-label position="stacked">{{'CUSTOMER.ADDRESS' | translate}}</ion-label>
-		<ion-text (click)="launchNavigatorRequest()">
-			{{customer.googleAddress}} 
+		<ion-text ><a href="https://www.google.com/maps/dir/?api=1&destination={{customer.googleAddress}}" target="blank">
+			{{customer.googleAddress}} </a>
 		</ion-text>
 	</ion-item>
 

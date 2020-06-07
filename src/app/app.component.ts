@@ -6,13 +6,15 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { Storage } from '@ionic/storage';
-
+import { DataSharingService } from './services/data-sharing.service'
+import { OnlineCheckService } from './services/online-check.service'
 import { TranslateService } from '@ngx-translate/core';
 import {AppConstants } from './app-constants';
 import { AuthenticationService } from './services/authentication.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable, Observer, fromEvent, merge } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -37,8 +39,9 @@ export class AppComponent implements OnInit {
     public authService:AuthenticationService,
     public afAuth:AngularFireAuth,
     private storage: Storage,
-    private appConstants: AppConstants
-
+    private appConstants: AppConstants,
+    public dataSharingService:DataSharingService,
+    public onlineCheckService: OnlineCheckService
     ) {
     this.initializeApp();
   }
@@ -51,11 +54,26 @@ export class AppComponent implements OnInit {
       console.log("desktop",this.platform.is('desktop'))
       console.log("pwa",this.platform.is('pwa'))
       console.log("mobileweb",this.platform.is('mobileweb'))
-      this.storage.get('offlineVisits').then(
-        data =>{
-          if(data !==null){this.offlineVisits = data}
-       });
-      this.createOnline$().subscribe(isOnline => this.isOnline = isOnline);
+      
+      this.onlineCheckService.onlineCheck().subscribe(isOnline => {
+        this.isOnline = isOnline;
+
+        this.storage.get('offlineVisits').then(
+          data =>{
+            console.log("this.offlineVisits", JSON.parse(data)  );    
+
+            if(data !==null){
+              this.dataSharingService.offlineVisitNumberDataChanges( JSON.parse(data));
+            }
+          });
+        this.dataSharingService.curretOfflineVisitNumberChanges.subscribe(data => {
+          if(data !==null){
+            this.offlineVisits = data
+          }
+        });
+
+        
+      });
 
     });
   }
@@ -93,9 +111,10 @@ export class AppComponent implements OnInit {
   }
   selectTabNavigation(){
     const path = window.location.pathname;
-    console.log("path",path);
+    console.log("path: ",path);
+    console.log("path: ",path);
     if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(page => page.url.toLowerCase() === path.toLowerCase().replace('/',""));
+      this.selectedIndex = this.appPages.findIndex(page => page.url.toLowerCase() === path.toLowerCase().split("/")[1]);
     }
   }
 
@@ -104,26 +123,8 @@ export class AppComponent implements OnInit {
   }
 
   initNotification(){
-      /*
-      PushNotifications.requestPermission().then( result => {
-      if (result.granted) {
-        // Register with Apple / Google to receive push via APNS/FCM
-        PushNotifications.register();
-      } else {
-        // Show some error
-      }
-    });
-    */
   }
 
-  createOnline$() {
-    return merge<boolean>(
-      fromEvent(window, 'offline').pipe(map(() => false)),
-      fromEvent(window, 'online').pipe(map(() => true)),
-      new Observable((sub: Observer<boolean>) => {
-        sub.next(navigator.onLine);
-        sub.complete();
-      }));
-  }
+
 
 }

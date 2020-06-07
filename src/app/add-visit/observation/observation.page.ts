@@ -16,8 +16,8 @@ export class ObservationPage implements OnInit {
 		) { }
 
 	ngOnInit() {
-		this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
-            this.visit = visit
+		let sub = this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
+            this.visit = visit;
         });
 	}
 	ionViewWillLeave(){

@@ -15,6 +15,7 @@
 				<h2 *ngIf="visit.dateTime">{{ visit.dateTime | date:'medium' }} </h2>
 
 				<p *ngIf="visit.employee.data">{{'VISIT.VisitPerformedBY' | translate}} {{visit.employee.data.firstName }} {{visit.employee.data.lastName}}</p>
+				<p *ngIf="visit.employee.data === null">{{'VISIT.VisitPerformedBY' | translate}} {{'COMMON.UnknownEmployee' | translate}}</p>
 
 			</ion-label>
 		</ion-item>

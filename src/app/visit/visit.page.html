@@ -20,9 +20,12 @@
 			<ion-text color="primary"><h6 class="subTitle">{{'VISIT.TitleFor'  | translate}} {{customer.firstName}} {{customer.lastName}} {{'VISIT.DoneBy' | translate}} {{employee.firstName}} {{employee.lastName}}</h6></ion-text>
 		</div>
 	</ion-title>
-	<ion-buttons slot="end" *ngIf="claims['admin']===true || claims['employee'] ===true">
-		<ion-button [routerLink]="['/edit-visit' ,{ visitID:visitId, mode: 'update',customer: customerStringified,swimmingPoolName:swimmingPoolName}]">
+	<ion-buttons slot="end" >
+		<ion-button [routerLink]="['/edit-visit' ,{ visitID:visitId, mode: 'update',customer: customerStringified,swimmingPoolName:swimmingPoolName}]" *ngIf="editEligibility === true && mode !== 'offline'">
 			<ion-icon name="pencil" ></ion-icon>
+		</ion-button>
+		<ion-button (click)="uploadVisit()" *ngIf="(claims['admin']===true || claims['employee'] ===true) && mode !=='online'">
+			<ion-icon name="cloud-upload" ></ion-icon>
 		</ion-button>
 	</ion-buttons>
 
@@ -50,3 +53,4 @@
 		</ion-tab-bar>
 	</ion-tabs>
 </ion-content>
+
