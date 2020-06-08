@@ -24,7 +24,7 @@ const routes: Routes = [
 {
   path: 'customers/:id',
   loadChildren: () => import('./customer/customer.module').then( m => m.CustomerPageModule),
-  canActivate: [AngularFireAuthGuard]
+    canActivate: [AngularFireAuthGuard]
 
 },
 {

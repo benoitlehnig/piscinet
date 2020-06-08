@@ -14,7 +14,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable, Observer, fromEvent, merge } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -41,7 +41,8 @@ export class AppComponent implements OnInit {
     private storage: Storage,
     private appConstants: AppConstants,
     public dataSharingService:DataSharingService,
-    public onlineCheckService: OnlineCheckService
+    public onlineCheckService: OnlineCheckService,
+    private router: Router
     ) {
     this.initializeApp();
   }
@@ -60,8 +61,6 @@ export class AppComponent implements OnInit {
 
         this.storage.get('offlineVisits').then(
           data =>{
-            console.log("this.offlineVisits", JSON.parse(data)  );    
-
             if(data !==null){
               this.dataSharingService.offlineVisitNumberDataChanges( JSON.parse(data));
             }
@@ -91,12 +90,16 @@ export class AppComponent implements OnInit {
               this.claims = result.claims;
               if(this.claims['customer'] ===true){
                 this.appPages = this.appConstants.appCustomerPages;
+                this.router.navigateByUrl('/myProfile');
               }
               if(this.claims['admin'] ===true){
                 this.appPages = this.appConstants.appAdminPages;
+                this.router.navigateByUrl('/customers');
               }
               if(this.claims['employee'] ===true){
                 this.appPages = this.appConstants.appEmployeePages;
+                this.router.navigateByUrl('/customers');
+
               }
               this.selectTabNavigation();
               this.initNotification();
@@ -104,6 +107,7 @@ export class AppComponent implements OnInit {
         }
         else{
           this.isUserLogged =false;
+          
         }
       }
       );
