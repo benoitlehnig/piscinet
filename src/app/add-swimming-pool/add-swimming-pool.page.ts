@@ -47,7 +47,7 @@ export class AddSwimmingPoolPage implements OnInit {
 			this.customer =  JSON.parse(params['customer']);
 			if(this.mode ==="update"){
 				this.poolId = this.activatedRoute.snapshot.paramMap.get('sid')
-				this.afDatabase.object<SwimmingPool>('pools/'+this.uid +'/'+this.poolId).valueChanges().subscribe(
+				this.afDatabase.object<SwimmingPool>('pools/'+this.poolId).valueChanges().subscribe(
 					(data) =>{
 						this.swimmingPool = data;
 					})

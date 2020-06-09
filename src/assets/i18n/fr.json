@@ -12,6 +12,7 @@
 		"Visits": "Visites",
 		"myPools": "Mes Piscines",
 		"Offline": "Hors Ligne",
+		"Alarms": "Alarmes",
 		"OfflineVisitCreate": "Faire une visite hors ligne",
 		"OfflineVisits": "Mes visites hors-ligne",
 		"UnknownEmployee": "Employé",
@@ -330,7 +331,11 @@
 		"AlertMesssage": "Etes-vous sur de vouloir supprimer toutes vos visites hors-lignes ? ",
 		"AlertCancel": "Annuler",
 		"AlertOK": "Supprimer"
-	}
-
-	
+	},
+	"NOTIFICATIONS":{
+		"Title": "Alarmes",
+		"Maintenance": "Maintenance",
+		"TechnicalLocal": "Local",
+		"Curtain": "Rideau"
+	}	
 }

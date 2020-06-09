@@ -100,6 +100,7 @@ export class OfflineVisitsPage implements OnInit {
     removalAll(){
       this.storage.remove('offlineVisits');
       this.visits =[];
+      this.storage.set('offlineVisits',JSON.stringify(this.visits) );
 
     }
     initData(){

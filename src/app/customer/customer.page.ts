@@ -73,7 +73,7 @@ export class CustomerPage implements OnInit {
 				this.customerStringified = JSON.stringify(data);
 				this.center = this.customer.location;
 			})
-		this.swimmingPools = this.afDatabase.list('/pools/'+this.uid).snapshotChanges().pipe(
+		this.swimmingPools = this.afDatabase.list<SwimmingPool>('/pools/',ref => ref.orderByChild('customerUid').equalTo(this.uid)).snapshotChanges().pipe(
 			map(changes => 
 				changes.map(c => ({ key: c.payload.key, data: c.payload.val() }))
 				)

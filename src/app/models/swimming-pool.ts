@@ -8,9 +8,9 @@ export class SwimmingPool {
     shape: string="";
     environment: number=0;
     state: number=0
-    cover: string="";
+    cover: string="liner";
     warning: boolean=true;
-    access: string="";
+    access: string="ladder";
     winterCover: boolean=false;
     dateSandFilter: string="";
     brandSandFilter: string="";

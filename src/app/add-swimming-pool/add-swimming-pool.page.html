@@ -102,29 +102,35 @@
 
 
 		<ion-item>
-			<ion-label>{{'ADDSWIMMINGPOOL.Cover' | translate}}</ion-label>
-			<ion-select name="cover" [(ngModel)]="swimmingPool.cover" >
-				<ion-select-option value="liner">{{'ADDSWIMMINGPOOL.Liner' | translate}}</ion-select-option>
-				<ion-select-option value="PVC">{{'ADDSWIMMINGPOOL.PVC' | translate}}</ion-select-option>
-				<ion-select-option value="mosaic">{{'ADDSWIMMINGPOOL.Mosaic' | translate}}</ion-select-option>
-				<ion-select-option value="polyester">{{'ADDSWIMMINGPOOL.Polyester' | translate}}</ion-select-option>
-				<ion-select-option value="coatedConcrete">{{'ADDSWIMMINGPOOL.CoatedConcrete' | translate}}</ion-select-option>
-			</ion-select>
+			<ion-item><ion-label>{{'ADDSWIMMINGPOOL.Cover' | translate}}</ion-label></ion-item>
+			<ion-segment scrollable name="cover" [(ngModel)]="swimmingPool.cover">
+				<ion-segment-button value="liner" layout="icon-start" class="segmentButtonOverride">
+					<ion-label>{{'ADDSWIMMINGPOOL.Liner' | translate}}</ion-label>
+				</ion-segment-button>
+				<ion-segment-button value="PVC" layout="icon-start" class="segmentButtonOverride">
+					<ion-label>{{'ADDSWIMMINGPOOL.PVC' | translate}}</ion-label>
+				</ion-segment-button>
+				<ion-segment-button value="mosaic" layout="icon-start" class="segmentButtonOverride">
+					<ion-label>{{'ADDSWIMMINGPOOL.Mosaic' | translate}}</ion-label>
+				</ion-segment-button>
+				<ion-segment-button value="polyester" layout="icon-start" class="segmentButtonOverride">
+					<ion-label>{{'ADDSWIMMINGPOOL.Polyester' | translate}}</ion-label>
+				</ion-segment-button>
+				<ion-segment-button value="coatedConcrete" layout="icon-start" class="segmentButtonOverride">
+					<ion-label>{{'ADDSWIMMINGPOOL.CoatedConcrete' | translate}}</ion-label>
+				</ion-segment-button>
+			</ion-segment>
 		</ion-item>
 		<ion-item>
-			<ion-radio-group name="access" [(ngModel)]="swimmingPool.access" >
-				<ion-list-header>
-					<ion-label>{{'ADDSWIMMINGPOOL.Access' | translate}}</ion-label>
-				</ion-list-header>
-				<ion-item>
+			<ion-item><ion-label>{{'ADDSWIMMINGPOOL.Access' | translate}}</ion-label></ion-item>
+			<ion-segment scrollable name="access" [(ngModel)]="swimmingPool.access">
+				<ion-segment-button value="ladder" layout="icon-start" class="segmentButtonOverride">
 					<ion-label>{{'ADDSWIMMINGPOOL.Ladder' | translate}}</ion-label>
-					<ion-radio slot="start" value="ladder"></ion-radio>
-				</ion-item>
-				<ion-item>
+				</ion-segment-button>
+				<ion-segment-button value="stairs" layout="icon-start" class="segmentButtonOverride">
 					<ion-label>{{'ADDSWIMMINGPOOL.Stairs' | translate}}</ion-label>
-					<ion-radio slot="start" value="stairs"></ion-radio>
-				</ion-item>	
-			</ion-radio-group>
+				</ion-segment-button>
+			</ion-segment>
 		</ion-item>
 		<ion-item>
 			<ion-label>{{'ADDSWIMMINGPOOL.AlarmSystem' | translate}}</ion-label>

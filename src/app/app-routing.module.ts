@@ -113,6 +113,10 @@ const routes: Routes = [
   canActivate: [AngularFireAuthGuard]
 
 },
+  {
+    path: 'alarms',
+    loadChildren: () => import('./alarms/alarms.module').then( m => m.AlarmsPageModule)
+  },
 
 ];
 

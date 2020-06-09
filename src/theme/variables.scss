@@ -317,4 +317,16 @@ ion-fab-button.maintenance[data-desc]::after {
 }
 .modal{
   --max-width: 1000px;  
+}
+.alarms{
+  .maintenance{
+    color:var(--ion-color-warning);
   }
+  .technicalLocal{
+    color:var(--ion-color-primary);
+  }
+  .curtain{
+   color:   var(--ion-color-danger);
+ }
+
+}

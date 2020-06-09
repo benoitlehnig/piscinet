@@ -21,6 +21,11 @@ export class AppConstants {
 		title: 'Employes',
 		url: 'employees',
 		icon: 'people-circle'
+	},
+	{
+		title: 'Alarms',
+		url: 'alarms',
+		icon: 'notifications'
 	}
 	];
 	public appCustomerPages = [

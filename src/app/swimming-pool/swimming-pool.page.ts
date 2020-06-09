@@ -48,7 +48,7 @@ export class SwimmingPoolPage implements OnInit {
 				this.customer = data;
 				this.customerStringified = JSON.stringify(data);
 			})
-		this.afDatabase.object<SwimmingPool>('pools/'+this.uid +'/'+this.poolId).valueChanges().subscribe(
+		this.afDatabase.object<SwimmingPool>('pools/'+this.poolId).valueChanges().subscribe(
 			(data) =>{
 				this.swimmingPool = data;
 				this.dataSharingService.currentPool({uid:this.uid, poolId:this.poolId,swimmingPool:this.swimmingPool })

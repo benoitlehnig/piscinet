@@ -60,7 +60,7 @@ export class MyPoolsPage implements OnInit {
 
 	onSelectPoolChange(event){
 		console.log(event);
-		this.afDatabase.object<SwimmingPool>('pools/'+this.uid +'/'+event.detail.value).valueChanges().subscribe(
+		this.afDatabase.object<SwimmingPool>('pools/'+event.detail.value).valueChanges().subscribe(
 			(data) =>{
 				this.selectedSwimmingPool = {key:event.detail.value, data :  data};
 				this.selectedSwimmingPoolName = data.name;
