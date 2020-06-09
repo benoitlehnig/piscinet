@@ -336,6 +336,10 @@
 		"Title": "Alarmes",
 		"Maintenance": "Maintenance",
 		"TechnicalLocal": "Local",
-		"Curtain": "Rideau"
+		"Curtain": "Rideau",
+		"LastMaintenance": "Derniere maintenance effectuée il y a ",
+		"LastTechnicalLocal": "Derniere nettoyage du local technique effectué il y a ",
+		"LastCurtain": "Derniere nettoyage du rideau effectué il y a ",
+		"Days": " jours"
 	}	
 }

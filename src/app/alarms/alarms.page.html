@@ -15,19 +15,25 @@
 
 			<ion-avatar slot="start" class="avatarListVisits"  [ngClass]="{'technicalLocal': alarm.type ==='technicalLocal' , 
 			'maintenance': alarm.type ==='maintenance' , 'curtain': alarm.type ==='curtain' }">
-				<ion-icon name="notifications"></ion-icon>
-				<div class="typeOfVisitWrapper">
-					<span *ngIf="alarm.type ==='technicalLocal'">{{'NOTIFICATIONS.TechnicalLocal' | translate}}</span>
-					<span *ngIf="alarm.type ==='maintenance'">{{'NOTIFICATIONS.Maintenance' | translate}}</span>
-					<span *ngIf="alarm.type ==='curtain'">{{'NOTIFICATIONS.Curtain' | translate}}</span>
+			<ion-icon name="notifications"></ion-icon>
+			<div class="typeOfVisitWrapper">
+				<span *ngIf="alarm.type ==='technicalLocal'">{{'NOTIFICATIONS.TechnicalLocal' | translate}}</span>
+				<span *ngIf="alarm.type ==='maintenance'">{{'NOTIFICATIONS.Maintenance' | translate}}</span>
+				<span *ngIf="alarm.type ==='curtain'">{{'NOTIFICATIONS.Curtain' | translate}}</span>
+			</div>
+		</ion-avatar>
+		<ion-label>
+			<h2>{{ alarm.data.customer.data.firstName}} {{ alarm.data.customer.data.lastName}} </h2>
+			<h3>{{ alarm.data.name}}
+				<div *ngIf="alarm.numberOfDays !='' ">
+					<span *ngIf="alarm.type ==='technicalLocal'"> {{'NOTIFICATIONS.LastTechnicalLocal' | translate}}</span>
+					<span *ngIf="alarm.type ==='maintenance'">{{'NOTIFICATIONS.LastMaintenance' | translate}}</span>
+					<span *ngIf="alarm.type ==='curtain'"> {{'NOTIFICATIONS.LastCurtain' | translate}} </span>
+					<ion-badge color="warning" *ngIf="alarm.numberOfDays !='' ">{{ alarm.numberOfDays}} {{'NOTIFICATIONS.Days' | translate}} </ion-badge>
 				</div>
-			</ion-avatar>
-			<ion-label>
-				<h2>{{ alarm.data.customer.data.firstName}} {{ alarm.data.customer.data.lastName}} </h2>
-				<h3>{{ alarm.data.name}} | dernier effectue il y a {{ alarm.numberOfDays}} jours
-				</h3>
-			</ion-label>
-		</ion-item>
-	</ion-list>
+			</h3>
+		</ion-label>
+	</ion-item>
+</ion-list>
 
 </ion-content>
