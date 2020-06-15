@@ -2,13 +2,11 @@
 	<ion-toolbar>
 		<ion-buttons slot="start">
 			<ion-back-button></ion-back-button>
-			<ion-menu-button></ion-menu-button>
 		</ion-buttons>
 		<ion-title *ngIf="mode === 'add'">{{'ADDEMPLOYEE.TitleAdd' | translate}}</ion-title>
 		<ion-title *ngIf="mode === 'update'">{{'ADDEMPLOYEE.TitleUpdate' | translate}} {{employee.firstName}} {{employee.lastName}}</ion-title>
 		<ion-buttons slot="end">
-			<ion-button color="primary" fill="outline" (click)="submitForm()" >
-				<ion-icon name="save"></ion-icon>
+			<ion-button color="primary" fill="solid" (click)="submitForm()" >
 				<span *ngIf="mode === 'update'" class="spanButton">{{'ADDEMPLOYEE.UpdateEmployee' | translate}}</span>
 				<span *ngIf="mode === 'add'"  class="spanButton">{{'ADDEMPLOYEE.AddEmployee' | translate}}</span>
 			</ion-button>

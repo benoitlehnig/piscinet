@@ -6,7 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { OnlineCheckService } from '../services/online-check.service'
 import {Customer} from '../models/customer';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { CustomerServicesService } from '../services/customer-services.service'
 
 
 @Component({
@@ -31,10 +31,7 @@ export class OfflineVisitsPage implements OnInit {
     public translateService : TranslateService,
     public authenticationService:AuthenticationService,
     public onlineCheckService: OnlineCheckService,
-    public db: AngularFireDatabase,
-
-
-
+    public customerServicesService:CustomerServicesService
     ) { }
 
 
@@ -109,7 +106,7 @@ export class OfflineVisitsPage implements OnInit {
           this.visits = JSON.parse(val);
           this.visits.forEach((obj, index) => {
             if(obj.customerUid !==""){
-              this.db.object<Customer>('customers/'+obj.customerUid).valueChanges().subscribe(
+              this.customerServicesService.getCustomer(obj.customerUid).subscribe(
                 (data3) =>{
                   this.visits[index].customerInfo = data3;
                 })

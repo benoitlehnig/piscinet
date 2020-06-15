@@ -34,6 +34,7 @@ export class AuthenticationService {
 
 					})
 			} else {
+				this.router.navigate(['/login']);
 				this.storage.set('loggedIn', false); 
 			}
 		});

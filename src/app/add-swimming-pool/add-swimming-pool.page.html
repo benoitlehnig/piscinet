@@ -1,12 +1,8 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
 		<ion-buttons slot="start">
-			<ion-menu-button></ion-menu-button>
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
-		<ion-avatar slot="start">
-			<img src="./assets/images/swimmingPoolAvatar.png">
-		</ion-avatar>
 		<ion-title >
 			<span *ngIf="mode === 'add'">{{'ADDSWIMMINGPOOL.TitleAdd' | translate}}</span>
 			<span *ngIf="mode === 'update'">{{'ADDSWIMMINGPOOL.TitleUpdate' | translate}}</span>
@@ -15,8 +11,7 @@
 			</div>
 		</ion-title>
 		<ion-buttons  slot="end">
-			<ion-button color="primary" fill="outline" (click)="submitForm()" >
-				<ion-icon name="save"></ion-icon>
+			<ion-button color="primary" fill="solid" (click)="submitForm()" >
 				<span *ngIf="mode === 'add'" class="spanButton">{{'ADDSWIMMINGPOOL.AddButton' | translate}}</span>
 				<span *ngIf="mode === 'update'" class="spanButton">{{'ADDSWIMMINGPOOL.UpdateButton' | translate}}</span>
 			</ion-button>
@@ -37,20 +32,15 @@
 		</ion-list-header>
 		<ion-segment scrollable name="shape" [(ngModel)]="swimmingPool.shape">
 			<ion-segment-button value="rectangular" layout="icon-start" class="segmentButtonOverride">
-				<img src="./assets/images/pool_rectangular.png" alt="{{'ADDSWIMMINGPOOL.Rectangular' | translate}}" class="poolShape" />
 				<ion-label>{{'ADDSWIMMINGPOOL.Rectangular' | translate}}</ion-label>
 			</ion-segment-button>
 			<ion-segment-button value="square" layout="icon-start" class="segmentButtonOverride">
-				<img src="./assets/images/pool_square.png" alt="{{'ADDSWIMMINGPOOL.Square' | translate}}" class="poolShape" />
 				<ion-label>{{'ADDSWIMMINGPOOL.Square' | translate}}</ion-label>
 			</ion-segment-button>
 			<ion-segment-button value="swimmingLane" layout="icon-start" class="segmentButtonOverride">
-				<img src="./assets/images/pool_line.png" alt="{{'ADDSWIMMINGPOOL.SwimmingLane' | translate}}" class="poolShape" />
 				<ion-label>{{'ADDSWIMMINGPOOL.SwimmingLane' | translate}}</ion-label>
-
 			</ion-segment-button>
 			<ion-segment-button value="bean" layout="icon-start" class="segmentButtonOverride">
-				<img src="./assets/images/pool_bean.png" alt="{{'ADDSWIMMINGPOOL.Bean' | translate}}" class="poolShape" />
 				<ion-label>{{'ADDSWIMMINGPOOL.Bean' | translate}}</ion-label>
 			</ion-segment-button>
 		</ion-segment>
@@ -82,18 +72,29 @@
 			{{'ADDSWIMMINGPOOL.GeneralInformation' | translate}}
 		</ion-list-header>
 
+		<ion-item lines="none">
+			<h5>
+				{{'ADDSWIMMINGPOOL.Environment' | translate}}
+			</h5>
+		</ion-item>
 		<ion-item>
-			<ion-range name="environment" min="0" max="2" step="1" snaps="true" ticks="true" color="secondary" [(ngModel)]="swimmingPool.environment">
-				<ion-icon size="small" slot="start" name="leaf"></ion-icon>
-				<ion-icon slot="end" name="leaf"></ion-icon>
+			
+			<ion-range name="environment" min="0" max="2" step="1" snaps="true" ticks="true" color="primary" [(ngModel)]="swimmingPool.environment">
+				<ion-icon size="small" slot="start" name="leaf" color="primary"></ion-icon>
+				<ion-icon slot="end" name="leaf" color="primary"></ion-icon>
 				<ion-label slot="start">{{'ADDSWIMMINGPOOL.NoVegetation' | translate}}</ion-label>
 				<ion-label slot="end">{{'ADDSWIMMINGPOOL.LotOfVegetation' | translate}}</ion-label>
 			</ion-range>
 		</ion-item>
+		<ion-item lines="none">
+			<h5>
+				{{'ADDSWIMMINGPOOL.State' | translate}}
+			</h5>
+		</ion-item>
 		<ion-item>
-			<ion-range name="state" min="0" max="3" step="1" snaps="true" ticks="true" color="secondary" [(ngModel)]="swimmingPool.state">
-				<ion-icon  slot="start" name="thumbs-down"></ion-icon>
-				<ion-icon slot="end" name="thumbs-up"></ion-icon>
+			<ion-range name="state" min="0" max="3" step="1" snaps="true" ticks="true" color="primary" [(ngModel)]="swimmingPool.state">
+				<ion-icon  slot="start" name="thumbs-down" color="primary"></ion-icon>
+				<ion-icon slot="end" name="thumbs-up" color="primary"></ion-icon>
 				<ion-label slot="start">{{'ADDSWIMMINGPOOL.BadState' | translate}}</ion-label>
 				<ion-label slot="end">{{'ADDSWIMMINGPOOL.VeryGoodState' | translate}}</ion-label>
 			</ion-range>

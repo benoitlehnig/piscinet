@@ -8,15 +8,16 @@ import { IonicModule } from '@ionic/angular';
 import { AddVisitPageRoutingModule } from './add-visit-routing.module';
 
 import { AddVisitPage } from './add-visit.page';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    TranslateModule,
-    AddVisitPageRoutingModule
-  ],
-  declarations: [AddVisitPage]
+	imports: [
+	CommonModule,
+	FormsModule,
+	IonicModule,
+	TranslateModule,
+	AddVisitPageRoutingModule
+	],
+	declarations: [AddVisitPage,ConfirmationComponent]
 })
 export class AddVisitPageModule {}

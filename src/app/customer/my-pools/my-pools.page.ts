@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
-import { AngularFireDatabase } from '@angular/fire/database';
 import {SwimmingPool} from '../../models/swimming-pool';
 import { map } from 'rxjs/operators'
 import { DataSharingService } from '../../services/data-sharing.service'
+import { CustomerServicesService } from '../../services/customer-services.service'
+import { PoolServicesService } from '../../services/pool-services.service'
 
 @Component({
 	selector: 'app-my-pools',
@@ -21,7 +22,8 @@ export class MyPoolsPage implements OnInit {
 
 	constructor(
 		public authService:AuthenticationService,
-		public afDatabase: AngularFireDatabase,
+		public customerServicesService: CustomerServicesService,
+		public poolServicesService: PoolServicesService,
 		public dataSharingService:DataSharingService
 
 		) { }
@@ -32,11 +34,7 @@ export class MyPoolsPage implements OnInit {
 			{
 				if(result){
 					this.uid = result.uid;
-					this.swimmingPools = this.afDatabase.list<SwimmingPool>('/pools/'+this.uid).snapshotChanges().pipe(
-						map(changes => 
-							changes.map(c => ({ key: c.payload.key, data: c.payload.val() }))
-							)
-						);
+					this.swimmingPools = this.customerServicesService.getCustomerPools(this.uid);
 					this.swimmingPools.subscribe(
 						swimmingPools=>{
 							if( swimmingPools[0]){
@@ -59,8 +57,7 @@ export class MyPoolsPage implements OnInit {
 	}
 
 	onSelectPoolChange(event){
-		console.log(event);
-		this.afDatabase.object<SwimmingPool>('pools/'+event.detail.value).valueChanges().subscribe(
+		this.poolServicesService.getSwimmingPool(event.detail.value).subscribe(
 			(data) =>{
 				this.selectedSwimmingPool = {key:event.detail.value, data :  data};
 				this.selectedSwimmingPoolName = data.name;

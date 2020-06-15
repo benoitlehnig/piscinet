@@ -1,14 +1,12 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
 		<ion-buttons slot="start">
-			<ion-menu-button></ion-menu-button>
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
 		<ion-title *ngIf="mode === 'add'">{{'ADDCUSTOMER.TitleAdd' | translate}}</ion-title>
 		<ion-title *ngIf="mode === 'update'">{{'ADDCUSTOMER.TitleUpdate' | translate}}</ion-title>
 		<ion-buttons slot="end">
-			<ion-button color="primary" fill="outline" (click)="submitForm()" >
-				<ion-icon name="save"></ion-icon>
+			<ion-button color="primary" fill="solid" (click)="submitForm()" >
 				<span *ngIf="mode === 'update'" class="spanButton">{{'ADDCUSTOMER.UpdateCustomer' | translate}}</span>
 				<span *ngIf="mode === 'add'"  class="spanButton">{{'ADDCUSTOMER.AddCustomer' | translate}}</span>
 			</ion-button>
@@ -18,7 +16,6 @@
 
 
 <ion-content>
-
 	<ion-item>
 		<ion-label position="stacked">{{'ADDCUSTOMER.FirstName' | translate}} <ion-text color="danger">*</ion-text></ion-label>
 		<ion-input  name="firstName" type="text" [(ngModel)]="customer.firstName"  required></ion-input>
@@ -30,8 +27,8 @@
 	<ion-item>
 		<ion-label position="stacked">{{'CUSTOMER.ADDRESS' | translate}} <ion-text color="danger">*</ion-text></ion-label>
 		<ion-input [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="{{'COMMON.AddressSearch' | translate}}" required></ion-input>
-		<ion-list [hidden]="autocompleteItems.length == 0">
-			<ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+		<ion-list [hidden]="autocompleteItems.length == 0" class="autocomplete">
+			<ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)" lines="none">
 				{{ item.description }}
 			</ion-item>
 		</ion-list>
@@ -52,7 +49,7 @@
 	
 	<ion-item>
 		<ion-label position="stacked">{{'ADDCUSTOMER.Email' | translate}} <ion-text color="danger">*</ion-text></ion-label>
-		<ion-input name="email" type="email"  [disabled]="mode==='update'" [(ngModel)]="customer.email" required ></ion-input>
+		<ion-input name="email" type="email" pattern="email" [disabled]="mode==='update'" [(ngModel)]="customer.email" required ></ion-input>
 	</ion-item>
 
 	<ion-grid>

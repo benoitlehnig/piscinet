@@ -31,44 +31,44 @@
 		<ion-row>
 			<ion-col>
 				<ion-item lines="none" *ngIf="swimmingPool.environment !==null">
-					<ion-icon slot="start" name="leaf"></ion-icon>		
-					<ion-text *ngIf="swimmingPool.environment ===0" >{{'SWIMMINGPOOL.NoVegetation' | translate}}</ion-text>
-					<ion-text *ngIf="swimmingPool.environment ===1" >{{'SWIMMINGPOOL.LittleVegetation' | translate}}</ion-text>
-					<ion-text *ngIf="swimmingPool.environment ===2" >{{'SWIMMINGPOOL.LotOfVegetation' | translate}}</ion-text>
+					<ion-icon slot="start" name="leaf" color="primary"></ion-icon>		
+					<ion-text class="smallerFont" *ngIf="swimmingPool.environment ===0" >{{'SWIMMINGPOOL.NoVegetation' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.environment ===1" >{{'SWIMMINGPOOL.LittleVegetation' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.environment ===2" >{{'SWIMMINGPOOL.LotOfVegetation' | translate}}</ion-text>
 				</ion-item>
 				<ion-item lines="none" *ngIf="swimmingPool.state !==null">
-					<ion-icon  slot="start" name="thumbs-down" *ngIf="swimmingPool.state ===1 || swimmingPool.state ===0 "></ion-icon>
-					<ion-icon slot="start" name="thumbs-up" *ngIf="swimmingPool.state ===3 || swimmingPool.state ===2"></ion-icon>	
-					<ion-text *ngIf="swimmingPool.state ===3" >{{'SWIMMINGPOOL.VeryGoodState' | translate}}</ion-text>
-					<ion-text *ngIf="swimmingPool.state ===2" >{{'SWIMMINGPOOL.GoodState' | translate}}</ion-text>
-					<ion-text *ngIf="swimmingPool.state ===1" >{{'SWIMMINGPOOL.StateOK' | translate}}</ion-text>
-					<ion-text *ngIf="swimmingPool.state ===0" >{{'SWIMMINGPOOL.BadState' | translate}}</ion-text>
+					<ion-icon  slot="start" name="thumbs-down" color="primary" *ngIf="swimmingPool.state ===1 || swimmingPool.state ===0 "></ion-icon>
+					<ion-icon slot="start" name="thumbs-up" color="primary" *ngIf="swimmingPool.state ===3 || swimmingPool.state ===2"></ion-icon>	
+					<ion-text class="smallerFont"  *ngIf="swimmingPool.state ===3" >{{'SWIMMINGPOOL.VeryGoodState' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.state ===2" >{{'SWIMMINGPOOL.GoodState' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.state ===1" >{{'SWIMMINGPOOL.StateOK' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.state ===0" >{{'SWIMMINGPOOL.BadState' | translate}}</ion-text>
 				</ion-item>
 				<ion-item lines="none" *ngIf="swimmingPool.cover !==''">
-					<ion-icon slot="start" name="apps"></ion-icon>		
-					<ion-text *ngIf="swimmingPool.cover ==='liner'" >{{'SWIMMINGPOOL.Liner' | translate}}</ion-text>
-					<ion-text *ngIf="swimmingPool.cover ==='mosaic'" >{{'SWIMMINGPOOL.Mosaic' | translate}}</ion-text>
-					<ion-text *ngIf="swimmingPool.cover ==='PVC'" >{{'SWIMMINGPOOL.PVC' | translate}}</ion-text>
-					<ion-text *ngIf="swimmingPool.cover ==='polyester'" >{{'SWIMMINGPOOL.Polyester' | translate}}</ion-text>
-					<ion-text *ngIf="swimmingPool.cover ==='coatedConcrete'" >{{'SWIMMINGPOOL.CoatedConcrete' | translate}}</ion-text>
+					<ion-icon slot="start" name="apps" color="primary"></ion-icon>		
+					<ion-text class="smallerFont" *ngIf="swimmingPool.cover ==='liner'" >{{'SWIMMINGPOOL.Liner' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.cover ==='mosaic'" >{{'SWIMMINGPOOL.Mosaic' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.cover ==='PVC'" >{{'SWIMMINGPOOL.PVC' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.cover ==='polyester'" >{{'SWIMMINGPOOL.Polyester' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.cover ==='coatedConcrete'" >{{'SWIMMINGPOOL.CoatedConcrete' | translate}}</ion-text>
 				</ion-item>
 			</ion-col>
 			<ion-col>
 
 				<ion-item lines="none" *ngIf="swimmingPool.access !==''">
-					<ion-icon name="return-down-forward" slot="start"></ion-icon>
-					<ion-text *ngIf="swimmingPool.access ==='ladder'" >{{'SWIMMINGPOOL.Ladder' | translate}}</ion-text>
-					<ion-text *ngIf="swimmingPool.access ==='stairs'" >{{'SWIMMINGPOOL.Stairs' | translate}}</ion-text>
+					<ion-icon name="return-down-forward" slot="start" color="primary"></ion-icon>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.access ==='ladder'" >{{'SWIMMINGPOOL.Ladder' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.access ==='stairs'" >{{'SWIMMINGPOOL.Stairs' | translate}}</ion-text>
 				</ion-item>
 				<ion-item lines="none" >
-					<ion-icon  slot="start" name="notifications" ></ion-icon>
-					<ion-text *ngIf="swimmingPool.warning ===true">{{'SWIMMINGPOOL.AlarmSystemPresent' | translate}}</ion-text>
-					<ion-text *ngIf="swimmingPool.warning ===false">{{'SWIMMINGPOOL.AlarmSystemPNotresent' | translate}}</ion-text>
+					<ion-icon  slot="start" name="notifications" color="primary"></ion-icon>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.warning ===true">{{'SWIMMINGPOOL.AlarmSystemPresent' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.warning ===false">{{'SWIMMINGPOOL.AlarmSystemPNotresent' | translate}}</ion-text>
 				</ion-item>
 				<ion-item lines="none"> 
-					<ion-icon  slot="start" name="snow"></ion-icon>
-					<ion-text *ngIf="swimmingPool.winterCover ===true">{{'SWIMMINGPOOL.WinterCoverPresent' | translate}}</ion-text>
-					<ion-text *ngIf="swimmingPool.winterCover ===false">{{'SWIMMINGPOOL.WinterCoverNotPresent' | translate}}</ion-text>
+					<ion-icon  slot="start" name="snow" color="primary"></ion-icon>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.winterCover ===true">{{'SWIMMINGPOOL.WinterCoverPresent' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.winterCover ===false">{{'SWIMMINGPOOL.WinterCoverNotPresent' | translate}}</ion-text>
 				</ion-item>
 			</ion-col>
 		</ion-row>

@@ -1,12 +1,8 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
 		<ion-buttons slot="start">
-			<ion-menu-button></ion-menu-button>
-			<ion-back-button></ion-back-button>
+			<ion-back-button defaultHref="customers"></ion-back-button>
 		</ion-buttons>
-		<ion-avatar class="avatarTop" slot="start">
-			<ngx-avatar name="{{ customer.firstName }} {{ customer.lastName}}"></ngx-avatar>
-		</ion-avatar>
 		<ion-title>{{ customer.firstName}} {{customer.lastName}} </ion-title>
 		<ion-buttons slot="end" *ngIf="claims['admin']" >
 				<ion-button (click)="presentPopover($event)" >
@@ -19,10 +15,18 @@
 
 <ion-content>
 	<ion-item  lines="none">
-		<ion-badge color="primary" *ngIf="customer.typeOfContract ==='technical'" >{{'CUSTOMER.CONTRACTTYPETECHNICAL' | translate}}</ion-badge>
-		<ion-badge color="primary" *ngIf="customer.typeOfContract ==='full'">{{'CUSTOMER.CONTRACTTYPEFULL'  | translate}}</ion-badge>
-		<ion-badge color="primary" *ngIf="customer.contractOfProduct ==='included'" class="contractOfProduct">{{'CUSTOMER.CONTRACTPRODUCTINCLUDED' | translate}}</ion-badge>
-		<ion-badge color="warning" *ngIf="customer.contractOfProduct ==='notIncluded'"  class="contractOfProduct">{{'CUSTOMER.CONTRACTPRODUCTNOTINCLUDED'  | translate}}</ion-badge>
+		<ion-chip color="primary" *ngIf="customer.typeOfContract ==='technical'">
+			 <ion-label>{{'CUSTOMER.CONTRACTTYPETECHNICAL' | translate}}</ion-label>
+		</ion-chip>
+		<ion-chip color="primary" *ngIf="customer.typeOfContract ==='full'">
+			 <ion-label>{{'CUSTOMER.CONTRACTTYPEFULL' | translate}}</ion-label>
+		</ion-chip>
+		<ion-chip color="primary" *ngIf="customer.contractOfProduct ==='included'">
+			 <ion-label>{{'CUSTOMER.CONTRACTPRODUCTINCLUDED' | translate}}</ion-label>
+		</ion-chip>
+		<ion-chip color="primary" *ngIf="customer.contractOfProduct ==='notIncluded'">
+			 <ion-label>{{'CUSTOMER.CONTRACTPRODUCTNOTINCLUDED' | translate}}</ion-label>
+		</ion-chip>
 	</ion-item>
 
 	<ion-item lines="none">

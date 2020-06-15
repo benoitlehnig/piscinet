@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {Visit} from '../models/Visit';
+import {Visit} from '../models/visit';
 import {Customer} from '../models/customer';
 import {Employee} from '../models/employee';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { NavController } from '@ionic/angular';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { CustomerServicesService } from '../services/customer-services.service'
+import { EmployeeServicesService } from '../services/employee-services.service'
+import { VisitServicesService } from '../services/visit-services.service';
+
 import { Storage } from '@ionic/storage';
 import { AuthenticationService } from '../services/authentication.service';
 import { DataSharingService } from '../services/data-sharing.service'
@@ -39,7 +42,9 @@ export class VisitPage implements OnInit {
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
-		public db: AngularFireDatabase,
+		public customerServicesService: CustomerServicesService,
+		public employeeServicesService: EmployeeServicesService,
+		public visitServicesService: VisitServicesService,
 		private storage: Storage,
 		public authenticationService:AuthenticationService,
 		public dataSharingService:DataSharingService,
@@ -67,24 +72,21 @@ export class VisitPage implements OnInit {
 		this.visitId = this.activatedRoute.snapshot.paramMap.get('vid');
 		this.claims = this.authenticationService.getClaims();
 		if(this.mode ==='online'){
-			this.db.object<Visit>('visits/'+this.visitId).valueChanges().subscribe(
+			this.visitServicesService.getVisit(this.visitId).subscribe(
 				(data) =>{
 					this.visit = data;
-					console.log("moment().diff(this.visit.dateTime,'hours') <3", moment().diff(this.visit.dateTime,'hours'))
-					console.log(" this.claims['admin']", this.claims['admin'])
 					this.editEligibility = (
 						this.claims['admin']===true || 
 						(this.claims['employee'] ===true && moment().diff(this.visit.dateTime,'hours') <3)
 						);
-					console.log(this.editEligibility);
-					this.db.object<Employee>('employees/'+data.employeeUid).valueChanges().subscribe(
+					this.employeeServicesService.getEmployee(data.employeeUid).subscribe(
 						(data2) =>{
 							if(data2!==null)
 							{
 								this.employee = data2
 							}
 						});
-					this.db.object<Customer>('customers/'+data.customerUid).valueChanges().subscribe(
+					this.customerServicesService.getCustomer(data.customerUid).subscribe(
 						(data3) =>{
 							this.customer = data3;
 							this.customerStringified = JSON.stringify(data3);
@@ -98,7 +100,7 @@ export class VisitPage implements OnInit {
 					let offlineVisits= JSON.parse(data);
 					this.visit = offlineVisits[this.visitId];
 					if(this.visit.customerUid !==""){
-						this.db.object<Customer>('customers/'+this.visit.customerUid).valueChanges().subscribe(
+						this.customerServicesService.getCustomer(this.visit.customerUid).subscribe(
 							(data3) =>{
 								this.customer = data3;
 								this.customerStringified = JSON.stringify(data3);

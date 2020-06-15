@@ -7,6 +7,9 @@ export class Visit {
 	public dateTime: string="";
 	public poolId: string="";
 	public typeOfVisit:string="full";
+	public generalStatusKO:boolean=true;
+	public newVisitDone:boolean=false;
+	public issueDescription:string="" ;
 
 	deserialize(input: any) {
 		Object.assign(this, input);
@@ -63,7 +66,7 @@ export class Maintenance{
 	}
 }
 export class Observation{
-	public waterGoodClarity:boolean=false;
+	public waterBadClarity:boolean=false;
 	public algeaOnWall:boolean=false;
 	public brossage: boolean=false;
 	public otherObservation: string;

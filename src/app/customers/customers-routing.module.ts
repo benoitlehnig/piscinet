@@ -1,13 +1,47 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { CustomersPage } from './customers.page';
 
 const routes: Routes = [
+{
+  path: 'tab',
+  component: CustomersPage,
+  children: [
   {
-    path: '',
-    component: CustomersPage
-  }
+    path: 'list',
+    children: [
+    {
+      path: '',
+      loadChildren: './list-view/list-view.module#ListViewPageModule'
+    }
+    ]
+  },
+  {
+    path: 'map',
+    children: [
+    {
+      path: '',
+      loadChildren: './map-view/map-view.module#MapViewPageModule'
+    }
+    ]
+  },     
+  
+  ]
+},
+{
+  path: '',
+  redirectTo: 'tab/list',
+  pathMatch: 'full'
+},
+{
+  path: 'list-view',
+  loadChildren: () => import('./list-view/list-view.module').then( m => m.ListViewPageModule)
+},
+{
+  path: 'map-view',
+  loadChildren: () => import('./map-view/map-view.module').then( m => m.MapViewPageModule)
+}
 ];
 
 @NgModule({

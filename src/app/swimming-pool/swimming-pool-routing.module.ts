@@ -25,7 +25,16 @@ const routes: Routes = [
 			loadChildren: './visits/visits.module#VisitsPageModule'
 		}
 		]
-	},     
+	},   
+	{
+		path: 'statistics',
+		children: [
+		{
+			path: '',
+			loadChildren: './statistics/statistics.module#StatisticsPageModule'
+		}
+		]
+	}    
 	
 	]
 },
@@ -41,7 +50,11 @@ const routes: Routes = [
 	path: '',
 	redirectTo: 'tab/information',
 	pathMatch: 'full'
-}
+},
+  {
+    path: 'statistics',
+    loadChildren: () => import('./statistics/statistics.module').then( m => m.StatisticsPageModule)
+  }
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, AngularFireList,AngularFireObject  } from '@angular/fire/database';
+import { EmployeeServicesService } from '../services/employee-services.service'
 import { Observable } from 'rxjs';
 import {Employee} from '../models/employee';
 import { AngularFireFunctions } from '@angular/fire/functions';
@@ -17,7 +17,7 @@ export class EmployeesPage implements OnInit {
 	public employees: Observable<any>;
 	public claims;
 	constructor(
-		public afDatabase: AngularFireDatabase,
+		public employeeServicesService: EmployeeServicesService,
 		private functions: AngularFireFunctions,
 		public authenticationService:AuthenticationService
 
@@ -25,12 +25,7 @@ export class EmployeesPage implements OnInit {
 		) { }
 
 	ngOnInit() {
-		this.employees = this.afDatabase.list('/employees', ref => ref.orderByChild('lastName')).snapshotChanges()
-		.pipe(
-			map(changes => 
-				changes.map(c => ({ key: c.payload.key, data: c.payload.val() }))
-				)
-			);
+		this.employees = this.employeeServicesService.getEmployees();
 		this.claims = this.authenticationService.getClaims();
 	}
 

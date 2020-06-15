@@ -13,20 +13,21 @@
 	</ion-fab-button>
 </ion-fab>
 <ion-content>
-	<ion-searchbar    showcancelbutton="" placeholder="{{'CUSTOMERS.Filter' | translate}}"
-    (ionInput)="filterList($event)"
-  ></ion-searchbar>
-	<ion-list>
-		<ion-item *ngFor="let customer of customers | async" [routerLink]="['/customers/' + customer.key]" [ngClass]="{'visible': (customer.data.lastName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 || customer.data.firstName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ),'hidden': (customer.data.lastName.toLowerCase().indexOf(searchTerm.toLowerCase()) === -1 || customer.data.firstName.toLowerCase().indexOf(searchTerm.toLowerCase()) === -1)}">
-			<ion-avatar  slot="start">
-				<ngx-avatar name="{{ customer.data.firstName }} {{ customer.data.lastName}}"></ngx-avatar>
-			</ion-avatar>
-			<ion-label>
-				<h2>{{ customer.data.firstName }} {{ customer.data.lastName}}</h2>
-				<h3><a href="tel:{{customer.data.telPhoneNumber}}">{{ customer.data.telPhoneNumber}}</a></h3>
-				<h3>{{customer.data.googleAddress}}</h3>
-			</ion-label>
-		</ion-item>
-	</ion-list>
+	<ion-tabs>
+		<ion-tab-bar slot="top">
+			<ion-tab-button tab="list" selected >
+				<ion-icon name="list"></ion-icon>
+				<ion-label>{{'CUSTOMERS.ListView' | translate}} </ion-label>
+			</ion-tab-button>
+
+			<ion-tab-button tab="map"> 
+				<ion-icon name="map"></ion-icon>
+				<ion-label>{{'CUSTOMERS.MapView' | translate}} </ion-label>
+			</ion-tab-button>
+		</ion-tab-bar>
+	</ion-tabs>
+
+
+	
 
 </ion-content>

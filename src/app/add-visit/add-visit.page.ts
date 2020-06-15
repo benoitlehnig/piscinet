@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import {Visit} from '../models/Visit';
+import {Visit} from '../models/visit';
 import {Customer} from '../models/customer';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { ActivatedRoute } from '@angular/router';
@@ -10,10 +10,13 @@ import { AuthenticationService } from '../services/authentication.service';
 import { LoadingController } from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
 import { ToastController } from '@ionic/angular';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { VisitServicesService } from '../services/visit-services.service';
 import { DataSharingService } from '../services/data-sharing.service'
 import { Observable, Observer, fromEvent, merge } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ModalController } from '@ionic/angular';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
+
 
 @Component({
 	selector: 'app-add-visit',
@@ -42,8 +45,9 @@ export class AddVisitPage implements OnInit {
 		public loadingController: LoadingController,
 		public translateService : TranslateService,
 		public toastController: ToastController,
-		public afDatabase: AngularFireDatabase,
-		public dataSharingService:DataSharingService
+		public visitServicesService: VisitServicesService,
+		public dataSharingService:DataSharingService,
+		public modalController: ModalController
 
 		) {
 
@@ -77,7 +81,7 @@ export class AddVisitPage implements OnInit {
 						this.dataSharingService.someDataChanges(this.newVisit);					
 					}
 					else{
-						this.afDatabase.object<Visit>('visits/'+this.visitId).valueChanges().subscribe(
+						this.visitServicesService.getVisit(this.visitId).subscribe(
 							(data) =>{
 								this.newVisit = data;
 							});
@@ -102,6 +106,7 @@ export class AddVisitPage implements OnInit {
 	}
 	async addVisit(){
 		console.log("this.mode addVisit", this.mode)
+		this.modalController.dismiss();
 		if(this.mode !=='update'){
 			let sub = this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
 				visit.dateTime = moment().format();
@@ -153,7 +158,7 @@ export class AddVisitPage implements OnInit {
 		this.loading = await this.loadingController.create({
 			cssClass: 'my-custom-class',
 			message: this.loadingText,
-			duration: 5000
+			duration: 10000
 		});
 		this.loading.present();
 		
@@ -170,6 +175,23 @@ export class AddVisitPage implements OnInit {
 			duration: 3000
 		});
 		toast.present();
+	}
+	async presentModal() {
+		const modal = await this.modalController.create({
+			component: ConfirmationComponent,
+			componentProps: {homeref:this},
+			swipeToClose: true,
+
+			cssClass: 'modal'
+		});
+		return await modal.present();
+	}
+
+	saveRequest(){
+		this.presentModal();
+	}
+	closePopover(){
+		this.modalController.dismiss();
 	}
 
 	createOnline$() {

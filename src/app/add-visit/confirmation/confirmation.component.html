@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		
+		<ion-title >{{'ADDVISIT.ConfirmationTitle' | translate}}</ion-title>
+		<ion-buttons slot="end">
+			<ion-button color="secondary" fill="solid" (click)="cancel()">
+				{{'ADDVISIT.Cancel' | translate}}
+			</ion-button>	
+		</ion-buttons>
+
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-item class="topText">
+		<ion-text>{{'ADDVISIT.ConfirmationText' | translate}}</ion-text>
+	</ion-item>
+	<ion-item lines='none'>
+		<ion-label>{{'ADDVISIT.IssueDetected' | translate}}</ion-label>
+		<ion-toggle slot="start" [(ngModel)]="generalStatusKO"></ion-toggle>
+	</ion-item>
+	<ion-item *ngIf="generalStatusKO === true">
+		<ion-label position="stacked">{{'ADDVISIT.IssueDescription' | translate}}</ion-label>
+		<ion-textarea name="issueDescription" type="text" [(ngModel)]="issueDescription" ></ion-textarea>
+	</ion-item>
+
+	
+	<ion-button expand="block" (click)="confirm()" class="buttonBottomPopup">{{'ADDVISIT.Confirm' | translate}}</ion-button>
+
+</ion-content>

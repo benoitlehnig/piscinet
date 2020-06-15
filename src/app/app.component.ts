@@ -115,8 +115,6 @@ export class AppComponent implements OnInit {
   }
   selectTabNavigation(){
     const path = window.location.pathname;
-    console.log("path: ",path);
-    console.log("path: ",path);
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.url.toLowerCase() === path.toLowerCase().split("/")[1]);
     }

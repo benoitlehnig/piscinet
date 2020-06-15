@@ -13,6 +13,7 @@
 		"myPools": "Mes Piscines",
 		"Offline": "Hors Ligne",
 		"Alarms": "Alarmes",
+		"Admin": "Configuration",
 		"OfflineVisitCreate": "Faire une visite hors ligne",
 		"OfflineVisits": "Mes visites hors-ligne",
 		"UnknownEmployee": "Employé",
@@ -32,7 +33,9 @@
 	},
 	"CUSTOMERS":{
 		"TITLE": "Clients",
-		"Filter": "Rechercher ..."
+		"Filter": "Rechercher ...",
+		"ListView": "Liste" ,
+		"MapView": "Carte"
 	},
 	"CUSTOMER":{
 		"MOBILEPHONENUMBER": "Telephone mobile",
@@ -52,8 +55,13 @@
 		"VisitsPerfomed": " visites éffectuées",
 		"Edit": "Modifier",
 		"SendEmailForUserCreation": "Envoyer un email de creation de compte",
-		"EmailSent": "Email envoyé ! "
-
+		"EmailSent": "Email envoyé ! ",
+		"Remove": "Supprimer",
+		"AlertHeader": "Suppression du client",
+		"AlertMesssage": "Etes-vous sur de vouloir supprimer ce client ? ",
+		"AlertCancel": "Annuler",
+		"AlertOK": "Supprimer",
+		"SuccessDeleteText": " a bien ete supprimé."
 	},
 	"ADDCUSTOMER":{
 		"TitleAdd": "Ajouter un nouveau client",
@@ -88,7 +96,9 @@
 		"Edit": "Modifier",
 		"SendEmailForUserCreation": "Envoyer un email de creation de compte",
 		"EmailSent": "Email envoyé ! ",
-		"SetAdmin": "Donner droits d'admin"
+		"SetAdmin": "Donner droits d'admin",
+		"Remove": "Supprimer",
+		"SuccessDeleteText": " a bien ete supprimé."
 	},
 	"ADDEMPLOYEE":{
 		"TitleAdd": "Ajouter un nouvel employé",
@@ -110,7 +120,7 @@
 		"Environment": "Environement",
 		"NoVegetation": "Pas de végétation",
 		"LittleVegetation": "Peu de végétation",
-		"LotOfVegetation": "Beaucoup de végétation",
+		"LotOfVegetation": "Bc de végétation",
 		"State": "Etat",
 		"VeryGoodState": "Excellent état",
 		"GoodState": "Bon état",
@@ -148,8 +158,9 @@
 		"PompDate": "Date de la pompe a chaleur : ",
 		"AutomaticFillDate": "Date du remplissage automatique : ",
 		"Observation": "Observations",
-		"Information": "Informations générales",
-		"Visits": "Visites effectuées"
+		"Information": "Informations",
+		"Visits": "Visites",
+		"Statistics": "Statistiques"
 	},
 	"ADDSWIMMINGPOOL":{
 		"Name": "Nom de la piscine",
@@ -164,15 +175,15 @@
 		"Bean": "Haricot",
 		"SwimmingLane": "Couloir de nage",
 		"GeneralInformation": "Informations Générales",
-		"Environment": "Environement",
-		"NoVegetation": "Pas de végétation",
+		"Environment": "Végétation",
+		"NoVegetation": "Aucune",
 		"LittleVegetation": "Peu de végétation",
-		"LotOfVegetation": "Beaucoup de végétation",
+		"LotOfVegetation": "Beaucoup",
 		"State": "Etat",
-		"VeryGoodState": "Excellent état",
+		"VeryGoodState": "Excellent",
 		"GoodState": "Bon état",
 		"StateOK": "Etat passable",
-		"BadState": "Mauvais état",
+		"BadState": "Mauvais",
 		"AlarmSystem": "Systeme d'alarme",
 		"Cover": "Type de revêtement",
 		"Liner": "Liner",
@@ -209,7 +220,7 @@
 	},
 	"VISIT":{
 		"Title": "Visite",
-		"Title": "Visite",
+		"GeneralTitle": "General",
 		"AddVisitTitle": "Nouvelle Visite",
 		"MainteanceTitle": "Maintenance",
 		"TechnicalTitle": "Technique",
@@ -294,8 +305,8 @@
 		"ClearWaterOK": "Eau claire",
 		"ClearWaterKO": "Eau trouble",
 		"AlgeaOnWall": "Algues sur les murs",
-		"AlgeaOnWallOK": "Algues sur les murs",
-		"AlgeaOnWallKO": "Pas d'algue sur les murs",
+		"AlgeaOnWallKO": "Algues sur les murs",
+		"AlgeaOnWallOK": "Pas d'algue sur les murs",
 		"Brossage": "Brossage",
 		"OtherObservation": "Autres observations",
 		"AddVisitSave": "Enregistrer",
@@ -305,14 +316,22 @@
 		"VisitsOfflineTitle": "Mes visites hors-ligne",
 		"Customer": "Client :  ",
 		"TitleFor": "Pour ",
-		"TitleOn": " du "
+		"TitleOn": " du ",
+		"At": "Effectué le ",
+		"NewInterventionRequired": "Nouveau passage nécessaire"
 	},
 	"ADDVISIT":{
 		"SuccessAdd": " - nouvelle visite ajoutée ! ",
 		"SuccessUpdate": "- visite modifiée ! ",
 		"SuccessUploadText": "Visite ajoutée ! ",
 		"SelectCustomerAndPool": "Selection du client : ",
-		"PoolNameTitle": "Piscine"
+		"PoolNameTitle": "Piscine",
+		"IssueDetected": "Problème technique détecté nécessitant une nouvelle intervention",
+		"IssueDescription": "Description du problème",
+		"ConfirmationTitle": "Confirmation",
+		"Cancel": "Annuler",
+		"Confirm": "Confirmer",
+		"ConfirmationText": "Merci d'avoir rempli la fiche de visite. En enregistrant cette visite, le client recevra un avis de votre passage. Si une intervention supplementaire est nécessaire, merci de le mentionner."
 	},
 	"MYPROFILE":{
 		"Title": "Mon Profil",
@@ -341,5 +360,8 @@
 		"LastTechnicalLocal": "Derniere nettoyage du local technique effectué il y a ",
 		"LastCurtain": "Derniere nettoyage du rideau effectué il y a ",
 		"Days": " jours"
+	},	
+	"ADMIN":{
+		"Title": "Configuration"
 	}	
 }

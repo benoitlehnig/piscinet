@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSharingService } from '../../services/data-sharing.service'
-import {Visit} from '../../models/Visit';
+import {Visit} from '../../models/visit';
 
 @Component({
 	selector: 'app-maintenance',

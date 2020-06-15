@@ -12,7 +12,7 @@
 				</div>
 			</ion-avatar>
 			<ion-label>
-				<h2 *ngIf="visit.dateTime">{{ visit.dateTime | date:'medium' }} </h2>
+				<h3 *ngIf="visit.dateTime"><b>{{ visit.dateTime | date:'medium' }}</b></h3>
 
 				<p *ngIf="visit.employee.data">{{'VISIT.VisitPerformedBY' | translate}} {{visit.employee.data.firstName }} {{visit.employee.data.lastName}}</p>
 				<p *ngIf="visit.employee.data === null">{{'VISIT.VisitPerformedBY' | translate}} {{'COMMON.UnknownEmployee' | translate}}</p>

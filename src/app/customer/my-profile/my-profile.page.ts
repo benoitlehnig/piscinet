@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { CustomerServicesService } from '../../services/customer-services.service'
 import {Customer} from '../../models/customer';
-import { map, switchMap } from 'rxjs/operators'
 
 @Component({
 	selector: 'app-my-profile',
@@ -16,7 +15,7 @@ export class MyProfilePage implements OnInit {
 
 	constructor( 
 		public authService:AuthenticationService,
-		public afDatabase: AngularFireDatabase
+		public customerServicesService: CustomerServicesService
 
 		) { }
 
@@ -29,7 +28,7 @@ export class MyProfilePage implements OnInit {
 			{
 				console.log("MyProfilePage", result)
 				this.uid = result.uid;
-				this.afDatabase.object<Customer>('customers/'+this.uid).valueChanges().subscribe(
+				this.customerServicesService.getCustomer(this.uid).subscribe(
 					(data) =>{
 						this.customer = data;
 					})

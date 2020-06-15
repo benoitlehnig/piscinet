@@ -4,11 +4,14 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { AuthenticationService } from '../services/authentication.service';
 import { PopoverController } from '@ionic/angular';
 
-import { AngularFireDatabase } from '@angular/fire/database';
+import { EmployeeServicesService } from '../services/employee-services.service'
 import { Observable } from 'rxjs';
 import {Employee} from '../models/employee';
 import { PopoverComponent } from './popover/popover.component';
 import {TranslateService} from '@ngx-translate/core';
+import { NavController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -28,35 +31,39 @@ export class EmployeePage implements OnInit {
 		minZoom: 8
 	}
 	public emailSentText:string = "";
+	public successDeleteText:string="";
+	public loading ;
 
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
-		public db: AngularFireDatabase,
+		public employeeServicesService: EmployeeServicesService,
 		private functions: AngularFireFunctions,
 		public authenticationService:AuthenticationService,
 		public popoverController: PopoverController,
-		public translateService : TranslateService
-
+		public translateService : TranslateService,
+		public navCtrl: NavController,
+		public toastController: ToastController,
+		public loadingController: LoadingController,
 
 		) { }
 
 	ngOnInit() {
 		this.uid = this.activatedRoute.snapshot.paramMap.get('id');
 		this.claims = this.authenticationService.getClaims();
-		this.translateService.get('EMPLOYEE.EmailSent').subscribe(
+		this.translateService.get('EMPLOYEE.EmailSent', 'EMPLOYEE.SuccessDeleteText').subscribe(
 			value => {
-				this.emailSentText = value;
+				this.emailSentText = value['EMPLOYEE.EmailSent'];
+				this.successDeleteText = value['EMPLOYEE.SuccessDeleteText'];
 			});
 		
 	}
 	ionViewWillEnter(){
-		this.db.object<Employee>('employees/'+this.uid).valueChanges().subscribe(
+		this.employeeServicesService.getEmployee(this.uid).subscribe(
 			(data) =>{
 				this.employee = data;
 				this.center = this.employee.location;
 			})
-
 	}
 
 	setAdmin(){
@@ -69,7 +76,7 @@ export class EmployeePage implements OnInit {
 		const popover = await this.popoverController.create({
 			component: PopoverComponent,
 			componentProps: {homeref:this, uid:this.uid},
-			cssClass: 'my-custom-class',
+			cssClass: 'popover',
 			event: ev,
 			translucent: true
 		});
@@ -77,6 +84,27 @@ export class EmployeePage implements OnInit {
 	}
 	dismissPopover(){
 		this.popoverController.dismiss();
+	}
+	removeEmployee(){
+		const callable = this.functions.httpsCallable('deleteEmployee');
+		const obs = callable(this.uid);
+		obs.subscribe(async res => {
+			this.popoverController.dismiss();
+			this.navCtrl.navigateRoot(['employees/']);
+			this.presentToast();
+			this.loading.dismiss();
+		});
+	}
+
+
+	async presentToast() {
+		let message = this.employee.firstName +" "+ this.employee.lastName +" "+ this.successDeleteText;
+		
+		const toast = await this.toastController.create({
+			message: message ,
+			duration: 3000
+		});
+		toast.present();
 	}
 
 }

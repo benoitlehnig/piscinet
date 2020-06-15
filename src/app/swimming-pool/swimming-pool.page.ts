@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {SwimmingPool} from '../models/swimming-pool';
-import { AngularFireDatabase } from '@angular/fire/database';
 import { ActivatedRoute } from '@angular/router';
 import {Customer} from '../models/customer';
 import {TranslateService} from '@ngx-translate/core';
-import { DataSharingService } from '../services/data-sharing.service'
+import { DataSharingService } from '../services/data-sharing.service';
+import { CustomerServicesService } from '../services/customer-services.service';
+import { PoolServicesService } from '../services/pool-services.service';
 
 @Component({
 	selector: 'app-swimming-pool',
@@ -22,9 +23,10 @@ export class SwimmingPoolPage implements OnInit {
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
-		public afDatabase: AngularFireDatabase,
+		public customerServicesService: CustomerServicesService,
 		public translateService : TranslateService,
-		public dataSharingService:DataSharingService
+		public dataSharingService:DataSharingService,
+		public poolServicesService: PoolServicesService
 
 		) { 
 		
@@ -43,12 +45,12 @@ export class SwimmingPoolPage implements OnInit {
 	ionViewWillEnter(){
 		this.uid = this.activatedRoute.snapshot.paramMap.get('id')
 		this.poolId = this.activatedRoute.snapshot.paramMap.get('sid');
-		this.afDatabase.object<Customer>('customers/'+this.uid).valueChanges().subscribe(
+		this.customerServicesService.getCustomer(this.uid).subscribe(
 			(data) =>{
 				this.customer = data;
 				this.customerStringified = JSON.stringify(data);
 			})
-		this.afDatabase.object<SwimmingPool>('pools/'+this.poolId).valueChanges().subscribe(
+		this.poolServicesService.getSwimmingPool(this.poolId).subscribe(
 			(data) =>{
 				this.swimmingPool = data;
 				this.dataSharingService.currentPool({uid:this.uid, poolId:this.poolId,swimmingPool:this.swimmingPool })

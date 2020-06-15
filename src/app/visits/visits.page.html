@@ -21,11 +21,14 @@
 				</div>
 			</ion-avatar>
 			<ion-label>
-				<h2 *ngIf="visit.dateTime">{{ visit.dateTime | date:'medium' }} </h2>
-				<h2>{{'VISIT.Customer' | translate}}{{ visit.customer.data.firstName}} {{ visit.customer.data.lastName}} </h2>
+				<h3 *ngIf="visit.dateTime"><b>{{ visit.dateTime | date:'medium' }}</b> </h3>
+				<h4 *ngIf="visit.customer.data !==null">{{'VISIT.Customer' | translate}}{{ visit.customer.data.firstName}} {{ visit.customer.data.lastName}} </h4>
 				
 				<p *ngIf="visit.employee.data !==null">{{'VISIT.VisitPerformedBY' | translate}} {{visit.employee.data.firstName }} {{visit.employee.data.lastName}}</p>
-
+				<p *ngIf="visit.generalStatusKO ===true">
+					<ion-icon name="warning" color="danger"></ion-icon>
+					<ion-text color="danger">{{'VISIT.NewInterventionRequired' | translate}}</ion-text>
+				</p>
 			</ion-label>
 		</ion-item>
 	</ion-list>

@@ -23,7 +23,7 @@
 			</div>
 		</ion-avatar>
 		<ion-label>
-			<h2>{{ alarm.data.customer.data.firstName}} {{ alarm.data.customer.data.lastName}} </h2>
+			<h2  *ngIf="alarm.data.customer.data !==null">{{ alarm.data.customer.data.firstName}} {{ alarm.data.customer.data.lastName}} </h2>
 			<h3>{{ alarm.data.name}}
 				<div *ngIf="alarm.numberOfDays !='' ">
 					<span *ngIf="alarm.type ==='technicalLocal'"> {{'NOTIFICATIONS.LastTechnicalLocal' | translate}}</span>

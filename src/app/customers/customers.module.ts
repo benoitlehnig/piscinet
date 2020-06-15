@@ -19,8 +19,9 @@ import { CustomersPage } from './customers.page';
     TranslateModule,
     AvatarModule,
     GoogleMapsModule,
-    CustomersPageRoutingModule
+    CustomersPageRoutingModule,
+
   ],
-  declarations: [CustomersPage]
+  declarations: [CustomersPage ]
 })
 export class CustomersPageModule {}

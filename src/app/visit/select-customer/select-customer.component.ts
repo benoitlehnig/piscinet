@@ -1,5 +1,5 @@
 import { Component, OnInit ,Input} from '@angular/core';
-import { AngularFireDatabase, AngularFireList,AngularFireObject  } from '@angular/fire/database';
+import { CustomerServicesService } from '../../services/customer-services.service'
 import { Observable } from 'rxjs';
 import {Customer} from '../../models/customer';
 import { map } from 'rxjs/operators';
@@ -19,25 +19,16 @@ export class SelectCustomerComponent implements OnInit {
 	@Input("homeref") value;
 
 	constructor(
-		public afDatabase: AngularFireDatabase,
+		public customerServicesService: CustomerServicesService,
 		public navParams : NavParams
 		) { }
 
 	ngOnInit() {
-		this.customers = this.afDatabase.list<Customer>('/customers',ref => ref.orderByChild('lastName')).snapshotChanges()
-		.pipe(
-			map(changes => 
-				changes.map(c => ({ key: c.payload.key, data: c.payload.val(), class:'visible' }))
-				)
-			);
+		this.customers = this.customerServicesService.getCustomers();
 	}
 
 	selectCustomer(customer){
-		let swimmingPools = this.afDatabase.list('/pools/'+customer.key).snapshotChanges().pipe(
-			map(changes => 
-				changes.map(c => ({ key: c.payload.key, data: c.payload.val()}))
-				)
-			).subscribe(
+		let swimmingPools = this.customerServicesService.getCustomerPools(+customer.key).subscribe(
 			data =>{
 				if(data.length >1){
 					this.selectedCustomerPools = data;
@@ -48,12 +39,12 @@ export class SelectCustomerComponent implements OnInit {
 				}
 				swimmingPools.unsubscribe();
 			})
-		
-
 	}
+
 	selectCustomerAndPool(customer,pool){
 		this.navParams.get('homeref').selectCustomer(customer.key, pool.key)
 	}
+	
 	async filterList(evt) {
 		this.searchTerm = evt.srcElement.value;
 	}

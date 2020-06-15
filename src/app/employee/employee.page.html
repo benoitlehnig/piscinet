@@ -1,12 +1,8 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
 		<ion-buttons slot="start">
-			<ion-menu-button></ion-menu-button>
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
-		<ion-avatar class="avatarTop" slot="start">
-			<ngx-avatar name="{{employee.firstName }} {{employee.lastName}}"></ngx-avatar>
-		</ion-avatar>
 		<ion-title>{{ employee.firstName}} {{employee.lastName}} </ion-title>
 		<ion-buttons slot="end" *ngIf="claims['admin']">
 			<ion-button (click)="presentPopover($event)" >
@@ -42,7 +38,5 @@
 		[position]="employee.location"></map-marker>
 	</google-map>
 
-	<div padding>
-		<ion-button class="submit-btn" (click)="setAdmin()" *ngIf="claims['admin']">set Admin</ion-button>
-	</div>
+
 </ion-content>

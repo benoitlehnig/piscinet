@@ -284,7 +284,7 @@ ion-text.unknown{
 }
 .subTitle{
   margin:0px;
-  font-size:0.8em;
+  font-size:0.7em;
 }
 ion-fab-button[data-desc] {
   position: relative;
@@ -318,6 +318,12 @@ ion-fab-button.maintenance[data-desc]::after {
 .modal{
   --max-width: 1000px;  
 }
+.autocomplete{
+  border:1px solid var(--ion-color-primary);
+  border-radius:  5px;
+  margin-bottom: 12px;
+  padding: 12px;
+}
 .alarms{
   .maintenance{
     color:var(--ion-color-warning);
@@ -329,4 +335,20 @@ ion-fab-button.maintenance[data-desc]::after {
    color:   var(--ion-color-danger);
  }
 
+}
+app-list-view{
+  justify-content: normal!important;
+}
+@media (max-width: 820px) {
+  .popover{
+    --min-width:calc(100% - 20px);
+  }
+  .smallerFont{
+    font-size:  0.7em;
+  }
+}
+@media (min-width: 820px) {
+  .popover{
+    --min-width:400px;
+  }
 }

@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>{{'ADMIN.Title' | translate}}</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-item>
+		<ion-label> Envoyer un email apres chaque visite</ion-label>
+		<ion-toggle slot="start" [(ngModel)]="company.configuration.sendEmailAfterVisit"  (ionChange)="saveConfiguration()"></ion-toggle>
+	</ion-item>
+</ion-content>

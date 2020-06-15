@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, AngularFireList,AngularFireObject  } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import {Customer} from '../models/customer';
 import { map } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
+import { DataSharingService } from '../services/data-sharing.service'
+import { CustomerServicesService } from '../services/customer-services.service'
 
 
 @Component({
@@ -14,29 +15,22 @@ import { AuthenticationService } from '../services/authentication.service';
 export class CustomersPage implements OnInit {
 	public customers;
 	public claims;
-	public searchTerm:string ="";
 
 	constructor(
-		public afDatabase: AngularFireDatabase,
 		public authenticationService:AuthenticationService,
+		public dataSharingService:DataSharingService,
+		public customerServicesService:CustomerServicesService
 
 		) { 
 
 	}
 
 	ngOnInit() {
-		this.customers = this.afDatabase.list<Customer>('/customers',ref => ref.orderByChild('lastName')).snapshotChanges()
-		.pipe(
-			map(changes => 
-				changes.map(c => ({ key: c.payload.key, data: c.payload.val(), class:'visible' }))
-				)
-			);
+		this.customers = this.customerServicesService.getCustomers();
+		this.customers.subscribe(
+			data=> this.dataSharingService.currentCustomers(data));
 		this.claims = this.authenticationService.getClaims();
 
-	}
-
-	async filterList(evt) {
-		this.searchTerm = evt.srcElement.value;
 	}
 
 	

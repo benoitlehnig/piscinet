@@ -4,7 +4,7 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { CustomerServicesService } from '../services/customer-services.service'
 import { ToastController } from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
 import { LoadingController } from '@ionic/angular';
@@ -38,7 +38,7 @@ export class AddCustomerPage implements OnInit {
 		public navCtrl: NavController,
 		private afAuth: AngularFireAuth,
 		private activatedRoute: ActivatedRoute,
-		public afDatabase: AngularFireDatabase,
+		public customerServicesService:CustomerServicesService,
 		public toastController: ToastController,	
 		public translateService : TranslateService,
 		public zone: NgZone,
@@ -56,7 +56,7 @@ export class AddCustomerPage implements OnInit {
 			this.mode =  params['mode'];
 			if(this.mode ==="update"){
 				this.uid = params['uid'];
-				this.afDatabase.object<Customer>('customers/'+this.uid).valueChanges().subscribe(
+				this.customerServicesService.getCustomer(this.uid).subscribe(
 					(data) =>{
 						this.customer = data;
 						this.typeOfContract = this.customer.typeOfContract;

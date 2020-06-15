@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, AngularFireList,AngularFireObject  } from '@angular/fire/database';
 import {SwimmingPool} from '../models/swimming-pool';
 import { AuthenticationService } from '../services/authentication.service';
 import * as moment from 'moment';
-import { Observable, combineLatest, of } from 'rxjs'
-import { map, switchMap } from 'rxjs/operators'
-import { uniq, flatten } from 'lodash'
+import { PoolServicesService } from '../services/pool-services.service'
+
 @Component({
 	selector: 'app-alarms',
 	templateUrl: './alarms.page.html',
@@ -18,42 +16,14 @@ export class AlarmsPage implements OnInit {
 	public swimmingPool;
 	public claims;
 	constructor(
-		public afDatabase: AngularFireDatabase,
-		public authenticationService:AuthenticationService
+		public authenticationService:AuthenticationService,
+		public poolServicesService: PoolServicesService,
+
 		) { }
 
 	ngOnInit() {
-		let lastMonth = moment().subtract(1, 'years').format();
-		this.swimmingPool = this.afDatabase.list<SwimmingPool>('pools').snapshotChanges()
-		.pipe(
-			switchMap(pools => {
-				const customerUids = uniq(pools.map(pool  => pool.payload.val().customerUid));
-				return combineLatest(
-					of(pools),
-					combineLatest(
-						customerUids.map(customerUid =>
-							this.afDatabase.object<any>('customers/'+customerUid).valueChanges().pipe(
-								map(customer => ({uid:customerUid, data:customer}))
-								)
-							)
-						) as any,
-					)  as any
-			}),
-			map(([pools, customers]) => {
-				console.log(pools,customers);
-				return pools.map(pool => {
-					return {
-						...(pool.payload.val() as object)  ,
-						poolKey: pool.key,
-						customer: customers.find(a => a.uid === pool.payload.val().customerUid),
-					}
-				})
-			})
-			);
-
-
+		this.swimmingPool = this.poolServicesService.getPoolsWithCustomers();
 		this.swimmingPool.subscribe((data)=>{
-			console.log("pools", data)
 			data.forEach( (element:any) => {
 				this.checkCurtainRule(element);
 				this.checkMaintenanceRule(element);

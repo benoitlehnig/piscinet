@@ -1,8 +1,7 @@
 <ion-header>
 	<ion-toolbar>
 		<ion-buttons slot="start">
-			<ion-menu-button></ion-menu-button>
-			<ion-back-button></ion-back-button>
+			<ion-back-button defaultHref="visits"></ion-back-button>
 		</ion-buttons>
 		<ion-avatar slot="start" class="avatarListVisits"  [ngClass]="{'full': visit.typeOfVisit ==='full' , 
 		'controle': visit.typeOfVisit ==='controle' , 'maintenance': visit.typeOfVisit ==='maintenance' }">
@@ -15,10 +14,7 @@
 		
 	</ion-avatar>
 	<ion-title>
-		{{'VISIT.Title' | translate}} {{'VISIT.TitleOn' | translate}} {{ visit.dateTime | date:'d MMM y' }}
-		<div>
-			<ion-text color="primary"><h6 class="subTitle">{{'VISIT.TitleFor'  | translate}} {{customer.firstName}} {{customer.lastName}} {{'VISIT.DoneBy' | translate}} {{employee.firstName}} {{employee.lastName}}</h6></ion-text>
-		</div>
+	{{ visit.dateTime | date:'d MMM y' }}
 	</ion-title>
 	<ion-buttons slot="end" >
 		<ion-button [routerLink]="['/edit-visit' ,{ visitID:visitId, mode: 'update',customer: customerStringified,swimmingPoolName:swimmingPoolName}]" *ngIf="editEligibility === true && mode !== 'offline'">
@@ -33,8 +29,14 @@
 </ion-header>
 
 <ion-content>
+
+
 	<ion-tabs>
 		<ion-tab-bar slot="top">
+			<ion-tab-button tab="general" selected>
+				<ion-icon name="information"></ion-icon>
+				<ion-label>{{'VISIT.GeneralTitle' | translate}} </ion-label>
+			</ion-tab-button>
 			<ion-tab-button tab="maintenance" selected>
 				<ion-icon name="construct"></ion-icon>
 				<ion-label>{{'VISIT.MainteanceTitle' | translate}} </ion-label>

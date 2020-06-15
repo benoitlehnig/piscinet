@@ -9,10 +9,12 @@ export class DataSharingService {
 	private someDataSource = new BehaviorSubject(null);
 	private offlineVisitNumberDataSource = new BehaviorSubject(null);
 	private currentPoolDataSource = new BehaviorSubject(null);
+	private customersDataSource = new BehaviorSubject(null);
 
 	currentSomeDataChanges = this.someDataSource.asObservable();
 	curretOfflineVisitNumberChanges = this.offlineVisitNumberDataSource.asObservable();
 	currentPoolChanges = this.currentPoolDataSource.asObservable();
+	customersChanges = this.customersDataSource.asObservable();
 
 
 	constructor() { }
@@ -40,5 +42,11 @@ export class DataSharingService {
 	}
 	getCurrentPoolChanges(){
 		return this.currentPoolChanges;
+	}
+	currentCustomers(customers){
+		this.customersDataSource.next(customers);
+	}
+	getCustomersChanges(){
+		return this.customersChanges;
 	}
 }

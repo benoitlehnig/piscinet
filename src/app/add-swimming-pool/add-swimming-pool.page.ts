@@ -4,11 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
-import { AngularFireDatabase } from '@angular/fire/database';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular';
 import {SwimmingPool} from '../models/swimming-pool';
 import {Customer} from '../models/customer';
+import { PoolServicesService } from '../services/pool-services.service';
 
 @Component({
 	selector: 'app-add-swimming-pool',
@@ -32,7 +32,7 @@ export class AddSwimmingPoolPage implements OnInit {
 		private functions: AngularFireFunctions,
 		public navCtrl: NavController,
 		private activatedRoute: ActivatedRoute,
-		public afDatabase: AngularFireDatabase,
+		public poolServicesService: PoolServicesService,
 		public toastController: ToastController,
 		public translateService : TranslateService,
 		private storage: Storage,
@@ -47,7 +47,7 @@ export class AddSwimmingPoolPage implements OnInit {
 			this.customer =  JSON.parse(params['customer']);
 			if(this.mode ==="update"){
 				this.poolId = this.activatedRoute.snapshot.paramMap.get('sid')
-				this.afDatabase.object<SwimmingPool>('pools/'+this.poolId).valueChanges().subscribe(
+				this.poolServicesService.getSwimmingPool(this.poolId).subscribe(
 					(data) =>{
 						this.swimmingPool = data;
 					})

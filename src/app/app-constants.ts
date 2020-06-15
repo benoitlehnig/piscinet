@@ -26,6 +26,11 @@ export class AppConstants {
 		title: 'Alarms',
 		url: 'alarms',
 		icon: 'notifications'
+	},
+	{
+		title: 'Admin',
+		url: 'admin',
+		icon: 'settings'
 	}
 	];
 	public appCustomerPages = [

@@ -1,17 +1,18 @@
 <ion-header [translucent]="true">
 	<ion-toolbar>
 		<ion-buttons slot="start">
-			<ion-menu-button></ion-menu-button>
-			<ion-back-button></ion-back-button>
+			<ion-back-button ></ion-back-button>
 		</ion-buttons>
-		<ion-title >{{'VISIT.AddVisitTitle' | translate}}</ion-title>
-		<div>
-			<ion-text color="primary"><h6 class="subTitle"> {{customer.firstName}} {{customer.lastName}}</h6></ion-text>
-		</div>
+		<ion-title >
+			<span *ngIf="mode==='add'">{{'VISIT.AddVisitTitle' | translate}}</span>
+			<span *ngIf="mode==='update'">{{ newVisit.dateTime | date:'d MMM y' }}</span>
+			<div>
+				<ion-text color="primary"><h6 class="subTitle"> {{customer.firstName}} {{customer.lastName}}</h6></ion-text>
+			</div>
+		</ion-title>
 		<ion-buttons slot="end">
-			<ion-button fill="outline" color="primary" (click)="addVisit()">
-				<ion-icon slot="start" name="save"></ion-icon>
-				<span class="spanButton">{{'VISIT.AddVisitSave' | translate}}</span>
+			<ion-button color="primary" fill="solid" (click)="saveRequest()">
+				{{'VISIT.AddVisitSave' | translate}}
 			</ion-button>
 		</ion-buttons>
 	</ion-toolbar>

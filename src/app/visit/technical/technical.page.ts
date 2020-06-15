@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Visit} from '../../models/Visit';
+import {Visit} from '../../models/visit';
 import { DataSharingService } from '../../services/data-sharing.service'
 
 

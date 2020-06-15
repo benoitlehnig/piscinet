@@ -16,7 +16,6 @@ export class InformationPage implements OnInit {
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		public dataSharingService:DataSharingService
-
 		) { 
 	}
 
@@ -28,20 +27,14 @@ export class InformationPage implements OnInit {
 	}
 
 	initData(){
-		this.uid = this.activatedRoute.snapshot.paramMap.get('id')
-		this.poolId = this.activatedRoute.snapshot.paramMap.get('sid')
 		let sub = this.dataSharingService.getCurrentPoolChanges().subscribe(
 			data => {
-				if(data){console.log("getCurrentPoolChanges info",data, data.poolId)
+				if(data){
 					this.poolId = data.poolId;
-				this.uid = data.uid;
-				this.swimmingPool = data.swimmingPool;
-				console.log(this.swimmingPool);
-			}
-
-		});
-
+					this.uid = data.uid;
+					this.swimmingPool = data.swimmingPool;
+				}
+			});
 	}
-
 
 }

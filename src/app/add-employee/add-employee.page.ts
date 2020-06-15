@@ -4,7 +4,7 @@ import { NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {Employee} from '../models/employee';
 import { ActivatedRoute } from '@angular/router';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { EmployeeServicesService } from '../services/employee-services.service'
 import { ToastController } from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
 import { LoadingController } from '@ionic/angular';
@@ -35,7 +35,7 @@ export class AddEmployeePage implements OnInit {
 		public navCtrl: NavController,
 		private afAuth: AngularFireAuth,
 		private activatedRoute: ActivatedRoute,
-		public afDatabase: AngularFireDatabase,
+		public employeeServicesService: EmployeeServicesService,
 		public toastController: ToastController,
 		public translateService : TranslateService,
 		public zone: NgZone,
@@ -52,7 +52,7 @@ export class AddEmployeePage implements OnInit {
 			this.mode =  params['mode'];
 			if(this.mode ==="update"){
 				this.uid = params['uid'];
-				this.afDatabase.object<Employee>('employees/'+this.uid).valueChanges().subscribe(
+				this.employeeServicesService.getEmployee(this.uid).subscribe(
 					(data) =>{
 						this.employee = data;
 						this.autocomplete = { input: this.employee.googleAddress};

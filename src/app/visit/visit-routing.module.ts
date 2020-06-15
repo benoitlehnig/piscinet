@@ -3,17 +3,28 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { VisitPage } from './visit.page';
 
+
+
 const routes: Routes = [
   {
     path: 'visit',
     component: VisitPage,
      children: [
+     {
+        path: 'general',
+        children: [
+          {
+            path: '',
+            loadChildren: './general/general.module#GeneralPageModule'
+          }
+        ]
+      },
       {
         path: 'maintenance',
         children: [
           {
             path: '',
-            loadChildren: '../visit/maintenance/maintenance.module#MaintenancePageModule'
+            loadChildren: './maintenance/maintenance.module#MaintenancePageModule'
           }
         ]
       },
@@ -22,7 +33,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../visit/observation/observation.module#ObservationPageModule'
+            loadChildren: './observation/observation.module#ObservationPageModule'
           }
         ]
       },
@@ -31,7 +42,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../visit/technical/technical.module#TechnicalPageModule'
+            loadChildren: './technical/technical.module#TechnicalPageModule'
           }
         ]
       },
@@ -41,21 +52,25 @@ const routes: Routes = [
   },
   {
     path: 'maintenance',
-    loadChildren: () => import('../visit/maintenance/maintenance.module').then( m => m.MaintenancePageModule)
+    loadChildren: () => import('./maintenance/maintenance.module').then( m => m.MaintenancePageModule)
   },
   {
     path: 'technical',
-    loadChildren: () => import('../visit/technical/technical.module').then( m => m.TechnicalPageModule)
+    loadChildren: () => import('./technical/technical.module').then( m => m.TechnicalPageModule)
   },
   {
     path: 'observation',
-    loadChildren: () => import('../visit/observation/observation.module').then( m => m.ObservationPageModule)
+    loadChildren: () => import('./observation/observation.module').then( m => m.ObservationPageModule)
+  },
+  {
+    path: 'general',
+    loadChildren: () => import('./general/general.module').then( m => m.GeneralPageModule)
   },
   {
     path: '',
-    redirectTo: 'visit/maintenance',
+    redirectTo: 'visit/general',
     pathMatch: 'full'
-  }
+  },
 ];
 
 @NgModule({

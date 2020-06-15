@@ -1,0 +1,25 @@
+	<ion-content>
+		<ion-item lines="none">
+			<ion-text>{{'VISIT.Customer' | translate}}</ion-text>
+			<ion-text><b>{{customer.firstName}} {{customer.lastName}}</b></ion-text> 
+		</ion-item>
+		<ion-item lines="none">
+			<ion-text>{{'VISIT.At' | translate}} </ion-text>
+			<ion-text><b>{{ visit.dateTime |  date:'medium' }}</b></ion-text> 
+		</ion-item>
+		<ion-item>
+			<ion-chip color="primary" *ngIf="employee!==null">
+				<ion-label>{{employee.firstName}} {{employee.lastName}}</ion-label>
+			</ion-chip>
+		</ion-item>
+		<div class="statusWrapper"  *ngIf="visit.generalStatusKO === false ">
+			<ion-icon name="checkmark" color="primary"></ion-icon>
+		</div>
+		<ion-item *ngIf="visit.generalStatusKO===true">
+			<ion-icon *ngIf="visit.generalStatusKO === true " name="warning" color="danger"></ion-icon>
+			<ion-text>
+				<p>{{'VISIT.NewInterventionRequired' | translate}}</p>
+				<p>{{visit.issueDescription}}</p>
+			</ion-text>
+		</ion-item>
+	</ion-content>
