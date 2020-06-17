@@ -21,18 +21,18 @@
 						<ion-label position="floating" color="primary">{{'LOGIN.Password' | translate}}</ion-label>
 						<ion-input name="password" type="password" placeholder="{{'LOGIN.Password' | translate}}" ngModel required></ion-input>
 					</ion-item>
-
+					<div *ngIf="mode ==='login'" class="ion-text-end ion-margin-bottom">
+						<ion-text (click)="requestResetPasswordPage()" class="linkStyle ion-text-end">{{'LOGIN.ForgottenPassword' | translate}}</ion-text>
+					</div>
 
 					<ion-button class="submit-btn" type="submit" >{{'LOGIN.LoginButton' | translate}}</ion-button>
 
-					<ion-item>
+					<ion-item lines="none">
 						<label class="error-message">{{errorMessage}}</label>
 					</ion-item>
 					
 				</form>
-				<ion-item lines="none" *ngIf="mode ==='login'">
-					<a><ion-text (click)="requestResetPasswordPage()">{{'LOGIN.ForgottenPassword' | translate}}</ion-text></a>
-				</ion-item>
+				
 				<div *ngIf="mode ==='resetPassword'">
 					<ion-item>
 						<ion-label position="floating" color="primary">{{'LOGIN.Email' | translate}}</ion-label>

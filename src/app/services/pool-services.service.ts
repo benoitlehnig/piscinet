@@ -6,20 +6,28 @@ import { uniq, flatten } from 'lodash'
 import {SwimmingPool} from '../models/swimming-pool';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class PoolServicesService {
 
-  constructor(
-  	public afDatabase: AngularFireDatabase,
-  	) { }
+	constructor(
+		public afDatabase: AngularFireDatabase,
+		) { }
 
-  getSwimmingPool(id){
-  	 return this.afDatabase.object<SwimmingPool>('pools/'+id).valueChanges()
-  }
+	getSwimmingPool(id){
+		return this.afDatabase.object<SwimmingPool>('pools/'+id).valueChanges()
+	}
 
-  getPoolsWithCustomers(){
-  	return this.afDatabase.list<SwimmingPool>('pools').snapshotChanges()
+	getSwimmingPoolStatistics(id,statisticName){
+		return this.afDatabase.list<any>("statistics/"+id+"/"+statisticName,ref => ref.orderByChild('date')).snapshotChanges().pipe(
+			map(changes => 
+				changes.map(c => ({ label: c.payload.val().date, value: c.payload.val().value }))
+				)
+			);
+	}
+
+	getPoolsWithCustomers(){
+		return this.afDatabase.list<SwimmingPool>('pools').snapshotChanges()
 		.pipe(
 			switchMap(pools => {
 				const customerUids = uniq(pools.map(pool  => pool.payload.val().customerUid));
@@ -45,5 +53,5 @@ export class PoolServicesService {
 				})
 			})
 			);
-  }
+	}
 }

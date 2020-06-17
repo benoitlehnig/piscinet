@@ -2,6 +2,8 @@ import { Component, OnInit ,ViewChild} from '@angular/core';
 import { Chart } from 'chart.js';
 import { VisitServicesService } from '../../services/visit-services.service';
 import { DataSharingService } from '../../services/data-sharing.service'
+import { PoolServicesService } from '../../services/pool-services.service';
+import * as moment from 'moment';
 
 @Component({
 	selector: 'app-statistics',
@@ -10,31 +12,87 @@ import { DataSharingService } from '../../services/data-sharing.service'
 })
 export class StatisticsPage implements OnInit {
 
-	@ViewChild('barChart') barChart;
+	@ViewChild('temperatureChart') temperatureChart;
+	@ViewChild('phChart') phChart;
+	@ViewChild('chloreChart') chloreChart;
 	bars: any;
 	colorArray: any;
+	poolData:any;
+	uid:string="";
+	poolId:string="";
+
+	chloreDataArray={
+		labels:[],
+		data:[]
+	};
+	temperatureDataArray={
+		labels:[],
+		data:[]
+	}
+	PHDataArray={
+		labels:[],
+		data:[]
+	}
+
 	constructor(
 		public visitServicesService: VisitServicesService,
-		public dataSharingService:DataSharingService
+		public dataSharingService:DataSharingService,
+		public poolServicesService: PoolServicesService
+
 		) { }
 
 	ngOnInit() {
 	}
 
 	ionViewDidEnter() {
-		this.createBarChart();
+		let sub = this.dataSharingService.getCurrentPoolChanges().subscribe(
+			data => {
+				if(data){
+					this.poolData = data.swimmingPool;
+					this.uid = data.uid;
+					this.poolId = data.poolId;
+					this.poolServicesService.getSwimmingPoolStatistics(this.poolId,"chlore").subscribe(
+						data=>{ 
+							this.chloreDataArray ={	labels:[],data:[]};
+							data.forEach((obj,index) =>{
+								this.chloreDataArray.labels.push(moment(obj.label).format('DD-MMM-YY'));
+								this.chloreDataArray.data.push(obj.value);
+							});
+							this.createBarChart(this.chloreChart,"chlore",this.chloreDataArray);
+						})
+					this.poolServicesService.getSwimmingPoolStatistics(this.poolId,"temperature").subscribe(
+						data=>{ 
+							this.temperatureDataArray ={	labels:[],data:[]};
+
+							data.forEach((obj,index) =>{
+								this.temperatureDataArray.labels.push(moment(obj.label).format('DD-MMM-YY'));
+								this.temperatureDataArray.data.push(obj.value);
+							});
+							this.createBarChart(this.temperatureChart, "temperature", this.temperatureDataArray);
+						})
+					this.poolServicesService.getSwimmingPoolStatistics(this.poolId,"PH").subscribe(
+						data=>{
+							this.PHDataArray ={	labels:[],data:[]};
+							data.forEach((obj,index) =>{
+								this.PHDataArray.labels.push(moment(obj.label).format('DD-MMM-YY'));
+								this.PHDataArray.data.push(obj.value);
+							});
+							this.createBarChart(this.phChart, "PH", this.PHDataArray);
+						})
+				}
+			});
+		
 	}
 
-	createBarChart() {
-		this.bars = new Chart(this.barChart.nativeElement, {
+	createBarChart(chart,label,array) {
+		this.bars = new Chart(chart.nativeElement, {
 			type: 'line',
 			data: {
-				labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'],
+				labels: array.labels,
 				datasets: [{
-					label: 'Viewers in millions',
-					data: [2.5, 3.8, 5, 6.9, 6.9, 7.5, 10, 17],
-					backgroundColor: 'rgb(38, 194, 129)', // array should have same number of elements as number of dataset
-					borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
+					label: label,
+					data: array.data,
+					borderColor: 'rgb(56, 128, 255)',// array should have same number of elements as number of dataset
 					borderWidth: 1
 				}]
 			},

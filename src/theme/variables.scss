@@ -352,3 +352,9 @@ app-list-view{
     --min-width:400px;
   }
 }
+
+.linkStyle{
+ color:var(--ion-color-primary);
+ text-decoration: underline;
+ font-size:   0.8em;
+}

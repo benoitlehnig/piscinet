@@ -14,6 +14,7 @@ import { GeneralPage } from './general.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     GeneralPageRoutingModule
   ],
   declarations: [GeneralPage]
