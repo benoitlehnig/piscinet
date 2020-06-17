@@ -11,15 +11,18 @@
 			</ion-card-header>
 			<ion-card-content>
 				<form class="form" #form="ngForm" (ngSubmit)="loginUser(form)" *ngIf="mode ==='login'">
-
+					<ion-item lines="none" class="errorItem" *ngIf="errorMessage!==''">
+						<ion-icon name="warning" class="icon ion-margin-end"></ion-icon>
+						<label class="errorMessage">{{errorMessage}}</label>
+					</ion-item>
 					<ion-item>
 						<ion-label position="floating" color="primary">{{'LOGIN.Email' | translate}}</ion-label>
-						<ion-input  name="email" type="text" placeholder="{{'LOGIN.Email' | translate}}" ngModel required></ion-input>
+						<ion-input  name="email" type="email" ngModel required></ion-input>
 					</ion-item>
 
 					<ion-item>
 						<ion-label position="floating" color="primary">{{'LOGIN.Password' | translate}}</ion-label>
-						<ion-input name="password" type="password" placeholder="{{'LOGIN.Password' | translate}}" ngModel required></ion-input>
+						<ion-input name="password" type="password" ngModel required></ion-input>
 					</ion-item>
 					<div *ngIf="mode ==='login'" class="ion-text-end ion-margin-bottom">
 						<ion-text (click)="requestResetPasswordPage()" class="linkStyle ion-text-end">{{'LOGIN.ForgottenPassword' | translate}}</ion-text>
@@ -27,9 +30,7 @@
 
 					<ion-button class="submit-btn" type="submit" >{{'LOGIN.LoginButton' | translate}}</ion-button>
 
-					<ion-item lines="none">
-						<label class="error-message">{{errorMessage}}</label>
-					</ion-item>
+					
 					
 				</form>
 				

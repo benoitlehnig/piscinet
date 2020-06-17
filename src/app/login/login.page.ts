@@ -16,6 +16,7 @@ export class LoginPage implements OnInit {
 	emailResetPassword:string="";
 	mode:string ="login";
 	successEmailSent:string ="";
+	errorMessages = [{'invalidemail': "",'wrongpassword':'','usernot-found':'',}]
 	validation_messages = {
 		'email': [
 		{ type: 'required', message: 'Email is required.' },
@@ -35,15 +36,17 @@ export class LoginPage implements OnInit {
 		) { }
 
 	ngOnInit() {
-			this.translateService.get('LOGIN.SuccessEmailSent').subscribe(
+			this.translateService.get(['LOGIN.SuccessEmailSent','LOGIN.invalidemail','LOGIN.wrongpassword','LOGIN.usernot-found',]).subscribe(
 			value => {
-				this.successEmailSent = value;
+				console.log(value)
+				this.successEmailSent = value['LOGIN.SuccessEmailSent'];
+				this.errorMessages['invalidemail'] = value['LOGIN.invalidemail'];
+				this.errorMessages['wrongpassword'] = value['LOGIN.wrongpassword'];
+				this.errorMessages['usernot-found'] = value['LOGIN.usernot-found'];
 			});
 	}
 
 	
-
-
 	loginUser(form) {
 		this.authService.loginUser(form)
 		.then(res => {
@@ -62,7 +65,10 @@ export class LoginPage implements OnInit {
 			
 			
 		}, err => {
-			this.errorMessage = err.message;
+			console.log(err);
+			console.log(err.code.split("/")[1].replace("-",""));
+			console.log(this.errorMessages['invalidemail'])
+			this.errorMessage = this.errorMessages[String(err.code.split("/")[1].replace("-",""))];
 		})
 	}
 

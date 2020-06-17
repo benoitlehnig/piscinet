@@ -29,7 +29,10 @@
 		"RequestNewPasswordText": "Vous avez oublié votre mot de passe ? Pas de soucis, remplissez votre addresse email et vous vous enverrons par email un nouveau mot de passe.",
 		"ForgottenPassword": "Mot de passe oublié",
 		"ResetPasswordCancelButton": "Annuler",
-		"SuccessEmailSent": "Un email vient de vous etre envoye. A bientot"
+		"SuccessEmailSent": "Un email vient de vous etre envoye. A bientot",
+		"invalidemail": "Mauvaise adresse email",
+		"wrongpassword": "Mot de passe incorrect",
+		"usernot-found": "Utilisateur non reconnu"
 	},
 	"CUSTOMERS":{
 		"TITLE": "Clients",
