@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title *ngIf="mode === 'add'">{{'ADDACCOUNT.TitleAdd' | translate}}</ion-title>
+		<ion-title *ngIf="mode === 'update'">{{'ADDACCOUNT.TitleUpdate' | translate}}</ion-title>
+		<ion-buttons slot="end">
+			<ion-button color="primary" fill="solid" (click)="submitForm()" >
+				<span *ngIf="mode === 'update'" class="spanButton">{{'ADDACCOUNT.UpdateAccount' | translate}}</span>
+				<span *ngIf="mode === 'add'"  class="spanButton">{{'ADDACCOUNT.AddAccount' | translate}}</span>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-item>
+		<ion-label position="stacked">{{'ADDACCOUNT.Name' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input name="name" type="text" [(ngModel)]="account.name"  required></ion-input>
+	</ion-item>
+</ion-content>

@@ -52,6 +52,7 @@ export class SwimmingPoolPage implements OnInit {
 			})
 		this.poolServicesService.getSwimmingPool(this.poolId).subscribe(
 			(data) =>{
+				console.log("pool updated :", data)
 				this.swimmingPool = data;
 				this.dataSharingService.currentPool({uid:this.uid, poolId:this.poolId,swimmingPool:this.swimmingPool })
 			})

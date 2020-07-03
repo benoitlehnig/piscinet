@@ -21,7 +21,9 @@
 			<ion-label>
 				<h2>{{ employee.data.firstName }} {{ employee.data.lastName}}</h2>
 				<h3><a href="tel:{{ employee.data.telPhoneNumber}}">{{ employee.data.telPhoneNumber}}</a></h3>
+				 <ion-badge color="primary" *ngIf="employee.data.admin ===true" slot="end">Admin</ion-badge>
 			</ion-label>
+
 		</ion-item>
 	</ion-list>
 

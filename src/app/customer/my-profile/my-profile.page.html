@@ -60,5 +60,9 @@
 			{{customer.googleAddress}} 
 		</ion-text>
 	</ion-item>
+	<ion-item >
+			<ion-label >{{'CUSTOMER.ReceivePushNotif' | translate}}</ion-label>
+			<ion-toggle slot="start" [(ngModel)]="receivePushNotif" (ionChange)="updatePushNotifRequest()"></ion-toggle>
+		</ion-item>
 
 </ion-content>

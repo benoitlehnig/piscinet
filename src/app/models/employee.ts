@@ -8,6 +8,8 @@ export class Employee {
 	public town: string;
 	public postalCode: string;
 	public telPhoneNumber: string;
+	public admin:boolean=false;
+	public pushNotifAllVisitSubscription:boolean=false;
 
 	deserialize(input: any) {
 		Object.assign(this, input);

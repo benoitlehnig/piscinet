@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
 
 
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
@@ -51,6 +52,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   IonicModule.forRoot(),
   IonicStorageModule.forRoot(),
   AngularFireModule.initializeApp(environment.firebaseConfig),
+  AngularFireMessagingModule,
   TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,

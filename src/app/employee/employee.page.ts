@@ -12,6 +12,8 @@ import {TranslateService} from '@ngx-translate/core';
 import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
+import { AngularFireMessaging } from '@angular/fire/messaging';
+
 
 
 @Component({
@@ -33,6 +35,8 @@ export class EmployeePage implements OnInit {
 	public emailSentText:string = "";
 	public successDeleteText:string="";
 	public loading ;
+	public mapOK = false;
+	public loadingText:string="" ;
 
 
 	constructor(
@@ -45,30 +49,37 @@ export class EmployeePage implements OnInit {
 		public navCtrl: NavController,
 		public toastController: ToastController,
 		public loadingController: LoadingController,
+		private afMessaging: AngularFireMessaging,
+
 
 		) { }
 
 	ngOnInit() {
 		this.uid = this.activatedRoute.snapshot.paramMap.get('id');
 		this.claims = this.authenticationService.getClaims();
-		this.translateService.get('EMPLOYEE.EmailSent', 'EMPLOYEE.SuccessDeleteText').subscribe(
+		this.translateService.get(['EMPLOYEE.EmailSent', 'EMPLOYEE.SuccessDeleteText','COMMON.Loading']).subscribe(
 			value => {
 				this.emailSentText = value['EMPLOYEE.EmailSent'];
 				this.successDeleteText = value['EMPLOYEE.SuccessDeleteText'];
+				this.loadingText = value['COMMON.Loading'];
 			});
 		
 	}
 	ionViewWillEnter(){
 		this.employeeServicesService.getEmployee(this.uid).subscribe(
 			(data) =>{
-				this.employee = data;
-				this.center = this.employee.location;
+				if(data){
+					this.employee = data;
+					this.center = this.employee.location;
+					this.mapOK = true;
+				}
 			})
 	}
 
 	setAdmin(){
 		const callable = this.functions.httpsCallable('setAdmin');
 		const obs = callable(this.uid);
+		this.popoverController.dismiss();
 		obs.subscribe(async res => {
 		});
 	}
@@ -105,6 +116,34 @@ export class EmployeePage implements OnInit {
 			duration: 3000
 		});
 		toast.present();
+	}
+
+	sendEmailUserCreation(){
+		let email={'customer':this.employee, 'uid': this.uid};
+		const callable = this.functions.httpsCallable('sendUserCreationEmail');
+		const obs = callable(email);
+		obs.subscribe(async res => {
+			this.popoverController.dismiss();
+		});
+	}
+
+	async removeCustomer(){
+		this.loading = await this.loadingController.create({
+			cssClass: 'my-custom-class',
+			message: this.loadingText,
+			duration: 5000
+		});
+		this.loading.present();
+		this.navCtrl.navigateRoot(['employees/']);
+
+		const callable = this.functions.httpsCallable('deleteEmployee');
+		const obs = callable(this.uid);
+		obs.subscribe(async res => {
+			this.popoverController.dismiss();
+			this.presentToast();
+			this.loading.dismiss();
+		});
+
 	}
 
 }

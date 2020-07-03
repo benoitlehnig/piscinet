@@ -51,6 +51,7 @@
 					<ion-text class="smallerFont" *ngIf="swimmingPool.cover ==='PVC'" >{{'SWIMMINGPOOL.PVC' | translate}}</ion-text>
 					<ion-text class="smallerFont" *ngIf="swimmingPool.cover ==='polyester'" >{{'SWIMMINGPOOL.Polyester' | translate}}</ion-text>
 					<ion-text class="smallerFont" *ngIf="swimmingPool.cover ==='coatedConcrete'" >{{'SWIMMINGPOOL.CoatedConcrete' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.cover ==='moltenGlass'" >{{'SWIMMINGPOOL.MoltenGlass' | translate}}</ion-text>
 				</ion-item>
 			</ion-col>
 			<ion-col>
@@ -59,23 +60,29 @@
 					<ion-icon name="return-down-forward" slot="start" color="primary"></ion-icon>
 					<ion-text class="smallerFont" *ngIf="swimmingPool.access ==='ladder'" >{{'SWIMMINGPOOL.Ladder' | translate}}</ion-text>
 					<ion-text class="smallerFont" *ngIf="swimmingPool.access ==='stairs'" >{{'SWIMMINGPOOL.Stairs' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.access ==='beach'" >{{'SWIMMINGPOOL.Beach' | translate}}</ion-text>
+				</ion-item>
+				<ion-item lines="none" >
+					<ion-icon  slot="start" name="menu" color="primary"></ion-icon>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.barrier ===true">{{'SWIMMINGPOOL.Barrier' | translate}}</ion-text>
 				</ion-item>
 				<ion-item lines="none" >
 					<ion-icon  slot="start" name="notifications" color="primary"></ion-icon>
-					<ion-text class="smallerFont" *ngIf="swimmingPool.warning ===true">{{'SWIMMINGPOOL.AlarmSystemPresent' | translate}}</ion-text>
-					<ion-text class="smallerFont" *ngIf="swimmingPool.warning ===false">{{'SWIMMINGPOOL.AlarmSystemPNotresent' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.alarmElectronicSystem ===true">{{'SWIMMINGPOOL.AlarmElectronicSystem' | translate}}</ion-text>
 				</ion-item>
 				<ion-item lines="none"> 
 					<ion-icon  slot="start" name="snow" color="primary"></ion-icon>
-					<ion-text class="smallerFont" *ngIf="swimmingPool.winterCover ===true">{{'SWIMMINGPOOL.WinterCoverPresent' | translate}}</ion-text>
+					<div *ngIf="swimmingPool.winterCover ===true">
+						<ion-text class="smallerFont" *ngIf="swimmingPool.coverType ==='automatic'">{{'SWIMMINGPOOL.CoverAutomatic' | translate}}</ion-text>
+						<ion-text class="smallerFont" *ngIf="swimmingPool.coverType ==='reel'">{{'SWIMMINGPOOL.CoverReel' | translate}}</ion-text>
+						<ion-text class="smallerFont" *ngIf="swimmingPool.coverType ==='stretched'">{{'SWIMMINGPOOL.CoverStretched' | translate}}</ion-text>
+					</div>
+					
 					<ion-text class="smallerFont" *ngIf="swimmingPool.winterCover ===false">{{'SWIMMINGPOOL.WinterCoverNotPresent' | translate}}</ion-text>
 				</ion-item>
 			</ion-col>
 		</ion-row>
 	</ion-grid>
-	
-
-	
 
 	<ion-card class="infoCard">
 		<ion-card-header>
@@ -123,6 +130,7 @@
 				<ion-text *ngIf="swimmingPool.electronicalProduct ==='salt'">{{'SWIMMINGPOOL.Salt' | translate}}</ion-text>
 				<ion-text *ngIf="swimmingPool.electronicalProduct ==='copper'">{{'SWIMMINGPOOL.Copper' | translate}}</ion-text>
 				<ion-text *ngIf="swimmingPool.electronicalProduct ==='chlorine'">{{'SWIMMINGPOOL.Chlorine' | translate}}</ion-text>
+				<ion-text *ngIf="swimmingPool.electronicalProduct ==='UVSterilisation'">{{'SWIMMINGPOOL.UVSterilisation' | translate}}</ion-text>
 			</div>
 			<div>
 				<ion-text position="stacked">{{'SWIMMINGPOOL.DateElectronicalProduct' | translate}} </ion-text>

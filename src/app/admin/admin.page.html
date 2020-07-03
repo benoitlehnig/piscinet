@@ -8,8 +8,37 @@
 </ion-header>
 
 <ion-content>
-	<ion-item>
-		<ion-label> Envoyer un email apres chaque visite</ion-label>
-		<ion-toggle slot="start" [(ngModel)]="company.configuration.sendEmailAfterVisit"  (ionChange)="saveConfiguration()"></ion-toggle>
+	<ion-list>
+		<ion-list-header>Email Configuration</ion-list-header>
+		<ion-item>
+			<ion-label >Envoyer un email apres chaque visite</ion-label>
+			<ion-toggle slot="start" [(ngModel)]="company.configuration.emailConfiguration.sendEmailAfterVisit" ></ion-toggle>
+		</ion-item>
+		<ion-item >
+		<ion-label >M'envoyer des push notification apres chaque visite</ion-label>
+		<ion-toggle slot="start" [(ngModel)]="pushNotifAllVisitSubscription" (ionChange)="subscribeNewVisit()"></ion-toggle>
 	</ion-item>
+		<ion-item>
+			<ion-label position="floating">from Email</ion-label>
+			<ion-input type="text" [(ngModel)]="company.configuration.emailConfiguration.serverEmail.from.email" ></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="floating">from Name</ion-label>
+			<ion-input type="text" [(ngModel)]="company.configuration.emailConfiguration.serverEmail.from.name" ></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="floating">reply_to Email</ion-label>
+			<ion-input type="text" [(ngModel)]="company.configuration.emailConfiguration.serverEmail.reply_to.email" ></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="floating">reply_to Name</ion-label>
+			<ion-input type="text" [(ngModel)]="company.configuration.emailConfiguration.serverEmail.reply_to.name" ></ion-input>
+		</ion-item>
+		<ion-item >
+			<ion-label position="floating">Password Email </ion-label>
+			<ion-input type="password" [(ngModel)]="company.configuration.emailConfiguration.serverEmail.emailServerPassword" ></ion-input>
+		</ion-item>
+	</ion-list>
+
+	<ion-button (click)="saveConfiguration()">Save</ion-button>
 </ion-content>

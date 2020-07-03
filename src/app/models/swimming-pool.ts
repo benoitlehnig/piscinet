@@ -9,9 +9,11 @@ export class SwimmingPool {
     environment: number=0;
     state: number=0
     cover: string="liner";
-    warning: boolean=true;
+    barrier: boolean=false;
+    alarmElectronicSystem: boolean=false;
     access: string="ladder";
     winterCover: boolean=false;
+    coverType: string="";
     dateSandFilter: string="";
     brandSandFilter: string="";
     brandFilter: string="";
@@ -23,17 +25,23 @@ export class SwimmingPool {
     PHDate: string="";
     pomp:  boolean=false;
     pompDate: string="";
+    pompModel: string="";
+    pompBrand: string="";
+    pompPower: string="";
+    pompPhase: string="";
     automaticFill: boolean=false;
     automaticFillDate: string="";
+    automaticFillType: string="";
+    counterCurrent: boolean=false;
     observation: string="";
     lastVisitDate: string="";
     numberOfVisits: number=0;
     lastCurtainCleaningDate:string="";
     lastTLCleaningDate:string="";
     lastMaintenanceDate:string="";
-
-	deserialize(input: any) {
-		Object.assign(this, input);
-		return this;
-	}
+        
+    deserialize(input: any) {
+        Object.assign(this, input);
+        return this;
+    }
 }

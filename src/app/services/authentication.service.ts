@@ -14,7 +14,8 @@ export class AuthenticationService {
 	public authState=new Observable(state => {return state})
 	public user: Observable<firebase.User>;
 	public claims={};
-
+	private claimsDataSource = new BehaviorSubject(null);
+	private claimsChanges = this.claimsDataSource.asObservable();
 	constructor(
 		private afAuth: AngularFireAuth,
 		private storage:Storage,
@@ -29,6 +30,7 @@ export class AuthenticationService {
 					result=> {
 						console.log("result",result);
 						this.claims = result.claims;
+						this.claimsDataSource.next(this.claims);
 						this.storage.set('claims', result.claims); 
 						this.storage.set('loggedIn', true); 
 
@@ -41,9 +43,21 @@ export class AuthenticationService {
 	}
 
 
-	 getClaims(){
-
+	getClaims(){
 		return this.claims;
+	}
+	getClaimsChanges(){
+		return this.claimsChanges;
+	}
+	getClaimsObservable(){
+		return this.afAuth.onAuthStateChanged((user) => {
+			if (user) {
+				return user.getIdTokenResult().then(
+					result=> {
+						return result.claims;
+					})
+			}
+		});
 	}
 
 	registerUser(value) {
@@ -99,6 +113,8 @@ export class AuthenticationService {
 	userDetails() {
 		return this.afAuth.user
 	}
+
+	
 
 
 }

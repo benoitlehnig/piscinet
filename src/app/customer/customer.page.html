@@ -60,7 +60,7 @@
 		</ion-text>
 	</ion-item>
 
-	<google-map height="40%" width="100%" [zoom]="zoom" [center]="center" [options]="options">
+	<google-map height="40%" width="100%" [zoom]="zoom" [center]="center" [options]="options" id="map" *ngIf="mapOK===true">
 		<map-marker	[position]="customer.location"></map-marker>
 	</google-map>
 

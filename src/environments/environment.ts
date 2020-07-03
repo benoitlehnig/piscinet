@@ -12,7 +12,9 @@ export const environment = {
 		storageBucket: "piscinet-79e4a.appspot.com",
 		messagingSenderId: "412940409175",
 		appId: "1:412940409175:web:da62771b749df1516d4612",
-		measurementId: "G-YELLZ9SMBP"
+		measurementId: "G-YELLZ9SMBP",
+		vapidKey: 'BDo2zWS28DWEY944DP0IctD3PAmrn5C_tU1IJ_fx1VZhtwy474tvw_Gux2E-g5b3pKHeSyTNLP-FrQcDjE8FkPs'
+
 	}
 };
 

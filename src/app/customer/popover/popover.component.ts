@@ -38,6 +38,8 @@ export class PopoverComponent implements OnInit {
 		}
 
 		sendEmailUserCreation(){
+			this.dismissPopover();
+			console.log("ok")
 			this.navParams.get('homeref').sendEmailUserCreation();
 
 		}

@@ -8,6 +8,10 @@
 		<ion-icon name="mail-outline" ></ion-icon>
 		<span class="spanButton">{{'EMPLOYEE.SendEmailForUserCreation' | translate}}</span>
 	</ion-item>
+	<ion-item button (click)="removeEmployee()" >
+		<ion-icon name="trash" ></ion-icon>
+		<span class="spanButton">{{'EMPLOYEE.Remove' | translate}}</span>
+	</ion-item>
 	<ion-item lines="none" button (click)="setAdmin()" >
 		<ion-icon name="person-circle" ></ion-icon>
 		<span class="spanButton">{{'EMPLOYEE.SetAdmin' | translate}}</span>

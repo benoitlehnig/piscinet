@@ -12,9 +12,12 @@ import { TranslateService } from '@ngx-translate/core';
 import {AppConstants } from './app-constants';
 import { AuthenticationService } from './services/authentication.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireMessaging } from '@angular/fire/messaging';
+
 import { Observable, Observer, fromEvent, merge } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -23,7 +26,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public isUserLogged:boolean= false;
-  public user;
+  public uid;
   public displayName;
   public claims:any={email: ''};
   public appPages =[];
@@ -42,7 +45,8 @@ export class AppComponent implements OnInit {
     private appConstants: AppConstants,
     public dataSharingService:DataSharingService,
     public onlineCheckService: OnlineCheckService,
-    private router: Router
+    private router: Router,
+    private afMessaging: AngularFireMessaging
     ) {
     this.initializeApp();
   }
@@ -55,7 +59,6 @@ export class AppComponent implements OnInit {
       console.log("desktop",this.platform.is('desktop'))
       console.log("pwa",this.platform.is('pwa'))
       console.log("mobileweb",this.platform.is('mobileweb'))
-      
       this.onlineCheckService.onlineCheck().subscribe(isOnline => {
         this.isOnline = isOnline;
 
@@ -77,12 +80,13 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     this.afAuth.user.subscribe(
       data =>{
         console.log("user >>", data);
         if(data){
+          this.uid = data.uid;
           this.isUserLogged =true;
           this.displayName = data.displayName;
           data.getIdTokenResult().then(
@@ -99,10 +103,15 @@ export class AppComponent implements OnInit {
               if(this.claims['employee'] ===true){
                 this.appPages = this.appConstants.appEmployeePages;
                 this.router.navigateByUrl('/customers');
-
+              }
+              if(this.claims['superAdmin'] ===true || this.claims.user_id ==='lQbe5AiDp8NSC0fWuhYwkdMBArw2'){
+                this.appPages = this.appConstants.appASuperAdminPages;
+                this.router.navigateByUrl('/customers');
               }
               this.selectTabNavigation();
               this.initNotification();
+              this.listen()
+              this.requestPermission();
             })
         }
         else{
@@ -113,6 +122,11 @@ export class AppComponent implements OnInit {
       );
 
   }
+
+  ngAfterViewInit() {
+
+  }
+
   selectTabNavigation(){
     const path = window.location.pathname;
     if (path !== undefined) {
@@ -125,8 +139,27 @@ export class AppComponent implements OnInit {
   }
 
   initNotification(){
+    this.requestPermission()
   }
+  requestPermission() {
 
+ 
+    this.afMessaging.requestToken
+    .subscribe(
+      (token) => { 
+        console.log('Permission granted! Save to the server!', token); 
+        const callable = this.functions.httpsCallable('addDevice');
+        const obs = callable({'uid':this.uid, 'token': token});
+        obs.subscribe(async res => {
+        });
+      },
+      (error) => { console.error(error); },  
+      );
+      
+  }
+  listen() {
+    
+  }
 
 
 }

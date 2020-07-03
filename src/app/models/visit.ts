@@ -7,7 +7,7 @@ export class Visit {
 	public dateTime: string="";
 	public poolId: string="";
 	public typeOfVisit:string="full";
-	public generalStatusKO:boolean=true;
+	public generalStatusKO:boolean=false;
 	public newVisitDone:boolean=false;
 	public issueDescription:string="" ;
 
@@ -86,7 +86,10 @@ export class Technique{
 	public productGalet: string="";
 	public productSel: string="";
 	public productFloculent: string="";
-	public productOther: string;
+	public productOther: string ="";
+	public pHMinusPowder: string ="";
+	public hydrochloricAcid: string ="";
+	public pHMinusLiquid: string ="";
 	deserialize(input: any) {
 		Object.assign(this, input);
 		return this;

@@ -4,22 +4,38 @@ import { Observable, combineLatest, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 import { uniq, flatten } from 'lodash'
 import {SwimmingPool} from '../models/swimming-pool';
+import {AuthenticationService} from './authentication.service'
 
 @Injectable({
 	providedIn: 'root'
 })
 export class PoolServicesService {
 
+	public accountId:string="";
+
 	constructor(
 		public afDatabase: AngularFireDatabase,
-		) { }
+		public authenticationService: AuthenticationService,
+
+		) { 
+		this.authenticationService.getClaimsChanges().subscribe(
+			data=>{
+				console.log("claims",data);
+				if(data !==null){
+					if(data['accountId'] !== null){
+						this.accountId=data['accountId'];
+					} 
+				}
+				
+			})
+	}
 
 	getSwimmingPool(id){
-		return this.afDatabase.object<SwimmingPool>('pools/'+id).valueChanges()
+		return this.afDatabase.object<SwimmingPool>(this.accountId+'/pools/'+id).valueChanges()
 	}
 
 	getSwimmingPoolStatistics(id,statisticName){
-		return this.afDatabase.list<any>("statistics/"+id+"/"+statisticName,ref => ref.orderByChild('date')).snapshotChanges().pipe(
+		return this.afDatabase.list<any>(this.accountId+"/statistics/"+id+"/"+statisticName,ref => ref.orderByChild('date')).snapshotChanges().pipe(
 			map(changes => 
 				changes.map(c => ({ label: c.payload.val().date, value: c.payload.val().value }))
 				)
@@ -27,7 +43,7 @@ export class PoolServicesService {
 	}
 
 	getPoolsWithCustomers(){
-		return this.afDatabase.list<SwimmingPool>('pools').snapshotChanges()
+		return this.afDatabase.list<SwimmingPool>(this.accountId+'/pools').snapshotChanges()
 		.pipe(
 			switchMap(pools => {
 				const customerUids = uniq(pools.map(pool  => pool.payload.val().customerUid));
@@ -35,7 +51,7 @@ export class PoolServicesService {
 					of(pools),
 					combineLatest(
 						customerUids.map(customerUid =>
-							this.afDatabase.object<any>('customers/'+customerUid).valueChanges().pipe(
+							this.afDatabase.object<any>(this.accountId+'/customers/'+customerUid).valueChanges().pipe(
 								map(customer => ({uid:customerUid, data:customer}))
 								)
 							)

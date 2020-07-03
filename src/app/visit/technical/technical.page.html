@@ -63,6 +63,26 @@
 			<ion-text *ngIf="visit.technique.productFloculent !==''">{{visit.technique.productFloculent}}</ion-text> 
 			<ion-text *ngIf="visit.technique.productFloculent ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
 		</ion-item>
+		<ion-item>
+			<ion-label>{{'VISIT.PHMinusPowder' | translate}}</ion-label>
+			<ion-text *ngIf="visit.technique.pHMinusPowder !==''">{{visit.technique.pHMinusPowder}}</ion-text> 
+			<ion-text *ngIf="visit.technique.pHMinusPowder ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+		<ion-item>
+			<ion-label>{{'VISIT.HydrochloricAcid' | translate}}</ion-label>
+			<ion-text *ngIf="visit.technique.hydrochloricAcid !==''">{{visit.technique.hydrochloricAcid}}</ion-text> 
+			<ion-text *ngIf="visit.technique.hydrochloricAcid ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+		<ion-item>
+			<ion-label>{{'VISIT.HydrochloricAcid' | translate}}</ion-label>
+			<ion-text *ngIf="visit.technique.hydrochloricAcid !==''">{{visit.technique.hydrochloricAcid}}</ion-text> 
+			<ion-text *ngIf="visit.technique.hydrochloricAcid ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+		<ion-item>
+			<ion-label>{{'VISIT.PHMinusLiquid' | translate}}</ion-label>
+			<ion-text *ngIf="visit.technique.pHMinusLiquid !==''">{{visit.technique.pHMinusLiquid}}</ion-text> 
+			<ion-text *ngIf="visit.technique.pHMinusLiquid ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
 		<ion-item *ngIf="visit.technique.productOther !==''">
 			<ion-text>{{'VISIT.IntroducedProductOther' | translate}}</ion-text>
 			<ion-text *ngIf="visit.technique.productOther !==''">{{visit.technique.productOther}}</ion-text> 

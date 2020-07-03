@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Customer} from '../models/customer';
 import {SwimmingPool} from '../models/swimming-pool';
@@ -13,6 +13,8 @@ import { NavController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { CustomerServicesService } from '../services/customer-services.service'
+import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps'
+
 
 @Component({
 	selector: 'app-customer',
@@ -40,7 +42,9 @@ export class CustomerPage implements OnInit {
 	public loading ;
 	public loadingText:string="" ;
 	public successDeleteText:string="";
+	public mapOK = false;
 
+	@ViewChild(GoogleMap, { static: false }) map: GoogleMap
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -64,6 +68,7 @@ export class CustomerPage implements OnInit {
 				this.loadingText = value['COMMON.Loading'];
 				this.successDeleteText = value['CUSTOMER.SuccessDeleteText'];
 			});		
+		
 	}
 	async presentPopover(ev: any) {
 		const popover = await this.popoverController.create({
@@ -84,17 +89,18 @@ export class CustomerPage implements OnInit {
 				this.customer = data;
 				this.customerStringified = JSON.stringify(data);
 				this.center = this.customer.location;
+				this.mapOK = true;
 			})
 		this.swimmingPools = this.customerServicesService.getCustomerPools(this.uid);
+		
 	}
 
 
 	sendEmailUserCreation(){
-		let email={'customer':this.customer};
+		let email={'customer':this.customer, 'uid': this.uid};
 		const callable = this.functions.httpsCallable('sendUserCreationEmail');
 		const obs = callable(email);
 		obs.subscribe(async res => {
-			this.popoverController.dismiss();
 		});
 	}
 

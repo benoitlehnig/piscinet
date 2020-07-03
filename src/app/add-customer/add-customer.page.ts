@@ -81,7 +81,7 @@ export class AddCustomerPage implements OnInit {
 		obs.subscribe(async res => {
 			this.successfullUpdate(res.key);
 			this.navCtrl.navigateRoot(['customers/'+res.key]);
-		});
+		})
 	}
 
 	updateCustomer(){

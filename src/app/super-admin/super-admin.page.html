@@ -1,0 +1,26 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>superAdmin</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-fab vertical="top" horizontal="end" slot="fixed"  [routerLink]="['add-account',{ mode: 'add'}]">
+		<ion-fab-button>
+			<ion-icon name="add"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
+	<ion-list>
+		<ion-item *ngFor="let account of accounts" >
+			<ion-label>
+				<div><ion-text  ><h2>{{account.name}}</h2></ion-text></div>
+				<div><ion-text [routerLink]="['account/' + account.id]" class="linkStyle" >more details</ion-text></div>
+				<div><ion-text (click)="selectAccount(account)" class="linkStyle" >set as current account</ion-text></div>
+			</ion-label>
+		</ion-item>
+	</ion-list>
+	<ion-button color="primary" fill="solid" (click)="setSuperAdminRight()" >
+		<span >Provide Super Admin rights </span>
+	</ion-button>
+
+</ion-content>

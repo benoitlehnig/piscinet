@@ -54,6 +54,18 @@
 			<ion-input name="productFloculent" type="text" [(ngModel)]="visit.technique.productFloculent"  (ionChange)="saveTechnical()"></ion-input>
 		</ion-item>
 		<ion-item>
+			<ion-label position="stacked">{{'VISIT.PHMinusPowder' | translate}}</ion-label>
+			<ion-input name="PHMinusPowder" type="text" [(ngModel)]="visit.technique.pHMinusPowder"  (ionChange)="saveTechnical()"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'VISIT.HydrochloricAcid' | translate}}</ion-label>
+			<ion-input name="HydrochloricAcid" type="text" [(ngModel)]="visit.technique.hydrochloricAcid"  (ionChange)="saveTechnical()"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">{{'VISIT.PHMinusLiquid' | translate}}</ion-label>
+			<ion-input name="pHMinusLiquid" type="text" [(ngModel)]="visit.technique.pHMinusLiquid"  (ionChange)="saveTechnical()"></ion-input>
+		</ion-item>
+		<ion-item>
 			<ion-label position="stacked">{{'VISIT.IntroducedProductOther' | translate}}</ion-label>
 			<ion-input name="productOther" type="text" [(ngModel)]="visit.technique.productOther"  (ionChange)="saveTechnical()"></ion-input>
 		</ion-item>

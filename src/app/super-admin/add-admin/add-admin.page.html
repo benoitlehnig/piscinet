@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title >{{'ADDEMPLOYEE.TitleAdd' | translate}}</ion-title>
+		<ion-buttons slot="end">
+			<ion-button color="primary" fill="solid" (click)="submitForm()" >Enregistrer
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+<ion-content>
+	<ion-item>
+		<ion-label position="stacked">{{'ADDEMPLOYEE.FirstName' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input  name="firstName" type="text" [(ngModel)]="employee.firstName"  required></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="stacked">{{'ADDEMPLOYEE.LastName' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input  name="lastName" type="text" [(ngModel)]="employee.lastName"  required></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="stacked">{{'ADDEMPLOYEE.TelPhoneNumber' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input  name="telPhoneNumber" type="tel" [(ngModel)]="employee.telPhoneNumber"  required></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="stacked">{{'ADDEMPLOYEE.Email' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input  readname="email" type="email" [(ngModel)]="employee.email"  required></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="stacked">{{'EMPLOYEE.Address' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="{{'COMMON.AddressSearch' | translate}}" required></ion-input>
+		<ion-list [hidden]="autocompleteItems.length == 0">
+			<ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+				{{ item.description }}
+			</ion-item>
+		</ion-list>
+	</ion-item>
+</ion-content>

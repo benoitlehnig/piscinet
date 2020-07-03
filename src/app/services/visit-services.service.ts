@@ -7,6 +7,7 @@ import {Employee} from '../models/employee';
 import {SwimmingPool} from '../models/swimming-pool';
 import {Visit} from '../models/visit';
 import * as moment from 'moment';
+import {AuthenticationService} from './authentication.service'
 
 
 @Injectable({
@@ -14,13 +15,27 @@ import * as moment from 'moment';
 })
 export class VisitServicesService {
 
+	public accountId:string="piscinet";
+
 	constructor(
-		public afDatabase: AngularFireDatabase
-		) { }
+		public afDatabase: AngularFireDatabase,
+		public authenticationService: AuthenticationService,
+		) {
+		this.authenticationService.getClaimsChanges().subscribe(
+			data=>{
+				console.log("claims",data);
+				if(data !==null){
+					if(data['accountId'] !== null){
+						this.accountId=data['accountId'];
+					} 
+				}
+				
+			})
+	}
 
 
 	getVisitsByPool(poolId,visitNumber){
-		return this.afDatabase.list<Visit>('visits',ref => ref.orderByChild('poolId').equalTo(poolId).limitToLast(visitNumber)).snapshotChanges()
+		return this.afDatabase.list<Visit>(this.accountId+'/visits',ref => ref.orderByChild('poolId').equalTo(poolId).limitToLast(visitNumber)).snapshotChanges()
 		.pipe(
 			switchMap(visits => {
 				const customerUids = uniq(visits.map(visit  => visit.payload.val().customerUid));
@@ -29,14 +44,14 @@ export class VisitServicesService {
 					of(visits.reverse()),
 					combineLatest(
 						customerUids.map(customerUid =>
-							this.afDatabase.object<any>('customers/'+customerUid).valueChanges().pipe(
+							this.afDatabase.object<any>(this.accountId+'/customers/'+customerUid).valueChanges().pipe(
 								map(customer => ({uid:customerUid, data:customer}))
 								)
 							)
 						) as any,
 					combineLatest(
 						employeeUids.map(employeeUid =>
-							this.afDatabase.object<any>('employees/'+employeeUid).valueChanges().pipe(
+							this.afDatabase.object<any>(this.accountId+'/employees/'+employeeUid).valueChanges().pipe(
 								map(employee => ({uid:employeeUid, data:employee}))
 								)
 							)
@@ -57,13 +72,13 @@ export class VisitServicesService {
 	}
 
 	getVisit(visitId){
-		return this.afDatabase.object<Visit>('visits/'+visitId).valueChanges();
+		return this.afDatabase.object<Visit>(this.accountId+'/visits/'+visitId).valueChanges();
 	}
 
 	getVisitsSinceMonth(numberOfMonth,visitNumber){
 		let lastMonth = moment().subtract(numberOfMonth, 'months').format();
 
-		return this.afDatabase.list<Visit>('visits',ref => ref.orderByChild('dateTime').startAt(lastMonth).limitToLast(visitNumber)).snapshotChanges()
+		return this.afDatabase.list<Visit>(this.accountId+'/visits',ref => ref.orderByChild('dateTime').startAt(lastMonth).limitToLast(visitNumber)).snapshotChanges()
 		.pipe(
 			switchMap(visits => {
 				const customerUids = uniq(visits.map(visit  => visit.payload.val().customerUid));
@@ -72,14 +87,14 @@ export class VisitServicesService {
 					of(visits.reverse()),
 					combineLatest(
 						customerUids.map(customerUid =>
-							this.afDatabase.object<any>('customers/'+customerUid).valueChanges().pipe(
+							this.afDatabase.object<any>(this.accountId+'/customers/'+customerUid).valueChanges().pipe(
 								map(customer => ({uid:customerUid, data:customer}))
 								)
 							)
 						) as any,
 					combineLatest(
 						employeeUids.map(employeeUid =>
-							this.afDatabase.object<any>('employees/'+employeeUid).valueChanges().pipe(
+							this.afDatabase.object<any>(this.accountId+'/employees/'+employeeUid).valueChanges().pipe(
 								map(employee => ({uid:employeeUid, data:employee}))
 								)
 							)
