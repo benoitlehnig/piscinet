@@ -8,7 +8,7 @@
 		<ion-icon name="add" ></ion-icon>
 		<span class="spanButton">{{'CUSTOMER.AddPool' | translate}}</span>
 	</ion-item>
-	<ion-item  button (click)="sendEmailUserCreation()">
+	<ion-item  button (click)="sendEmailUserCreation()" *ngIf="isActivated ===true">
 		<ion-icon name="mail-outline" ></ion-icon>
 		<span class="spanButton">{{'CUSTOMER.SendEmailForUserCreation' | translate}}</span>
 	</ion-item>

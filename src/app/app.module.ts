@@ -32,6 +32,10 @@ import { AvatarModule } from 'ngx-avatar';
 
 import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
 
+import { GdprmodalComponent } from './gdprmodal/gdprmodal.component';
+
+import { AngularFireAnalyticsModule,ScreenTrackingService,UserTrackingService  } from '@angular/fire/analytics';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -39,7 +43,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,GdprmodalComponent],
   entryComponents: [],
   imports: [
   BrowserModule,
@@ -50,9 +54,11 @@ export function HttpLoaderFactory(http: HttpClient) {
   HttpClientModule,
   AvatarModule,
   IonicModule.forRoot(),
+
   IonicStorageModule.forRoot(),
   AngularFireModule.initializeApp(environment.firebaseConfig),
   AngularFireMessagingModule,
+  AngularFireAnalyticsModule,
   TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,
@@ -66,6 +72,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   StatusBar,
   LaunchNavigator,
   SplashScreen,
+  ScreenTrackingService,
+  UserTrackingService ,
   { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   { provide: LOCALE_ID, useValue: "fr-FR" }
   ],

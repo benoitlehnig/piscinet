@@ -70,10 +70,28 @@ export class CustomerPage implements OnInit {
 			});		
 		
 	}
+	ionViewWillEnter(){
+		this.customerServicesService.getCustomer(this.uid).subscribe(
+			(data) =>{
+				if(data!==null){
+					console.log(data);
+					this.customer = data;
+					this.customerStringified = JSON.stringify(data);
+					this.center = this.customer.location;
+					this.mapOK = true;
+				}
+			})
+		this.swimmingPools = this.customerServicesService.getCustomerPools(this.uid);
+		
+	}
 	async presentPopover(ev: any) {
+		let isActivated:boolean=false;
+		if(this.customer.userRecordUid && (this.customer.userRecordUid !== null ||this.customer.userRecordUid !=="")){
+			isActivated =true;
+		}
 		const popover = await this.popoverController.create({
 			component: PopoverComponent,
-			componentProps: {homeref:this, uid:this.uid,customerStringified:this.customerStringified},
+			componentProps: {homeref:this, uid:this.uid,customerStringified:this.customerStringified,isActivated:isActivated},
 			cssClass: 'popover',
 			event: ev,
 			translucent: true
@@ -83,19 +101,16 @@ export class CustomerPage implements OnInit {
 	dismissPopover(){
 		this.popoverController.dismiss();
 	}
-	ionViewWillEnter(){
-		this.customerServicesService.getCustomer(this.uid).subscribe(
-			(data) =>{
-				this.customer = data;
-				this.customerStringified = JSON.stringify(data);
-				this.center = this.customer.location;
-				this.mapOK = true;
-			})
-		this.swimmingPools = this.customerServicesService.getCustomerPools(this.uid);
-		
+	
+
+	activateAccount(){
+		let accountCreationRequest={'customer':this.customer, 'uid': this.uid};
+		const callable = this.functions.httpsCallable('activateCustomer');
+		const obs = callable(accountCreationRequest);
+		obs.subscribe(async res => {
+			this.sendEmailUserCreation()
+		});
 	}
-
-
 	sendEmailUserCreation(){
 		let email={'customer':this.customer, 'uid': this.uid};
 		const callable = this.functions.httpsCallable('sendUserCreationEmail');
@@ -105,6 +120,8 @@ export class CustomerPage implements OnInit {
 	}
 
 	async removeCustomer(){
+		let customer={'customer':this.customer, 'uid': this.uid};
+
 		this.loading = await this.loadingController.create({
 			cssClass: 'my-custom-class',
 			message: this.loadingText,
@@ -114,7 +131,7 @@ export class CustomerPage implements OnInit {
 		this.navCtrl.navigateRoot(['customers/']);
 
 		const callable = this.functions.httpsCallable('deleteCustomer');
-		const obs = callable(this.uid);
+		const obs = callable(customer);
 		obs.subscribe(async res => {
 			this.popoverController.dismiss();
 			this.presentToast();

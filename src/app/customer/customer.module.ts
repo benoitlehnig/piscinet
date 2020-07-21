@@ -12,13 +12,13 @@ import { CustomerPage } from './customer.page';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    TranslateModule,
-    GoogleMapsModule,
-     TranslateModule.forChild(),
-    CustomerPageRoutingModule
+  CommonModule,
+  FormsModule,
+  IonicModule,
+  TranslateModule,
+  GoogleMapsModule,
+  TranslateModule.forChild(),
+  CustomerPageRoutingModule
   ],
   declarations: [CustomerPage,PopoverComponent],
   exports:[TranslatePipe]

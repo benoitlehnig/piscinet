@@ -20,6 +20,7 @@ export class PopoverComponent implements OnInit {
 
 	@Input("homeref") value;
 	@Input("uid") uid;
+	@Input("isActivated") isActivated;
 	@Input("customerStringified") customerStringified;
 
 	ngOnInit() {

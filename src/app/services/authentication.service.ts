@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 
 @Injectable({
@@ -20,6 +21,7 @@ export class AuthenticationService {
 		private afAuth: AngularFireAuth,
 		private storage:Storage,
 		public router:Router,
+		public angularFireAnalytics:AngularFireAnalytics
 
 		) { 
 		this.user = this.afAuth.authState;
@@ -31,13 +33,14 @@ export class AuthenticationService {
 						console.log("result",result);
 						this.claims = result.claims;
 						this.claimsDataSource.next(this.claims);
-						this.storage.set('claims', result.claims); 
+						this.storage.set('accountId', result.claims['accountId']);
+						this.angularFireAnalytics.logEvent('login', {accountId:  result.claims['accountId']});
+						this.storage.set('claims', result.claims);
 						this.storage.set('loggedIn', true); 
 
 					})
 			} else {
-				this.router.navigate(['/login']);
-				this.storage.set('loggedIn', false); 
+				console.log("user not logged in auth")	 
 			}
 		});
 	}

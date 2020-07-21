@@ -343,14 +343,20 @@ app-list-view{
   .popover{
     --min-width:calc(100% - 20px);
   }
-  .smallerFont{
-    font-size:  0.7em;
-  }
+  .gdprModal{
+    --width:calc(80% - 20px);
+ }
+ .smallerFont{
+  font-size:  0.7em;
+}
 }
 @media (min-width: 820px) {
   .popover{
     --min-width:400px;
   }
+  .gdprModal{
+   --width:calc(80% - 20px);
+ }
 }
 
 .linkStyle{
@@ -358,3 +364,4 @@ app-list-view{
  text-decoration: underline;
  font-size:   0.8em;
 }
+

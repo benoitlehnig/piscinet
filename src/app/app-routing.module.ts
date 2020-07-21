@@ -14,7 +14,7 @@ const adminEmployeeOnly = () => pipe(customClaims, map(claims => (claims.admin =
 const routes: Routes = [
 {
   path: '',
-  redirectTo: 'customers',
+  redirectTo: 'landing-page',
   pathMatch: 'full'
 },
 {
@@ -43,8 +43,8 @@ const routes: Routes = [
   loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
 },
 {
-  path: 'register',
-  loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  path: 'login/:accountId',
+  loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
 },
 {
   path: 'edit-employee',
@@ -127,6 +127,10 @@ const routes: Routes = [
   loadChildren: () => import('./super-admin/super-admin.module').then( m => m.SuperAdminPageModule),
   canActivate: [AngularFireAuthGuard], data: { authGuardPipe: superAdminOnly }
 },
+  {
+    path: 'landing-page',
+    loadChildren: () => import('./landing-page/landing-page.module').then( m => m.LandingPagePageModule)
+  }
 
 
 ];

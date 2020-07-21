@@ -21,7 +21,7 @@
 		"AddressSearch": "Rechercher une addresse"
 	},
 	"LOGIN":{
-		"Welcome": "Bienvenue sur Piscine.net",
+		"Welcome": "Bienvenue sur ",
 		"PleaseConnect": "Veuillez-vous connecter",
 		"LoginButton": "Se connecter",
 		"Email": "Email",
@@ -66,7 +66,11 @@
 		"AlertCancel": "Annuler",
 		"AlertOK": "Supprimer",
 		"SuccessDeleteText": " a bien ete supprimé.",
-		"ReceivePushNotif": "Je veux recevoir des push notifications apres chaque visite."
+		"ReceivePushNotif": "Je veux recevoir des push notifications apres chaque visite.",
+		"ActivateAccount": "Activer le compte client",
+		"VisitMaintenance": "Maintenance",
+		"VisitComplete": "Complete",
+		"VisitFull": "Activer le compte client"
 	},
 	"ADDCUSTOMER":{
 		"TitleAdd": "Ajouter un nouveau client",
@@ -344,6 +348,7 @@
 		"TitleFor": "Pour ",
 		"TitleOn": " du ",
 		"At": "Effectué le ",
+		"NewInterventionRequired": "Nouvelle intervention nécessaire",
 		"PHMinusPowder": "PH minus poudre (bisulfate de sodium)",
 		"HydrochloricAcid": "Acide chlorhydrique",
 		"PHMinusLiquid": "PH minus liquide (acide sulfurique)"
@@ -390,7 +395,15 @@
 		"Days": " jours"
 	},	
 	"ADMIN":{
-		"Title": "Configuration"
+		"Title": "Configuration",
+		"GeneralConfiguration": "Parametres généraux",
+		"Name": "Nom de la société de pisciniste (apparait sur les emails ainsi que sur le site) : ",
+		"Email": "Contact email de la société : ",
+		"TelNumber": "Contact telephonique de la société : ",
+		"NotificationConfig": "Configuration des notifications : ",
+		"SendMailAfterVisit": "Envoyer un email au client après chaque visite ( payant) ",
+		"NameSecondaryVisit": "En cas de visite supplementaire necessaire, nom de la personne qui effectuera la visite: ",
+		"SendMePushNotif": "M'envoyer une notification push après chaque visite"
 	},
 	"ADDACCOUNT":{
 		"TitleAdd": "Ajouter un nouveau compte",
@@ -400,5 +413,81 @@
 		"UpdateAccount": "Enregister",
 		"SuccessAdd": "ajouté ! ",
 		"SuccessUpdate": "modifié ! "
+	},
+	"STATISTICS":{
+		"EvolutionPH": "Evolution PH",
+		"EvolutionChlore": "Evolution Chlore ",
+		"EvolutionTemperature": "Evolution Temperature",
+		"EvolutionAlca": "Evolution Alcalinomètrique complet"
+	},
+	"GDPRMODAL":{
+		"Title": "Politique de confientialité des données",
+		"IntroductionTitle": "Introduction",
+		"Introduction": "Dans le cadre de notre activité, nous sommes amenés à collecter et à traiter des informations dont certaines sont qualifiées de 'données personnelles'. Nous attachons une grande importance au respect de la vie privée, et nous n’utilisons que des donnes de manière responsable et confidentielle et dans une finalité précise.",
+		"GDPRTextCustomerTitle": "Données personnelles",
+		"GDPRTextCustomerSubTitle": "Sur notre application, il y a 2 types de données susceptibles d’être recueillies.",
+		"GDPRTextCustomerSubTitle1": "Les données transmises directement",
+		"GDPRTextCustomerSubText1": "Ces données sont celles saisies directement par votre piscinier. Sont obligatoires « prénom et nom », «numero de telephone »,   «addresse» et « email ».",
+		"GDPRTextCustomerSubTitle2": "Les données collectées automatiquement",
+		"GDPRTextCustomerSubText2": "Lors de vos visites, une fois votre consentement donné, nous pouvons recueillir des informations de type « web analytics » relatives à votre navigation, la durée de votre consultation, votre adresse IP, votre type et version de navigateur. La technologie utilisée est le cookie.",
+		"GDPRTextCustomerDataUsageTitle": "Utilisation des données",
+		"GDPRTextCustomerDataUsageText": "Les données que vous nous transmettez directement sont utilisées dans le but de vous re-contacter et/ou dans le cadre de la demande que vous nous faites. Les données « web analytics » sont collectées de forme anonyme (en enregistrant des adresses IP anonymes) par Google Analytics, et nous permettent de mesurer l'audience de notre site web, les consultations et les éventuelles erreurs afin d’améliorer constamment l’expérience des utilisateurs. Ces données sont utilisées par [Société], responsable du traitement des données, et ne seront jamais cédées à un tiers ni utilisées à d’autres fins que celles détaillées ci-dessus.",
+		"GDPRTextCustomerCookieTitle": "Cookies",
+		"GDPRTextCustomerCookieText": "Cookies Google Analytics : Web analytics",
+		"GDPRTextCustomerRightsTitle": "Vos droits concernant les données personnelles",
+		"GDPRTextCustomerRightsText": "Vous avez le droit de consultation, demande de modification ou d’effacement sur l’ensemble de vos données personnelles. Vous pouvez également retirer votre consentement au traitement de vos données.",
+		"NotificationOptIn": "J'accepte de recevoir des notifications email et push pour le suivi de mes piscines",
+		"AcceptAndStart": "Accepter et commencer"
+	},
+	"LANDINGPAGE":{
+		"Title": "OpenPool",
+		"Title1": "Fonctionalités",
+		"Title2": "Particulier",
+		"Title3": "Tarifs",
+		"Register": "Inscription",
+		"Connection": "Connection",
+		"MainContent": "Optimisez la gestion de vos piscines et augmentez vos revenus avec le meilleur logiciel pour piscinistes",
+		"StartNow": "Commencez maintenant",
+		"FreeStart": "Accès gratuit et sans engagement",
+		"Content1Title": "Une appli complète pour les piscinistes",
+		"Content2Title": "Pour les particuliers",
+		"Content3Title": "Un tarif progressif pour gérer l'ensemble de vos piscines",
+		"Price1Title": "Piscine One",
+		"Price1SubTitle": "Découvrir l'appli",
+		"Price1Price": "GRATUIT",
+		"Price1Item1": "Limité à 5 piscines ",
+		"Price2Title": "Piscine Plus",
+		"Price2SubTitle": "Accompagner votre activité",
+		"Price2Price": "1 €/HT",
+		"Price2PriceSub": "Par piscine et par mois",
+		"Price2Item1": "Nombre de piscines illimité",
+		"Price1Register": "Inscription gratuite",
+		"Price2Register": "Sans engagement",
+		"Icon1Title": "Vos contacts et piscines à jour",
+		"Icon1Text": "Vous gardez à jour les informations de vos cliens et piscines,blablablab",
+		"Icon2Title": "Alarmes",
+		"Icon2Text": "Des alarmes se declenchées pour les piscines qui doivent être visitées, balablabla",
+		"Icon3Title": "Historique",
+		"Icon3Text": "Les visites effectuées sont sauvegardées afin d'assurer la tracabilité de l'entretien des piscines",
+		"Icon4Title": "Interface client",
+		"Icon4Text": "Vos clients sont notifiés après votre passage et ont acces a une interface pour leur piscine",
+		"pictureAndText1Title": "Un mode hors-ligne pour une couverture globale",
+		"pictureAndText1Text": "Ou que vous soyez, sauvegardez les visites que vous effectuez sur votre mobile, puis synchronisez les des que vous etes en ligne",
+		"pictureAndText2Title": "Retrouver toutes vos visites",
+		"pictureAndText2Text": "Retrouver et partager avec vos employés toutes les informations de vos piscines, les historiques d’entretien ainsi que des analyses de suivi de piscine",
+		"pictureAndText3Title": "Notifier après chaque visite",
+		"pictureAndText3Text": "Recevez pour vous et votre client une notification apres chaque visite effectuée, ainsi qu'une alerte si une seconde visite est nécessaire",
+		"pictureAndText4Title": "Donner de la confiance à vos clients",
+		"pictureAndText4Text": "Une interface disponible sur web et mobile permet à vos clients de suivre les visites effectuées"
+	},
+	"REGISTER":{
+		"Title": "Demander un compte",
+		"Text":"A la reception de votre demande, un compte vous sera créé avec lequel vous pourrez commencer à utiliser l'application.",
+		"CompanyName": "Nom de la societe",
+		"LastName": "Nom",
+		"FirstName": "Prenom",
+		"EmailAddress": "Email",
+		"RequestAccount": "Envoyer la demande",
+		"AccountRequestSentText": "Merci, nous traitons votre demande dans les plus brefs délais ! "
 	}
 }

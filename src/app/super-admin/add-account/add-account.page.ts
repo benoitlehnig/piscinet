@@ -3,6 +3,7 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { ActivatedRoute } from '@angular/router';
 import {Company} from '../../models/company';
 import { NavController } from '@ionic/angular';
+import {AccountServicesService} from '../../services/account-services.service'
 
 @Component({
 	selector: 'app-add-account',
@@ -18,13 +19,20 @@ export class AddAccountPage implements OnInit {
 	constructor(
 		private functions: AngularFireFunctions,
 		public activatedRoute:ActivatedRoute,
-		public navCtrl: NavController
+		public navCtrl: NavController,
+		public accountServicesService:AccountServicesService
 
 		) { }
 
 	ngOnInit() {
 		this.activatedRoute.params.subscribe(params => {
 			this.mode =  params['mode'];
+			if(this.mode ==='update'){
+				this.accountId = params['id'];
+				this.accountServicesService.getAccount(this.accountId).subscribe(
+					(data)=>
+					this.account = data);
+			}
 		});
 
 	}
@@ -38,7 +46,7 @@ export class AddAccountPage implements OnInit {
 	}
 
 	updateAccount(){
-		let accountToUpdate={'uid':this.accountId, 'value' : this.account};
+		let accountToUpdate={'accountId':this.accountId, 'value' : this.account};
 		const callable = this.functions.httpsCallable('updateAccount');
 		const obs = callable(accountToUpdate);
 		obs.subscribe(async res => {

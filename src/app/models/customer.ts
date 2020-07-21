@@ -12,6 +12,7 @@ export class Customer {
   public guardianNumber: string ="";
   public typeOfContract: string ="";
   public contractOfProduct: string ="";
+  public userRecordUid:string="";
 
   deserialize(input: any) {
     Object.assign(this, input);

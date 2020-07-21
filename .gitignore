@@ -32,4 +32,4 @@ src/firebase-messaging-sw.js
 /platforms
 /plugins
 /www
-
+/src/environments

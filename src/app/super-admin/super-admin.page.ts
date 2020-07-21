@@ -23,12 +23,6 @@ export class SuperAdminPage implements OnInit {
 		
 	}
 
-	setSuperAdminRight(){
-		const callable = this.functions.httpsCallable('setSuperAdmin');
-		const obs = callable("setSuperAdmin");
-		obs.subscribe(async res => {
-		});
-	}
 
 	selectAccount(account){
 		console.log(account);

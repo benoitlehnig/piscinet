@@ -1,0 +1,157 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>{{'LANDINGPAGE.Title' | translate}}</ion-title>
+		<ion-buttons slot="secondary" class="secondary"  class="ion-hide-md-down">
+			<ion-button (click)="scrollTo('content1')">
+				{{'LANDINGPAGE.Title1' | translate}}
+			</ion-button>
+			<ion-button (click)="scrollTo('content3')" >
+				{{'LANDINGPAGE.Title3' | translate}}
+			</ion-button>
+		</ion-buttons>
+		<ion-buttons slot="primary">
+			<ion-button color="secondary" fill="solid" (click)="presentRegisterPopover()"  class="ion-hide-sm-down">
+				{{'LANDINGPAGE.Register' | translate}}
+			</ion-button>
+			<ion-button color="primary" fill="solid"  [routerLink]="['/login']">
+				{{'LANDINGPAGE.Connection' | translate}}
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<div class="mainContent">
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<ion-text color="primary"><h1>{{'LANDINGPAGE.MainContent' | translate}}</h1></ion-text>
+					<ion-button size="large" expand="block" color="primary" class="startNowButton" (click)="presentRegisterPopover()">{{'LANDINGPAGE.StartNow' | translate}}</ion-button>
+					<ion-text><p class="freeAccess">{{'LANDINGPAGE.FreeStart' | translate}}</p></ion-text>
+				</ion-col>
+				<ion-col class="screenCapture">
+					<img src="assets/images/screenCatpure.png">
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</div>
+	<div class="subContent" >
+		<h1 id="content1" class="subContentTitle">{{'LANDINGPAGE.Content1Title' | translate}}</h1>
+		<ion-grid class="iconsRow">
+			<ion-row>
+				<ion-col>
+					<ion-icon name="people-outline"></ion-icon>
+					<h2>{{'LANDINGPAGE.Icon1Title' | translate}}</h2>
+					<p>{{'LANDINGPAGE.Icon1Text' | translate}}</p>
+				</ion-col>
+				<ion-col>
+					<ion-icon name="notifications-outline"></ion-icon>
+					<h2>{{'LANDINGPAGE.Icon2Title' | translate}}</h2>
+					<p>{{'LANDINGPAGE.Icon2Text' | translate}}</p>
+				</ion-col>
+				<ion-col>
+					<ion-icon name="analytics-outline"></ion-icon>
+					<h2>{{'LANDINGPAGE.Icon3Title' | translate}}</h2>
+					<p>{{'LANDINGPAGE.Icon3Text' | translate}}</p>
+				</ion-col>
+				<ion-col>
+					<ion-icon name="chatbubbles-outline"></ion-icon>
+					<h2>{{'LANDINGPAGE.Icon4Title' | translate}}</h2>
+					<p>{{'LANDINGPAGE.Icon4Text' | translate}}</p>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		<ion-grid class="pictureAndText">
+			<ion-row>
+				<ion-col>
+					<img src="assets/images/undraw_working_from_anywhere_ub67.svg">
+				</ion-col>
+				<ion-col>
+					<h2>{{'LANDINGPAGE.pictureAndText1Title' | translate}}</h2>
+					<p>{{'LANDINGPAGE.pictureAndText1Text' | translate}}</p>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		<ion-grid class="pictureAndText">
+			<ion-row>
+				<ion-col>
+					<h2>{{'LANDINGPAGE.pictureAndText2Title' | translate}}</h2>
+					<p>{{'LANDINGPAGE.pictureAndText2Text' | translate}}</p>
+				</ion-col>
+				<ion-col>
+					<img src="assets/images/undraw_data_reports_706v.svg">
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		<ion-grid class="pictureAndText">
+			<ion-row>
+				<ion-col>
+					<img src="assets/images/undraw_push_notifications_im0o.svg">
+				</ion-col>
+				<ion-col>
+					<h2>{{'LANDINGPAGE.pictureAndText3Title' | translate}}</h2>
+					<p>{{'LANDINGPAGE.pictureAndText3Text' | translate}}</p>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		<ion-grid class="pictureAndText">
+			<ion-row>
+				<ion-col>
+					<h2>{{'LANDINGPAGE.pictureAndText4Title' | translate}}</h2>
+					<p>{{'LANDINGPAGE.pictureAndText4Text' | translate}}</p>
+				</ion-col>
+				<ion-col>
+					<img src="assets/images/undraw_in_the_pool_c5h0.svg">
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		
+	</div> 			
+	<div class="subContent subContent3">
+		<h1 id="content3" class="subContentTitle">{{'LANDINGPAGE.Content3Title' | translate}}</h1>
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<div class="pricing">
+						<div class="pricingHeader">
+							<div class="title"><ion-text><h1>{{'LANDINGPAGE.Price1Title' | translate}}</h1></ion-text></div>
+							<div class="subtitle">{{'LANDINGPAGE.Price1SubTitle' | translate}}</div>
+						</div>
+
+						<div class="content">
+							<ion-text><h2>{{'LANDINGPAGE.Price1Price' | translate}}</h2></ion-text>
+							<ion-list>
+								<ion-item lines="none" class="ion-text-center">
+									<ion-label>{{'LANDINGPAGE.Price1Item1' | translate}}</ion-label>
+								</ion-item>
+							</ion-list>
+							<ion-button  color="primary" (click)="presentRegisterPopover()">{{'LANDINGPAGE.Price1Register' | translate}}</ion-button>
+						</div>
+					</div>
+				</ion-col>
+
+				<ion-col>
+					<div class="pricing pricing2">
+						<div class="pricingHeader">
+							<div class="title"><ion-text><h1>{{'LANDINGPAGE.Price2Title' | translate}}</h1></ion-text></div>
+							<div class="subtitle">{{'LANDINGPAGE.Price2SubTitle' | translate}}</div>
+						</div>
+
+						<div class="content">
+							<ion-text><h2>{{'LANDINGPAGE.Price2Price' | translate}}</h2></ion-text>
+							<ion-text><p>{{'LANDINGPAGE.Price2PriceSub' | translate}}</p></ion-text>
+							<ion-list>
+								<ion-item lines="none" class="ion-text-center">
+									<ion-label>{{'LANDINGPAGE.Price2Item1' | translate}}</ion-label>
+								</ion-item>
+							</ion-list>
+							<ion-button  color="secondary" (click)="presentRegisterPopover()"> {{'LANDINGPAGE.Price2Register' | translate}}</ion-button>
+
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</div> 	
+
+</ion-content>

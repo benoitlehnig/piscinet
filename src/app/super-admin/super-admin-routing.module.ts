@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: 'account/:id/add-admin',
     loadChildren: () => import('./add-admin/add-admin.module').then( m => m.AddAdminPageModule)
+  },
+  {
+    path: 'account/:id/edit-account',
+    loadChildren: () => import('./add-account/add-account.module').then( m => m.AddAccountPageModule)
   }
 ];
 

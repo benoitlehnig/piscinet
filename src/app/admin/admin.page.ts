@@ -37,7 +37,10 @@ export class AdminPage implements OnInit {
 			console.log(this.uid)
 			this.employeeServicesService.getEmployee(this.uid).subscribe(
 				employee =>{
-					this.pushNotifAllVisitSubscription = employee.pushNotifAllVisitSubscription;
+					if( employee !==null){
+						this.pushNotifAllVisitSubscription = employee.pushNotifAllVisitSubscription;
+
+					}
 				})
 		});
 	}

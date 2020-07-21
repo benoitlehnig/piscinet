@@ -4,13 +4,76 @@
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
 		<ion-title>account</ion-title>
+		<ion-buttons slot="end">
+			<ion-button [routerLink]="['edit-account',{ mode: 'update'}]">
+				<ion-icon name="pencil" ></ion-icon>
+			</ion-button>
+		</ion-buttons>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-	<ion-fab vertical="top" horizontal="end" slot="fixed" [routerLink]="['add-admin']" >
-		<ion-fab-button>
-			<ion-icon name="add"></ion-icon>
-		</ion-fab-button>
-	</ion-fab>
+	<ion-list>
+		<ion-list-header>General Configuration</ion-list-header>
+		<ion-item>
+			<ion-text position="floating">Url for landing page</ion-text>
+			<ion-text>{{account.configuration.logoPictureUrl}}</ion-text>
+		</ion-item>
+		<ion-item>
+			<ion-text position="floating">Name for landing page</ion-text>
+			<ion-text>{{account.configuration.nameLoginPage}}</ion-text>
+		</ion-item>
+		<ion-item>
+			<ion-label position="floating">Plan (free or premium)</ion-label>
+			<ion-text type="text">{{account.plan}}</ion-text>
+		</ion-item>
+	</ion-list>
+	<ion-list>
+		<ion-list-header>Email Configuration</ion-list-header>
+		<ion-item>
+			<ion-label >Envoyer un email apres chaque visite</ion-label>
+			<ion-toggle slot="start" disabled="true" name="sendEmailAfterVisit" [(ngModel)]="account.configuration.emailConfiguration.sendEmailAfterVisit" ></ion-toggle>
+		</ion-item>
+		<ion-item>
+			<ion-text position="floating">from Email</ion-text>
+			<ion-text >{{account.configuration.emailConfiguration.serverEmail.from.email}}</ion-text>
+		</ion-item>
+		<ion-item>
+			<ion-text position="floating">from Name</ion-text>
+			<ion-text >{{account.configuration.emailConfiguration.serverEmail.from.name}}</ion-text>
+		</ion-item>
+		<ion-item>
+			<ion-text position="floating">reply_to Email</ion-text>
+			<ion-text >{{account.configuration.emailConfiguration.serverEmail.reply_to.email}}</ion-text>
+		</ion-item>
+		<ion-item>
+			<ion-text position="floating">reply_to Name</ion-text>
+			<ion-text >{{account.configuration.emailConfiguration.serverEmail.reply_to.name}}</ion-text>
+		</ion-item>
+		<ion-item >
+			<ion-text position="floating">Password Email </ion-text>
+			<ion-text>{{account.configuration.emailConfiguration.serverEmail.emailServerPassword}}</ion-text>
+		</ion-item>
+		<ion-item >
+			<ion-text position="floating">visitKO template : </ion-text>
+			<ion-text >{{account.configuration.emailConfiguration.emailTemplates.visitKO}}</ion-text>
+		</ion-item>
+		<ion-item >
+			<ion-text position="floating">visitOK template : </ion-text>
+			<ion-text >{{account.configuration.emailConfiguration.emailTemplates.visitOK}}</ion-text>
+		</ion-item>
+		<ion-item >
+			<ion-text position="floating">welcomeCustomer template : </ion-text>
+			<ion-text >{{account.configuration.emailConfiguration.emailTemplates.welcomeCustomer}}</ion-text>
+		</ion-item>
+		<ion-item >
+			<ion-text position="floating">welcomeEmployee template : </ion-text>
+			<ion-text >{{account.configuration.emailConfiguration.emailTemplates.welcomeEmployee}}</ion-text>
+		</ion-item>
+		<ion-item >
+			<ion-text position="floating">welcomeEmployee template : </ion-text>
+			<ion-text >{{account.configuration.emailConfiguration.emailTemplates.welcomeEmployee}}</ion-text>
+		</ion-item>
+
+	</ion-list>
 </ion-content>

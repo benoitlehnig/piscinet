@@ -48,8 +48,8 @@
 	</ion-item>
 	
 	<ion-item>
-		<ion-label position="stacked">{{'ADDCUSTOMER.Email' | translate}} <ion-text color="danger">*</ion-text></ion-label>
-		<ion-input name="email" type="email" pattern="email" [disabled]="mode==='update'" [(ngModel)]="customer.email" required ></ion-input>
+		<ion-label position="stacked">{{'ADDCUSTOMER.Email' | translate}}</ion-label>
+		<ion-input name="email" type="email" pattern="email" [disabled]="(mode==='update' && (customer.userRecordUid!==''))" [(ngModel)]="customer.email"  ></ion-input>
 	</ion-item>
 
 	<ion-grid>

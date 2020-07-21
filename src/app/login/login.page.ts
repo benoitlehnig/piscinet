@@ -4,6 +4,9 @@ import { NavController } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
 import {TranslateService} from '@ngx-translate/core';
 import { ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+import { ActivatedRoute } from '@angular/router';
+import {AccountServicesService}  from '../services/account-services.service'; 
 
 @Component({
 	selector: 'app-login',
@@ -12,12 +15,15 @@ import { ToastController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-	errorMessage: string = '';
-	emailResetPassword:string="";
-	mode:string ="login";
-	successEmailSent:string ="";
-	errorMessages = [{'invalidemail': "",'wrongpassword':'','usernot-found':'',}]
-	validation_messages = {
+	public errorMessage: string = '';
+	public accountId:string="";
+	public landingPageLogo:string="";
+	public landingPageName:string="";
+	public emailResetPassword:string="";
+	public mode:string ="login";
+	public successEmailSent:string ="";
+	public errorMessages = [{'invalidemail': "",'wrongpassword':'','usernot-found':'',}]
+	public validation_messages = {
 		'email': [
 		{ type: 'required', message: 'Email is required.' },
 		{ type: 'pattern', message: 'Please enter a valid email.' }
@@ -33,10 +39,39 @@ export class LoginPage implements OnInit {
 		public navCtrl: NavController,
 		public translateService : TranslateService,
 		public toastController: ToastController,
+		private storage: Storage,
+		private activatedRoute: ActivatedRoute,
+		private accountServicesService: AccountServicesService,
 		) { }
 
 	ngOnInit() {
-			this.translateService.get(['LOGIN.SuccessEmailSent','LOGIN.invalidemail','LOGIN.wrongpassword','LOGIN.usernot-found',]).subscribe(
+		this.activatedRoute.queryParams.subscribe((params) => {
+			console.log("params:", params);
+			if(params.accountId !== undefined){
+				console.log("his.accountId !==null", this.accountId)
+				this.accountId = params.accountId;
+				console.log( params.accountId,this.accountId);
+				this.storage.set('accountId',this.accountId);
+				this.retrieveAccountCustomization();
+			}
+			else{
+				this.storage.get('accountId').then((accountId) => {
+					if(accountId !==null){
+						console.log("this.accountId storage ", this.accountId)
+						this.accountId = accountId;
+						this.retrieveAccountCustomization();
+					}
+					else{
+
+					}
+				});
+			}
+		});
+		
+		
+
+		
+		this.translateService.get(['LOGIN.SuccessEmailSent','LOGIN.invalidemail','LOGIN.wrongpassword','LOGIN.usernot-found',]).subscribe(
 			value => {
 				console.log(value)
 				this.successEmailSent = value['LOGIN.SuccessEmailSent'];
@@ -57,7 +92,7 @@ export class LoginPage implements OnInit {
 				this.navCtrl.navigateForward('/myPools');
 			}
 			if(claims['admin'] ===true){
-				this.navCtrl.navigateForward('/');
+				this.navCtrl.navigateForward('/customers');
 			}
 			if(claims['employee'] ===true){
 				this.navCtrl.navigateForward('/customers');
@@ -94,6 +129,16 @@ export class LoginPage implements OnInit {
 			duration: 3000
 		});
 		toast.present();
+	}
+
+	retrieveAccountCustomization(){
+		console.log(this.accountId);
+		this.accountServicesService.getAccount(this.accountId).subscribe(
+			(account) => {
+				console.log(account);
+				this.landingPageLogo = account.configuration.logoPictureUrl;
+				this.landingPageName =  account.configuration.nameLoginPage
+			})
 	}
 
 }

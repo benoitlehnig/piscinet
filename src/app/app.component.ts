@@ -18,6 +18,10 @@ import { Observable, Observer, fromEvent, merge } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
+import { PopoverController } from '@ionic/angular';
+import { GdprmodalComponent } from './gdprmodal/gdprmodal.component';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -46,7 +50,9 @@ export class AppComponent implements OnInit {
     public dataSharingService:DataSharingService,
     public onlineCheckService: OnlineCheckService,
     private router: Router,
-    private afMessaging: AngularFireMessaging
+    private afMessaging: AngularFireMessaging,
+    public popoverController: PopoverController
+
     ) {
     this.initializeApp();
   }
@@ -85,13 +91,19 @@ export class AppComponent implements OnInit {
     this.afAuth.user.subscribe(
       data =>{
         console.log("user >>", data);
+
         if(data){
+          console.log("lastSignInTime : ", data.metadata.lastSignInTime)
+          
           this.uid = data.uid;
           this.isUserLogged =true;
           this.displayName = data.displayName;
           data.getIdTokenResult().then(
             result=> {
               this.claims = result.claims;
+              if(data.metadata.lastSignInTime ==='' || data.metadata.lastSignInTime===null){
+                this.presentGDPRPopover();
+              }
               if(this.claims['customer'] ===true){
                 this.appPages = this.appConstants.appCustomerPages;
                 this.router.navigateByUrl('/myProfile');
@@ -143,11 +155,10 @@ export class AppComponent implements OnInit {
   }
   requestPermission() {
 
- 
+
     this.afMessaging.requestToken
     .subscribe(
       (token) => { 
-        console.log('Permission granted! Save to the server!', token); 
         const callable = this.functions.httpsCallable('addDevice');
         const obs = callable({'uid':this.uid, 'token': token});
         obs.subscribe(async res => {
@@ -155,10 +166,25 @@ export class AppComponent implements OnInit {
       },
       (error) => { console.error(error); },  
       );
-      
+
   }
   listen() {
+
+  }
+
+  async presentGDPRPopover() {
     
+    const popover = await this.popoverController.create({
+      component: GdprmodalComponent,
+      componentProps: {homeref:this, uid:this.uid, claims: this.claims},
+      cssClass: 'gdprModal',
+      backdropDismiss: false,
+      translucent: true
+    });
+    return await popover.present();
+  }
+  dismissGDPRPopover(){
+    this.popoverController.dismiss();
   }
 
 

@@ -1,0 +1,31 @@
+<ion-content class="ion-padding modal">
+	<h1>{{'GDPRMODAL.Title' | translate}}</h1>
+	<p><ion-text>{{'GDPRMODAL.Introduction' | translate}}</ion-text></p>
+	<div >
+		<h2><ion-text>{{'GDPRMODAL.GDPRTextCustomerTitle' | translate}}</ion-text></h2>
+		<p><ion-text>{{'GDPRMODAL.GDPRTextCustomerSubTitle' | translate}}</ion-text></p>
+		<ul>
+			<li>
+				<h3><ion-text>{{'GDPRMODAL.GDPRTextCustomerSubTitle1' | translate}}</ion-text></h3>
+				<p><ion-text>{{'GDPRMODAL.GDPRTextCustomerSubText1' | translate}}</ion-text></p>
+			</li>
+			<li>
+				<h3><ion-text>{{'GDPRMODAL.GDPRTextCustomerSubTitle2' | translate}}</ion-text></h3>
+				<p><ion-text>{{'GDPRMODAL.GDPRTextCustomerSubText2' | translate}}</ion-text></p>
+			</li>
+		</ul>
+		<h2><ion-text>{{'GDPRMODAL.GDPRTextCustomerDataUsageTitle' | translate}}</ion-text></h2>
+		<p><ion-text>{{'GDPRMODAL.GDPRTextCustomerDataUsageText' | translate}}</ion-text></p>
+		<h2><ion-text>{{'GDPRMODAL.GDPRTextCustomerCookieTitle' | translate}}</ion-text></h2>
+		<p><ion-text>{{'GDPRMODAL.GDPRTextCustomerCookieText' | translate}}</ion-text></p>
+		<h2><ion-text>{{'GDPRMODAL.GDPRTextCustomerRightsTitle' | translate}}</ion-text></h2>
+		<p><ion-text>{{'GDPRMODAL.GDPRTextCustomerRightsText' | translate}}</ion-text></p>
+		<ion-item lines="none">
+			<ion-label class="ion-text-nowrap"><div>{{'GDPRMODAL.NotificationOptIn' | translate}}</div></ion-label>
+			<ion-checkbox slot="start" [(ngModel)]="notificationConsent" ></ion-checkbox>
+		</ion-item>
+	</div>
+
+	<ion-button expand="block" color="primary" class="startNowButton" (click)="closePopup()" [disabled]="!notificationConsent">{{'GDPRMODAL.AcceptAndStart' | translate}}</ion-button>
+
+</ion-content>

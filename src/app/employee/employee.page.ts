@@ -119,6 +119,8 @@ export class EmployeePage implements OnInit {
 	}
 
 	sendEmailUserCreation(){
+		let employee:any = this.employee;
+		employee.userRecordUid = this.uid;
 		let email={'customer':this.employee, 'uid': this.uid};
 		const callable = this.functions.httpsCallable('sendUserCreationEmail');
 		const obs = callable(email);

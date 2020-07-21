@@ -10,7 +10,7 @@ import {Company} from '../../models/company';
 })
 export class AccountPage implements OnInit {
 
-	public id:string="";
+	public accountId:string="";
 	public account:Company = new Company();
 	constructor(
 		public  accountServicesService: AccountServicesService,
@@ -18,14 +18,19 @@ export class AccountPage implements OnInit {
 		) { }
 
 	ngOnInit() {
-		this.id = this.activatedRoute.snapshot.paramMap.get('id');
+		this.accountId = this.activatedRoute.snapshot.paramMap.get('id');
 	}
 
 	ionViewWillEnter(){
-		this.accountServicesService.getAccount(this.id).subscribe(
+		this.accountServicesService.getAccount(this.accountId).subscribe(
 			(data) =>{
+				console.log("account : ", data);
 				this.account = data;
 			})		
+	}
+
+	saveAccount(){
+		
 	}
 
 }
