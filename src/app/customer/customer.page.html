@@ -77,14 +77,14 @@
 		<ion-label>
 			<h2 >{{swimmingPool.data.name}} <ion-badge color="primary">{{swimmingPool.data.numberOfVisits}} {{'CUSTOMER.VisitsPerfomed' | translate}}</ion-badge></h2>
 			<h3><ion-text  color="primary" *ngIf="swimmingPool.data.lastVisitDate != ''">Derniere visite effectuee le {{swimmingPool.data.lastVisitDate | date:'mediumDate'}}</ion-text></h3>
-			<ion-button color="primary"  [routerLink]="['/customers/'+uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: customerStringified,swimmingPoolName:swimmingPool.name,visitType:'full' }]"><ion-icon name="shield-checkmark" class="ion-margin-end"></ion-icon>
-				<div class="visitType">{{'CUSTOMER.VisitFull' | translate}}</div>
+			<ion-button color="primary"  (click)="startVisit('full',swimmingPool)"><ion-icon name="shield-checkmark" class="ion-margin-end ion-hide-sm-down"></ion-icon>
+				<div class="visitType">{{'CUSTOMER.VisitTypeFull' | translate}}</div>
 			</ion-button>
-			<ion-button color="secondary"  [routerLink]="['/customers/'+uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: customerStringified,swimmingPoolName:swimmingPool.name,visitType:'controle' }]">	<ion-icon name="shield-checkmark" class="ion-margin-end" ></ion-icon>
-				<div class="visitType">{{'CUSTOMER.VisitControle' | translate}}</div></div>
+			<ion-button color="secondary"  (click)="startVisit('controle',swimmingPool)">	<ion-icon name="shield-checkmark" class="ion-margin-end ion-hide-sm-down" ></ion-icon>
+				<div class="visitType">{{'CUSTOMER.VisitTypeControl' | translate}}</div>
 			</ion-button>
-			<ion-button color="success" [routerLink]="['/customers/'+uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: customerStringified,swimmingPoolName:swimmingPool.name,visitType:'maintenance' }]">	<ion-icon name="shield-checkmark" class="ion-margin-end"></ion-icon>
-				<div class="visitType">{{'CUSTOMER.VisitMaintenance' | translate}}</div>
+			<ion-button color="success" (click)="startVisit('maintenance',swimmingPool)">	<ion-icon name="shield-checkmark" class="ion-margin-end ion-hide-sm-down"></ion-icon>
+				<div class="visitType">{{'CUSTOMER.VisitTypeMaintenance' | translate}}</div>
 			</ion-button>
 		</ion-label>
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSharingService } from '../../services/data-sharing.service'
 import {Visit} from '../../models/visit';
+import {AppConstants } from '../../app-constants';
 
 
 @Component({
@@ -12,8 +13,13 @@ export class TechniquePage implements OnInit {
 
 	
 	visit:Visit=new Visit();
+
+	chloreSteps=this.appConstants.chloreSteps;
+	PHSteps=this.appConstants.PHSteps;
+
 	constructor(
-		public dataSharingService:DataSharingService
+		public dataSharingService:DataSharingService,
+		public appConstants:AppConstants
 		) { }
 
 
@@ -30,6 +36,14 @@ export class TechniquePage implements OnInit {
 	
 	ionViewWillEnter(){
 		
+	}
+	saveChlore(value){
+		this.visit.technique.chlore =value;
+		this.saveTechnical();
+	}
+	savePH(value){
+		this.visit.technique.PH =value;
+		this.saveTechnical();
 	}
 	saveTechnical(){
 		this.dataSharingService.someDataChanges(this.visit);

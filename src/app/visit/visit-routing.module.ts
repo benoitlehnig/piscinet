@@ -15,7 +15,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './general/general.module#GeneralPageModule'
+            loadChildren: () => import('./general/general.module').then( m => m.GeneralPageModule)
           }
         ]
       },
@@ -24,7 +24,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './maintenance/maintenance.module#MaintenancePageModule'
+            loadChildren: () => import('./maintenance/maintenance.module').then( m => m.MaintenancePageModule)
           }
         ]
       },
@@ -33,7 +33,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './observation/observation.module#ObservationPageModule'
+            loadChildren:  () => import('./observation/observation.module').then( m => m.ObservationPageModule)
           }
         ]
       },
@@ -42,7 +42,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './technical/technical.module#TechnicalPageModule'
+            loadChildren: () => import('./technical/technical.module').then( m => m.TechnicalPageModule)
           }
         ]
       },

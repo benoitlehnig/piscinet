@@ -3,15 +3,7 @@
 		<ion-list-header>
 			<h2>{{'VISIT.Cleaning' | translate}}</h2>
 		</ion-list-header>
-		<div class="paddingToggle">
-			<ion-item>
-				<ion-label>{{'VISIT.Analyse' | translate}}</ion-label>
-				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.analyse"  (ionChange)="saveMaintenance()"></ion-toggle>
-			</ion-item>
-			<ion-item>
-				<ion-label>{{'VISIT.CleaningCurtain' | translate}}</ion-label>
-				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.curtain" (ionChange)="saveMaintenance()"></ion-toggle>
-			</ion-item>
+		<div >
 			<ion-item>
 				<ion-label>{{'VISIT.CleaningSkimmer' | translate}}</ion-label>
 				<ion-toggle slot="start"  [(ngModel)]="visit.maintenance.cleaningSkimmer" (ionChange)="saveMaintenance()"></ion-toggle>
@@ -20,11 +12,7 @@
 				<ion-label>{{'VISIT.EmptySkimmer' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.emptySkimmer" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
-			<ion-item>
-				<ion-label>{{'VISIT.CleaningSkimmerFrame' | translate}}</ion-label>
-				<ion-toggle slot="start"  [(ngModel)]="visit.maintenance.cleaningSkimmerFrame" (ionChange)="saveMaintenance()"></ion-toggle>
-			</ion-item>
-			<ion-item>
+			<ion-item *ngIf="swimmingPool.robot ===true">
 				<ion-label>{{'VISIT.EmptyPoolRobotBag' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.emptyPoolRobotBag" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
@@ -37,14 +25,6 @@
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.vacuum" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
 			<ion-item>
-				<ion-label>{{'VISIT.CleaningBeam' | translate}}</ion-label>
-				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.cleaningBeam" (ionChange)="saveMaintenance()"></ion-toggle>
-			</ion-item>
-			<ion-item>
-				<ion-label>{{'VISIT.LoopHoles' | translate}}</ion-label>
-				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.loopholes" (ionChange)="saveMaintenance()"></ion-toggle>
-			</ion-item>
-			<ion-item>
 				<ion-label>{{'VISIT.PassageLandingSurface' | translate}}</ion-label>
 				<ion-toggle slot="start"  [(ngModel)]="visit.maintenance.passageLandingSurface" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
@@ -52,39 +32,43 @@
 				<ion-label>{{'VISIT.PassageLandingDepth' | translate}}</ion-label>
 				<ion-toggle slot="start"  [(ngModel)]="visit.maintenance.passageLandingDepth" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
-			<ion-item>
-				<ion-label>{{'VISIT.BottomDrain' | translate}}</ion-label>
-				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.bottomDrain" (ionChange)="saveMaintenance()"></ion-toggle>
+			<ion-item *ngIf="swimmingPool.curtain ===true">
+				<ion-label>{{'VISIT.CleaningCurtain' | translate}}</ion-label>
+				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.curtain" (ionChange)="saveMaintenance()"></ion-toggle>
+			</ion-item>
+			<ion-item  *ngIf="swimmingPool.curtain ===true">
+				<ion-label>{{'VISIT.CurtainVacuumCleaner' | translate}}</ion-label>
+				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.curtainVacuumCleaner" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
 			<ion-item>
-				<ion-label>{{'VISIT.VacuumCleaner' | translate}}</ion-label>
-				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.vacuumCleaner" (ionChange)="saveMaintenance()"></ion-toggle>
+				<ion-label>{{'VISIT.Brossage' | translate}}</ion-label>
+				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.brossage" (ionChange)="saveObservation()"></ion-toggle>
 			</ion-item>
 		</div>
 	</ion-list>
-	<ion-list>
+	<ion-list *ngIf="swimmingPool.alarmElectronicSystem ===true">
 		<ion-list-header>
 			<h2>{{'VISIT.AlarmSystemTitle' | translate}}</h2>
 		</ion-list-header>
-		<ion-item class="paddingToggle">
+		<ion-item >
 			<ion-label>{{'VISIT.CleaningAlarm' | translate}}</ion-label>
 			<ion-toggle slot="start" [(ngModel)]="visit.maintenance.cleaningAlarm" (ionChange)="saveMaintenance()"></ion-toggle>
 		</ion-item>
-		<ion-item class="paddingToggle">
+		<ion-item >
 			<ion-label>{{'VISIT.ProperAlarm' | translate}}</ion-label>
 			<ion-toggle slot="start" [(ngModel)]="visit.maintenance.properAlarm" (ionChange)="saveMaintenance()"></ion-toggle>
 		</ion-item>
 
 	</ion-list>
-	<ion-list>
+	<ion-list *ngIf="swimmingPool.automaticFill ===true">
 		<ion-list-header>
 			<h2>{{'VISIT.AutomaticFill' | translate}}</h2>
 		</ion-list-header>
-		<ion-item class="paddingToggle">
+		<ion-item >
 			<ion-label>{{'VISIT.GoodFloat' | translate}}</ion-label>
 			<ion-toggle slot="start" [(ngModel)]="visit.maintenance.goodFloat" (ionChange)="saveMaintenance()"></ion-toggle>
 		</ion-item>
-		<ion-item class="paddingToggle">
+		<ion-item >
 			<ion-label>{{'VISIT.FloatNotBlocked' | translate}}</ion-label>
 			<ion-toggle slot="start" [(ngModel)]="visit.maintenance.floatNotBlocked" (ionChange)="saveMaintenance()"></ion-toggle>
 		</ion-item>
@@ -93,7 +77,7 @@
 		<ion-list-header>
 			<h2>{{'VISIT.TechnicalLocal' | translate}}</h2>
 		</ion-list-header>
-		<div class="paddingToggle">
+		<div >
 			<ion-item >
 				<ion-label>{{'VISIT.TLFilterWashing' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.TLFilterWashing" (ionChange)="saveMaintenance()"></ion-toggle>
@@ -103,76 +87,86 @@
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.TLCleaningPreFilter" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
 			<ion-item >
-				<ion-label position="stacked">{{'VISIT.TLChloreLVL' | translate}}</ion-label>
-				<ion-input  name="TLChloreLVL" type="text" [(ngModel)]="visit.maintenance.TLChloreLVL" (ionChange)="saveMaintenance()"></ion-input>
-			</ion-item>
-			<ion-item >
-				<ion-label position="stacked">{{'VISIT.TLPHLVL' | translate}}</ion-label>
-				<ion-input  name="TLPHLVL" type="text" [(ngModel)]="visit.maintenance.TLPHLVL" (ionChange)="saveMaintenance()"></ion-input>
-			</ion-item>
-			<ion-item >
-				<ion-label position="stacked">{{'VISIT.TLWaterMeter' | translate}}</ion-label>
-				<ion-input  name="TLWaterMeter" type="text"  [(ngModel)]="visit.maintenance.TLWaterMeter" (ionChange)="saveMaintenance()"></ion-input>
-			</ion-item>
-			<ion-item >
 				<ion-label>{{'VISIT.TLClockSetting' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.TLClockSetting" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
-			<ion-list>
-				<ion-list-header>
-					<ion-label>{{'VISIT.FilteringModeTitle' | translate}}</ion-label>
-				</ion-list-header>
-				<ion-segment scrollable name="TLFiltrationMode"  [(ngModel)]="visit.maintenance.TLFiltrationMode" (ionChange)="saveMaintenance()">
-					<ion-segment-button value="automatic">
-						<ion-label>{{'VISIT.FilteringModeTitleAutomatic' | translate}}</ion-label>
-					</ion-segment-button>
-					<ion-segment-button value="manual" layout="icon-start" >
-						<ion-label>{{'VISIT.FilteringModeTitleManual' | translate}}</ion-label>
-					</ion-segment-button>
-				</ion-segment>
-			</ion-list>
-			<ion-list>
-				<ion-list-header>
-					<ion-label>{{'VISIT.TLRobotMode' | translate}}</ion-label>
-				</ion-list-header>
-				<ion-segment scrollable name="TLRobotMode"  [(ngModel)]="visit.maintenance.TLRobotMode" (ionChange)="saveMaintenance()">
-					<ion-segment-button value="automatic">
-						<ion-label>{{'VISIT.TLRobotModeAutomatic' | translate}}</ion-label>
-					</ion-segment-button>
-					<ion-segment-button value="manual" layout="icon-start" >
-						<ion-label>{{'VISIT.TLRobotModeManual' | translate}}</ion-label>
-					</ion-segment-button>
-				</ion-segment>
-			</ion-list>
-			<ion-list>
-				<ion-list-header>
-					<ion-label>{{'VISIT.TLProjectorMode' | translate}}</ion-label>
-				</ion-list-header>
-				<ion-segment  scrollable name="TLProjectorMode"  [(ngModel)]="visit.maintenance.TLProjectorMode" (ionChange)="saveMaintenance()">
-					<ion-segment-button value="automatic">
-						<ion-label>{{'VISIT.TLProjectorModeAutomatic' | translate}}</ion-label>
-					</ion-segment-button>
-					<ion-segment-button value="manual" layout="icon-start" >
-						<ion-label>{{'VISIT.TLProjectorModeManual' | translate}}</ion-label>
-					</ion-segment-button>
-				</ion-segment>
-				<ion-item >
-					<ion-label position="stacked">{{'VISIT.TLProjectorWater' | translate}}</ion-label>
-					<ion-input  name="TLProjectorWater" type="text"  [(ngModel)]="visit.maintenance.TLProjectorWater" (ionChange)="saveMaintenance()"></ion-input>
-				</ion-item>
-			</ion-list>
-			
 			<ion-item >
 				<ion-label>{{'VISIT.TLCleaningRoom' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.TLCleaningRoom" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
+			<ion-item >
+				<ion-label >
+					<div><ion-text>{{'VISIT.TLChloreLVL' | translate}}</ion-text></div>
+					<div>
+						<ion-range min="0" max="100" color="secondary"  name="TLChloreLVL" [(ngModel)]="visit.maintenance.TLChloreLVL" (ionChange)="saveMaintenance()">
+							<ion-label slot="start">0%</ion-label>
+							<ion-icon size="small" slot="start" name="beaker-outline"></ion-icon>
+							<ion-label slot="end">100%</ion-label>
+							<ion-icon slot="end" name="beaker-outline"></ion-icon>
+						</ion-range>
+					</div>
+				</ion-label>
+			</ion-item>
+			<ion-item >
+				<ion-label >
+					<div><ion-text>{{'VISIT.TLPHLVL' | translate}}</ion-text></div>
+					<div>
+						<ion-range min="0" max="100" color="secondary" name="TLChloreLVL" [(ngModel)]="visit.maintenance.TLPHLVL" (ionChange)="saveMaintenance()">
+							<ion-label slot="start">0%</ion-label>
+							<ion-icon size="small" slot="start" name="beaker-outline"></ion-icon>
+							<ion-label slot="end">100%</ion-label>
+							<ion-icon slot="end" name="beaker-outline"></ion-icon>
+						</ion-range>
+					</div>
+				</ion-label>
+			</ion-item>
+
+			<ion-item >
+				<ion-text slot="start">{{'VISIT.TLWaterMeter' | translate}}</ion-text>
+				<ion-input slot="end" class="ion-float-end borderInput" name="TLWaterMeter" type="number"  [(ngModel)]="visit.maintenance.TLWaterMeter" (ionChange)="saveMaintenance()"></ion-input>
+			</ion-item>
+			
+			<ion-item lines="none">
+				<ion-text>{{'VISIT.FilteringModeTitle' | translate}}</ion-text>
+				<ion-segment class="segmentAlignRight" scrollable name="TLFiltrationMode"  [(ngModel)]="visit.maintenance.TLFiltrationMode" (ionChange)="saveMaintenance()">
+					<ion-segment-button value="automatic" class="segmentButtonOverride">
+						<ion-label>{{'VISIT.FilteringModeTitleAutomatic' | translate}}</ion-label>
+					</ion-segment-button>
+					<ion-segment-button value="manual" class="segmentButtonOverride">
+						<ion-label>{{'VISIT.FilteringModeTitleManual' | translate}}</ion-label>
+					</ion-segment-button>
+				</ion-segment>
+			</ion-item>
+			<ion-item lines="none" *ngIf="swimmingPool.robot ===true">
+				<ion-text>{{'VISIT.TLRobotMode' | translate}}</ion-text>
+				<ion-segment class="segmentAlignRight" scrollable name="TLRobotMode"  [(ngModel)]="visit.maintenance.TLRobotMode" (ionChange)="saveMaintenance()">
+					<ion-segment-button value="automatic" class="segmentButtonOverride">
+						<ion-label>{{'VISIT.TLRobotModeAutomatic' | translate}}</ion-label>
+					</ion-segment-button>
+					<ion-segment-button value="manual" class="segmentButtonOverride">
+						<ion-label>{{'VISIT.TLRobotModeManual' | translate}}</ion-label>
+					</ion-segment-button>
+				</ion-segment>
+			</ion-item>
+			<ion-item>
+				<ion-text>{{'VISIT.TLProjectorMode' | translate}}</ion-text>
+				<ion-segment class="segmentAlignRight" scrollable name="TLProjectorMode"  [(ngModel)]="visit.maintenance.TLProjectorMode" (ionChange)="saveMaintenance()">
+					<ion-segment-button value="automatic" class="segmentButtonOverride">
+						<ion-label>{{'VISIT.TLProjectorModeAutomatic' | translate}}</ion-label>
+					</ion-segment-button>
+					<ion-segment-button value="manual" class="segmentButtonOverride">
+						<ion-label>{{'VISIT.TLProjectorModeManual' | translate}}</ion-label>
+					</ion-segment-button>
+				</ion-segment>
+			</ion-item>
+			
 		</div>
 	</ion-list>
 	<ion-list>
 		<ion-list-header>
 			<h2>{{'VISIT.ElectronicDevicesTitle' | translate}}</h2>
 		</ion-list-header>
-		<div class="paddingToggle">
+		<div  *ngIf="swimmingPool.electronicalProduct === salt">
 			<h3>{{'VISIT.SaltDeviceTitle' | translate}}</h3>
 			<ion-item>
 				<ion-label>{{'VISIT.PFEDSaltCell' | translate}}</ion-label>
@@ -186,26 +180,26 @@
 				<ion-textarea placeholder="{{'VISIT.PFEDSaltOtherProb' | translate}}"  name="PFEDSaltOtherProb" type="text" [(ngModel)]="visit.maintenance.PFEDSaltOtherProb" (ionChange)="saveMaintenance()"></ion-textarea>
 			</ion-item>
 		</div>
-		<div class="paddingToggle">
-			<h3>{{'VISIT.ChloreTitle' | translate}}</h3>
+		<div  >
+			<h3 class="ion-margin-start">{{'VISIT.ChloreTitle' | translate}}</h3>
 			<ion-item>
 				<ion-label>{{'VISIT.PFEDChloraFaulty' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.PFEDChloraFaulty" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
 		</div>
-		<div class="paddingToggle">
-			<h3>{{'VISIT.PHTitle' | translate}}</h3>
+		<div >
+			<h3 class="ion-margin-start">{{'VISIT.PHTitle' | translate}}</h3>
 			<ion-item>
 				<ion-label>{{'VISIT.PFEDPHFaulty' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.PFEDPHFaulty" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
-			<ion-item>
-				<ion-label position="stacked">{{'VISIT.PFEDPH2WaterTemp' | translate}}</ion-label>
-				<ion-textarea name="PFEDPH2WaterTemp" type="text" [(ngModel)]="visit.maintenance.PFEDPH2WaterTemp" (ionChange)="saveMaintenance()"></ion-textarea>
+			<ion-item >
+				<ion-text slot="start">{{'VISIT.PFEDPH2WaterTemp' | translate}}</ion-text>
+				<ion-input slot="end" class="ion-float-end borderInput" name="PFEDPH2WaterTemp" type="number"  [(ngModel)]="visit.maintenance.PFEDPH2WaterTemp" (ionChange)="saveMaintenance()"></ion-input>
 			</ion-item>
 		</div>
-		<div class="paddingToggle">
-			<h3>{{'VISIT.UVTitle' | translate}}</h3>
+		<div *ngIf="swimmingPool.electronicalProduct === UVSterilisation"> 
+			<h3 class="ion-margin-start">{{'VISIT.UVTitle' | translate}}</h3>
 			<ion-item>
 				<ion-label>{{'VISIT.PFEDUVCell' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.PFEDUVCell" (ionChange)="saveMaintenance()"></ion-toggle>

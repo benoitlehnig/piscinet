@@ -17,6 +17,7 @@ export class SwimmingPoolPage implements OnInit {
 	public poolId:string;
 	public uid:string;
 	public swimmingPool:SwimmingPool=new SwimmingPool();
+	public swimmingPoolStringified:string="";
 	public customer:Customer = new Customer();
 	public customerStringified = "";
 	public visitTypeText= {visitTypeFull: '',visitTypeControl:'', visitTypeMaintenance:'' };
@@ -52,8 +53,8 @@ export class SwimmingPoolPage implements OnInit {
 			})
 		this.poolServicesService.getSwimmingPool(this.poolId).subscribe(
 			(data) =>{
-				console.log("pool updated :", data)
 				this.swimmingPool = data;
+				this.swimmingPoolStringified = JSON.stringify(this.swimmingPool);
 				this.dataSharingService.currentPool({uid:this.uid, poolId:this.poolId,swimmingPool:this.swimmingPool })
 			})
 	}

@@ -53,22 +53,29 @@
 					<ion-text class="smallerFont" *ngIf="swimmingPool.cover ==='coatedConcrete'" >{{'SWIMMINGPOOL.CoatedConcrete' | translate}}</ion-text>
 					<ion-text class="smallerFont" *ngIf="swimmingPool.cover ==='moltenGlass'" >{{'SWIMMINGPOOL.MoltenGlass' | translate}}</ion-text>
 				</ion-item>
+				<ion-item lines="none" *ngIf="swimmingPool.curtain !==''">
+					<ion-icon slot="start" name="archive-outline" color="primary"></ion-icon>		
+					<ion-text class="smallerFont" *ngIf="swimmingPool.curtain ===true">{{'SWIMMINGPOOL.Curtain' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.curtain ===false">{{'SWIMMINGPOOL.CurtainNone' | translate}}</ion-text>
+				</ion-item>
 			</ion-col>
 			<ion-col>
-
 				<ion-item lines="none" *ngIf="swimmingPool.access !==''">
 					<ion-icon name="return-down-forward" slot="start" color="primary"></ion-icon>
 					<ion-text class="smallerFont" *ngIf="swimmingPool.access ==='ladder'" >{{'SWIMMINGPOOL.Ladder' | translate}}</ion-text>
 					<ion-text class="smallerFont" *ngIf="swimmingPool.access ==='stairs'" >{{'SWIMMINGPOOL.Stairs' | translate}}</ion-text>
 					<ion-text class="smallerFont" *ngIf="swimmingPool.access ==='beach'" >{{'SWIMMINGPOOL.Beach' | translate}}</ion-text>
 				</ion-item>
-				<ion-item lines="none" >
+				<ion-item lines="none" *ngIf="swimmingPool.barrier !== null">
 					<ion-icon  slot="start" name="menu" color="primary"></ion-icon>
 					<ion-text class="smallerFont" *ngIf="swimmingPool.barrier ===true">{{'SWIMMINGPOOL.Barrier' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.barrier ===false">{{'SWIMMINGPOOL.BarrierNone' | translate}}</ion-text>
 				</ion-item>
-				<ion-item lines="none" >
+				<ion-item lines="none" *ngIf="swimmingPool.alarmElectronicSystem !== null">
 					<ion-icon  slot="start" name="notifications" color="primary"></ion-icon>
 					<ion-text class="smallerFont" *ngIf="swimmingPool.alarmElectronicSystem ===true">{{'SWIMMINGPOOL.AlarmElectronicSystem' | translate}}</ion-text>
+						<ion-text class="smallerFont" *ngIf="swimmingPool.alarmElectronicSystem ===false">{{'SWIMMINGPOOL.AlarmElectronicSystemNone' | translate}}</ion-text>
+
 				</ion-item>
 				<ion-item lines="none"> 
 					<ion-icon  slot="start" name="snow" color="primary"></ion-icon>
@@ -152,9 +159,13 @@
 				<ion-text  position="stacked">{{'SWIMMINGPOOL.PompDate' | translate}}</ion-text>
 				<ion-text  >{{ swimmingPool.pompDate | date:'mediumDate' }}</ion-text>
 			</div>
-			<div *ngIf="swimmingPool.PH ===true">
-				<ion-text  position="stacked">{{'SWIMMINGPOOL.AutomaticFillDate' | translate}}</ion-text>
-				<ion-text  >{{ swimmingPool.automaticFillDate | date:'mediumDate' }}</ion-text>
+			<div *ngIf="swimmingPool.automaticFill ===true">
+				<ion-text *ngIf="swimmingPool.automaticFillType ==='electronic'">{{'SWIMMINGPOOL.automaticFillTypeElectronic' | translate}}</ion-text>
+				<ion-text *ngIf="swimmingPool.automaticFillType ==='water'">{{'SWIMMINGPOOL.automaticFillTypeWater' | translate}}</ion-text>
+				<ion-text  > [{{ swimmingPool.automaticFillDate | date:'mediumDate' }}]</ion-text>
+			</div>
+			<div *ngIf="swimmingPool.robot ===true">
+				<ion-text >{{'SWIMMINGPOOL.Robot' | translate}}</ion-text>
 			</div>
 		</ion-card-content>
 	</ion-card>

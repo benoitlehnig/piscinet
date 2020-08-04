@@ -16,6 +16,7 @@ import { Observable, Observer, fromEvent, merge } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import {SwimmingPool} from '../models/swimming-pool';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class AddVisitPage implements OnInit {
 
 	newVisit:Visit = new Visit();
 	customer:Customer = new Customer();
-	swimmingPoolName:string="";
+	swimmingPool:SwimmingPool= new SwimmingPool();
 	visitId:string="";
 	public successAddText:string="";
 	public successUpdateText:string="";
@@ -70,11 +71,16 @@ export class AddVisitPage implements OnInit {
 			if(params['visitType'] ){
 				this.newVisit.typeOfVisit =params['visitType'];
 			}
+			if(params['swimmingPoolStringified']){
+				this.swimmingPool =  JSON.parse(params['swimmingPoolStringified']); 
+				this.dataSharingService.currentPool(this.swimmingPool);
+			}
+			if(params['customer']){
+				this.customer =  JSON.parse(params['customer']); 
+			}
 			this.authService.userDetails().subscribe( (data)=>{
 				this.newVisit.employeeUid = data.uid	
 				if(this.offline ===false){
-					this.customer =  JSON.parse(params['customer']);
-					this.swimmingPoolName =  params['swimmingPoolName'];
 					if(this.mode !=='update'){
 						this.newVisit.customerUid = this.activatedRoute.snapshot.paramMap.get('id');
 						this.newVisit.poolId =this.activatedRoute.snapshot.paramMap.get('sid');
@@ -166,9 +172,9 @@ export class AddVisitPage implements OnInit {
 
 	}
 	async presentToast() {
-		let message = this.swimmingPoolName + " "+ this.successUpdateText;
+		let message = this.swimmingPool.name + " "+ this.successUpdateText;
 		if(this.mode ==='add'){
-			message = this.swimmingPoolName +" "+ this.successAddText;
+			message = this.swimmingPool.name +" "+ this.successAddText;
 		}
 		const toast = await this.toastController.create({
 			message: message ,

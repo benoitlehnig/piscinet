@@ -27,6 +27,6 @@ export class VisitsPage implements OnInit {
 
   }
   initLiverData(){
-    this.visits = this.visitServicesService.getVisitsSinceMonth(1,100);
+   this.visits = this.visitServicesService.getVisitsSinceMonth(1,100);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSharingService } from '../../services/data-sharing.service'
 import {Visit} from '../../models/visit';
+import {SwimmingPool} from '../../models/swimming-pool';
 
 @Component({
 	selector: 'app-maintenance',
@@ -9,10 +10,12 @@ import {Visit} from '../../models/visit';
 })
 export class MaintenancePage implements OnInit {
 
-	visit: Visit = new Visit()
+	public visit: Visit = new Visit()
+	public swimmingPool:SwimmingPool=new SwimmingPool();
 	constructor(
-		public dataSharingService:DataSharingService
-		) { }
+		public dataSharingService:DataSharingService,
+		) { 
+	}
 
 	ngOnInit() {
 		
@@ -22,11 +25,12 @@ export class MaintenancePage implements OnInit {
 	}
 	ionViewWillEnter(){
 		this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
-			console.log("visit maintenance:", visit)
-            this.visit = visit
-        });
-		
-		
+			this.visit = visit;
+
+		});
+		this.dataSharingService.getCurrentPoolChanges().subscribe(swimmingPool =>{
+			this.swimmingPool = swimmingPool;
+		})	
 	}
 
 	saveMaintenance(){

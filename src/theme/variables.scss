@@ -228,9 +228,6 @@
 
 
 }
-.paddingToggle{
-  padding-left:2em;
-}
 .maxWidthDate{
   max-width:40em;
 }
@@ -365,3 +362,17 @@ app-list-view{
  font-size:   0.8em;
 }
 
+
+.md .segmentButtonOverride {
+  --background-checked:  var(--ion-color-primary);
+  --color-checked : #FFFFFF;
+}
+
+.borderInput{
+  background:var(--ion-color-primary);
+  color:var(--ion-color-primary-contrast);
+  text-align:right;
+  border-radius: 3px;
+  max-width:40px;
+  padding-right:12px;
+}

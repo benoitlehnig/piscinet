@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Visit} from '../../models/visit';
 import { DataSharingService } from '../../services/data-sharing.service'
+import {AppConstants } from '../../app-constants';
 
 
 @Component({
@@ -11,14 +12,19 @@ import { DataSharingService } from '../../services/data-sharing.service'
 export class TechnicalPage implements OnInit {
 
 	public visit:Visit = new Visit();
+	public chloreSteps= this.appConstants.chloreSteps;
+	public PHSteps= this.appConstants.PHSteps;
+
 	constructor(
-		public dataSharingService:DataSharingService
+		public dataSharingService:DataSharingService,
+		public appConstants:AppConstants
 
 		) { }
 
 	ngOnInit() {
 		this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
-			this.visit = visit
+			this.visit = visit;
+			console.log(this.visit)
 		});
 	}
 	ionViewWillEnter(){

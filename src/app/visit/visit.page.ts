@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {Visit} from '../models/visit';
 import {Customer} from '../models/customer';
 import {Employee} from '../models/employee';
+import {SwimmingPool} from '../models/swimming-pool';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { NavController } from '@ionic/angular';
 import { CustomerServicesService } from '../services/customer-services.service'
 import { EmployeeServicesService } from '../services/employee-services.service'
+import { PoolServicesService } from '../services/pool-services.service'
 import { VisitServicesService } from '../services/visit-services.service';
 
 import { Storage } from '@ionic/storage';
@@ -27,9 +29,11 @@ import { ModalController } from '@ionic/angular';
 export class VisitPage implements OnInit {
 
 	visit:Visit = new Visit();
+	swimmingPool:SwimmingPool = new SwimmingPool();
 	visitId:string="";
 	public claims;
 	public customerStringified = "";
+	public swimmingPoolStringified = "";
 	public mode = "online";
 	public loading;
 	public customer:Customer= new Customer()
@@ -44,6 +48,7 @@ export class VisitPage implements OnInit {
 		private activatedRoute: ActivatedRoute,
 		public customerServicesService: CustomerServicesService,
 		public employeeServicesService: EmployeeServicesService,
+		public poolServicesService: PoolServicesService,
 		public visitServicesService: VisitServicesService,
 		private storage: Storage,
 		public authenticationService:AuthenticationService,
@@ -90,6 +95,12 @@ export class VisitPage implements OnInit {
 						(data3) =>{
 							this.customer = data3;
 							this.customerStringified = JSON.stringify(data3);
+						});
+					this.poolServicesService.getSwimmingPool(data.poolId).subscribe(
+						(data4) =>{
+							console.log("pool", data4)
+							this.swimmingPool = data4;
+							this.dataSharingService.currentPool(this.swimmingPool);
 						});
 					this.dataSharingService.someDataChanges(this.visit);
 				})

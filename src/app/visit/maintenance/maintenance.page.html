@@ -4,17 +4,8 @@
 		<ion-list-header>
 			<h2>{{'VISIT.Cleaning' | translate}}</h2>
 		</ion-list-header>
-		<div class="paddingToggle">
-			<ion-item>
-				<ion-label>{{'VISIT.Analyse' | translate}}</ion-label>
-				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.analyse"  ></ion-icon>
-				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.analyse ===false"  ></ion-icon>
-			</ion-item>
-			<ion-item>
-				<ion-label>{{'VISIT.CleaningCurtain' | translate}}</ion-label>
-				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.curtain === true"  ></ion-icon>
-				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.curtain ===false"  ></ion-icon>
-			</ion-item>
+		<div >
+			
 			<ion-item>
 				<ion-label>{{'VISIT.CleaningSkimmer' | translate}}</ion-label>
 				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.cleaningSkimmer === true"  ></ion-icon>
@@ -25,12 +16,7 @@
 				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.emptySkimmer === true"  ></ion-icon>
 				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.emptySkimmer === false"  ></ion-icon>
 			</ion-item>
-			<ion-item>
-				<ion-label>{{'VISIT.CleaningSkimmerFrame' | translate}}</ion-label>
-				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.cleaningSkimmerFrame === true"  ></ion-icon>
-				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.cleaningSkimmerFrame ===false"  ></ion-icon>
-			</ion-item>
-			<ion-item>
+			<ion-item  *ngIf="swimmingPool.robot ===true">
 				<ion-label>{{'VISIT.EmptyPoolRobotBag' | translate}}</ion-label>
 				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.emptyPoolRobotBag === true"  ></ion-icon>
 				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.emptyPoolRobotBag ===false"  ></ion-icon>
@@ -46,16 +32,6 @@
 				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.vacuum ===false"  ></ion-icon>
 			</ion-item>
 			<ion-item>
-				<ion-label>{{'VISIT.CleaningBeam' | translate}}</ion-label>
-				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.cleaningBeam === true"  ></ion-icon>
-				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.cleaningBeam ===false"  ></ion-icon>
-			</ion-item>
-			<ion-item>
-				<ion-label>{{'VISIT.LoopHoles' | translate}}</ion-label>
-				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.loopholes === true"  ></ion-icon>
-				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.loopholes ===false"  ></ion-icon>
-			</ion-item>
-			<ion-item>
 				<ion-label>{{'VISIT.PassageLandingSurface' | translate}}</ion-label>
 				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.passageLandingSurface === true"  ></ion-icon>
 				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.passageLandingSurface ===false"  ></ion-icon>
@@ -65,44 +41,49 @@
 				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.passageLandingDepth === true"  ></ion-icon>
 				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.passageLandingDepth ===false"  ></ion-icon>
 			</ion-item>
-			<ion-item>
-				<ion-label>{{'VISIT.BottomDrain' | translate}}</ion-label>
-				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.bottomDrain === true"  ></ion-icon>
-				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.bottomDrain ===false"  ></ion-icon>
+			<ion-item *ngIf="swimmingPool.curtain ===true">
+				<ion-label>{{'VISIT.CleaningCurtain' | translate}}</ion-label>
+				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.curtain === true"  ></ion-icon>
+				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.curtain ===false"  ></ion-icon>
+			</ion-item>
+			<ion-item  *ngIf="swimmingPool.curtain ===true">
+				<ion-label>{{'VISIT.CurtainVacuumCleaner' | translate}}</ion-label>
+				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.curtainVacuumCleaner === true"  ></ion-icon>
+				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.curtainVacuumCleaner ===false"  ></ion-icon>
 			</ion-item>
 			<ion-item>
-				<ion-label>{{'VISIT.VacuumCleaner' | translate}}</ion-label>
-				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.vacuumCleaner === true"  ></ion-icon>
-				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.vacuumCleaner ===false"  ></ion-icon>
+				<ion-label>{{'VISIT.Brossage' | translate}}</ion-label>
+				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.brossage === true"  ></ion-icon>
+				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.brossage ===false"  ></ion-icon>
 			</ion-item>
 		</div>
 	</ion-list>
-	<ion-list>
+	<ion-list  *ngIf="swimmingPool.alarmElectronicSystem ===true">
 		<ion-list-header>
 			<h2>{{'VISIT.AlarmSystemTitle' | translate}}</h2>
 		</ion-list-header>
-		<ion-item class="paddingToggle">
+		<ion-item >
 			<ion-label>{{'VISIT.CleaningAlarm' | translate}}</ion-label>
 			<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.cleaningAlarm === true"  ></ion-icon>
 			<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.cleaningAlarm ===false"  ></ion-icon>
 		</ion-item>
-		<ion-item class="paddingToggle">
+		<ion-item >
 			<ion-label>{{'VISIT.ProperAlarm' | translate}}</ion-label>
 			<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.properAlarm === true"  ></ion-icon>
 			<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.properAlarm ===false"  ></ion-icon>
 		</ion-item>
 
 	</ion-list>
-	<ion-list>
+	<ion-list *ngIf="swimmingPool.automaticFill ===true">
 		<ion-list-header>
 			<h2>{{'VISIT.AutomaticFill' | translate}}</h2>
 		</ion-list-header>
-		<ion-item class="paddingToggle">
+		<ion-item >
 			<ion-label>{{'VISIT.GoodFloat' | translate}}</ion-label>
 			<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.goodFloat === true"  ></ion-icon>
 			<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.goodFloat ===false"  ></ion-icon>
 		</ion-item>
-		<ion-item class="paddingToggle">
+		<ion-item >
 			<ion-label>{{'VISIT.FloatNotBlocked' | translate}}</ion-label>
 			<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.floatNotBlocked === true"  ></ion-icon>
 			<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.floatNotBlocked ===false"  ></ion-icon>
@@ -112,74 +93,66 @@
 		<ion-list-header>
 			<h2>{{'VISIT.TechnicalLocal' | translate}}</h2>
 		</ion-list-header>
-		<div class="paddingToggle">
-			<ion-item >
-				<ion-label>{{'VISIT.TLFilterWashing' | translate}}</ion-label>
-				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.TLFilterWashing === true"  ></ion-icon>
-				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.TLFilterWashing ===false"  ></ion-icon>
-			</ion-item>
-			<ion-item >
-				<ion-label>{{'VISIT.TLCleaningPreFilter' | translate}}</ion-label>
-				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.TLCleaningPreFilter === true"  ></ion-icon>
-				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.TLCleaningPreFilter ===false"  ></ion-icon>
-			</ion-item>
-			<ion-item >
-				<ion-text position="stacked">{{'VISIT.TLChloreLVL' | translate}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLChloreLVL !==''">{{visit.maintenance.TLChloreLVL}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLChloreLVL ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
-			</ion-item>
-			<ion-item >
-				<ion-text position="stacked">{{'VISIT.TLPHLVL' | translate}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLPHLVL !==''">{{visit.maintenance.TLPHLVL}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLPHLVL ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
-			</ion-item>
-			<ion-item >
-				<ion-text>{{'VISIT.TLWaterMeter' | translate}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLWaterMeter !==''">{{visit.maintenance.TLWaterMeter}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLWaterMeter ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
-			</ion-item>
-			<ion-item >
-				<ion-label>{{'VISIT.TLClockSetting' | translate}}</ion-label>
-				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.TLClockSetting === true"  ></ion-icon>
-				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.TLClockSetting ===false"  ></ion-icon>
-			</ion-item>
-			<ion-item>
-				<ion-text >{{'VISIT.FilteringModeTitle' | translate}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLFiltrationMode ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLFiltrationMode ==='automatic'">{{'VISIT.FilteringModeTitleAutomatic' | translate}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLFiltrationMode ==='manual'">{{'VISIT.FilteringModeTitleManual' | translate}}</ion-text>
-			</ion-item>
-			<ion-item>
-				<ion-text >{{'VISIT.TLRobotMode' | translate}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLRobotMode ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLRobotMode ==='automatic'">{{'VISIT.TLRobotModeAutomatic' | translate}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLRobotMode ==='manual'">{{'VISIT.TLRobotModeManual' | translate}}</ion-text>
-			</ion-item>
-			<ion-item>
-				<ion-text >{{'VISIT.TLProjectorMode' | translate}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLProjectorMode ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLProjectorMode ==='automatic'">{{'VISIT.TLProjectorModeAutomatic' | translate}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLProjectorMode ==='manual'">{{'VISIT.TLProjectorModeManual' | translate}}</ion-text>
-			</ion-item>
-			<ion-item >
-				<ion-text >{{'VISIT.TLProjectorWater' | translate}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLProjectorWater ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLProjectorWater !==''" >visit.maintenance.TLProjectorWater</ion-text>
-			</ion-item>
-			
-			<ion-item >
-				<ion-label>{{'VISIT.TLCleaningRoom' | translate}}</ion-label>
-				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.TLCleaningRoom === true"  ></ion-icon>
-				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.TLCleaningRoom ===false"  ></ion-icon>
-			</ion-item>
-		</div>
+		<ion-item >
+			<ion-label>{{'VISIT.TLFilterWashing' | translate}}</ion-label>
+			<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.TLFilterWashing === true"  ></ion-icon>
+			<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.TLFilterWashing ===false"  ></ion-icon>
+		</ion-item>
+		<ion-item >
+			<ion-label>{{'VISIT.TLCleaningPreFilter' | translate}}</ion-label>
+			<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.TLCleaningPreFilter === true"  ></ion-icon>
+			<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.TLCleaningPreFilter ===false"  ></ion-icon>
+		</ion-item>
+		<ion-item >
+			<ion-label>{{'VISIT.TLClockSetting' | translate}}</ion-label>
+			<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.TLClockSetting === true"  ></ion-icon>
+			<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.TLClockSetting ===false"  ></ion-icon>
+		</ion-item>
+		<ion-item >
+			<ion-text >{{'VISIT.FilteringModeTitle' | translate}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.TLFiltrationMode ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.TLFiltrationMode ==='automatic'" class="ion-margin-start">{{'VISIT.FilteringModeTitleAutomatic' | translate}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.TLFiltrationMode ==='manual'" class="ion-margin-start">{{'VISIT.FilteringModeTitleManual' | translate}}</ion-text>
+		</ion-item>
+		<ion-item *ngIf="swimmingPool.robot ===true">
+			<ion-text >{{'VISIT.TLRobotMode' | translate}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.TLRobotMode ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.TLRobotMode ==='automatic'" class="ion-margin-start">{{'VISIT.TLRobotModeAutomatic' | translate}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.TLRobotMode ==='manual'" class="ion-margin-start">{{'VISIT.TLRobotModeManual' | translate}}</ion-text>
+		</ion-item>
+		<ion-item >
+			<ion-text >{{'VISIT.TLProjectorMode' | translate}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.TLProjectorMode ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.TLProjectorMode ==='automatic'" class="ion-margin-start">{{'VISIT.TLProjectorModeAutomatic' | translate}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.TLProjectorMode ==='manual'" class="ion-margin-start">{{'VISIT.TLProjectorModeManual' | translate}}</ion-text>
+		</ion-item>
+		<ion-item >
+			<ion-label>{{'VISIT.TLCleaningRoom' | translate}}</ion-label>
+			<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.TLCleaningRoom === true"  ></ion-icon>
+			<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.TLCleaningRoom ===false"  ></ion-icon>
+		</ion-item>
+		<ion-item >
+			<ion-text position="stacked">{{'VISIT.TLChloreLVL' | translate}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.TLChloreLVL !==''" class="ion-margin-start">{{visit.maintenance.TLChloreLVL}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.TLChloreLVL ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+		<ion-item >
+			<ion-text position="stacked">{{'VISIT.TLPHLVL' | translate}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.TLPHLVL !==''" class="ion-margin-start">{{visit.maintenance.TLPHLVL}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.TLPHLVL ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+		<ion-item >
+			<ion-text>{{'VISIT.TLWaterMeter' | translate}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.TLWaterMeter !==''" class="ion-margin-start">{{visit.maintenance.TLWaterMeter}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.TLWaterMeter ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
 	</ion-list>
 	<ion-list>
 		<ion-list-header>
 			<h2>{{'VISIT.ElectronicDevicesTitle' | translate}}</h2>
 		</ion-list-header>
-		<div class="paddingToggle">
-			<h3>{{'VISIT.SaltDeviceTitle' | translate}}</h3>
+		<div *ngIf="swimmingPool.electronicalProduct === salt">
+			<h3  class="ion-margin-start">{{'VISIT.SaltDeviceTitle' | translate}}</h3>
 			<ion-item>
 				<ion-label *ngIf="visit.maintenance.PFEDSaltCell === false" >{{'VISIT.PFEDSaltCellNoIssue' | translate}}</ion-label>
 				<ion-label *ngIf="visit.maintenance.PFEDSaltCell === true">{{'VISIT.PFEDSaltCellIssue' | translate}}</ion-label>
@@ -195,8 +168,8 @@
 				<ion-text >{{visit.maintenance.PFEDSaltOtherProb}}</ion-text>
 			</ion-item>
 		</div>
-		<div class="paddingToggle">
-			<h3>{{'VISIT.ChloreTitle' | translate}}</h3>
+		<div >
+			<h3  class="ion-margin-start">{{'VISIT.ChloreTitle' | translate}}</h3>
 			<ion-item>
 				<ion-label *ngIf="visit.maintenance.PFEDChloraFaulty === false" >{{'VISIT.PFEDChloraNoFaulty' | translate}}</ion-label>
 				<ion-label *ngIf="visit.maintenance.PFEDChloraFaulty === true">{{'VISIT.PFEDChloraFaulty' | translate}}</ion-label>
@@ -204,22 +177,17 @@
 				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.PFEDChloraFaulty ===true"  ></ion-icon>
 			</ion-item>
 		</div>
-		<div class="paddingToggle">
-			<h3>{{'VISIT.PHTitle' | translate}}</h3>
+		<div >
+			<h3  class="ion-margin-start">{{'VISIT.PHTitle' | translate}}</h3>
 			<ion-item>
 				<ion-label *ngIf="visit.maintenance.PFEDPHFaulty === false" >{{'VISIT.PFEDPHNoFaulty' | translate}}</ion-label>
 				<ion-label *ngIf="visit.maintenance.PFEDPHFaulty === true">{{'VISIT.PFEDPHFaulty' | translate}}</ion-label>
 				<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.PFEDPHFaulty === false"  ></ion-icon>
 				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.PFEDPHFaulty ===true"  ></ion-icon>
 			</ion-item>
-			<ion-item>
-				<ion-text position="stacked">{{'VISIT.PFEDPH2WaterTemp' | translate}}</ion-text>
-				<ion-text  *ngIf="visit.maintenance.TLFiltrationMode !==''" >{{visit.maintenance.PFEDPH2WaterTemp}}</ion-text>
-				<ion-text *ngIf="visit.maintenance.TLFiltrationMode ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
-			</ion-item>
 		</div>
-		<div class="paddingToggle">
-			<h3>{{'VISIT.UVTitle' | translate}}</h3>
+		<div *ngIf="swimmingPool.electronicalProduct === UVSterilisation"> 
+			<h3  class="ion-margin-start">{{'VISIT.UVTitle' | translate}}</h3>
 			<ion-item>
 				<ion-label *ngIf="visit.maintenance.PFEDUVCell === false" >{{'VISIT.PFEDUVCellNoIssue' | translate}}</ion-label>
 				<ion-label *ngIf="visit.maintenance.PFEDUVCell === true">{{'VISIT.PFEDUVCell' | translate}}</ion-label>

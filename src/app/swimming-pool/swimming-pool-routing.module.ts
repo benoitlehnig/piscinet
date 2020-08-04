@@ -13,7 +13,7 @@ const routes: Routes = [
 		children: [
 		{
 			path: '',
-			loadChildren: './information/information.module#InformationPageModule'
+			loadChildren: () => import('./information/information.module').then( m => m.InformationPageModule)
 		}
 		]
 	},
@@ -22,7 +22,7 @@ const routes: Routes = [
 		children: [
 		{
 			path: '',
-			loadChildren: './visits/visits.module#VisitsPageModule'
+			loadChildren: () => import('./visits/visits.module').then( m => m.VisitsPageModule)
 		}
 		]
 	},   
@@ -31,7 +31,7 @@ const routes: Routes = [
 		children: [
 		{
 			path: '',
-			loadChildren: './statistics/statistics.module#StatisticsPageModule'
+			loadChildren: () => import('./statistics/statistics.module').then( m => m.StatisticsPageModule)
 		}
 		]
 	}    

@@ -1,5 +1,5 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import {Customer} from '../models/customer';
 import {SwimmingPool} from '../models/swimming-pool';
 import { Observable, combineLatest, of } from 'rxjs'
@@ -48,6 +48,7 @@ export class CustomerPage implements OnInit {
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
+		private router: Router,
 		public authenticationService:AuthenticationService,
 		private functions: AngularFireFunctions,
 		public popoverController: PopoverController,
@@ -149,6 +150,12 @@ export class CustomerPage implements OnInit {
 		});
 		toast.present();
 	}
+
+	startVisit(type:string,swimmingPool){
+		const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
+		this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
+			swimmingPoolName:swimmingPool.name,visitType:'controle',swimmingPoolStringified:swimmingPoolStringified }])
+			}
 
 
 }

@@ -151,6 +151,11 @@
 			<ion-label>{{'ADDSWIMMINGPOOL.WinterCover' | translate}}</ion-label>
 			<ion-toggle slot="start" name="winterCover"  [(ngModel)]="swimmingPool.winterCover"></ion-toggle>
 		</ion-item>
+		<ion-item>
+			<ion-label>{{'ADDSWIMMINGPOOL.Curtain' | translate}}</ion-label>
+			<ion-toggle slot="start" name="curtain"  [(ngModel)]="swimmingPool.curtain"></ion-toggle>
+		</ion-item>
+		
 		<div class="paddingToggle" *ngIf="swimmingPool.winterCover ===true"  lines="none">
 				<ion-radio-group name="coverType" [(ngModel)]="swimmingPool.coverType" >
 					<ion-list-header>
@@ -306,7 +311,7 @@
 				</ion-item>
 				<ion-radio-group name="automaticFillType" [(ngModel)]="swimmingPool.automaticFillType" >
 					<ion-list-header>
-						<ion-label>{{'SWIMMINGPOOL.AutomaticFillType' | translate}}</ion-label>
+						<ion-label>{{'ADDSWIMMINGPOOL.AutomaticFillType' | translate}}</ion-label>
 					</ion-list-header>
 					<ion-item>
 						<ion-label>{{'ADDSWIMMINGPOOL.automaticFillTypeElectronic' | translate}}</ion-label>

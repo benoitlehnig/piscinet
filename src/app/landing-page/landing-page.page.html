@@ -1,7 +1,7 @@
 <ion-header>
 	<ion-toolbar>
-		<ion-title>{{'LANDINGPAGE.Title' | translate}}</ion-title>
-		<ion-buttons slot="secondary" class="secondary"  class="ion-hide-md-down">
+		<ion-title class="ion-hide-sm-down">{{'LANDINGPAGE.Title' | translate}}</ion-title>
+		<ion-buttons slot="secondary" class="secondar ion-hide-md-down">
 			<ion-button (click)="scrollTo('content1')">
 				{{'LANDINGPAGE.Title1' | translate}}
 			</ion-button>
@@ -10,7 +10,7 @@
 			</ion-button>
 		</ion-buttons>
 		<ion-buttons slot="primary">
-			<ion-button color="secondary" fill="solid" (click)="presentRegisterPopover()"  class="ion-hide-sm-down">
+			<ion-button color="secondary" fill="solid" (click)="presentRegisterPopover()" >
 				{{'LANDINGPAGE.Register' | translate}}
 			</ion-button>
 			<ion-button color="primary" fill="solid"  [routerLink]="['/login']">
@@ -50,12 +50,12 @@
 					<p>{{'LANDINGPAGE.Icon2Text' | translate}}</p>
 				</ion-col>
 				<ion-col>
-					<ion-icon name="analytics-outline"></ion-icon>
+					<ion-icon name="chatbubbles-outline"></ion-icon>
 					<h2>{{'LANDINGPAGE.Icon3Title' | translate}}</h2>
 					<p>{{'LANDINGPAGE.Icon3Text' | translate}}</p>
 				</ion-col>
 				<ion-col>
-					<ion-icon name="chatbubbles-outline"></ion-icon>
+					<ion-icon name="color-palette-outline"></ion-icon>
 					<h2>{{'LANDINGPAGE.Icon4Title' | translate}}</h2>
 					<p>{{'LANDINGPAGE.Icon4Text' | translate}}</p>
 				</ion-col>

@@ -92,4 +92,76 @@ export class AppConstants {
 	}
 	];
 
+	public chloreSteps=[{
+		value:0.1,
+		color:'#FFFFFF',
+		backgroundColor:'#C6C5D5',
+	},
+	{
+		value:0.3,
+		color:'#FFFFFF',
+		backgroundColor:'#D0B0C8',
+	},
+	{
+		value:0.6,
+		color:'#FFFFFF',
+		backgroundColor:'#CEA1C2',
+	},
+	{
+		value:1,
+		color:'#FFFFFF',
+		backgroundColor:'#D790BC',
+	},
+	{
+		value:1.5,
+		color:'#FFFFFF',
+		backgroundColor:'#E561AC',
+	},
+	{
+		value:2,
+		color:'#FFFFFF',
+		backgroundColor:'#EE4CA1',
+	},
+	{
+		value:3,
+		color:'#FFFFFF',
+		backgroundColor:'#F226A3',
+	},
+	];
+	public PHSteps=[{
+		value:6.8,
+		color:'#FFFFFF',
+		backgroundColor:'#D2AE64',
+	},
+	{
+		value:7,
+		color:'#FFFFFF',
+		backgroundColor:'#D2AE64',
+	},
+	{
+		value:7.2,
+		color:'#FFFFFF',
+		backgroundColor:'#E09F65',
+	},
+	{
+		value:7.4,
+		color:'#FFFFFF',
+		backgroundColor:'#E8825A',
+	},
+	{
+		value:7.6,
+		color:'#FFFFFF',
+		backgroundColor:'#ED5C69',
+	},
+	{
+		value:7.8,
+		color:'#FFFFFF',
+		backgroundColor:'#F03B72',
+	},
+	{
+		value:8.2,
+		color:'#FFFFFF',
+		backgroundColor:'#F743A4',
+	},
+	]
 }

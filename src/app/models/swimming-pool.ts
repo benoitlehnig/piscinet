@@ -13,6 +13,8 @@ export class SwimmingPool {
     alarmElectronicSystem: boolean=false;
     access: string="ladder";
     winterCover: boolean=false;
+    curtain: boolean=false;
+    robot: boolean=false;
     coverType: string="";
     dateSandFilter: string="";
     brandSandFilter: string="";

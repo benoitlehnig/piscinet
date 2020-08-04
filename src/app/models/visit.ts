@@ -18,7 +18,6 @@ export class Visit {
 }
 
 export class Maintenance{
-	public  analyse: boolean=false;
 	public  curtain: boolean=false;
 	public  cleaningSkimmer: boolean=false;
 	public  emptySkimmer: boolean=false;
@@ -34,18 +33,17 @@ export class Maintenance{
 	public  passageLandingDepth: boolean=false;
 	public  goodFloat: boolean=false;
 	public  floatNotBlocked: boolean=false;
-	public  bottomDrain: boolean=false;
-	public  vacuumCleaner: boolean=false;
+	public  curtainVacuumCleaner: boolean=false;
+	public  brossage: boolean=false;
 	public  TLFilterWashing: boolean=false;
 	public  TLCleaningPreFilter: boolean=false;
-	public  TLChloreLVL: string="";
-	public  TLPHLVL: string="";
+	public  TLChloreLVL: string="50";
+	public  TLPHLVL: string="50";
 	public  TLWaterMeter: string="";
 	public  TLClockSetting: boolean=false;
 	public  TLFiltrationMode: string="";
 	public  TLRobotMode: string="";
 	public  TLProjectorMode: string="";
-	public  TLProjectorWater: string="";
 	public  TLCleaningRoom: boolean=false;
 	public  PFEDSaltRAS:  boolean=false;
 	public  PFEDSaltCell:  boolean=false;
@@ -68,7 +66,8 @@ export class Maintenance{
 export class Observation{
 	public waterBadClarity:boolean=false;
 	public algeaOnWall:boolean=false;
-	public brossage: boolean=false;
+	public  bottomDrain: boolean=false;
+
 	public otherObservation: string;
 	deserialize(input: any) {
 		Object.assign(this, input);
@@ -79,6 +78,7 @@ export class Technique{
 	public chlore: string="";
 	public PH: string="";
 	public stabilisant: string="";
+	public waterTemperature: string="";
 	public TAC: string="";
 	public sel: string="";
 	public productChlore: string="";
