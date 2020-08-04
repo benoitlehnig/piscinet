@@ -78,7 +78,7 @@ export class Technique{
 	public chlore: string="";
 	public PH: string="";
 	public stabilisant: string="";
-	public waterTemperature: string="";
+	public waterTemperature: string="20";
 	public TAC: string="";
 	public sel: string="";
 	public productChlore: string="";

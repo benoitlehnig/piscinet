@@ -53,7 +53,7 @@
 					<ion-text class="smallerFont" *ngIf="swimmingPool.cover ==='coatedConcrete'" >{{'SWIMMINGPOOL.CoatedConcrete' | translate}}</ion-text>
 					<ion-text class="smallerFont" *ngIf="swimmingPool.cover ==='moltenGlass'" >{{'SWIMMINGPOOL.MoltenGlass' | translate}}</ion-text>
 				</ion-item>
-				<ion-item lines="none" *ngIf="swimmingPool.curtain !==''">
+				<ion-item lines="none" *ngIf="swimmingPool.curtain !==null">
 					<ion-icon slot="start" name="archive-outline" color="primary"></ion-icon>		
 					<ion-text class="smallerFont" *ngIf="swimmingPool.curtain ===true">{{'SWIMMINGPOOL.Curtain' | translate}}</ion-text>
 					<ion-text class="smallerFont" *ngIf="swimmingPool.curtain ===false">{{'SWIMMINGPOOL.CurtainNone' | translate}}</ion-text>

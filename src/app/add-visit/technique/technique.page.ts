@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataSharingService } from '../../services/data-sharing.service'
 import {Visit} from '../../models/visit';
 import {AppConstants } from '../../app-constants';
+import {SwimmingPool} from '../../models/swimming-pool';
 
 
 @Component({
@@ -13,6 +14,8 @@ export class TechniquePage implements OnInit {
 
 	
 	visit:Visit=new Visit();
+	public swimmingPool:SwimmingPool=new SwimmingPool();
+	public lastTechnique=null;
 
 	chloreSteps=this.appConstants.chloreSteps;
 	PHSteps=this.appConstants.PHSteps;
@@ -28,6 +31,12 @@ export class TechniquePage implements OnInit {
 			console.log("visit technique:", visit)
             this.visit = visit;
         });
+        this.dataSharingService.getCurrentPoolChanges().subscribe(swimmingPool =>{
+			this.swimmingPool = swimmingPool;
+			if(swimmingPool.lastTechnique){
+				this.lastTechnique = swimmingPool.lastTechnique
+			}
+		})	
 	}
 
 	ionViewWillLeave(){

@@ -10,29 +10,67 @@
 
 <ion-content>
 	<ion-list>
-		<ion-item *ngFor="let visit of visits | async" [routerLink]="['/visits/' + visit.visitKey,{swimmingPoolStringified:swimmingPoolStringified}]">
+		<ion-item *ngFor="let visit of visits | async" [routerLink]="['/visits/' + visit.visitKey]">
 			<ion-avatar slot="start" class="avatarListVisits"  [ngClass]="{'full': visit.typeOfVisit ==='full' , 
 			'controle': visit.typeOfVisit ==='controle' , 'maintenance': visit.typeOfVisit ==='maintenance' }">
-				<ion-icon name="shield-checkmark"></ion-icon>
-				<div *ngIf="visit" class="typeOfVisitWrapper">
-					<span *ngIf="visit.typeOfVisit ==='full'">{{'VISIT.VisitTypeFull' | translate}}</span>
-					<span *ngIf="visit.typeOfVisit ==='controle'">{{'VISIT.VisitTypeControl' | translate}}</span>
-					<span *ngIf="visit.typeOfVisit ==='maintenance'">{{'VISIT.VisitTypeMaintenance' | translate}}</span>
-				</div>
-			</ion-avatar>
-			<ion-label>
-				<h3 *ngIf="visit.dateTime"><b>{{ visit.dateTime | date:'medium' }}</b> </h3>
-				<h4 *ngIf="visit.customer.data !==null">{{'VISIT.Customer' | translate}}{{ visit.customer.data.firstName}} {{ visit.customer.data.lastName}} </h4>
-				
-				<p *ngIf="visit.employee.data !==null">{{'VISIT.VisitPerformedBY' | translate}} {{visit.employee.data.firstName }} {{visit.employee.data.lastName}}</p>
-				<p *ngIf="visit.generalStatusKO ===true">
-					<ion-icon name="warning" color="danger"></ion-icon>
-					<ion-text color="danger">{{'VISIT.NewInterventionRequired' | translate}}</ion-text>
-				</p>
-			</ion-label>
-			<ion-note>{{visit.technique.Chlore}}</ion-note>
-			<ion-note>{{visit.technique.PH}}</ion-note>
-		</ion-item>
-	</ion-list>
+			<ion-icon name="shield-checkmark"></ion-icon>
+			<div *ngIf="visit" class="typeOfVisitWrapper">
+				<span *ngIf="visit.typeOfVisit ==='full'">{{'VISIT.VisitTypeFull' | translate}}</span>
+				<span *ngIf="visit.typeOfVisit ==='controle'">{{'VISIT.VisitTypeControl' | translate}}</span>
+				<span *ngIf="visit.typeOfVisit ==='maintenance'">{{'VISIT.VisitTypeMaintenance' | translate}}</span>
+			</div>
+		</ion-avatar>
+		<ion-label>
+			<h3 *ngIf="visit.dateTime"><b>{{ visit.dateTime | date:'medium' }}</b> </h3>
+			<h4 *ngIf="visit.customer.data !==null">{{'VISIT.Customer' | translate}}{{ visit.customer.data.firstName}} {{ visit.customer.data.lastName}} </h4>
+
+			<p *ngIf="visit.employee.data !==null">{{'VISIT.VisitPerformedBY' | translate}} {{visit.employee.data.firstName }} {{visit.employee.data.lastName}}</p>
+			<p *ngIf="visit.generalStatusKO ===true">
+				<ion-icon name="warning" color="danger"></ion-icon>
+				<ion-text color="danger">{{'VISIT.NewInterventionRequired' | translate}}</ion-text>
+			</p>
+		</ion-label>
+		<ion-note >
+			<div>
+				{{'VISIT.AnalyseChlore'| translate}}
+			</div>
+			<div class="KPIValue">
+				{{visit.technique.chlore}}
+			</div>
+		</ion-note >
+		<ion-note class="ion-margin-start">
+			<div>
+				{{'VISIT.AnalysePH'| translate}}
+			</div>
+			<div class="KPIValue">
+				{{visit.technique.PH}}
+			</div>
+		</ion-note>
+		<ion-note class="ion-hide-sm-down ion-margin-start">
+			<div>
+				{{'VISIT.AnalyseSalt'| translate}}    
+			</div>
+			<div class="KPIValue">
+				{{visit.technique.sel}}
+			</div>
+		</ion-note>
+		<ion-note class="ion-hide-sm-down  ion-margin-start">
+			<div>
+				{{'VISIT.AnalyseTAC'| translate}}    
+			</div>
+			<div class="KPIValue">
+				{{visit.technique.TAC}}
+			</div>
+		</ion-note>
+		<ion-note class="ion-hide-sm-down ion-margin-start">
+			<div>
+				{{visit.technique.AnalyseStabiliserShort}}
+			</div>
+			<div class="KPIValue">
+				{{visit.technique.stabilisant}}
+			</div>
+		</ion-note>
+	</ion-item>
+</ion-list>
 
 </ion-content>

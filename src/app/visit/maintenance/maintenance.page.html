@@ -151,7 +151,7 @@
 		<ion-list-header>
 			<h2>{{'VISIT.ElectronicDevicesTitle' | translate}}</h2>
 		</ion-list-header>
-		<div *ngIf="swimmingPool.electronicalProduct === salt">
+		<div *ngIf="swimmingPool.electronicalProduct === 'salt'">
 			<h3  class="ion-margin-start">{{'VISIT.SaltDeviceTitle' | translate}}</h3>
 			<ion-item>
 				<ion-label *ngIf="visit.maintenance.PFEDSaltCell === false" >{{'VISIT.PFEDSaltCellNoIssue' | translate}}</ion-label>
@@ -186,7 +186,7 @@
 				<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.PFEDPHFaulty ===true"  ></ion-icon>
 			</ion-item>
 		</div>
-		<div *ngIf="swimmingPool.electronicalProduct === UVSterilisation"> 
+		<div *ngIf="swimmingPool.electronicalProduct === 'UVSterilisation'"> 
 			<h3  class="ion-margin-start">{{'VISIT.UVTitle' | translate}}</h3>
 			<ion-item>
 				<ion-label *ngIf="visit.maintenance.PFEDUVCell === false" >{{'VISIT.PFEDUVCellNoIssue' | translate}}</ion-label>

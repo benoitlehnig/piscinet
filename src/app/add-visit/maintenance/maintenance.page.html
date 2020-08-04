@@ -42,7 +42,7 @@
 			</ion-item>
 			<ion-item>
 				<ion-label>{{'VISIT.Brossage' | translate}}</ion-label>
-				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.brossage" (ionChange)="saveObservation()"></ion-toggle>
+				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.brossage" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
 		</div>
 	</ion-list>
@@ -166,7 +166,7 @@
 		<ion-list-header>
 			<h2>{{'VISIT.ElectronicDevicesTitle' | translate}}</h2>
 		</ion-list-header>
-		<div  *ngIf="swimmingPool.electronicalProduct === salt">
+		<div *ngIf="swimmingPool.electronicalProduct === 'salt'">
 			<h3>{{'VISIT.SaltDeviceTitle' | translate}}</h3>
 			<ion-item>
 				<ion-label>{{'VISIT.PFEDSaltCell' | translate}}</ion-label>
@@ -198,7 +198,7 @@
 				<ion-input slot="end" class="ion-float-end borderInput" name="PFEDPH2WaterTemp" type="number"  [(ngModel)]="visit.maintenance.PFEDPH2WaterTemp" (ionChange)="saveMaintenance()"></ion-input>
 			</ion-item>
 		</div>
-		<div *ngIf="swimmingPool.electronicalProduct === UVSterilisation"> 
+		<div *ngIf="swimmingPool.electronicalProduct === 'UVSterilisation' "> 
 			<h3 class="ion-margin-start">{{'VISIT.UVTitle' | translate}}</h3>
 			<ion-item>
 				<ion-label>{{'VISIT.PFEDUVCell' | translate}}</ion-label>

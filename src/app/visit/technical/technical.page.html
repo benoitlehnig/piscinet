@@ -10,7 +10,7 @@
 				<div  *ngIf="visit.technique.chlore !==''">
 					<ion-grid class="analyses">
 						<ion-row>
-							<ion-col class="cell" (click)="saveChlore(step.value)" *ngFor="let step of chloreSteps"  [ngClass]="{'selected': visit.technique.chlore === step.value }" style="background-color:{{step.backgroundColor}}" >
+							<ion-col class="cell" *ngFor="let step of chloreSteps"  [ngClass]="{'selected': visit.technique.chlore === step.value }" style="background-color:{{step.backgroundColor}}" >
 								<ion-text>{{step.value}}</ion-text>
 							</ion-col>
 						</ion-row>
@@ -26,13 +26,57 @@
 				<div *ngIf="visit.technique.PH !==''">
 					<ion-grid class="analyses">
 						<ion-row>
-							<ion-col class="cell" (click)="savePH(step.value)" *ngFor="let step of PHSteps"  [ngClass]="{'selected': visit.technique.PH === step.value }" style="background-color:{{step.backgroundColor}}" >
+							<ion-col class="cell" *ngFor="let step of PHSteps"  [ngClass]="{'selected': visit.technique.PH === step.value }" style="background-color:{{step.backgroundColor}}" >
 								<ion-text>{{step.value}}</ion-text>
 							</ion-col>
 						</ion-row>
 					</ion-grid>
 				</div>
 			</ion-label> 
+		</ion-item>
+		<ion-item lines="none" class="readOnlyTemp">
+			<ion-label class="readOnlyTemp">
+				<ion-text slot="start" class="readOnlyTemp">{{'VISIT.WaterTemperature' | translate}} : {{visit.technique.waterTemperature}}</ion-text>
+				<div>
+					<ion-range min="10" max="40" step="1" name="waterTemperature"  [(ngModel)]="visit.technique.waterTemperature" disabled class="readOnlyTemp" pin="true">
+						<ion-icon size="small" color="primary" slot="start" name="thermometer-outline"></ion-icon>
+						<ion-label slot="start">10</ion-label>
+						<ion-label slot="end">40</ion-label>
+						<ion-icon slot="end" color="primary" name="thermometer-outline"></ion-icon>
+					</ion-range>
+				</div>
+			</ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-grid>
+				<ion-row>
+					<ion-col class="ion-text-center">
+						<div>
+							<ion-text >{{'VISIT.AnalyseSalt' | translate}}</ion-text>
+						</div>
+						<div>
+							<ion-input class="borderInput inlineAnalyseBorder" name="sel" type="number" [(ngModel)]="visit.technique.sel" readonly></ion-input>
+						</div>
+					</ion-col>
+					<ion-col class="ion-text-center">
+						<div>
+							<ion-text >{{'VISIT.AnalyseTAC' | translate}}</ion-text>
+						</div>
+						<div>
+							<ion-input class="borderInput inlineAnalyseBorder" name="TAC" type="number"  [(ngModel)]="visit.technique.TAC" readonly></ion-input>
+						</div>
+					</ion-col>
+					<ion-col class="ion-text-center">
+						<div>
+							<ion-text >{{'VISIT.AnalyseStabiliser' | translate}}</ion-text>
+						</div>
+						<div>
+							<ion-input  class="borderInput inlineAnalyseBorder" name="stabilisant" type="number"  [(ngModel)]="visit.technique.stabilisant"></ion-input>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+
 		</ion-item>
 
 	</ion-list>
@@ -53,12 +97,12 @@
 		<ion-item>
 			<ion-text>{{'VISIT.AnalyseSalt' | translate}}</ion-text>
 			<ion-text *ngIf="visit.technique.sel !==''" class="ion-margin-start">{{visit.technique.sel}}</ion-text> 
-			<ion-text *ngIf="visit.technique.sel ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+			<ion-text *ngIf="visit.technique.sel ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
 		</ion-item>
 		<ion-item>
 			<ion-text>{{'VISIT.WaterTemperature' | translate}}</ion-text>
 			<ion-text *ngIf="visit.technique.waterTemperature !==''" class="ion-margin-start">{{visit.technique.waterTemperature}}</ion-text> 
-			<ion-text *ngIf="visit.technique.waterTemperature ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+			<ion-text *ngIf="visit.technique.waterTemperature ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
 		</ion-item>
 	</ion-list>
 	<ion-list>

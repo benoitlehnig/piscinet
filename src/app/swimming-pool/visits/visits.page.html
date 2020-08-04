@@ -4,25 +4,61 @@
 		<ion-item *ngFor="let visit of visits | async" [routerLink]="['/visits/' + visit.visitKey]">
 			<ion-avatar slot="start" class="avatarListVisits" [ngClass]="{'full': visit.typeOfVisit ==='full' , 
 			'controle': visit.typeOfVisit ==='controle' , 'maintenance': visit.typeOfVisit ==='maintenance' }">
-				<ion-icon name="shield-checkmark"></ion-icon>
-				<div *ngIf="visit.maintenance" class="typeOfVisitWrapper">
-					<span *ngIf="visit.typeOfVisit ==='full'">{{'VISIT.VisitTypeFull' | translate}}</span>
-					<span *ngIf="visit.typeOfVisit ==='controle'">{{'VISIT.VisitTypeControl' | translate}}</span>
-					<span *ngIf="visit.typeOfVisit ==='maintenance'">{{'VISIT.VisitTypeMaintenance' | translate}}</span>
-				</div>
-			</ion-avatar>
-			<ion-label>
-				<h3 *ngIf="visit.dateTime"><b>{{ visit.dateTime | date:'medium' }}</b></h3>
+			<ion-icon name="shield-checkmark"></ion-icon>
+			<div *ngIf="visit.maintenance" class="typeOfVisitWrapper">
+				<span *ngIf="visit.typeOfVisit ==='full'">{{'VISIT.VisitTypeFull' | translate}}</span>
+				<span *ngIf="visit.typeOfVisit ==='controle'">{{'VISIT.VisitTypeControl' | translate}}</span>
+				<span *ngIf="visit.typeOfVisit ==='maintenance'">{{'VISIT.VisitTypeMaintenance' | translate}}</span>
+			</div>
+		</ion-avatar>
+		<ion-label>
+			<h3 *ngIf="visit.dateTime"><b>{{ visit.dateTime | date:'medium' }}</b></h3>
 
-				<p *ngIf="visit.employee.data">{{'VISIT.VisitPerformedBY' | translate}} {{visit.employee.data.firstName }} {{visit.employee.data.lastName}}</p>
-				<p *ngIf="visit.employee.data === null">{{'VISIT.VisitPerformedBY' | translate}} {{'COMMON.UnknownEmployee' | translate}}</p>
+			<p *ngIf="visit.employee.data">{{'VISIT.VisitPerformedBY' | translate}} {{visit.employee.data.firstName }} {{visit.employee.data.lastName}}</p>
+			<p *ngIf="visit.employee.data === null">{{'VISIT.VisitPerformedBY' | translate}} {{'COMMON.UnknownEmployee' | translate}}</p>
 
-			</ion-label>
-
-			<ion-note slot="end" color="primary">{{visit.technique.chlore}} </ion-note>
-			<ion-note slot="end" color="secondary"> {{visit.technique.PH}}</ion-note>
-
-		</ion-item>
-	</ion-list>
+		</ion-label>
+		<ion-note >
+			<div>
+				{{'VISIT.AnalyseChlore'| translate}}
+			</div>
+			<div class="KPIValue">
+				{{visit.technique.chlore}}
+			</div>
+		</ion-note >
+		<ion-note class="ion-margin-start">
+			<div>
+				{{'VISIT.AnalysePH'| translate}}
+			</div>
+			<div class="KPIValue">
+				{{visit.technique.PH}}
+			</div>
+		</ion-note>
+		<ion-note class="ion-hide-sm-down ion-margin-start">
+			<div>
+				{{'VISIT.AnalyseSalt'| translate}}    
+			</div>
+			<div class="KPIValue">
+				{{visit.technique.sel}}
+			</div>
+		</ion-note>
+		<ion-note class="ion-hide-sm-down  ion-margin-start">
+			<div>
+				{{'VISIT.AnalyseTAC'| translate}}    
+			</div>
+			<div class="KPIValue">
+				{{visit.technique.TAC}}
+			</div>
+		</ion-note>
+		<ion-note class="ion-hide-sm-down ion-margin-start">
+			<div>
+				{{visit.technique.AnalyseStabiliserShort}}
+			</div>
+			<div class="KPIValue">
+				{{visit.technique.stabilisant}}
+			</div>
+		</ion-note>
+	</ion-item>
+</ion-list>
 
 </ion-content>
