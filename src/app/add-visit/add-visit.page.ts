@@ -49,7 +49,6 @@ export class AddVisitPage implements OnInit {
 		public visitServicesService: VisitServicesService,
 		public dataSharingService:DataSharingService,
 		public modalController: ModalController
-
 		) {
 
 	}
@@ -136,9 +135,9 @@ export class AddVisitPage implements OnInit {
 							newOfflineData.push(visit);
 							this.storage.set('offlineVisits',JSON.stringify(newOfflineData) );
 							this.dataSharingService.offlineVisitNumberDataChanges(newOfflineData);
-							this.loading.dismiss();
-							sub.unsubscribe();
 						}
+						this.loading.dismiss();
+						sub.unsubscribe();
 						this.navCtrl.navigateRoot(['offlineVisits']);
 					});
 				}

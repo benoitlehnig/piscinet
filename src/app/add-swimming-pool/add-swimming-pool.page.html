@@ -28,7 +28,7 @@
 	</ion-item>
 	<ion-list>
 		<ion-list-header>
-			{{'ADDSWIMMINGPOOL.GeneralDimension' | translate}}
+			<h3>{{'ADDSWIMMINGPOOL.GeneralDimension' | translate}}</h3>	
 		</ion-list-header>
 		<ion-segment scrollable name="shape" [(ngModel)]="swimmingPool.shape">
 			<ion-segment-button value="rectangular" layout="icon-start" class="segmentButtonOverride">
@@ -46,30 +46,36 @@
 		</ion-segment>
 		<ion-grid>
 			<ion-row>
-				<ion-col size="4">
-					<ion-item>
-						<ion-label position="stacked">{{'ADDSWIMMINGPOOL.Length' | translate}} <ion-text color="danger">*</ion-text></ion-label>
-						<ion-input  name="length" type="text" [(ngModel)]="swimmingPool.length"  required></ion-input>
-					</ion-item>
+				<ion-col class="ion-text-center">
+					<div>
+						<ion-text>{{'ADDSWIMMINGPOOL.Length' | translate}} <ion-text color="danger">*</ion-text></ion-text>
+					</div>
+					<div>
+						<ion-input class="borderInput inlineAnalyseBorder" name="length" type="number"  [(ngModel)]="swimmingPool.length" required></ion-input>
+					</div>
 				</ion-col>
-				<ion-col size="4">
-					<ion-item>
-						<ion-label position="stacked">{{'ADDSWIMMINGPOOL.Width' | translate}} <ion-text color="danger">*</ion-text></ion-label>
-						<ion-input  name="width" type="text" [(ngModel)]="swimmingPool.width"  required></ion-input>
-					</ion-item>
+				<ion-col class="ion-text-center">
+					<div>
+						<ion-text>{{'ADDSWIMMINGPOOL.Width' | translate}} <ion-text color="danger">*</ion-text></ion-text>
+					</div>
+					<div>
+						<ion-input class="borderInput inlineAnalyseBorder" name="width" type="number"  [(ngModel)]="swimmingPool.width" required></ion-input>
+					</div>
 				</ion-col>
-				<ion-col size="4">
-					<ion-item>
-						<ion-label position="stacked">{{'ADDSWIMMINGPOOL.Depth' | translate}} <ion-text color="danger">*</ion-text></ion-label>
-						<ion-input  name="depth" type="text" [(ngModel)]="swimmingPool.depth"  required></ion-input>
-					</ion-item>
+				<ion-col class="ion-text-center">
+					<div>
+						<ion-text>{{'ADDSWIMMINGPOOL.Depth' | translate}} <ion-text color="danger">*</ion-text></ion-text>
+					</div>
+					<div>
+						<ion-input class="borderInput inlineAnalyseBorder" name="depth" type="number"  [(ngModel)]="swimmingPool.depth" required></ion-input>
+					</div>
 				</ion-col>
 			</ion-row>
 		</ion-grid>
 	</ion-list>
 	<ion-list>
 		<ion-list-header>
-			{{'ADDSWIMMINGPOOL.GeneralInformation' | translate}}
+			<h3>{{'ADDSWIMMINGPOOL.GeneralInformation' | translate}}</h3>
 		</ion-list-header>
 
 		<ion-item lines="none">
@@ -103,41 +109,51 @@
 
 
 		<ion-item>
-			<ion-item><ion-label>{{'ADDSWIMMINGPOOL.Cover' | translate}}</ion-label></ion-item>
-			<ion-segment scrollable name="cover" [(ngModel)]="swimmingPool.cover">
-				<ion-segment-button value="liner" layout="icon-start" class="segmentButtonOverride">
-					<ion-label>{{'ADDSWIMMINGPOOL.Liner' | translate}}</ion-label>
-				</ion-segment-button>
-				<ion-segment-button value="PVC" layout="icon-start" class="segmentButtonOverride">
-					<ion-label>{{'ADDSWIMMINGPOOL.PVC' | translate}}</ion-label>
-				</ion-segment-button>
-				<ion-segment-button value="mosaic" layout="icon-start" class="segmentButtonOverride">
-					<ion-label>{{'ADDSWIMMINGPOOL.Mosaic' | translate}}</ion-label>
-				</ion-segment-button>
-				<ion-segment-button value="polyester" layout="icon-start" class="segmentButtonOverride">
-					<ion-label>{{'ADDSWIMMINGPOOL.Polyester' | translate}}</ion-label>
-				</ion-segment-button>
-				<ion-segment-button value="coatedConcrete" layout="icon-start" class="segmentButtonOverride">
-					<ion-label>{{'ADDSWIMMINGPOOL.CoatedConcrete' | translate}}</ion-label>
-				</ion-segment-button>
-				<ion-segment-button value="moltenGlass" layout="icon-start" class="segmentButtonOverride">
-					<ion-label>{{'ADDSWIMMINGPOOL.MoltenGlass' | translate}}</ion-label>
-				</ion-segment-button>
-			</ion-segment>
+			<ion-label lines="none">
+				<div><ion-text>{{'ADDSWIMMINGPOOL.Cover' | translate}}</ion-text></div>
+				<div>
+					<ion-segment scrollable name="cover" [(ngModel)]="swimmingPool.cover">
+						<ion-segment-button value="liner" layout="icon-start" class="segmentButtonOverride">
+							<ion-label>{{'ADDSWIMMINGPOOL.Liner' | translate}}</ion-label>
+						</ion-segment-button>
+						<ion-segment-button value="PVC" layout="icon-start" class="segmentButtonOverride">
+							<ion-label>{{'ADDSWIMMINGPOOL.PVC' | translate}}</ion-label>
+						</ion-segment-button>
+						<ion-segment-button value="mosaic" layout="icon-start" class="segmentButtonOverride">
+							<ion-label>{{'ADDSWIMMINGPOOL.Mosaic' | translate}}</ion-label>
+						</ion-segment-button>
+						<ion-segment-button value="polyester" layout="icon-start" class="segmentButtonOverride">
+							<ion-label>{{'ADDSWIMMINGPOOL.Polyester' | translate}}</ion-label>
+						</ion-segment-button>
+						<ion-segment-button value="coatedConcrete" layout="icon-start" class="segmentButtonOverride">
+							<ion-label>{{'ADDSWIMMINGPOOL.CoatedConcrete' | translate}}</ion-label>
+						</ion-segment-button>
+						<ion-segment-button value="moltenGlass" layout="icon-start" class="segmentButtonOverride">
+							<ion-label>{{'ADDSWIMMINGPOOL.MoltenGlass' | translate}}</ion-label>
+						</ion-segment-button>
+					</ion-segment>
+				</div>
+			</ion-label>
 		</ion-item>
-		<ion-item>
-			<ion-item><ion-label>{{'ADDSWIMMINGPOOL.Access' | translate}}</ion-label></ion-item>
-			<ion-segment scrollable name="access" [(ngModel)]="swimmingPool.access">
-				<ion-segment-button value="ladder" layout="icon-start" class="segmentButtonOverride">
-					<ion-label>{{'ADDSWIMMINGPOOL.Ladder' | translate}}</ion-label>
-				</ion-segment-button>
-				<ion-segment-button value="stairs" layout="icon-start" class="segmentButtonOverride">
-					<ion-label>{{'ADDSWIMMINGPOOL.Stairs' | translate}}</ion-label>
-				</ion-segment-button>
-				<ion-segment-button value="beach" layout="icon-start" class="segmentButtonOverride">
-					<ion-label>{{'ADDSWIMMINGPOOL.Beach' | translate}}</ion-label>
-				</ion-segment-button>
-			</ion-segment>
+		<ion-item lines="none">
+			<ion-label>
+				<div>
+					<ion-text>{{'ADDSWIMMINGPOOL.Access' | translate}}</ion-text>
+				</div>
+				<div>
+					<ion-segment scrollable name="access" [(ngModel)]="swimmingPool.access">
+						<ion-segment-button value="ladder" layout="icon-start" class="segmentButtonOverride">
+							<ion-label>{{'ADDSWIMMINGPOOL.Ladder' | translate}}</ion-label>
+						</ion-segment-button>
+						<ion-segment-button value="stairs" layout="icon-start" class="segmentButtonOverride">
+							<ion-label>{{'ADDSWIMMINGPOOL.Stairs' | translate}}</ion-label>
+						</ion-segment-button>
+						<ion-segment-button value="beach" layout="icon-start" class="segmentButtonOverride">
+							<ion-label>{{'ADDSWIMMINGPOOL.Beach' | translate}}</ion-label>
+						</ion-segment-button>
+					</ion-segment>
+				</div>
+			</ion-label>
 		</ion-item>
 		<ion-item>
 			<ion-label>{{'ADDSWIMMINGPOOL.Barrier' | translate}}</ion-label>
@@ -147,34 +163,34 @@
 			<ion-label>{{'ADDSWIMMINGPOOL.AlarmElectronicSystem' | translate}}</ion-label>
 			<ion-toggle slot="start" name="alarmElectronicSystem"  [(ngModel)]="swimmingPool.alarmElectronicSystem"></ion-toggle>
 		</ion-item>
+		
+		<ion-item >
+			<ion-label>{{'ADDSWIMMINGPOOL.Curtain' | translate}}</ion-label>
+			<ion-toggle slot="start" name="curtain"  [(ngModel)]="swimmingPool.curtain"></ion-toggle>
+		</ion-item>
 		<ion-item>
 			<ion-label>{{'ADDSWIMMINGPOOL.WinterCover' | translate}}</ion-label>
 			<ion-toggle slot="start" name="winterCover"  [(ngModel)]="swimmingPool.winterCover"></ion-toggle>
 		</ion-item>
-		<ion-item>
-			<ion-label>{{'ADDSWIMMINGPOOL.Curtain' | translate}}</ion-label>
-			<ion-toggle slot="start" name="curtain"  [(ngModel)]="swimmingPool.curtain"></ion-toggle>
-		</ion-item>
-		
-		<div class="paddingToggle" *ngIf="swimmingPool.winterCover ===true"  lines="none">
-				<ion-radio-group name="coverType" [(ngModel)]="swimmingPool.coverType" >
-					<ion-list-header>
-						<ion-label>{{'ADDSWIMMINGPOOL.WinterCoverType' | translate}}</ion-label>
-					</ion-list-header>
-					<ion-item>
-						<ion-label>{{'ADDSWIMMINGPOOL.CoverAutomatic' | translate}}</ion-label>
-						<ion-radio slot="start" value="automatic"></ion-radio>
-					</ion-item>
-					<ion-item>
-						<ion-label>{{'ADDSWIMMINGPOOL.CoverReel' | translate}}</ion-label>
-						<ion-radio slot="start" value="reel"></ion-radio>
-					</ion-item>
-					<ion-item>
-						<ion-label>{{'ADDSWIMMINGPOOL.CoverStretched' | translate}}</ion-label>
-						<ion-radio slot="start" value="stretched"></ion-radio>
-					</ion-item>	
-				</ion-radio-group>
-			</div>
+		<div class="ion-margin-start" *ngIf="swimmingPool.winterCover ===true"  lines="none">
+			<ion-radio-group name="coverType" [(ngModel)]="swimmingPool.coverType" >
+				<ion-list-header>
+					<ion-label>{{'ADDSWIMMINGPOOL.WinterCoverType' | translate}}</ion-label>
+				</ion-list-header>
+				<ion-item lines="none">
+					<ion-label>{{'ADDSWIMMINGPOOL.CoverAutomatic' | translate}}</ion-label>
+					<ion-radio slot="start" value="automatic"></ion-radio>
+				</ion-item>
+				<ion-item lines="none">
+					<ion-label>{{'ADDSWIMMINGPOOL.CoverReel' | translate}}</ion-label>
+					<ion-radio slot="start" value="reel"></ion-radio>
+				</ion-item>
+				<ion-item lines="none">
+					<ion-label>{{'ADDSWIMMINGPOOL.CoverStretched' | translate}}</ion-label>
+					<ion-radio slot="start" value="stretched"></ion-radio>
+				</ion-item>	
+			</ion-radio-group>
+		</div>
 	</ion-list>
 	<ion-card>
 		<ion-card-header>
@@ -224,19 +240,19 @@
 					<ion-list-header>
 						<ion-label>{{'SWIMMINGPOOL.ElectronicalProductType' | translate}}</ion-label>
 					</ion-list-header>
-					<ion-item>
+					<ion-item lines="none">
 						<ion-label>{{'ADDSWIMMINGPOOL.Salt' | translate}}</ion-label>
 						<ion-radio slot="start" value="salt"></ion-radio>
 					</ion-item>
-					<ion-item>
+					<ion-item lines="none">
 						<ion-label>{{'ADDSWIMMINGPOOL.Copper' | translate}}</ion-label>
 						<ion-radio slot="start" value="copper"></ion-radio>
 					</ion-item>	
-					<ion-item>
+					<ion-item lines="none">
 						<ion-label>{{'ADDSWIMMINGPOOL.Chlorine' | translate}}</ion-label>
 						<ion-radio slot="start" value="chlorine"></ion-radio>
 					</ion-item>	
-					<ion-item>
+					<ion-item lines="none">
 						<ion-label>{{'ADDSWIMMINGPOOL.UVSterilisation' | translate}}</ion-label>
 						<ion-radio slot="start" value="UVSterilisation"></ion-radio>
 					</ion-item>	
@@ -259,7 +275,7 @@
 				<ion-label>{{'ADDSWIMMINGPOOL.PH' | translate}}</ion-label>
 				<ion-toggle slot="start" name="PH"  [(ngModel)]="swimmingPool.PH"></ion-toggle>
 			</ion-item>
-			<div class="paddingToggle" *ngIf="swimmingPool.PH ===true">
+			<div class="ion-margin-start" *ngIf="swimmingPool.PH ===true">
 				<ion-item> 
 					<ion-label>{{'ADDSWIMMINGPOOL.PHDate' | translate}}</ion-label>
 					<ion-datetime display-format="D MMM YYYY" picker-format="D MMM YYYY" name="PHDate" [(ngModel)]="swimmingPool.PHDate"></ion-datetime>
@@ -269,33 +285,33 @@
 				<ion-label>{{'ADDSWIMMINGPOOL.Pomp' | translate}}</ion-label>
 				<ion-toggle slot="start" name="PHpomp"  [(ngModel)]="swimmingPool.pomp"></ion-toggle>
 			</ion-item>
-			<div class="paddingToggle" *ngIf="swimmingPool.pomp ===true"  lines="none">
+			<div class="ion-margin-start" *ngIf="swimmingPool.pomp ===true"  lines="none">
 				<ion-item >
-					<ion-label>{{'ADDSWIMMINGPOOL.PompDate' | translate}}</ion-label>
+					<ion-label>{{'SWIMMINGPOOL.PompDate' | translate}}</ion-label>
 					<ion-datetime display-format="D MMM YYYY" picker-format="D MMM YYYY" name="pompDate" [(ngModel)]="swimmingPool.pompDate"></ion-datetime>
 				</ion-item>
 				<ion-item >
-					<ion-label>{{'ADDSWIMMINGPOOL.PompBrand' | translate}}</ion-label>
+					<ion-label>{{'SWIMMINGPOOL.PompBrand' | translate}}</ion-label>
 					<ion-input  name="pompBrand" type="text" [(ngModel)]="swimmingPool.pompBrand" ></ion-input>
 				</ion-item>
 				<ion-item >
-					<ion-label>{{'ADDSWIMMINGPOOL.PompModel' | translate}}</ion-label>
+					<ion-label>{{'SWIMMINGPOOL.PompModel' | translate}}</ion-label>
 					<ion-input  name="pompModel" type="text" [(ngModel)]="swimmingPool.pompModel" ></ion-input>
 				</ion-item>
 				<ion-item >
-					<ion-label>{{'ADDSWIMMINGPOOL.PompPower' | translate}}</ion-label>
+					<ion-label>{{'SWIMMINGPOOL.PompPower' | translate}}</ion-label>
 					<ion-input  name="pompPower" type="text" [(ngModel)]="swimmingPool.pompPower" ></ion-input>
 				</ion-item>
 				<ion-radio-group name="pompPhase" [(ngModel)]="swimmingPool.pompPhase" >
 					<ion-list-header>
 						<ion-label>{{'SWIMMINGPOOL.PompPhase' | translate}}</ion-label>
 					</ion-list-header>
-					<ion-item>
-						<ion-label>{{'ADDSWIMMINGPOOL.PompPhaseMono' | translate}}</ion-label>
+					<ion-item lines="none">
+						<ion-label>{{'SWIMMINGPOOL.PompPhaseMono' | translate}}</ion-label>
 						<ion-radio slot="start" value="mono"></ion-radio>
 					</ion-item>
-					<ion-item>
-						<ion-label>{{'ADDSWIMMINGPOOL.PompPhaseTri' | translate}}</ion-label>
+					<ion-item lines="none">
+						<ion-label>{{'SWIMMINGPOOL.PompPhaseTri' | translate}}</ion-label>
 						<ion-radio slot="start" value="tri"></ion-radio>
 					</ion-item>	
 				</ion-radio-group>
@@ -304,7 +320,7 @@
 				<ion-label>{{'ADDSWIMMINGPOOL.AutomaticFill' | translate}}</ion-label>
 				<ion-toggle slot="start" name="automaticFill"  [(ngModel)]="swimmingPool.automaticFill"></ion-toggle>
 			</ion-item>
-			<div class="paddingToggle" *ngIf="swimmingPool.automaticFill ===true"  lines="none">
+			<div class="ion-margin-start" *ngIf="swimmingPool.automaticFill ===true"  lines="none">
 				<ion-item >
 					<ion-label>{{'ADDSWIMMINGPOOL.AutomaticFillDate' | translate}}</ion-label>
 					<ion-datetime display-format="D MMM YYYY" picker-format="D MMM YYYY" name="automaticFillDate" [(ngModel)]="swimmingPool.automaticFillDate"></ion-datetime>
@@ -326,6 +342,10 @@
 			<ion-item lines="none">
 				<ion-label>{{'ADDSWIMMINGPOOL.CounterCurrent' | translate}}</ion-label>
 				<ion-toggle slot="start" name="counterCurrent"  [(ngModel)]="swimmingPool.counterCurrent"></ion-toggle>
+			</ion-item>
+			<ion-item lines="none">
+				<ion-label>{{'ADDSWIMMINGPOOL.Robot' | translate}}</ion-label>
+				<ion-toggle slot="start" name="robot"  [(ngModel)]="swimmingPool.robot"></ion-toggle>
 			</ion-item>
 		</ion-card-content>
 	</ion-card>

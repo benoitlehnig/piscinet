@@ -154,7 +154,7 @@ export class CustomerPage implements OnInit {
 	startVisit(type:string,swimmingPool){
 		const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
 		this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
-			swimmingPoolName:swimmingPool.name,visitType:'controle',swimmingPoolStringified:swimmingPoolStringified }])
+			swimmingPoolName:swimmingPool.name,visitType:type,swimmingPoolStringified:swimmingPoolStringified }])
 			}
 
 

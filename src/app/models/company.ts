@@ -11,6 +11,7 @@ export class Company {
 
 export class Configuration{
 	public logoPictureUrl:string="https://firebasestorage.googleapis.com/v0/b/piscinet-79e4a.appspot.com/o/4QVv7PDq0vCMmrqOQcq3%2FswimmingPoolAvatar.png?alt=media&token=0df5cb4c-ce6e-4f85-91f7-2f738971ca6b";
+	public logoPictureForNotifUrl:string="https://firebasestorage.googleapis.com/v0/b/piscinet-79e4a.appspot.com/o/4QVv7PDq0vCMmrqOQcq3%2FswimmingPoolAvatar.png?alt=media&token=0df5cb4c-ce6e-4f85-91f7-2f738971ca6b";
 	public nameLoginPage:string="";
 	public emailConfiguration:EmailConfiguration= new EmailConfiguration();
 }

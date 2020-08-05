@@ -82,31 +82,6 @@
 	</ion-list>
 	<ion-list>
 		<ion-list-header>
-			<h2>{{'VISIT.OtherAnalyseTitle' | translate}}</h2>
-		</ion-list-header>
-		<ion-item>
-			<ion-text>{{'VISIT.AnalyseStabiliser' | translate}}</ion-text>
-			<ion-text *ngIf="visit.technique.stabilisant !==''" class="ion-margin-start">{{visit.technique.stabilisant}}</ion-text> 
-			<ion-text *ngIf="visit.technique.stabilisant ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
-		</ion-item>
-		<ion-item>
-			<ion-text>{{'VISIT.AnalyseTAC' | translate}}</ion-text>
-			<ion-text *ngIf="visit.technique.TAC !==''" class="ion-margin-start">{{visit.technique.TAC}}</ion-text> 
-			<ion-text *ngIf="visit.technique.TAC ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
-		</ion-item>
-		<ion-item>
-			<ion-text>{{'VISIT.AnalyseSalt' | translate}}</ion-text>
-			<ion-text *ngIf="visit.technique.sel !==''" class="ion-margin-start">{{visit.technique.sel}}</ion-text> 
-			<ion-text *ngIf="visit.technique.sel ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
-		</ion-item>
-		<ion-item>
-			<ion-text>{{'VISIT.WaterTemperature' | translate}}</ion-text>
-			<ion-text *ngIf="visit.technique.waterTemperature !==''" class="ion-margin-start">{{visit.technique.waterTemperature}}</ion-text> 
-			<ion-text *ngIf="visit.technique.waterTemperature ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
-		</ion-item>
-	</ion-list>
-	<ion-list>
-		<ion-list-header>
 			<h2>{{'VISIT.IntroducedProductsTitle' | translate}}</h2>
 		</ion-list-header>
 		<ion-item>

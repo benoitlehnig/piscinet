@@ -5,7 +5,7 @@ export class SwimmingPool {
     length: number=0;
     width: number=0;
     depth: number=0;
-    shape: string="";
+    shape: string="rectangular";
     environment: number=0;
     state: number=0
     cover: string="liner";

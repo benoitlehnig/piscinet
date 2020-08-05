@@ -104,7 +104,8 @@ export class OfflineVisitsPage implements OnInit {
       this.storage.get('offlineVisits').then(
         val => {
           this.visits = JSON.parse(val);
-          this.visits.forEach((obj, index) => {
+          if(this.visits !== null){
+            this.visits.forEach((obj, index) => {
             if(obj.customerUid !==""){
               this.customerServicesService.getCustomer(obj.customerUid).subscribe(
                 (data3) =>{
@@ -112,6 +113,8 @@ export class OfflineVisitsPage implements OnInit {
                 })
             }
           });
+          }
+          
 
         })
     }

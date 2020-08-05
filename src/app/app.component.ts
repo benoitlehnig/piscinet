@@ -121,8 +121,6 @@ export class AppComponent implements OnInit {
                 this.router.navigateByUrl('/customers');
               }
               this.selectTabNavigation();
-              this.initNotification();
-              this.listen()
               this.requestPermission();
             })
         }
@@ -150,30 +148,39 @@ export class AppComponent implements OnInit {
     this.authService.logoutUser();
   }
 
-  initNotification(){
-    this.requestPermission()
-  }
+
   requestPermission() {
-
-
     this.afMessaging.requestToken
     .subscribe(
       (token) => { 
-        const callable = this.functions.httpsCallable('addDevice');
-        const obs = callable({'uid':this.uid, 'token': token});
-        obs.subscribe(async res => {
-        });
+        this.storage.get('tokenRegistered').then(data =>{
+          let tokenToBeRegistered = false;
+          if(data ===null){
+            tokenToBeRegistered = true;
+          }
+          else{
+            if(data !== token){
+              tokenToBeRegistered = true;
+            }
+          }
+          if( tokenToBeRegistered === true){
+            const callable = this.functions.httpsCallable('addDevice');
+            const obs = callable({'uid':this.uid, 'token': token});
+            obs.subscribe(async res => {
+              this.storage.set('tokenRegistered',token);
+            });
+          }
+        })
+
       },
       (error) => { console.error(error); },  
       );
 
   }
-  listen() {
 
-  }
 
   async presentGDPRPopover() {
-    
+
     const popover = await this.popoverController.create({
       component: GdprmodalComponent,
       componentProps: {homeref:this, uid:this.uid, claims: this.claims},

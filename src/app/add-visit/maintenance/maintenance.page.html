@@ -20,7 +20,7 @@
 				<ion-label>{{'VISIT.CleaningWaterLine' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.cleaningWaterLine" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
-			<ion-item>
+			<ion-item *ngIf="visit.typeOfVisit !=='maintenance'">
 				<ion-label>{{'VISIT.Vacuum' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.vacuum" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
@@ -46,7 +46,7 @@
 			</ion-item>
 		</div>
 	</ion-list>
-	<ion-list *ngIf="swimmingPool.alarmElectronicSystem ===true">
+	<ion-list *ngIf="swimmingPool.alarmElectronicSystem ===true && visit.typeOfVisit !=='maintenance'">
 		<ion-list-header>
 			<h2>{{'VISIT.AlarmSystemTitle' | translate}}</h2>
 		</ion-list-header>
@@ -60,7 +60,7 @@
 		</ion-item>
 
 	</ion-list>
-	<ion-list *ngIf="swimmingPool.automaticFill ===true">
+	<ion-list *ngIf="swimmingPool.automaticFill ===true && visit.typeOfVisit !=='maintenance'">
 		<ion-list-header>
 			<h2>{{'VISIT.AutomaticFill' | translate}}</h2>
 		</ion-list-header>
@@ -86,11 +86,11 @@
 				<ion-label>{{'VISIT.TLCleaningPreFilter' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.TLCleaningPreFilter" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
-			<ion-item >
+			<ion-item *ngIf="visit.typeOfVisit !=='maintenance'" >
 				<ion-label>{{'VISIT.TLClockSetting' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.TLClockSetting" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
-			<ion-item >
+			<ion-item *ngIf="visit.typeOfVisit !=='maintenance'" >
 				<ion-label>{{'VISIT.TLCleaningRoom' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.TLCleaningRoom" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
@@ -126,7 +126,7 @@
 				<ion-input slot="end" class="ion-float-end borderInput" name="TLWaterMeter" type="number"  [(ngModel)]="visit.maintenance.TLWaterMeter" (ionChange)="saveMaintenance()"></ion-input>
 			</ion-item>
 			
-			<ion-item lines="none">
+			<ion-item lines="none" *ngIf="visit.typeOfVisit !=='maintenance'" >
 				<ion-text>{{'VISIT.FilteringModeTitle' | translate}}</ion-text>
 				<ion-segment class="segmentAlignRight" scrollable name="TLFiltrationMode"  [(ngModel)]="visit.maintenance.TLFiltrationMode" (ionChange)="saveMaintenance()">
 					<ion-segment-button value="automatic" class="segmentButtonOverride">
@@ -137,7 +137,7 @@
 					</ion-segment-button>
 				</ion-segment>
 			</ion-item>
-			<ion-item lines="none" *ngIf="swimmingPool.robot ===true">
+			<ion-item lines="none" *ngIf="swimmingPool.robot ===true && visit.typeOfVisit !=='maintenance'" >
 				<ion-text>{{'VISIT.TLRobotMode' | translate}}</ion-text>
 				<ion-segment class="segmentAlignRight" scrollable name="TLRobotMode"  [(ngModel)]="visit.maintenance.TLRobotMode" (ionChange)="saveMaintenance()">
 					<ion-segment-button value="automatic" class="segmentButtonOverride">
@@ -148,7 +148,7 @@
 					</ion-segment-button>
 				</ion-segment>
 			</ion-item>
-			<ion-item>
+			<ion-item *ngIf="visit.typeOfVisit !=='maintenance'" >
 				<ion-text>{{'VISIT.TLProjectorMode' | translate}}</ion-text>
 				<ion-segment class="segmentAlignRight" scrollable name="TLProjectorMode"  [(ngModel)]="visit.maintenance.TLProjectorMode" (ionChange)="saveMaintenance()">
 					<ion-segment-button value="automatic" class="segmentButtonOverride">
@@ -162,7 +162,7 @@
 			
 		</div>
 	</ion-list>
-	<ion-list>
+	<ion-list *ngIf="visit.typeOfVisit !=='maintenance'" >
 		<ion-list-header>
 			<h2>{{'VISIT.ElectronicDevicesTitle' | translate}}</h2>
 		</ion-list-header>
