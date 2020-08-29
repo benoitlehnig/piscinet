@@ -11,7 +11,7 @@ import { IonicModule } from '@ionic/angular';
 import { LandingPagePageRoutingModule } from './landing-page-routing.module';
 
 import { LandingPagePage } from './landing-page.page';
-import { NgxPageScrollModule } from 'ngx-page-scroll';
+import {NgsRevealModule} from 'ngx-scrollreveal';
 
 @NgModule({
 	imports: [
@@ -19,7 +19,7 @@ import { NgxPageScrollModule } from 'ngx-page-scroll';
 	FormsModule,
 	IonicModule,
 	TranslateModule,
-	NgxPageScrollModule,  
+	NgsRevealModule,  
 	LandingPagePageRoutingModule
 	],
 	declarations: [LandingPagePage,RegisterFormComponent],

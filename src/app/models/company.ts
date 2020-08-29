@@ -7,6 +7,7 @@ export class Company {
 	public nameSecondaryVisit:string="";
 	public configuration:Configuration =new Configuration();
 	public plan:string="free";
+	public numberOfSwimmingPools:number=0;
 }
 
 export class Configuration{

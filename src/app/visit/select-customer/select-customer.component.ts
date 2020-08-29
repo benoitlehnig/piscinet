@@ -28,14 +28,17 @@ export class SelectCustomerComponent implements OnInit {
 	}
 
 	selectCustomer(customer){
-		let swimmingPools = this.customerServicesService.getCustomerPools(+customer.key).subscribe(
+		console.log(customer);
+		let swimmingPools = this.customerServicesService.getCustomerPools(customer.key).subscribe(
 			data =>{
 				if(data.length >1){
 					this.selectedCustomerPools = data;
 					this.selectedCustomerKey= customer.key
 				}
 				else{
-					this.navParams.get('homeref').selectCustomer(customer.key, data[0].key)
+					if(data[0] !==undefined){
+						this.navParams.get('homeref').selectCustomer(customer.key, data[0].key)
+					}
 				}
 				swimmingPools.unsubscribe();
 			})

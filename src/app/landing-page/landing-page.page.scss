@@ -4,6 +4,8 @@
 	background: var(--ion-color-light-tint);
 	height:calc(100%);
 	min-height: 700px;
+	max-height: 668px;
+
 	h1{
 		font-size:4em;
 	}
@@ -15,12 +17,14 @@
 	}
 	@media(max-width: 1000px) {
 		height: auto;
+		padding-top:40px;
 		h1{
 			font-size:2em;
 		}
 	}
 	@media(max-width: 800px) {
 		height: auto;
+		padding-top:40px;
 		h1{
 			font-size:1.5em;
 		}
@@ -37,6 +41,7 @@
 		}
 	}
 }
+
 .freeAccess{
 	font-style: italic;
 	width: fit-content;
@@ -53,11 +58,17 @@
 	min-width:300px;
 }
 .pricing{
-	float: right;
 	@media(max-width: 768px) {
-		float:none;
 		width: 200px;
+		margin:12px;
+
 	}	
+	@media(max-width: 1000px) {
+		width: 250px;
+		margin:12	px;
+
+	}
+	
 	width: 300px;
 	margin:24px;
 	border:1px solid;
@@ -86,13 +97,17 @@
 		}
 	}
 }
-.pricing2{
-	border-color: var(--ion-color-secondary-shade);
-	float: left;
+.pricing1{
+	position:absolute;
+	right:0px;
 	@media(max-width: 768px) {
-		float:none;
+		position:relative;
 
 	}	
+}
+.pricing2{
+	border-color: var(--ion-color-secondary-shade);
+	left:0px;
 	.pricingHeader{
 		background: var(--ion-color-secondary-shade);
 	}
@@ -102,26 +117,17 @@
 	margin-right:10%;
 }
 
-.iconsRow{
-	width: 57%;
-	@media(max-width: 768px) {
-		width: 100%;
-	}
-	text-align: center;
-	ion-icon{
-		font-size:3em;
-		color: var(--ion-color-primary);
-		margin-bottom:0.5em;
-	}
-}
+
 .pictureAndText{
-	width: 57%;
+	width: 50%;
+	margin-top: 60px;
+	margin-left: auto;
+	margin-right: auto;	h2{
+		font-size:2em;
+	}
 	@media(max-width: 768px) {
 		width: 100%;
 	}
-	margin-top:60px;
-	margin-left:auto;
-	margin-right:auto;
 }
 
 .subContent3{
@@ -129,5 +135,141 @@
 }
 .subContentTitle{
 	text-align: center;
-	
+	padding-top:50px;
+	font-size: 3em;
 }
+
+.subContentCard{
+	.card-content-md{
+		padding:0px!important;
+	}
+	position:relative;
+	top:-80px;
+	@media(max-width: 768px) {
+		top:-20px;
+	}
+}
+
+.iconRowWrapper{
+	width: 100%;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	text-align: center;
+	margin-top:100px;
+	margin-bottom:100px;
+	background: var(--ion-color-primary);
+}
+.iconsRow{
+	max-width: 1400px;
+	
+	h2{
+		font-size:2em;
+	}
+	text-align: center;
+	ion-icon{
+		font-size:3em;
+		margin-bottom:0.2em;
+	}
+	.iconsRowCol{
+		max-width: 50%;
+	}
+	color: var(--ion-color-primary-contrast);
+	@media(max-width: 768px) {
+		width: 100%;
+		margin-bottom: 12px;
+		h2{
+			font-size:1.5em;
+		}
+	}
+}
+
+.subContentGrid{
+	text-align:center;
+	margin-top:30px;
+	margin-bottom:60px;
+
+	img{
+		max-width:60%;
+	}
+	h2{
+		font-size:2em;
+
+	}
+
+}
+.bottomSection{
+	margin-top:30px;
+	background-color: var(--ion-color-dark);
+	position: relative;
+	bottom: -2px;
+	font-size: 3em;
+	color: var(--ion-color-dark-contrast);
+	a{
+		color: var(--ion-color-dark-contrast) !important;
+
+	}
+	.socialNetworkIcon{
+		color: var(--ion-color-dark-contrast);
+		font-size: 	1.5em;
+	}
+}
+
+
+.testimonyHeader{
+	font-size:2em;
+	color:var(--ion-color-dark);
+	margin-bottom:30px;
+	@media(max-width: 768px) {
+		font-size:1.3em;
+	}
+}
+.testimonyWrapper{
+	margin-top:30px;
+	max-width: 461px;
+	background: #efefefba;
+	padding: 12px;
+	text-align: right;
+	position: absolute;
+	right: 0px;
+
+}
+.testimonyContent{
+	font-style: italic;
+}
+
+.testimonyPicture{
+	background: url(https://image.freepik.com/photos-gratuite/piscine-stair_1203-2577.jpg);
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	min-height:350px;  
+	width: -webkit-fill-available; 
+}
+.testimonyPicture2{
+	background-image: url(https://image.freepik.com/photos-gratuite/jeune-homme-reposant-chaises-longues-nageant-detendez-vous-dans-piscine-tapez-sms-telephone-pigiste-travaille-distance-depuis-bureau-mobile_81863-3132.jpg)
+
+}
+ion-slides {
+	height: 100%;
+}
+.bottomSection{
+	background-color: var(--ion-color-dark);
+	position: relative;
+	bottom: -2px;
+	font-size: 3em;
+	color: var(--ion-color-dark-contrast);
+	a{
+		color: var(--ion-color-dark-contrast) !important;
+
+	}
+	.socialNetworkIcon{
+		color: var(--ion-color-dark-contrast);
+		font-size: 	1.5em;
+	}
+}
+
+
+

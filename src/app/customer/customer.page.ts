@@ -5,6 +5,7 @@ import {SwimmingPool} from '../models/swimming-pool';
 import { Observable, combineLatest, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 import { AuthenticationService } from '../services/authentication.service';
+import {AccountServicesService}  from '../services/account-services.service'; 
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from './popover/popover.component';
@@ -43,6 +44,7 @@ export class CustomerPage implements OnInit {
 	public loadingText:string="" ;
 	public successDeleteText:string="";
 	public mapOK = false;
+	public eligibilityToAddPool:boolean = true;
 
 	@ViewChild(GoogleMap, { static: false }) map: GoogleMap
 
@@ -56,7 +58,8 @@ export class CustomerPage implements OnInit {
 		public navCtrl: NavController,
 		public loadingController: LoadingController,
 		public toastController: ToastController,	
-		public customerServicesService:CustomerServicesService
+		public customerServicesService:CustomerServicesService,
+		public accountServicesService:AccountServicesService,
 
 		) { }
 
@@ -68,9 +71,16 @@ export class CustomerPage implements OnInit {
 				this.emailSentText = value['CUSTOMER.EmailSent'];
 				this.loadingText = value['COMMON.Loading'];
 				this.successDeleteText = value['CUSTOMER.SuccessDeleteText'];
-			});		
-		
+			});	
+		this.accountServicesService.getAccount(this.claims['accountId']).subscribe(
+			(account) => {
+				console.log(" account", account);
+				if(account.plan ==='free' && account.numberOfSwimmingPools >=5){
+					this.eligibilityToAddPool = false;
+				}
+			})	
 	}
+
 	ionViewWillEnter(){
 		this.customerServicesService.getCustomer(this.uid).subscribe(
 			(data) =>{
@@ -90,9 +100,10 @@ export class CustomerPage implements OnInit {
 		if(this.customer.userRecordUid && (this.customer.userRecordUid !== null ||this.customer.userRecordUid !=="")){
 			isActivated =true;
 		}
+		console.log("isactivated",this.customer,isActivated);
 		const popover = await this.popoverController.create({
 			component: PopoverComponent,
-			componentProps: {homeref:this, uid:this.uid,customerStringified:this.customerStringified,isActivated:isActivated},
+			componentProps: {homeref:this, uid:this.uid,customerStringified:this.customerStringified,isActivated:isActivated,eligibilityToAddPool:this.eligibilityToAddPool},
 			cssClass: 'popover',
 			event: ev,
 			translucent: true
@@ -155,7 +166,7 @@ export class CustomerPage implements OnInit {
 		const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
 		this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
 			swimmingPoolName:swimmingPool.name,visitType:type,swimmingPoolStringified:swimmingPoolStringified }])
-			}
+	}
 
 
 }

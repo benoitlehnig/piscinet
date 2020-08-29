@@ -4,57 +4,57 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddVisitPage } from './add-visit.page';
 
 const routes: Routes = [
+{
+  path: 'addVisit',
+  component: AddVisitPage,
+  children: [
   {
-    path: 'addVisit',
-    component: AddVisitPage,
+    path: 'maintenance',
     children: [
-      {
-        path: 'maintenance',
-        children: [
-          {
-            path: '',
-            loadChildren: '../add-visit/maintenance/maintenance.module#MaintenancePageModule'
-          }
-        ]
-      },
-      {
-        path: 'technique',
-        children: [
-          {
-            path: '',
-            loadChildren: '../add-visit/technique/technique.module#TechniquePageModule'
-          }
-        ]
-      },
-      {
-        path: 'observation',
-        children: [
-          {
-            path: '',
-            loadChildren: '../add-visit/observation/observation.module#ObservationPageModule'
-          }
-        ]
-      },
-     
+    {
+      path: '',
+      loadChildren: () => import('./maintenance/maintenance.module').then( m => m.MaintenancePageModule)
+    }
     ]
   },
   {
-    path: 'maintenance',
-    loadChildren: () => import('./maintenance/maintenance.module').then( m => m.MaintenancePageModule)
-  },
-  {
     path: 'technique',
-    loadChildren: () => import('./technique/technique.module').then( m => m.TechniquePageModule)
+    children: [
+    {
+      path: '',
+      loadChildren: () => import('./technique/technique.module').then( m => m.TechniquePageModule)
+    }
+    ]
   },
   {
     path: 'observation',
-    loadChildren: () => import('./observation/observation.module').then( m => m.ObservationPageModule)
+    children: [
+    {
+      path: '',
+      loadChildren: () => import('./observation/observation.module').then( m => m.ObservationPageModule)
+    }
+    ]
   },
-  {
-    path: '',
-    redirectTo: 'addVisit/maintenance',
-    pathMatch: 'full'
-  }
+  
+  ]
+},
+{
+  path: 'maintenance',
+  loadChildren: () => import('./maintenance/maintenance.module').then( m => m.MaintenancePageModule)
+},
+{
+  path: 'technique',
+  loadChildren: () => import('./technique/technique.module').then( m => m.TechniquePageModule)
+},
+{
+  path: 'observation',
+  loadChildren: () => import('./observation/observation.module').then( m => m.ObservationPageModule)
+},
+{
+  path: '',
+  redirectTo: 'addVisit/maintenance',
+  pathMatch: 'full'
+}
 ];
 
 @NgModule({

@@ -21,7 +21,6 @@ import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { GdprmodalComponent } from './gdprmodal/gdprmodal.component';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -55,7 +54,7 @@ export class AppComponent implements OnInit {
 
     ) {
     this.initializeApp();
-  }
+    }
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -74,7 +73,7 @@ export class AppComponent implements OnInit {
               this.dataSharingService.offlineVisitNumberDataChanges( JSON.parse(data));
             }
           });
-        this.dataSharingService.curretOfflineVisitNumberChanges.subscribe(data => {
+        this.dataSharingService.currentOfflineVisitNumberChanges.subscribe(data => {
           if(data !==null){
             this.offlineVisits = data
           }

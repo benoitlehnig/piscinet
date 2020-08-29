@@ -12,7 +12,7 @@ export class DataSharingService {
 	private customersDataSource = new BehaviorSubject(null);
 
 	currentSomeDataChanges = this.someDataSource.asObservable();
-	curretOfflineVisitNumberChanges = this.offlineVisitNumberDataSource.asObservable();
+	currentOfflineVisitNumberChanges = this.offlineVisitNumberDataSource.asObservable();
 	currentPoolChanges = this.currentPoolDataSource.asObservable();
 	customersChanges = this.customersDataSource.asObservable();
 
@@ -34,7 +34,7 @@ export class DataSharingService {
 	}
 
 	getOfflineVisitNumberData(){
-		return this.curretOfflineVisitNumberChanges;
+		return this.currentOfflineVisitNumberChanges;
 	}
 
 	currentPool(pool){

@@ -22,6 +22,7 @@ export class PopoverComponent implements OnInit {
 	@Input("uid") uid;
 	@Input("isActivated") isActivated;
 	@Input("customerStringified") customerStringified;
+	@Input("eligibilityToAddPool") eligibilityToAddPool;
 
 	ngOnInit() {
 		this.translateService.get(['CUSTOMER.AlertHeader', 'CUSTOMER.AlertMesssage','CUSTOMER.AlertCancel', 

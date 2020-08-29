@@ -499,7 +499,16 @@
 		"pictureAndText3Title": "Notifier après chaque visite",
 		"pictureAndText3Text": "Recevez pour vous et votre client une notification apres chaque visite effectuée, ainsi qu'une alerte si une seconde visite est nécessaire",
 		"pictureAndText4Title": "Donner de la confiance à vos clients",
-		"pictureAndText4Text": "Une interface disponible sur web et mobile permet à vos clients de suivre les visites effectuées"
+		"pictureAndText4Text": "Une interface disponible sur web et mobile permet à vos clients de suivre les visites effectuées",
+		"testimony1Title": "Augmentez votre chiffre d'affaire en facturant une offre premium à vos clients",
+		"testimony1Name": "Jacques",
+		"testimony1NameTitle": "Professionel dans les Alpes-Maritimes (06)",
+		"testimony1Text": "J'ai pu augmenter mes revenus de 10% en facturant le suivi à distance",
+		"testimony2Title": "Gagnez en productivité et optimisez d'avantage dans votre activité",
+		"testimony2Name": "Medhis",
+		"testimony2NameTitle": "Professionel dans le Var (83)",
+		"testimony2Text": "Avec l'historique de toutes mes piscines, je peux identifier plus rapidemnet les causes de certains problèmes et mieux gérer mes stocks",
+		"ContactUs": "Nous contacter"
 	},
 	"REGISTER":{
 		"Title": "Demander un compte",

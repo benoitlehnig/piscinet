@@ -2,6 +2,8 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { AngularFireAnalytics  } from '@angular/fire/analytics';
 import { PopoverController } from '@ionic/angular';
 import { RegisterFormComponent } from './register-form/register-form.component';
+import { NgsRevealService } from 'ngx-scrollreveal';
+import { NgsRevealConfig } from 'ngx-scrollreveal';
 
 @Component({
 	selector: 'app-landing-page',
@@ -10,15 +12,33 @@ import { RegisterFormComponent } from './register-form/register-form.component';
 })
 export class LandingPagePage implements OnInit {
 
+	public slideOpts = {
+		initialSlide: 1,
+		speed: 1000,
+		autoplay:true
+	};
+	public col1Config: NgsRevealConfig;
+
 	constructor(
 		analytics: AngularFireAnalytics,
-		public popoverController:PopoverController
+		public popoverController:PopoverController,
+		private revealService: NgsRevealService
 
-		) { }
+		) {
+		 this.col1Config = {reset:false, desktop: true,mobile: true};
+		}
 
 	ngOnInit() {
+		let beforeRevealSubscription = this.revealService.beforeReveal$.subscribe(
+      (el: HTMLElement) => {
+        console.log(`beforeReveal of '<${el.nodeName}>.${el.className}'`);
+      });
 	}
 
+	ionViewDidEnter(){
+		this.revealService.sync();
+
+	}
 	getContent() {
 		return document.querySelector('ion-content');
 	}

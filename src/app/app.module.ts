@@ -36,6 +36,8 @@ import { GdprmodalComponent } from './gdprmodal/gdprmodal.component';
 
 import { AngularFireAnalyticsModule,ScreenTrackingService,UserTrackingService  } from '@angular/fire/analytics';
 
+import {NgsRevealModule} from 'ngx-scrollreveal';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -54,7 +56,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   HttpClientModule,
   AvatarModule,
   IonicModule.forRoot(),
-
+  NgsRevealModule,
   IonicStorageModule.forRoot(),
   AngularFireModule.initializeApp(environment.firebaseConfig),
   AngularFireMessagingModule,
@@ -66,7 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       deps: [HttpClient]
     }
   }),
-  ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+  ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production,registrationStrategy: 'registerImmediately' }),
   ],
   providers: [ 
   StatusBar,

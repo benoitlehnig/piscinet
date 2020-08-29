@@ -111,11 +111,11 @@ export class AddVisitPage implements OnInit {
 	}
 	async addVisit(){
 		console.log("this.mode addVisit", this.mode)
-		this.modalController.dismiss();
 		if(this.mode !=='update'){
 			let sub = this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
 				visit.dateTime = moment().format();
 				if(this.offline === false){
+					this.modalController.dismiss();
 					const callable = this.functions.httpsCallable('addVisit');
 					const obs = callable(visit);
 					obs.subscribe(res => {
@@ -193,7 +193,12 @@ export class AddVisitPage implements OnInit {
 	}
 
 	saveRequest(){
-		this.presentModal();
+		if(this.offline === false){
+			this.presentModal();
+		}
+		else{
+			this.addVisit();
+		}
 	}
 	closePopover(){
 		this.modalController.dismiss();

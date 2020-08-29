@@ -31,18 +31,19 @@
                 "output": "./svg"
               },
               "src/manifest.webmanifest",
-              "src/firebase-messaging-sw.js"
+              "src/firebase-messaging-sw.js",
             ],
             "styles": [
               {
-                "input": "src/theme/variables.scss"
+                "input": "src/theme/variables.scss",
               },
               {
                 "input": "src/global.scss"
               }
             ],
             "scripts": [
-           ]
+              "node_modules/scrollreveal/dist/scrollreveal.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -105,6 +106,7 @@
             "karmaConfig": "karma.conf.js",
             "styles": [],
             "scripts": [
+             "node_modules/scrollreveal/dist/scrollreveal.min.js"
            ],
             "assets": [
               {

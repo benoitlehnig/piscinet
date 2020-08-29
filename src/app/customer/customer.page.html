@@ -52,7 +52,9 @@
 		<ion-text>
 			<a href="mailto:{{customer.email}}"> {{customer.email}}</a>
 		</ion-text>
-		<ion-button class="submit-btn" (click)="activateAccount()" *ngIf="customer.email!== '' && (customer.userRecordUid ===null || customer.userRecordUid ==='')">{{'CUSTOMER.ActivateAccount' | translate}}</ion-button>
+		<ion-button class="submit-btn" (click)="activateAccount()" *ngIf="customer.email!== '' && (customer.userRecordUid ===null || customer.userRecordUid ==='')">
+			<ion-icon name="flash-outline" ></ion-icon>{{'CUSTOMER.ActivateAccount' | translate}}
+		</ion-button>
 	</ion-item>
 	<ion-item  lines="none">
 		<ion-label position="stacked">{{'CUSTOMER.ADDRESS' | translate}}</ion-label>
@@ -90,7 +92,8 @@
 
 
 <div padding>
-	<ion-button class="submit-btn" [routerLink]="['edit-swimming-pool',{ mode: 'add',customer:customerStringified}]">{{'CUSTOMER.AddPool' | translate}}</ion-button>
+	<ion-button *ngIf="eligibilityToAddPool===true" class="submit-btn" [routerLink]="['edit-swimming-pool',{ mode: 'add',customer:customerStringified}]">{{'CUSTOMER.AddPool' | translate}}</ion-button>
+	
 </div>
 
 </ion-content>

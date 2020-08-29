@@ -7,6 +7,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { OnlineCheckService } from '../services/online-check.service'
 import {Customer} from '../models/customer';
 import { CustomerServicesService } from '../services/customer-services.service'
+import { DataSharingService } from '../services/data-sharing.service'
 
 
 @Component({
@@ -31,7 +32,8 @@ export class OfflineVisitsPage implements OnInit {
     public translateService : TranslateService,
     public authenticationService:AuthenticationService,
     public onlineCheckService: OnlineCheckService,
-    public customerServicesService:CustomerServicesService
+    public customerServicesService:CustomerServicesService,
+    public dataSharingService:DataSharingService
     ) { }
 
 
@@ -98,6 +100,7 @@ export class OfflineVisitsPage implements OnInit {
       this.storage.remove('offlineVisits');
       this.visits =[];
       this.storage.set('offlineVisits',JSON.stringify(this.visits) );
+      this.dataSharingService.offlineVisitNumberDataChanges(this.visits);
 
     }
     initData(){

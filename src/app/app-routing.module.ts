@@ -18,6 +18,10 @@ const routes: Routes = [
   pathMatch: 'full'
 },
 {
+  path: 'landing-page',
+  loadChildren: () => import('./landing-page/landing-page.module').then( m => m.LandingPagePageModule)
+},
+{
   path: 'customers',
   loadChildren: () => import('./customers/customers.module').then( m => m.CustomersPageModule),
   canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminEmployeeOnly },
@@ -126,11 +130,7 @@ const routes: Routes = [
   path: 'super-admin',
   loadChildren: () => import('./super-admin/super-admin.module').then( m => m.SuperAdminPageModule),
   canActivate: [AngularFireAuthGuard], data: { authGuardPipe: superAdminOnly }
-},
-  {
-    path: 'landing-page',
-    loadChildren: () => import('./landing-page/landing-page.module').then( m => m.LandingPagePageModule)
-  }
+}
 
 
 ];

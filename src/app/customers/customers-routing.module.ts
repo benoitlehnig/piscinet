@@ -13,7 +13,7 @@ const routes: Routes = [
     children: [
     {
       path: '',
-      loadChildren: './list-view/list-view.module#ListViewPageModule'
+      loadChildren: () => import('./list-view/list-view.module').then( m => m.ListViewPageModule)
     }
     ]
   },
@@ -22,7 +22,7 @@ const routes: Routes = [
     children: [
     {
       path: '',
-      loadChildren: './map-view/map-view.module#MapViewPageModule'
+      loadChildren: () => import('./map-view/map-view.module').then( m => m.MapViewPageModule)
     }
     ]
   },     
