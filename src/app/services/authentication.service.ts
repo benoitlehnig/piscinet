@@ -5,7 +5,8 @@ import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
-
+import {DataSharingService} from './data-sharing.service';
+import {CustomerServicesService} from './customer-services.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -21,7 +22,9 @@ export class AuthenticationService {
 		private afAuth: AngularFireAuth,
 		private storage:Storage,
 		public router:Router,
-		public angularFireAnalytics:AngularFireAnalytics
+		public angularFireAnalytics:AngularFireAnalytics,
+		public dataSharingService:DataSharingService,
+		public customerServicesService:CustomerServicesService,
 
 		) { 
 		this.user = this.afAuth.authState;
@@ -34,10 +37,20 @@ export class AuthenticationService {
 						this.claims = result.claims;
 						this.claimsDataSource.next(this.claims);
 						this.storage.set('accountId', result.claims['accountId']);
+						this.dataSharingService.currentAccountID(result.claims['accountId']);
 						this.angularFireAnalytics.logEvent('login', {accountId:  result.claims['accountId']});
+						this.customerServicesService
 						this.storage.set('claims', result.claims);
 						this.storage.set('loggedIn', true); 
-
+						if(this.claims['customer']){
+							this.customerServicesService.getCustomerFromUid(result.claims.user_id).subscribe(
+								data=>{
+									console.log("onAuthStateChanged", data)
+									if(data[0]){
+										this.dataSharingService.currentCustomer(data[0]);
+									}
+								})
+						}
 					})
 			} else {
 				console.log("user not logged in auth")	 

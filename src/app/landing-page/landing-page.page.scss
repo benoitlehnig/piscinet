@@ -1,32 +1,43 @@
+
+.logo{
+	max-height: 40px;
+	margin-left: 12px;
+	height: 40px;
+	width: 40px;
+}
 .mainContent{
-	padding:24px;
-	padding-top: 100px;
-	background: var(--ion-color-light-tint);
+
+	position: relative;
 	height:calc(100%);
 	min-height: 700px;
 	max-height: 668px;
-
+	overflow: hidden;
 	h1{
-		font-size:4em;
+		font-size:3em;
+		color: var(--ion-color-primary-contrast);
 	}
 	@media(max-width: 1400px) {
 		min-height: 500px;
 		h1{
-			font-size:3em;
+			font-size:2.5em;
 		}
 	}
-	@media(max-width: 1000px) {
+	@media(max-width: 992px) {
 		height: auto;
-		padding-top:40px;
 		h1{
 			font-size:2em;
 		}
+
 	}
-	@media(max-width: 800px) {
+	@media(max-width: 768px) {
 		height: auto;
-		padding-top:40px;
 		h1{
 			font-size:1.5em;
+		}
+		.background{
+			height:100%;
+			width:fit-content;
+			max-width: none;
 		}
 	}
 	.startNowButton{
@@ -40,35 +51,61 @@
 			width:100%
 		}
 	}
+
 }
+
+.after{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .2);
+	padding:24px;
+	padding-top: 100px;
+}
+
 
 .freeAccess{
 	font-style: italic;
 	width: fit-content;
 	margin-left: auto;
-	color: var(--ion-color-medium-shade);
+	color: var(--ion-color-primary-contrast);
 	margin-right: auto;
 }
 
 .subContent{
 	padding:24px;
 	height:auto;
+	@media(max-width: 768px) {
+		padding:0px!important;
+
+	}
 }
 .screenCapture{
 	min-width:300px;
+
+	img{
+		max-width: 80%;
+		margin-left: 69px;
+		max-height: 770px;
+	}
+
 }
+
+
 .pricing{
 	@media(max-width: 768px) {
 		width: 200px;
 		margin:12px;
 
 	}	
-	@media(max-width: 1000px) {
+	@media(max-width: 992px) {
 		width: 250px;
 		margin:12	px;
 
 	}
-	
+
 	width: 300px;
 	margin:24px;
 	border:1px solid;
@@ -96,20 +133,31 @@
 			margin:0;
 		}
 	}
+	.content{
+		height:300px;
+	}
 }
 .pricing1{
 	position:absolute;
 	right:0px;
 	@media(max-width: 768px) {
-		position:relative;
+		position:inherit;
+		margin-right: auto;
+		margin-left: auto;
 
 	}	
 }
 .pricing2{
-	border-color: var(--ion-color-secondary-shade);
+	border-color: var(--ion-color-secondary);
 	left:0px;
 	.pricingHeader{
-		background: var(--ion-color-secondary-shade);
+		background: var(--ion-color-secondary);
+	}
+	@media(max-width: 768px) {
+		position:inherit;
+		margin-right: auto;
+		margin-left: auto;
+
 	}
 }
 
@@ -117,19 +165,34 @@
 	margin-right:10%;
 }
 
-
 .pictureAndText{
-	width: 50%;
+	width: 100%;
 	margin-top: 60px;
-	margin-left: auto;
-	margin-right: auto;	h2{
+	h2{
 		font-size:2em;
+		margin-bottom: var(--padding-bottom);	
+		color: var(--ion-color-primary);	
 	}
 	@media(max-width: 768px) {
 		width: 100%;
+		h2{
+			font-size:1.5em;
+		}
 	}
 }
-
+.odd{
+	background: var(--ion-color-light-tint);
+}
+.pictureAndTextWrapper{
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top:32px;
+	padding-bottom: 32px;
+	@media(max-width: 768px) {
+		width: 90%;
+	}
+}
 .subContent3{
 	background: var(--ion-color-light-tint);
 }
@@ -137,14 +200,17 @@
 	text-align: center;
 	padding-top:50px;
 	font-size: 3em;
+	@media(max-width: 768px) {
+		font-size: 1.5em;
+	}
 }
 
 .subContentCard{
-	.card-content-md{
+	.card-content-md,.card-content-ios{
 		padding:0px!important;
 	}
 	position:relative;
-	top:-80px;
+	top:-150px;
 	@media(max-width: 768px) {
 		top:-20px;
 	}
@@ -155,13 +221,10 @@
 	padding-top: 30px;
 	padding-bottom: 30px;
 	text-align: center;
-	margin-top:100px;
-	margin-bottom:100px;
-	background: var(--ion-color-primary);
 }
 .iconsRow{
 	max-width: 1400px;
-	
+
 	h2{
 		font-size:2em;
 	}
@@ -172,13 +235,24 @@
 	}
 	.iconsRowCol{
 		max-width: 50%;
+		min-width: 130px;
 	}
-	color: var(--ion-color-primary-contrast);
-	@media(max-width: 768px) {
+
+	color: var(--ion-color-primary);
+
+	@media(max-width: 992px) {
 		width: 100%;
 		margin-bottom: 12px;
 		h2{
 			font-size:1.5em;
+		}
+
+	}
+	@media(max-width: 768px) {
+		width: 100%;
+		margin-bottom: 12px;
+		h2{
+			font-size:1em;
 		}
 	}
 }
@@ -197,79 +271,93 @@
 	}
 
 }
-.bottomSection{
-	margin-top:30px;
-	background-color: var(--ion-color-dark);
-	position: relative;
-	bottom: -2px;
-	font-size: 3em;
-	color: var(--ion-color-dark-contrast);
-	a{
-		color: var(--ion-color-dark-contrast) !important;
-
-	}
-	.socialNetworkIcon{
-		color: var(--ion-color-dark-contrast);
-		font-size: 	1.5em;
-	}
-}
-
 
 .testimonyHeader{
 	font-size:2em;
-	color:var(--ion-color-dark);
+	color:var(--ion-color-secondary-contrast);
 	margin-bottom:30px;
 	@media(max-width: 768px) {
-		font-size:1.3em;
+		font-size:1em;
 	}
 }
 .testimonyWrapper{
 	margin-top:30px;
 	max-width: 461px;
-	background: #efefefba;
 	padding: 12px;
 	text-align: right;
-	position: absolute;
-	right: 0px;
-
+	color:var(--ion-color-secondary-contrast);
 }
 .testimonyContent{
 	font-style: italic;
 }
-
+.testimonyContent {
+	margin: 1.5em 10px;
+	padding: 0.5em 10px;
+}
+.testimonyContent:before {
+	color: var(--ion-color-secondary-shade);
+	content: open-quote;
+	font-size: 4em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+}
+.testimonyContent:after {
+	color: var(--ion-color-secondary-shade);
+	content: close-quote;
+	font-size: 4em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+}
+.slides{
+	max-width:90%;
+	@media(max-width: 768px) {
+		max-width:100%;
+	}
+	--bullet-background	:var(--ion-color-secondary-contrast);
+}
 .testimonyPicture{
-	background: url(https://image.freepik.com/photos-gratuite/piscine-stair_1203-2577.jpg);
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-	min-height:350px;  
-	width: -webkit-fill-available; 
-}
-.testimonyPicture2{
-	background-image: url(https://image.freepik.com/photos-gratuite/jeune-homme-reposant-chaises-longues-nageant-detendez-vous-dans-piscine-tapez-sms-telephone-pigiste-travaille-distance-depuis-bureau-mobile_81863-3132.jpg)
+	box-shadow: 0 0 20px 1px #00000078;
+	background-color: var(--ion-color-light);
+	min-width:280px;
 
 }
+.testimonies{
+	background-color: var(--ion-color-secondary);
+}
+.testinmonyWrapper{
+	margin-top:60px;
+	@media(max-width: 768px) {
+		padding:0px!important;
+	}
+}
+
 ion-slides {
-	height: 100%;
+	--bullet-background-active: var(--ion-color-primary-contrast);;
 }
 .bottomSection{
-	background-color: var(--ion-color-dark);
+	background-color: var(--ion-color-primary);
 	position: relative;
 	bottom: -2px;
 	font-size: 3em;
-	color: var(--ion-color-dark-contrast);
+	color: var(--ion-color-primary-contrast);
 	a{
-		color: var(--ion-color-dark-contrast) !important;
+		color: var(--ion-color-primary-contrast) !important;
 
 	}
 	.socialNetworkIcon{
-		color: var(--ion-color-dark-contrast);
+		color: var(--ion-color-primary-contrast);
 		font-size: 	1.5em;
 	}
 }
 
 
-
+.card-avatar img {
+	overflow: hidden;
+	max-width: 130px;
+	max-height: 130px;
+	margin: -50px auto 0;
+	border-radius: 50%;
+	box-shadow: 0 16px 38px -12px rgba(0,0,0,0.56), 0 4px 25px 0 rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.2);
+}

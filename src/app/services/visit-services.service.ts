@@ -7,7 +7,7 @@ import {Employee} from '../models/employee';
 import {SwimmingPool} from '../models/swimming-pool';
 import {Visit} from '../models/visit';
 import * as moment from 'moment';
-import {AuthenticationService} from './authentication.service'
+import {DataSharingService} from './data-sharing.service';
 
 
 @Injectable({
@@ -19,17 +19,17 @@ export class VisitServicesService {
 
 	constructor(
 		public afDatabase: AngularFireDatabase,
-		public authenticationService: AuthenticationService,
+		public dataSharingService: DataSharingService,
 		) {
-		this.authenticationService.getClaimsChanges().subscribe(
+		
+		this.dataSharingService.getAccoundIDChanges().subscribe(
 			data=>{
-				console.log("claims",data);
+				console.log("accountId",data);
 				if(data !==null){
 					if(data['accountId'] !== null){
-						this.accountId=data['accountId'];
+						this.accountId=data;
 					} 
-				}
-				
+				}	
 			})
 	}
 

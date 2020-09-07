@@ -54,13 +54,21 @@ export class AppComponent implements OnInit {
 
     ) {
     this.initializeApp();
-    }
+  }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.translate.setDefaultLang('fr');
+      this.afMessaging.messages.subscribe((message) => { console.log(message); });
+      this.afMessaging.messages.subscribe(
+        (messaging: any) => {
+          messaging.onMessageCallback = (payload: any) => {
+           console.log(payload.notification.title)
+          };
+          messaging.onTokenRefresh = messaging.onTokenRefresh.bind(messaging);
+        });
       console.log("desktop",this.platform.is('desktop'))
       console.log("pwa",this.platform.is('pwa'))
       console.log("mobileweb",this.platform.is('mobileweb'))

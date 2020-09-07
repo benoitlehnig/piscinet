@@ -1,5 +1,9 @@
 <ion-header>
 	<ion-toolbar>
+		
+
+		<ion-img slot="start" src="./assets/images/logo.png" class="logo"></ion-img>
+
 		<ion-title>{{'LANDINGPAGE.Title' | translate}}</ion-title>
 		<ion-buttons slot="secondary" class="secondar ion-hide-md-down">
 			<ion-button (click)="scrollTo('content1')">
@@ -22,52 +26,56 @@
 
 <ion-content>
 	<div class="mainContent" >
-		<ion-grid >
-			<ion-row>
-				<ion-col>
-					<ion-text color="primary"><h1>{{'LANDINGPAGE.MainContent' | translate}}</h1></ion-text>
-					<ion-button size="large" expand="block" color="primary" class="startNowButton" (click)="presentRegisterPopover()">{{'LANDINGPAGE.StartNow' | translate}}</ion-button>
-					<ion-text><p class="freeAccess">{{'LANDINGPAGE.FreeStart' | translate}}</p></ion-text>
-				</ion-col>
-				<ion-col class="screenCapture">
-					<img src="assets/images/screenCatpure.png">
-				</ion-col>
-			</ion-row>
-		</ion-grid>
+		<img src="./assets/images/3030907.jpg" class="background"/>
+		<div class="after">
+			<ion-grid >
+				<ion-row>
+					<ion-col>
+						<ion-text color="primary"><h1>{{'LANDINGPAGE.MainContent' | translate}}</h1></ion-text>
+						<ion-button size="large" expand="block" color="secondary" class="startNowButton" (click)="presentRegisterPopover()">
+							<ion-icon name="arrow-forward-circle-outline" class="ion-hide-sm-down ion-margin-end"></ion-icon>
+						{{'LANDINGPAGE.StartNow' | translate}}</ion-button>
+						<ion-text><p class="freeAccess">{{'LANDINGPAGE.FreeStart' | translate}}</p></ion-text>
+					</ion-col>
+					<ion-col class="screenCapture">
+						<img src="./assets/images/animated_demo.gif">
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</div>
 	</div>
 
 	<div class="subContent ion-padding " >
 		<ion-card class="subContentCard" >
 			<ion-card-content>
 				<div>
-					<ion-text><h1  class="subContentTitle">{{'LANDINGPAGE.Content1Title' | translate}}</h1></ion-text>
 					<div class="iconRowWrapper">
 						<ion-grid class="iconsRow" >
 							<ion-row    [ngsRevealSet]="{reset: true, container: '.itemset'}" class="itemset" [ngsSelector]="'.seq-1'" [ngsInterval]="200">
 								<ion-col  [ngsReveal]="col1Config"  class="seq-1 iconsRowCol">
 									<div>
-										<ion-icon name="people-outline"></ion-icon>
+										<ion-icon name="people"></ion-icon>
 										<h2>{{'LANDINGPAGE.Icon1Title' | translate}}</h2>
 										<p>{{'LANDINGPAGE.Icon1Text' | translate}}</p>
 									</div>
 								</ion-col>
 								<ion-col    [ngsReveal]="col1Config"  class="seq-1 iconsRowCol">
 									<div>
-										<ion-icon name="notifications-outline"></ion-icon>
+										<ion-icon name="notifications"></ion-icon>
 										<h2>{{'LANDINGPAGE.Icon2Title' | translate}}</h2>
 										<p>{{'LANDINGPAGE.Icon2Text' | translate}}</p>
 									</div>
 								</ion-col>
 								<ion-col  [ngsReveal]="col1Config"  class="seq-1 iconsRowCol">
 									<div  >
-										<ion-icon name="chatbubbles-outline"></ion-icon>
+										<ion-icon name="chatbubbles"></ion-icon>
 										<h2>{{'LANDINGPAGE.Icon3Title' | translate}}</h2>
 										<p>{{'LANDINGPAGE.Icon3Text' | translate}}</p>
 									</div>
 								</ion-col>
 								<ion-col  [ngsReveal]="col1Config"  class="seq-1 iconsRowCol">
 									<div>
-										<ion-icon name="color-palette-outline"></ion-icon>
+										<ion-icon name="color-palette"></ion-icon>
 										<h2>{{'LANDINGPAGE.Icon4Title' | translate}}</h2>
 										<p>{{'LANDINGPAGE.Icon4Text' | translate}}</p>
 									</div>
@@ -75,33 +83,93 @@
 							</ion-row>
 						</ion-grid>
 					</div>
-					<div class="testimonies" >
-						<ion-slides pager="true" [options]="slideOpts">
+					<div class="testimonies ion-padding" >
+						<ion-slides pager="true" class="slides ion-margin-top ion-margin-bottom" [options]="slideOpts">
 							<ion-slide>
-								<div class="testimonyPicture ion-padding ">
-									
-									<div class="testimonyWrapper">
-										<ion-text><h1 class="testimonyHeader">{{'LANDINGPAGE.testimony1Title' | translate}}</h1></ion-text>
-										<ion-text><b>{{'LANDINGPAGE.testimony1Name' | translate}}</b>, {{'LANDINGPAGE.testimony1NameTitle' | translate}}</ion-text>
-										<p class="testimonyContent">{{'LANDINGPAGE.testimony1Text' | translate}}</p>
-									</div>
+								<div class="ion-padding ">
+									<ion-grid>
+										<ion-row>
+											<ion-col>
+												<div class="testimonyPicture ion-padding">
+													<img src="https://image.freepik.com/photos-gratuite/piscine-stair_1203-2577.jpg" >
+												</div>
+											</ion-col>
+											<ion-col>
+												<div class="testimonyWrapper">
+													<ion-text><h1 class="testimonyHeader">{{'LANDINGPAGE.testimony1Title' | translate}}</h1></ion-text>
+													<ion-text><b>{{'LANDINGPAGE.testimony1Name' | translate}}</b>, {{'LANDINGPAGE.testimony1NameTitle' | translate}}</ion-text>
+													<p class="testimonyContent">{{'LANDINGPAGE.testimony1Text' | translate}}</p>
+												</div>
+											</ion-col>
+										</ion-row>
+									</ion-grid>				
 								</div>
 							</ion-slide>
-							<ion-slide>
-								<div class="testimonyPicture testimonyPicture2 ion-padding ">
-									<div class="testimonyWrapper">
-										<ion-text><h1 class="testimonyHeader">{{'LANDINGPAGE.testimony2Title' | translate}}</h1></ion-text>
-										<ion-text><b>{{'LANDINGPAGE.testimony2Name' | translate}}</b>, {{'LANDINGPAGE.testimony2NameTitle' | translate}}</ion-text>
-										<p class="testimonyContent">{{'LANDINGPAGE.testimony2Text' | translate}}</p>
-									</div>
+							<ion-slide class="testimonies ion-padding" >
+								<div class=" ion-padding ">
+									<ion-grid>
+										<ion-row>
+											<ion-col>
+												<div class="testimonyPicture ion-padding">
+													<img src="https://image.freepik.com/photos-gratuite/jeune-homme-reposant-chaises-longues-nageant-detendez-vous-dans-piscine-tapez-sms-telephone-pigiste-travaille-distance-depuis-bureau-mobile_81863-3132.jpg" >
+												</div>
+											</ion-col>
+											<ion-col>
+												<div class="testimonyWrapper">
+													<ion-text><h1 class="testimonyHeader">{{'LANDINGPAGE.testimony2Title' | translate}}</h1></ion-text>
+													<ion-text><b>{{'LANDINGPAGE.testimony2Name' | translate}}</b>, {{'LANDINGPAGE.testimony2NameTitle' | translate}}</ion-text>
+													<p class="testimonyContent">{{'LANDINGPAGE.testimony2Text' | translate}}</p>
+												</div>
+											</ion-col>
+										</ion-row>
+									</ion-grid>
+								</div>
+							</ion-slide>
+							<ion-slide class="testimonies ion-padding" >
+								<div class=" ion-padding ">
+									<ion-grid>
+										<ion-row>
+											<ion-col>
+												<div class="testimonyPicture ion-padding">
+													<img src="https://image.freepik.com/free-photo/portrait-beautiful-young-asian-woman-happy-smile-relax-swimming-pool-travel-vacation_74190-8322.jpg" >
+												</div>
+											</ion-col>
+											<ion-col>
+												<div class="testimonyWrapper">
+													<ion-text><h1 class="testimonyHeader">{{'LANDINGPAGE.testimony3Title' | translate}}</h1></ion-text>
+													<ion-text><b>{{'LANDINGPAGE.testimony3Name' | translate}}</b>, {{'LANDINGPAGE.testimony3NameTitle' | translate}}</ion-text>
+													<p class="testimonyContent">{{'LANDINGPAGE.testimony3Text' | translate}}</p>
+												</div>
+											</ion-col>
+										</ion-row>
+									</ion-grid>
+								</div>
+							</ion-slide>
+							<ion-slide class="testimonies ion-padding" >
+								<div class=" ion-padding ">
+									<ion-grid>
+										<ion-row>
+											<ion-col>
+												<div class="testimonyPicture ion-padding">
+													<img src="https://image.freepik.com/free-photo/woman-relaxing-pool_23-2147814705.jpg" >
+												</div>
+											</ion-col>
+											<ion-col>
+												<div class="testimonyWrapper">
+													<ion-text><h1 class="testimonyHeader">{{'LANDINGPAGE.testimony4Title' | translate}}</h1></ion-text>
+													<ion-text><b>{{'LANDINGPAGE.testimony4Name' | translate}}</b>, {{'LANDINGPAGE.testimony4NameTitle' | translate}}</ion-text>
+													<p class="testimonyContent">{{'LANDINGPAGE.testimony4Text' | translate}}</p>
+												</div>
+											</ion-col>
+										</ion-row>
+									</ion-grid>
 								</div>
 							</ion-slide>
 						</ion-slides>
 					</div>
 					<div class="itemset2" [ngsRevealSet]="{reset: true, container: '.itemset2'}"  [ngsSelector]="'.seq-2'" [ngsInterval]="200">
-						<ion-text class="ion-text-center "><h1 id="content1" class="subContentTitle">{{'LANDINGPAGE.Title1' | translate}}</h1></ion-text>
-						<ion-grid  class="pictureAndText seq-2" >
-							<ion-row >
+						<ion-grid  class="pictureAndText  seq-2" >
+							<ion-row class="pictureAndTextWrapper">
 								<ion-col>
 									<img src="assets/images/undraw_working_from_anywhere_ub67.svg">
 								</ion-col>
@@ -111,8 +179,8 @@
 								</ion-col>
 							</ion-row>
 						</ion-grid>
-						<ion-grid class="pictureAndText seq-2">
-							<ion-row>
+						<ion-grid class="pictureAndText odd seq-2">
+							<ion-row class="pictureAndTextWrapper">
 								<ion-col>
 									<h2>{{'LANDINGPAGE.pictureAndText2Title' | translate}}</h2>
 									<p>{{'LANDINGPAGE.pictureAndText2Text' | translate}}</p>
@@ -122,8 +190,8 @@
 								</ion-col>
 							</ion-row>
 						</ion-grid>
-						<ion-grid class="pictureAndText seq-2">
-							<ion-row>
+						<ion-grid class="pictureAndText  seq-2">
+							<ion-row class="pictureAndTextWrapper">
 								<ion-col>
 									<img src="assets/images/undraw_push_notifications_im0o.svg">
 								</ion-col>
@@ -133,8 +201,8 @@
 								</ion-col>
 							</ion-row>
 						</ion-grid>
-						<ion-grid class="pictureAndText seq-2">
-							<ion-row>
+						<ion-grid class="pictureAndText odd seq-2">
+							<ion-row class="pictureAndTextWrapper">
 								<ion-col>
 									<h2>{{'LANDINGPAGE.pictureAndText4Title' | translate}}</h2>
 									<p>{{'LANDINGPAGE.pictureAndText4Text' | translate}}</p>
@@ -146,7 +214,6 @@
 						</ion-grid>
 					</div>
 				</div> 	
-
 				<div class="subContent subContent3">
 					<h1 id="content3" class="subContentTitle">{{'LANDINGPAGE.Content3Title' | translate}}</h1>
 					<ion-grid>
@@ -158,8 +225,10 @@
 										<div class="subtitle">{{'LANDINGPAGE.Price1SubTitle' | translate}}</div>
 									</div>
 
-									<div class="content">
+									<div class="content  ion-padding">
 										<ion-text><h2>{{'LANDINGPAGE.Price1Price' | translate}}</h2></ion-text>
+										<ion-text><p>&nbsp;</p></ion-text>
+
 										<ion-list>
 											<ion-item lines="none" class="ion-text-center">
 												<ion-label>{{'LANDINGPAGE.Price1Item1' | translate}}</ion-label>
@@ -177,7 +246,7 @@
 										<div class="subtitle">{{'LANDINGPAGE.Price2SubTitle' | translate}}</div>
 									</div>
 
-									<div class="content">
+									<div class="content ion-padding">
 										<ion-text><h2>{{'LANDINGPAGE.Price2Price' | translate}}</h2></ion-text>
 										<ion-text><p>{{'LANDINGPAGE.Price2PriceSub' | translate}}</p></ion-text>
 										<ion-list>
@@ -194,9 +263,6 @@
 					</ion-grid>
 				</div> 
 				<div class="bottomSection ion-text-center ion-padding" >
-					<a target="blank" href=" https://www.instagram.com/entrepreneur.studio" class="socialNetworkIcon ion-margin">
-						<ion-icon name="logo-instagram"></ion-icon>
-					</a>
 					<a target="blank" href="https://www.linkedin.com/company/entrepreneur-studio" class="socialNetworkIcon ion-margin">
 						<ion-icon name="logo-linkedin"></ion-icon>
 					</a>

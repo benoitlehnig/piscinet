@@ -14,7 +14,7 @@ export class LandingPagePage implements OnInit {
 
 	public slideOpts = {
 		initialSlide: 1,
-		speed: 1000,
+		speed: 2500,
 		autoplay:true
 	};
 	public col1Config: NgsRevealConfig;

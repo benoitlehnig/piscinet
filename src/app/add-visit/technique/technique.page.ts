@@ -15,7 +15,7 @@ export class TechniquePage implements OnInit {
 	
 	visit:Visit=new Visit();
 	public swimmingPool:SwimmingPool=new SwimmingPool();
-	public lastTechnique=null;
+	public lastTechnique={PH:0,chlore:0};
 
 	chloreSteps=this.appConstants.chloreSteps;
 	PHSteps=this.appConstants.PHSteps;
@@ -29,13 +29,17 @@ export class TechniquePage implements OnInit {
 	ngOnInit() {
 		this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
 			console.log("visit technique:", visit)
-            this.visit = visit;
-        });
-        this.dataSharingService.getCurrentPoolChanges().subscribe(swimmingPool =>{
-			this.swimmingPool = swimmingPool;
-			if(swimmingPool.lastTechnique){
-				this.lastTechnique = swimmingPool.lastTechnique
+			this.visit = visit;
+		});
+		this.dataSharingService.getCurrentPoolChanges().subscribe(swimmingPool =>{
+			if(swimmingPool){
+				this.swimmingPool = swimmingPool;
+				console.log("lastTechnique", swimmingPool.lastTechnique)
+				if(swimmingPool.lastTechnique){
+					this.lastTechnique = swimmingPool.lastTechnique
+				}
 			}
+			
 		})	
 	}
 

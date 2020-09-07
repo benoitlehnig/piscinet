@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {SwimmingPool} from '../../models/swimming-pool';
-import { ActivatedRoute } from '@angular/router';
 import { DataSharingService } from '../../services/data-sharing.service'
 
 @Component({
@@ -14,22 +13,26 @@ export class InformationPage implements OnInit {
 	public uid:string;
 	public swimmingPool:SwimmingPool=new SwimmingPool();
 	constructor(
-		private activatedRoute: ActivatedRoute,
 		public dataSharingService:DataSharingService
 		) { 
+		this.swimmingPool= new SwimmingPool();
 	}
 
 	ngOnInit() {
 
 	}
 	ionViewWillEnter(){
+		
+		console.log(this.swimmingPool.shape)
 		this.initData();
+
 	}
 
 	initData(){
 		let sub = this.dataSharingService.getCurrentPoolChanges().subscribe(
 			data => {
-				if(data){
+				if(data!=undefined){
+					console.log("swimmingPool", data)
 					this.poolId = data.poolId;
 					this.uid = data.uid;
 					this.swimmingPool = data.swimmingPool;

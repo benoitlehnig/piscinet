@@ -76,6 +76,11 @@ export class AppConstants {
 		title: 'MyProfile',
 		url: 'myProfile',
 		icon: 'person'
+	},
+	{
+		title: 'Contact',
+		url: 'conatct',
+		icon: 'chatbox-ellipses' 
 	}
 	];
 	public appEmployeePages = [

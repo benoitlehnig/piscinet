@@ -49,6 +49,11 @@ export class PopoverComponent implements OnInit {
 			this.navParams.get('homeref').dismissPopover();
 		}
 
+		activateAccount(){
+			this.dismissPopover();
+			this.navParams.get('homeref').activateAccount();
+		}
+
 		async removeCustomer() {
 			const alert = await this.alertController.create({
 				cssClass: 'my-custom-class',

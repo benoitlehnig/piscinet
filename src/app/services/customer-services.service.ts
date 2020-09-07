@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import {Customer} from '../models/customer';
 import { map } from 'rxjs/operators';
 import {SwimmingPool} from '../models/swimming-pool';
-import {AuthenticationService} from './authentication.service'
+import {DataSharingService} from './data-sharing.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -15,19 +15,17 @@ export class CustomerServicesService {
 
 	constructor(
 		public afDatabase: AngularFireDatabase,
-		public authenticationService: AuthenticationService,
+		public dataSharingService: DataSharingService,
 		) {
-		this.authenticationService.getClaimsChanges().subscribe(
+		this.dataSharingService.getAccoundIDChanges().subscribe(
 			data=>{
-				console.log("claims",data);
+				console.log("accountId",data);
 				if(data !==null){
 					if(data['accountId'] !== null){
-						this.accountId=data['accountId'];
+						this.accountId=data;
 					} 
-				}
-				
+				}	
 			})
-		
 	}
 
 	getCustomers(){
@@ -49,6 +47,15 @@ export class CustomerServicesService {
 				changes.map(c => ({ key: c.payload.key, data: c.payload.val() }))
 				)
 			);
+	}
+
+	getCustomerFromUid(uid){
+		return this.afDatabase.list<Customer>(this.accountId+'/customers/',ref => ref.orderByChild('userRecordUid').equalTo(uid)).snapshotChanges().pipe(
+			map(changes => 
+				changes.map(c => ({ key: c.payload.key, data: c.payload.val() }))
+				)
+			);
+
 	}
 
 

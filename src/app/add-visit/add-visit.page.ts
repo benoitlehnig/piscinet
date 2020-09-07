@@ -72,7 +72,7 @@ export class AddVisitPage implements OnInit {
 			}
 			if(params['swimmingPoolStringified']){
 				this.swimmingPool =  JSON.parse(params['swimmingPoolStringified']); 
-				this.dataSharingService.currentPool(this.swimmingPool);
+				this.dataSharingService.currentPool({uid:this.newVisit.customerUid, poolId:this.newVisit.poolId,swimmingPool:this.swimmingPool });
 			}
 			if(params['customer']){
 				this.customer =  JSON.parse(params['customer']); 

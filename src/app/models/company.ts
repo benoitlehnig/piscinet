@@ -1,5 +1,6 @@
 export class Company {
 	public name:string="";
+	public siretNumber:string="";
 	public googleAddress: string ="";
 	public location:any="";
 	public email:string="";

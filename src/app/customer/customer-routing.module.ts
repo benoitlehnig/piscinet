@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'my-pools',
     loadChildren: () => import('./my-pools/my-pools.module').then( m => m.MyPoolsPageModule)
+  },
+  {
+    path: 'contact',
+    loadChildren: () => import('./contact/contact.module').then( m => m.ContactPageModule)
   }
 ];
 

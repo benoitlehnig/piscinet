@@ -4,6 +4,7 @@ import { CustomerServicesService } from '../../services/customer-services.servic
 import {Customer} from '../../models/customer';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { DataSharingService } from '../../services/data-sharing.service'
 
 
 @Component({
@@ -22,24 +23,24 @@ export class MyProfilePage implements OnInit {
 		public customerServicesService: CustomerServicesService,
 		private afMessaging: AngularFireMessaging,
 		private functions: AngularFireFunctions,
+		private dataSharingService: DataSharingService,
 
 
-		) { }
+		) { 
+		this.customer = new Customer()
+	}
 
 	ngOnInit() {
 	}
 
 	ionViewWillEnter(){
-		this.authService.user.subscribe(
-			result =>
-			{
-				console.log("MyProfilePage", result)
-				this.uid = result.uid;
-				this.customerServicesService.getCustomer(this.uid).subscribe(
-					(data) =>{
-						console.log("customer", data)
-						this.customer = data;
-					})
+		this.dataSharingService.getCustomerChanges().subscribe(
+			data=>{
+				if(data){
+					console.log("ionViewWillEnter", data.data)
+					this.customer = data.data
+				}
+				
 			})
 
 	}

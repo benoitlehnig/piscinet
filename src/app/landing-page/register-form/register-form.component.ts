@@ -16,6 +16,7 @@ export class RegisterFormComponent implements OnInit {
 	public accountRequestSentText:string="";
 	public accountRequest ={
 		emailAddress:"",
+		siretNumber:"",
 		firstName:"",
 		lastName:"",
 		companyName:""
