@@ -103,6 +103,23 @@
 			<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.TLCleaningPreFilter === true"  ></ion-icon>
 			<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.TLCleaningPreFilter ===false"  ></ion-icon>
 		</ion-item>
+
+		<ion-item lines="none">
+			<ion-label  class="ion-padding-bottom" >
+				<ion-text>{{'VISIT.SandfilterPressure' | translate}}</ion-text>
+				<ion-text *ngIf="visit.maintenance.sandfilterPressure ===''" class="unknown ion-margin-start" >{{'COMMON.Unknown' | translate}}</ion-text>
+				<div  *ngIf="visit.maintenance.sandfilterPressure !==''">
+					<ion-grid class="analyses">
+						<ion-row>
+							<ion-col class="cell" *ngFor="let step of sandfilterPressureSteps"  [ngClass]="{'selected': visit.maintenance.sandfilterPressure === step.value }" style="background-color:{{step.backgroundColor}}" >
+								<ion-text>{{step.value}}</ion-text>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</div>
+			</ion-label>
+			
+		</ion-item>
 		<ion-item >
 			<ion-label>{{'VISIT.TLClockSetting' | translate}}</ion-label>
 			<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.TLClockSetting === true"  ></ion-icon>

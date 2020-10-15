@@ -1,10 +1,8 @@
-
-
 <ion-searchbar showcancelbutton="" placeholder="{{'CUSTOMERS.Filter' | translate}}" (ionInput)="filterList($event)"
 ></ion-searchbar>
 <ion-list>
 	<ion-item *ngFor="let customer of customers " [routerLink]="['/customers/' + customer.key]" [ngClass]="{'visible': (customer.data.lastName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 || customer.data.firstName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ),'hidden': (customer.data.lastName.toLowerCase().indexOf(searchTerm.toLowerCase()) === -1 || customer.data.firstName.toLowerCase().indexOf(searchTerm.toLowerCase()) === -1)}">
-		<ion-avatar  slot="start">
+		<ion-avatar  class="avatar" slot="start">
 			<ngx-avatar name="{{ customer.data.firstName }} {{ customer.data.lastName}}"></ngx-avatar>
 		</ion-avatar>
 		<ion-label>

@@ -86,6 +86,22 @@
 				<ion-label>{{'VISIT.TLCleaningPreFilter' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.TLCleaningPreFilter" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
+			<ion-item>
+				<ion-label  class="ion-padding-bottom">
+					<ion-text>{{'VISIT.SandfilterPressure' | translate}}</ion-text>
+					<div>
+						<ion-grid class="analyses">
+							<ion-row>
+								<ion-col class="cell" *ngFor="let step of sandfilterPressureSteps" (click)="savePressure(step.value)"  [ngClass]="{'selected': visit.maintenance.sandfilterPressure === step.value }" style="background-color:{{step.backgroundColor}}" >
+									<ion-text>{{step.value}}</ion-text>
+									<ion-icon *ngIf="lastMaintenance.sandfilterPressure === step.value" name="pricetag-outline" class="lastKPI"></ion-icon>
+								</ion-col>
+							</ion-row>
+						</ion-grid>
+					</div>
+				</ion-label>
+
+			</ion-item>
 			<ion-item *ngIf="visit.typeOfVisit !=='maintenance'" >
 				<ion-label>{{'VISIT.TLClockSetting' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.TLClockSetting" (ionChange)="saveMaintenance()"></ion-toggle>
@@ -125,7 +141,7 @@
 				<ion-text slot="start">{{'VISIT.TLWaterMeter' | translate}}</ion-text>
 				<ion-input slot="end" class="ion-float-end borderInput" name="TLWaterMeter" type="number"  [(ngModel)]="visit.maintenance.TLWaterMeter" (ionChange)="saveMaintenance()"></ion-input>
 			</ion-item>
-			
+
 			<ion-item lines="none" *ngIf="visit.typeOfVisit !=='maintenance'" >
 				<ion-text>{{'VISIT.FilteringModeTitle' | translate}}</ion-text>
 				<ion-segment class="segmentAlignRight" scrollable name="TLFiltrationMode"  [(ngModel)]="visit.maintenance.TLFiltrationMode" (ionChange)="saveMaintenance()">
@@ -159,7 +175,7 @@
 					</ion-segment-button>
 				</ion-segment>
 			</ion-item>
-			
+
 		</div>
 	</ion-list>
 	<ion-list *ngIf="visit.typeOfVisit !=='maintenance'" >

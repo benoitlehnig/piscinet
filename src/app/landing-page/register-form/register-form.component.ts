@@ -44,7 +44,8 @@ export class RegisterFormComponent implements OnInit {
 				this.navParams.get('homeref').dismissRegisterPopover();
 				const toast = await this.toastController.create({
 					message: this.accountRequestSentText ,
-					duration: 3000
+					position:'top' ,
+					duration: 5000
 				});
 				toast.present();
 			});

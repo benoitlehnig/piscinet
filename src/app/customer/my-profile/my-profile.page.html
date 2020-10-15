@@ -26,42 +26,65 @@
 	<ion-item lines="none">
 		<ion-text><h2>{{'MYPROFILE.PersonalInformation' | translate}}</h2></ion-text>
 	</ion-item>
-	<ion-item lines="none">
-		<ion-label position="stacked">{{'MYPROFILE.Name' | translate}}</ion-label>
-		<ion-text>{{customer.firstName}} {{customer.lastName}}</ion-text>
+	<ion-item lines="none" *ngIf="customer.telPhoneNumber !== ''">
+		<ion-avatar slot="start">
+			<ion-icon  color="primary" name="person-circle-outline" size="large"></ion-icon>
+		</ion-avatar>
+		<ion-label >
+			<h3>{{customer.firstName}} {{customer.lastName}}</h3>
+		</ion-label>
 	</ion-item>
-	<ion-item lines="none">
-		<ion-label position="stacked">{{'CUSTOMER.MOBILEPHONENUMBER' | translate}}</ion-label>
-		<ion-text>
-			<a href="tel:{{customer.telPhoneNumber}}"> {{customer.telPhoneNumber}}</a>
-		</ion-text>
+	<ion-item lines="none" *ngIf="customer.telPhoneNumber !== ''">
+		<ion-avatar slot="start">
+			<ion-icon  color="primary" name="call-outline" size="large"></ion-icon>
+		</ion-avatar>
+		<ion-label >
+			<h3>{{customer.telPhoneNumber}}</h3>
+			<p>{{'CUSTOMER.MOBILEPHONENUMBER' | translate}}</p>
+		</ion-label>
 	</ion-item>
-	<ion-item lines="none">
-		<ion-label position="stacked">{{'CUSTOMER.FIXEDPHONENUMBER' | translate}}</ion-label>
-		<ion-text>
-			<a href="tel:{{customer.telFixNumber}}"> {{customer.telFixNumber}}</a>
-		</ion-text>
+
+	<ion-item lines="none" *ngIf="customer.telFixNumber !== ''">
+		<ion-avatar slot="start">
+			<ion-icon  color="primary" name="call-outline" size="large"></ion-icon>
+		</ion-avatar>
+		<ion-label >
+			<h3>{{customer.telFixNumber}}</h3>
+			<p>{{'CUSTOMER.FIXEDPHONENUMBER' | translate}}</p>
+		</ion-label>
 	</ion-item>
-	<ion-item lines="none" *ngIf="customer.guardianNumber != ''">
-		<ion-label position="stacked">{{'CUSTOMER.GUARDIANPHONENUMBER' | translate}}</ion-label>
-		<ion-text>
-			<a href="tel:{{customer.guardianNumber}}"> {{customer.guardianNumber}}</a>
-		</ion-text>
+
+	<ion-item lines="none"  href="tel:{{customer.guardianNumber}}" *ngIf="customer.guardianNumber !== ''">
+		<ion-avatar slot="start">
+			<ion-icon  color="primary" name="call-outline" size="large"></ion-icon>
+		</ion-avatar>
+		<ion-label >
+			<h3>{{customer.guardianNumber}}</h3>
+			<p>{{'CUSTOMER.GUARDIANPHONENUMBER' | translate}}</p>
+		</ion-label>
 	</ion-item>
-	<ion-item  lines="none">
-		<ion-label position="stacked">{{'CUSTOMER.EMAIL' | translate}}</ion-label>
-		<ion-text>
-			<a href="mailto:{{customer.email}}"> {{customer.email}}</a>
-		</ion-text>
+
+	<ion-item lines="none" *ngIf="customer.email !== ''">
+		<ion-avatar slot="start">
+			<ion-icon color="primary" name="mail-outline" size="large"></ion-icon>
+		</ion-avatar>
+		<ion-label >
+			<h3>{{customer.email}}</h3>
+		</ion-label>
 	</ion-item>
-	<ion-item  lines="none">
-		<ion-label position="stacked">{{'CUSTOMER.ADDRESS' | translate}}</ion-label>
-		<ion-text>
-			{{customer.googleAddress}} 
-		</ion-text>
+
+
+	<ion-item  lines="none" >
+		<ion-avatar slot="start">
+			<ion-icon color="primary" name="navigate-circle-outline" size="large"></ion-icon>
+		</ion-avatar>
+		<ion-label>		
+			<h3>	{{customer.googleAddress}}</h3>		
+		</ion-label>
 	</ion-item>
+
 	<ion-item >
-			<ion-label >{{'CUSTOMER.ReceivePushNotif' | translate}}</ion-label>
+			<ion-label  class="ion-text-wrap">{{'CUSTOMER.ReceivePushNotif' | translate}}</ion-label>
 			<ion-toggle slot="start" [(ngModel)]="receivePushNotif" (ionChange)="updatePushNotifRequest()"></ion-toggle>
 		</ion-item>
 

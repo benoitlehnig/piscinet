@@ -14,7 +14,56 @@
 
 
 <ion-content>
-	<ion-item  lines="none">
+	<ion-item *ngIf="nextComeBackDisplay == true" class="message" lines="none">
+		<ion-avatar slot="start" class="ion-hide-sm-down">
+			<ion-icon name="notifications-outline" size="large"></ion-icon>
+		</ion-avatar>
+		<ion-avatar slot="end" >
+			<ion-icon name="close-outline" size="large" (click)="closeMessage()" class="clickable"></ion-icon>
+		</ion-avatar>
+		<ion-label>
+			{{'CUSTOMER.ComeBack' | translate}} {{customer.nextComeBack.returnDate | date:'mediumDate'}}
+			<div *ngIf="customer.nextComeBack.heatPompRequest === true">{{'CUSTOMER.ComeBackHeatPompRequest' | translate}}</div>
+		</ion-label>
+	</ion-item>
+	<ion-list>
+		<ion-list-header>
+			<h2><ion-text  color="primary">Piscines</ion-text></h2>
+		</ion-list-header>
+
+		<ion-item [routerLink]="['swimming-pool/'+ swimmingPool.key]" *ngFor="let swimmingPool of swimmingPools | async">
+			<ion-avatar slot="start"  class="ion-hide-sm-down">
+				<img src="./assets/images/swimmingPoolAvatar.png">
+			</ion-avatar>
+			<ion-label>
+				<h2 >{{swimmingPool.data.name}} <ion-badge color="secondary">{{swimmingPool.data.numberOfVisits}} {{'CUSTOMER.VisitsPerfomed' | translate}}</ion-badge></h2>
+				<h3><ion-text  color="primary" *ngIf="swimmingPool.data.lastVisitDate != ''">Derniere visite effectuee le {{swimmingPool.data.lastVisitDate | date:'mediumDate'}}</ion-text></h3>
+				<div class="ion-hide">
+					<ion-button color="primary"  (click)="startVisit('full',swimmingPool)">
+						<ion-icon name="add" ></ion-icon>
+						<div class="visitType">{{'CUSTOMER.VisitTypeFull' | translate}}</div>
+					</ion-button>
+
+					<ion-button color="success" (click)="startVisit('maintenance',swimmingPool)">	
+						<ion-icon name="add"></ion-icon>
+						<div class="visitType">{{'CUSTOMER.VisitTypeMaintenance' | translate}}</div>
+					</ion-button>
+				</div>
+				<ion-button color="primary"  (click)="presentActionSheet(swimmingPool)">
+					<ion-icon name="add" ></ion-icon>
+					<div class="visitType">{{'CUSTOMER.NewVisit' | translate}}</div>
+				</ion-button>
+			</ion-label>
+
+		</ion-item>
+	</ion-list>
+	<div class="ion-padding noPool" *ngIf="(swimmingPools| async)?.length === 0 ">
+		<p>{{'CUSTOMER.NoPool' | translate}}</p>
+		<ion-button *ngIf="eligibilityToAddPool===true" class="submit-btn" [routerLink]="['edit-swimming-pool',{ mode: 'add',customer:customerStringified}]"><ion-icon name="add"></ion-icon>{{'CUSTOMER.AddPool' | translate}}</ion-button>
+	</div>
+
+
+	<ion-item >
 		<ion-chip color="primary" *ngIf="customer.typeOfContract ==='technical'">
 			<ion-label>{{'CUSTOMER.CONTRACTTYPETECHNICAL' | translate}}</ion-label>
 		</ion-chip>
@@ -29,71 +78,66 @@
 		</ion-chip>
 	</ion-item>
 
-	<ion-item lines="none">
-		<ion-label position="stacked">{{'CUSTOMER.MOBILEPHONENUMBER' | translate}}</ion-label>
-		<ion-text>
-			<a href="tel:{{customer.telPhoneNumber}}"> {{customer.telPhoneNumber}}</a>
-		</ion-text>
-	</ion-item>
-	<ion-item lines="none">
-		<ion-label position="stacked">{{'CUSTOMER.FIXEDPHONENUMBER' | translate}}</ion-label>
-		<ion-text>
-			<a href="tel:{{customer.telFixNumber}}"> {{customer.telFixNumber}}</a>
-		</ion-text>
-	</ion-item>
-	<ion-item lines="none" *ngIf="customer.guardianNumber != ''">
-		<ion-label position="stacked">{{'CUSTOMER.GUARDIANPHONENUMBER' | translate}}</ion-label>
-		<ion-text>
-			<a href="tel:{{customer.guardianNumber}}"> {{customer.guardianNumber}}</a>
-		</ion-text>
-	</ion-item>
-	<ion-item  lines="none">
-		<ion-label position="stacked">{{'CUSTOMER.EMAIL' | translate}}</ion-label>
-		<ion-text>
-			<a href="mailto:{{customer.email}}"> {{customer.email}}</a>
-		</ion-text>
-		<ion-button class="submit-btn" (click)="activateAccount()" *ngIf="customer.email!== '' && (customer.userRecordUid ===null || customer.userRecordUid ==='')">
-			<ion-icon name="flash-outline" ></ion-icon>{{'CUSTOMER.ActivateAccount' | translate}}
-		</ion-button>
-	</ion-item>
-	<ion-item  lines="none">
-		<ion-label position="stacked">{{'CUSTOMER.ADDRESS' | translate}}</ion-label>
-		<ion-text ><a href="https://www.google.com/maps/dir/?api=1&destination={{customer.googleAddress}}" target="blank">
-		{{customer.googleAddress}} </a>
-	</ion-text>
-</ion-item>
-
-<google-map height="40%" width="100%" [zoom]="zoom" [center]="center" [options]="options" id="map" *ngIf="mapOK===true">
-	<map-marker	[position]="customer.location"></map-marker>
-</google-map>
-
-<ion-list>
-	<ion-list-header>
-		<h2><ion-text  color="primary">Piscines</ion-text></h2>
-	</ion-list-header>
-	
-	<ion-item  [routerLink]="['swimming-pool/'+ swimmingPool.key]" *ngFor="let swimmingPool of swimmingPools | async">
-		<ion-avatar slot="start"  class="ion-hide-sm-down">
-			<img src="./assets/images/swimmingPoolAvatar.png">
+	<ion-item lines="none"  href="tel:{{customer.telPhoneNumber}}"  *ngIf="customer.telPhoneNumber !== ''">
+		<ion-avatar slot="start">
+			<ion-icon  color="primary" name="call-outline" size="large"></ion-icon>
 		</ion-avatar>
-		<ion-label>
-			<h2 >{{swimmingPool.data.name}} <ion-badge color="primary">{{swimmingPool.data.numberOfVisits}} {{'CUSTOMER.VisitsPerfomed' | translate}}</ion-badge></h2>
-			<h3><ion-text  color="primary" *ngIf="swimmingPool.data.lastVisitDate != ''">Derniere visite effectuee le {{swimmingPool.data.lastVisitDate | date:'mediumDate'}}</ion-text></h3>
-			<ion-button color="primary"  (click)="startVisit('full',swimmingPool)"><ion-icon name="shield-checkmark" class="ion-margin-end ion-hide-sm-down"></ion-icon>
-				<div class="visitType">{{'CUSTOMER.VisitTypeFull' | translate}}</div>
-			</ion-button>
-			<ion-button color="success" (click)="startVisit('maintenance',swimmingPool)">	<ion-icon name="shield-checkmark" class="ion-margin-end ion-hide-sm-down"></ion-icon>
-				<div class="visitType">{{'CUSTOMER.VisitTypeMaintenance' | translate}}</div>
-			</ion-button>
+		<ion-label >
+			<h3>{{customer.telPhoneNumber}}</h3>
+			<p>{{'CUSTOMER.MOBILEPHONENUMBER' | translate}}</p>
 		</ion-label>
-
 	</ion-item>
-</ion-list>
+
+	<ion-item lines="none"  href="tel:{{customer.telFixNumber}}" *ngIf="customer.telFixNumber !== ''">
+		<ion-avatar slot="start">
+			<ion-icon  color="primary" name="call-outline" size="large"></ion-icon>
+		</ion-avatar>
+		<ion-label >
+			<h3>{{customer.telFixNumber}}</h3>
+			<p>{{'CUSTOMER.FIXEDPHONENUMBER' | translate}}</p>
+		</ion-label>
+	</ion-item>
+
+	<ion-item lines="none"  href="tel:{{customer.guardianNumber}}" *ngIf="customer.guardianNumber !== ''">
+		<ion-avatar slot="start">
+			<ion-icon  color="primary" name="call-outline" size="large"></ion-icon>
+		</ion-avatar>
+		<ion-label >
+			<h3>{{customer.guardianNumber}}</h3>
+			<p>{{'CUSTOMER.GUARDIANPHONENUMBER' | translate}}</p>
+		</ion-label>
+	</ion-item>
+
+	<ion-item lines="none"  href="mailto:{{customer.email}}" *ngIf="customer.email !== ''">
+		<ion-avatar slot="start">
+			<ion-icon color="primary" name="mail-outline" size="large"></ion-icon>
+		</ion-avatar>
+		<ion-label >
+			<h3>{{customer.email}}</h3>
+			<div>
+				<ion-button class="submit-btn" (click)="activateAccount()" *ngIf="customer.email!== '' && (customer.userRecordUid ===null || customer.userRecordUid ==='')">
+					<ion-icon name="flash-outline" ></ion-icon>{{'CUSTOMER.ActivateAccount' | translate}}
+				</ion-button>
+			</div>
+		</ion-label>
+	</ion-item>
+
+	<ion-item  lines="none" href="https://www.google.com/maps/dir/?api=1&destination={{customer.googleAddress}}">
+		<ion-avatar slot="start">
+			<ion-icon color="primary" name="navigate-circle-outline" size="large"></ion-icon>
+		</ion-avatar>
+		<ion-label>		
+			<h3>	{{customer.googleAddress}}</h3>		
+		</ion-label>
+	</ion-item>
+	<google-map height="40%" width="100%" [zoom]="zoom" [center]="center" [options]="options" id="map" *ngIf="mapOK===true">
+		<map-marker	[position]="customer.location"></map-marker>
+	</google-map>
 
 
-<div padding>
-	<ion-button *ngIf="eligibilityToAddPool===true" class="submit-btn" [routerLink]="['edit-swimming-pool',{ mode: 'add',customer:customerStringified}]">{{'CUSTOMER.AddPool' | translate}}</ion-button>
-	
-</div>
+
+
+
+
 
 </ion-content>

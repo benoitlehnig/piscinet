@@ -37,6 +37,7 @@ export class Maintenance{
 	public  brossage: boolean=false;
 	public  TLFilterWashing: boolean=false;
 	public  TLCleaningPreFilter: boolean=false;
+	public  sandfilterPressure: string="";
 	public  TLChloreLVL: string="50";
 	public  TLPHLVL: string="50";
 	public  TLWaterMeter: string="";

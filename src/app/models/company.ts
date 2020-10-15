@@ -38,6 +38,6 @@ export class EmailTemplates{
 	public welcomeEmployee:string="d-e2bb5a74bc5841a98992909bdfe4635d";
 }
 export class EmailDataName{
-	public email:string="poolsoftcontact@gmail.com";
-	public name:string="poolSoft";
+	public email:string="contact@checkmypool.net";
+	public name:string="checkmypool";
 }

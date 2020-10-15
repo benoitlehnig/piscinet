@@ -15,6 +15,8 @@ import { LoadingController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { CustomerServicesService } from '../services/customer-services.service'
 import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps'
+import { ActionSheetController } from '@ionic/angular';
+import * as moment from 'moment';
 
 
 @Component({
@@ -45,6 +47,10 @@ export class CustomerPage implements OnInit {
 	public successDeleteText:string="";
 	public mapOK = false;
 	public eligibilityToAddPool:boolean = true;
+	public visitTypeFullText:string = "";
+	public visitTypeMaintenanceText:string = "";
+	public newVisitCancelText:string = "";
+	public nextComeBackDisplay:boolean = false;
 
 	@ViewChild(GoogleMap, { static: false }) map: GoogleMap
 
@@ -60,17 +66,21 @@ export class CustomerPage implements OnInit {
 		public toastController: ToastController,	
 		public customerServicesService:CustomerServicesService,
 		public accountServicesService:AccountServicesService,
+		public actionSheetController: ActionSheetController
 
 		) { }
 
 	ngOnInit() {
 		this.uid = this.activatedRoute.snapshot.paramMap.get('id');
 		this.claims = this.authenticationService.getClaims();
-		this.translateService.get('CUSTOMER.EmailSent','COMMON.Loading').subscribe(
+		this.translateService.get(['CUSTOMER.EmailSent','COMMON.Loading','CUSTOMER.VisitTypeFull','CUSTOMER.VisitTypeMaintenance','CUSTOMER.NewVisitCancel'] ).subscribe(
 			value => {
 				this.emailSentText = value['CUSTOMER.EmailSent'];
 				this.loadingText = value['COMMON.Loading'];
 				this.successDeleteText = value['CUSTOMER.SuccessDeleteText'];
+				this.visitTypeFullText =  value['CUSTOMER.VisitTypeFull'];
+				this.visitTypeMaintenanceText =  value['CUSTOMER.VisitTypeMaintenance'];
+				this.newVisitCancelText =  value['CUSTOMER.NewVisitCancel'];
 			});	
 		this.accountServicesService.getAccount(this.claims['accountId']).subscribe(
 			(account) => {
@@ -87,6 +97,13 @@ export class CustomerPage implements OnInit {
 				if(data!==null){
 					console.log(data);
 					this.customer = data;
+					if(this.customer.nextComeBack){
+						var now = moment();
+						console.log("now.diff(moment(this.customer.nextComeBack.returnDate)) ", now.diff(moment(this.customer.nextComeBack.returnDate)) );
+						if(now.diff(moment(this.customer.nextComeBack.returnDate)) <0){
+							this.nextComeBackDisplay = true;
+						}
+					}
 					this.customerStringified = JSON.stringify(data);
 					this.center = this.customer.location;
 					this.mapOK = true;
@@ -166,6 +183,42 @@ export class CustomerPage implements OnInit {
 		const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
 		this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
 			swimmingPoolName:swimmingPool.name,visitType:type,swimmingPoolStringified:swimmingPoolStringified }])
+	}
+
+	async presentActionSheet(swimmingPool) {
+		const actionSheet = await this.actionSheetController.create({
+			header: 'Nouvelle visite',
+			cssClass: 'my-custom-class',
+			buttons: [{
+				text: this.visitTypeFullText,
+				icon: 'shield-checkmark',
+				handler: () => {
+					const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
+					this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
+						swimmingPoolName:swimmingPool.name,visitType:'full',swimmingPoolStringified:swimmingPoolStringified }])
+				}
+			}, {
+				text:  this.visitTypeMaintenanceText,
+				icon: 'shield-checkmark',
+				handler: () => {
+					const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
+					this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
+						swimmingPoolName:swimmingPool.name,visitType:'maintenance',swimmingPoolStringified:swimmingPoolStringified }])
+				}
+			},
+			 {
+				text: this.newVisitCancelText,
+				icon: 'close',
+				role: 'cancel',
+				handler: () => {
+					console.log('Cancel clicked');
+				}
+			}]
+		});
+		await actionSheet.present();
+	}
+	closeMessage(){
+		this.nextComeBackDisplay =false;
 	}
 
 

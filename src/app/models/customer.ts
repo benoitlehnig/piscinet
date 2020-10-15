@@ -13,9 +13,15 @@ export class Customer {
   public typeOfContract: string ="";
   public contractOfProduct: string ="";
   public userRecordUid:string="";
+  public nextComeBack: NextComeBack= new NextComeBack();
 
   deserialize(input: any) {
     Object.assign(this, input);
     return this;
   }
+}
+
+export class NextComeBack{
+  public returnDate:string="";
+  public heatPompRequest:boolean=false;
 }

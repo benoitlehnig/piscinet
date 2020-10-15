@@ -29,8 +29,7 @@ export class CustomerServicesService {
 	}
 
 	getCustomers(){
-
-		return this.afDatabase.list<Customer>(this.accountId+'/customers',ref => ref.orderByChild('lastName')).snapshotChanges()
+		return this.afDatabase.list<Customer>(this.accountId+'/customers',ref => ref.orderByChild('firstName')).snapshotChanges()
 		.pipe(
 			map(changes => 
 				changes.map(c => ({ key: c.payload.key, data: c.payload.val(), class:'visible' }))

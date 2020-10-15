@@ -36,6 +36,8 @@ export class AddVisitPage implements OnInit {
 	public loading;
 	public mode :string='online';
 	public offline	:boolean= false;
+	public nextComeBackDisplay:boolean = false;
+
 
 	constructor(
 		private storage: Storage,
@@ -76,6 +78,14 @@ export class AddVisitPage implements OnInit {
 			}
 			if(params['customer']){
 				this.customer =  JSON.parse(params['customer']); 
+				console.log("customer", this.customer);
+				if(this.customer.nextComeBack){
+					var now = moment();
+					console.log("now.diff(moment(this.customer.nextComeBack.returnDate)) ", now.diff(moment(this.customer.nextComeBack.returnDate)) );
+					if(now.diff(moment(this.customer.nextComeBack.returnDate)) <0){
+						this.nextComeBackDisplay = true;
+					}
+				}
 			}
 			this.authService.userDetails().subscribe( (data)=>{
 				this.newVisit.employeeUid = data.uid	
@@ -212,6 +222,10 @@ export class AddVisitPage implements OnInit {
 				sub.next(navigator.onLine);
 				sub.complete();
 			}));
+	}
+
+	closeMessage(){
+		this.nextComeBackDisplay =false;
 	}
 
 }

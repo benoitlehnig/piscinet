@@ -17,11 +17,11 @@
 <ion-content>
 	<ion-item>
 		<ion-label position="stacked">{{'ADDEMPLOYEE.FirstName' | translate}} <ion-text color="danger">*</ion-text></ion-label>
-		<ion-input  name="firstName" type="text" [(ngModel)]="employee.firstName"  required></ion-input>
+		<ion-input  name="firstName" type="text" appTitleCase  autocapitalize="sentences" [(ngModel)]="employee.firstName"  required></ion-input>
 	</ion-item>
 	<ion-item>
 		<ion-label position="stacked">{{'ADDEMPLOYEE.LastName' | translate}} <ion-text color="danger">*</ion-text></ion-label>
-		<ion-input  name="lastName" type="text" [(ngModel)]="employee.lastName"  required></ion-input>
+		<ion-input  name="lastName" type="text" appTitleCase  autocapitalize="sentences" [(ngModel)]="employee.lastName"  required></ion-input>
 	</ion-item>
 	<ion-item>
 		<ion-label position="stacked">{{'ADDEMPLOYEE.TelPhoneNumber' | translate}} <ion-text color="danger">*</ion-text></ion-label>

@@ -104,7 +104,7 @@ export class AppComponent implements OnInit {
           
           this.uid = data.uid;
           this.isUserLogged =true;
-          this.displayName = data.displayName;
+          this.displayName = data.email;
           data.getIdTokenResult().then(
             result=> {
               this.claims = result.claims;
@@ -113,6 +113,10 @@ export class AppComponent implements OnInit {
               }
               if(this.claims['customer'] ===true){
                 this.appPages = this.appConstants.appCustomerPages;
+                 this.displayName = this.dataSharingService.getCustomersChanges().subscribe(
+                   data2=>{
+                     console.log("getCustomersChanges", data2);
+                   })
                 this.router.navigateByUrl('/myProfile');
               }
               if(this.claims['admin'] ===true){

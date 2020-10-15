@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { AddEmployeePageRoutingModule } from './add-employee-routing.module';
 
 import { AddEmployeePage } from './add-employee.page';
+import {MyCommonDirectivesModule} from '../directives/common/common.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { AddEmployeePage } from './add-employee.page';
     FormsModule,
     IonicModule,
     TranslateModule,
-    AddEmployeePageRoutingModule
+    AddEmployeePageRoutingModule,
+    MyCommonDirectivesModule
   ],
   declarations: [AddEmployeePage]
 })

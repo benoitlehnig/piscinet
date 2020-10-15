@@ -79,7 +79,7 @@ export class AppConstants {
 	},
 	{
 		title: 'Contact',
-		url: 'conatct',
+		url: 'contact',
 		icon: 'chatbox-ellipses' 
 	}
 	];
@@ -167,6 +167,52 @@ export class AppConstants {
 		value:8.2,
 		color:'#FFFFFF',
 		backgroundColor:'#F743A4',
+	},
+	]
+	public sandfilterPressureSteps=[{
+		value:0,
+		color:'#FFFFFF',
+		backgroundColor:'#2dd36f',
+	},
+	{
+		value:0.2,
+		color:'#FFFFFF',
+		backgroundColor:'#2dd36f',
+	},
+	{
+		value:0.4,
+		color:'#FFFFFF',
+		backgroundColor:'#2dd36f',
+	},
+	{
+		value:0.6,
+		color:'#FFFFFF',
+		backgroundColor:'#2dd36f',
+	},
+	{
+		value:0.8,
+		color:'#FFFFFF',
+		backgroundColor:'#2dd36f',
+	},
+	{
+		value:1,
+		color:'#FFFFFF',
+		backgroundColor:'#ffc409',
+	},
+	{
+		value:1.2,
+		color:'#FFFFFF',
+		backgroundColor:'#ffc409',
+	},
+	{
+		value:1.4,
+		color:'#FFFFFF',
+		backgroundColor:'#eb445a',
+	},
+	{
+		value:1.6,
+		color:'#FFFFFF',
+		backgroundColor:'#eb445a',
 	},
 	]
 }

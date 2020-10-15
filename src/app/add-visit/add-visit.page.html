@@ -17,8 +17,20 @@
 		</ion-buttons>
 	</ion-toolbar>
 </ion-header>
-
+<ion-item *ngIf="nextComeBackDisplay == true" class="message" lines="none">
+		<ion-avatar slot="start" class="ion-hide-sm-down">
+			<ion-icon name="notifications-outline" size="large"></ion-icon>
+		</ion-avatar>
+		<ion-avatar slot="end" >
+			<ion-icon name="close-outline" size="large" (click)="closeMessage()" class="clickable"></ion-icon>
+		</ion-avatar>
+		<ion-label>
+			{{'CUSTOMER.ComeBack' | translate}} {{customer.nextComeBack.returnDate | date:'mediumDate'}}
+			<div *ngIf="customer.nextComeBack.heatPompRequest === true">{{'CUSTOMER.ComeBackHeatPompRequest' | translate}}</div>
+		</ion-label>
+	</ion-item>
 <ion-content>
+	
 	<ion-tabs>
 		<ion-tab-bar slot="top">
 			<ion-tab-button tab="maintenance" selected>

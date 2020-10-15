@@ -2,9 +2,9 @@ export class SwimmingPool {
 	customerUid: string="";
 	name: string="Principale";
     picture: string="";
-    length: number=0;
-    width: number=0;
-    depth: number=0;
+    length: number=null;
+    width: number=null;
+    depth: number=null;
     shape: string="rectangular";
     environment: number=0;
     state: number=0

@@ -27,4 +27,8 @@ export class AccountServicesService {
 		return this.afs.doc<Company>('accounts/'+id).valueChanges()
 	}
 
+	accountExists(account:Company){
+		return this.afs.collection<Company>('accounts', ref => ref.where('account', '==', account.siretNumber) )   
+	}
+
 }

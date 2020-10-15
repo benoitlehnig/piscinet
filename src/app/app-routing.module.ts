@@ -113,6 +113,12 @@ const routes: Routes = [
 
 },
 {
+  path: 'contact',
+  loadChildren: () => import('./customer/contact/contact.module').then( m => m.ContactPageModule),
+  canActivate: [AngularFireAuthGuard]
+
+},
+{
   path: 'offlineVisits',
   loadChildren: () => import('./offline-visits/offline-visits.module').then( m => m.OfflineVisitsPageModule),
   canActivate: [AngularFireAuthGuard]
