@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Visit} from '../../models/visit';
 import { DataSharingService } from '../../services/data-sharing.service'
 import {SwimmingPool} from '../../models/swimming-pool';
-import {AppConstants } from '../../app-constants';
 
 @Component({
 	selector: 'app-maintenance',
@@ -13,13 +12,9 @@ export class MaintenancePage implements OnInit {
 
 	public visit:Visit = new Visit();
 	public swimmingPool:SwimmingPool = new SwimmingPool();
-	public sandfilterPressureSteps = this.appConstants.sandfilterPressureSteps;
 
 	constructor(
 		public dataSharingService:DataSharingService,
-		public appConstants:AppConstants
-
-
 		) {
 		this.visit = new Visit();		
 	}

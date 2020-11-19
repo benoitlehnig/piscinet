@@ -45,11 +45,7 @@ export class MaintenancePage implements OnInit {
 	saveMaintenance(){
 		this.dataSharingService.someDataChanges(this.visit);
 	}
-	savePressure(value){
-		console.log("savePressure" , value)
-		this.visit.maintenance.sandfilterPressure =value;
-		this.saveMaintenance();
-	}
+	
 
 
 }

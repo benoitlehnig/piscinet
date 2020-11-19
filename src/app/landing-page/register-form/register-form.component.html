@@ -24,8 +24,12 @@
 			<ion-label position="floating">{{'REGISTER.EmailAddress' | translate}} <ion-text color="danger">*</ion-text></ion-label>
 			<ion-input  name="emailAddress" type="text" [(ngModel)]="accountRequest.emailAddress"  required></ion-input>
 		</ion-item>
+		<ion-item>
+			<ion-checkbox slot="start" [(ngModel)]="cguChecked"></ion-checkbox>
+			<ion-label class="ion-text-wrap">{{'REGISTER.cguText' | translate}} <a href="/cgu" target="_blank">{{'REGISTER.cguTextLink' | translate}} </a></ion-label>
+		</ion-item>
 		<div class="ion-margin-top ion-margin-bottom ion-text-center">
-			<ion-button color="primary" fill="solid" (click)="submitForm()" >
+			<ion-button color="primary" fill="solid" (click)="submitForm()" [disabled]="cguChecked === false">
 				{{'REGISTER.RequestAccount' | translate}}
 			</ion-button>
 		</div>

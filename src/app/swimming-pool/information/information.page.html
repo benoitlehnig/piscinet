@@ -74,7 +74,7 @@
 				<ion-item lines="none" *ngIf="swimmingPool.alarmElectronicSystem !== null">
 					<ion-icon  slot="start" name="notifications" color="primary"></ion-icon>
 					<ion-text class="smallerFont" *ngIf="swimmingPool.alarmElectronicSystem ===true">{{'SWIMMINGPOOL.AlarmElectronicSystem' | translate}}</ion-text>
-						<ion-text class="smallerFont" *ngIf="swimmingPool.alarmElectronicSystem ===false">{{'SWIMMINGPOOL.AlarmElectronicSystemNone' | translate}}</ion-text>
+					<ion-text class="smallerFont" *ngIf="swimmingPool.alarmElectronicSystem ===false">{{'SWIMMINGPOOL.AlarmElectronicSystemNone' | translate}}</ion-text>
 
 				</ion-item>
 				<ion-item lines="none"> 
@@ -104,6 +104,20 @@
 				<ion-text >{{'SWIMMINGPOOL.DateSandFilter' | translate}}</ion-text>
 				<ion-text><b>{{ swimmingPool.dateSandFilter | date:'mediumDate' }}</b></ion-text>
 			</div>
+			<div>
+				<ion-text >{{'SWIMMINGPOOL.SandFilterWeight' | translate}}</ion-text>
+				<ion-text><b>{{ swimmingPool.sandFilterWeight }}</b></ion-text>
+			</div>
+			<div>
+				<ion-grid class="analyses">
+					<ion-row>
+						<ion-col class="cell" *ngFor="let step of sandfilterPressureSteps"  [ngClass]="{'selected': swimmingPool.cleanFilterPressure === step.value }" style="background-color:{{step.backgroundColor}}" >
+							<ion-text>{{step.value}}</ion-text>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</div>
+			
 		</ion-card-content>
 	</ion-card>
 
@@ -138,6 +152,8 @@
 				<ion-text *ngIf="swimmingPool.electronicalProduct ==='copper'">{{'SWIMMINGPOOL.Copper' | translate}}</ion-text>
 				<ion-text *ngIf="swimmingPool.electronicalProduct ==='chlorine'">{{'SWIMMINGPOOL.Chlorine' | translate}}</ion-text>
 				<ion-text *ngIf="swimmingPool.electronicalProduct ==='UVSterilisation'">{{'SWIMMINGPOOL.UVSterilisation' | translate}}</ion-text>
+				<ion-text *ngIf="swimmingPool.electronicalProduct ==='brome'">{{'SWIMMINGPOOL.Brome' | translate}}</ion-text>
+				<ion-text *ngIf="swimmingPool.electronicalProduct ==='chlorinator'">{{'SWIMMINGPOOL.Chlorinator' | translate}}</ion-text>
 			</div>
 			<div>
 				<ion-text position="stacked">{{'SWIMMINGPOOL.DateElectronicalProduct' | translate}} </ion-text>
@@ -152,20 +168,44 @@
 
 		<ion-card-content>
 			<div *ngIf="swimmingPool.PH ===true" >
-				<ion-label  position="stacked">{{'SWIMMINGPOOL.PHDate' | translate}}</ion-label>
-				<ion-text  >{{ swimmingPool.PHDate | date:'mediumDate' }}</ion-text>
+				<h2>{{'SWIMMINGPOOL.PH' | translate}} </h2>
+				<div class="ion-margin-start">
+					<ion-label  position="stacked">{{'SWIMMINGPOOL.PHDate' | translate}}</ion-label>
+					<ion-text  >{{ swimmingPool.PHDate | date:'mediumDate' }}</ion-text>
+				</div>
 			</div>
 			<div *ngIf="swimmingPool.pomp ===true" >
-				<ion-text  position="stacked">{{'SWIMMINGPOOL.PompDate' | translate}}</ion-text>
-				<ion-text  >{{ swimmingPool.pompDate | date:'mediumDate' }}</ion-text>
+				<h2>{{'SWIMMINGPOOL.HeatPomp' | translate}} </h2>
+				<div class="ion-margin-start">
+					<ion-text  position="stacked">{{'SWIMMINGPOOL.PompDate' | translate}}</ion-text>
+					<ion-text  >{{ swimmingPool.pompDate | date:'mediumDate' }}</ion-text>
+				</div>
 			</div>
 			<div *ngIf="swimmingPool.automaticFill ===true">
-				<ion-text *ngIf="swimmingPool.automaticFillType ==='electronic'">{{'SWIMMINGPOOL.automaticFillTypeElectronic' | translate}}</ion-text>
-				<ion-text *ngIf="swimmingPool.automaticFillType ==='water'">{{'SWIMMINGPOOL.automaticFillTypeWater' | translate}}</ion-text>
-				<ion-text  > [{{ swimmingPool.automaticFillDate | date:'mediumDate' }}]</ion-text>
+				<h2>{{'SWIMMINGPOOL.AutomaticFill' | translate}} </h2>
+				<div class="ion-margin-start">
+					<div>
+						<ion-text >{{'SWIMMINGPOOL.AutomaticFillBrand' | translate}} </ion-text>
+						<ion-text><b>{{swimmingPool.automaticFillBrand}}</b></ion-text>
+					</div>
+					<div>
+						<ion-text position="stacked">{{'SWIMMINGPOOL.AutomaticFillModel' | translate}} </ion-text>
+						<ion-text><b>{{swimmingPool.automaticFillModel}}</b></ion-text>
+					</div>
+					<ion-text *ngIf="swimmingPool.automaticFillType ==='electronic'">{{'SWIMMINGPOOL.AutomaticFillTypeElectronic' | translate}}</ion-text>
+					<ion-text *ngIf="swimmingPool.automaticFillType ==='water'">{{'SWIMMINGPOOL.AutomaticFillTypeWater' | translate}}</ion-text>
+					<div>
+						<ion-text position="stacked">{{'SWIMMINGPOOL.AutomaticFillDate' | translate}} </ion-text>
+						<ion-text  ><b>{{ swimmingPool.automaticFillDate | date:'mediumDate' }}</b></ion-text>
+					</div>
+				</div>
+
 			</div>
 			<div *ngIf="swimmingPool.robot ===true">
 				<ion-text >{{'SWIMMINGPOOL.Robot' | translate}}</ion-text>
+			</div>
+			<div *ngIf="swimmingPool.frostPreventionSystem ===true">
+				<ion-text >{{'SWIMMINGPOOL.FrostPreventionSystemOn' | translate}}</ion-text>
 			</div>
 		</ion-card-content>
 	</ion-card>

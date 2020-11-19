@@ -14,6 +14,7 @@ export class RegisterFormComponent implements OnInit {
 	@Input("homeref") value;
 
 	public accountRequestSentText:string="";
+	public cguChecked:boolean=false;
 	public accountRequest ={
 		emailAddress:"",
 		siretNumber:"",

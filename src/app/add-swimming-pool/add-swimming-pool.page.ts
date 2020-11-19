@@ -9,6 +9,7 @@ import { LoadingController } from '@ionic/angular';
 import {SwimmingPool} from '../models/swimming-pool';
 import {Customer} from '../models/customer';
 import { PoolServicesService } from '../services/pool-services.service';
+import {AppConstants } from '../app-constants';
 
 @Component({
 	selector: 'app-add-swimming-pool',
@@ -27,6 +28,7 @@ export class AddSwimmingPoolPage implements OnInit {
 	public loadingText:string="";
 	public loading;
 	public customer:Customer=new Customer();
+	public sandfilterPressureSteps = this.appConstants.sandfilterPressureSteps;
 
 	constructor(
 		private functions: AngularFireFunctions,
@@ -36,7 +38,8 @@ export class AddSwimmingPoolPage implements OnInit {
 		public toastController: ToastController,
 		public translateService : TranslateService,
 		private storage: Storage,
-		public loadingController: LoadingController
+		public loadingController: LoadingController,
+		public appConstants:AppConstants,
 		)
 	{ }
 
@@ -122,5 +125,10 @@ export class AddSwimmingPoolPage implements OnInit {
 		toast.present();
 	}
 
+	savePressure(value){
+		console.log("savePressure" , value)
+		this.swimmingPool.cleanFilterPressure =value;
+	
+	}
 }
 

@@ -43,6 +43,7 @@ export class Maintenance{
 	public  TLWaterMeter: string="";
 	public  TLClockSetting: boolean=false;
 	public  TLFiltrationMode: string="";
+	public  filtrationTime: string="";
 	public  TLRobotMode: string="";
 	public  TLProjectorMode: string="";
 	public  TLCleaningRoom: boolean=false;

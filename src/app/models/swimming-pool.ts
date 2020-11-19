@@ -18,6 +18,8 @@ export class SwimmingPool {
     coverType: string="";
     dateSandFilter: string="";
     brandSandFilter: string="";
+    sandFilterWeight:number=0;
+    cleanFilterPressure:number=0;
     brandFilter: string="";
     cvFilter: string="";
     dateFilter: string="";
@@ -34,6 +36,9 @@ export class SwimmingPool {
     automaticFill: boolean=false;
     automaticFillDate: string="";
     automaticFillType: string="";
+    automaticFillBrand: string="";
+    automaticFillModel: string="";
+    frostPreventionSystem: boolean=false;
     counterCurrent: boolean=false;
     observation: string="";
     lastVisitDate: string="";

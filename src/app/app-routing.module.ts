@@ -136,7 +136,11 @@ const routes: Routes = [
   path: 'super-admin',
   loadChildren: () => import('./super-admin/super-admin.module').then( m => m.SuperAdminPageModule),
   canActivate: [AngularFireAuthGuard], data: { authGuardPipe: superAdminOnly }
-}
+},
+  {
+    path: 'cgu',
+    loadChildren: () => import('./cgu/cgu.module').then( m => m.CGUPageModule)
+  }
 
 
 ];
