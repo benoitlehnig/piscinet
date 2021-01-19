@@ -39,6 +39,7 @@ export class Maintenance{
 	public  TLCleaningPreFilter: boolean=false;
 	public  sandfilterPressure: string="";
 	public  TLChloreLVL: string="50";
+	public  chloreCanDelivered: string="0";
 	public  TLPHLVL: string="50";
 	public  TLWaterMeter: string="";
 	public  TLClockSetting: boolean=false;
@@ -46,6 +47,7 @@ export class Maintenance{
 	public  filtrationTime: string="";
 	public  TLRobotMode: string="";
 	public  TLProjectorMode: string="";
+	public  projectorSettingHours: string="";
 	public  TLCleaningRoom: boolean=false;
 	public  PFEDSaltRAS:  boolean=false;
 	public  PFEDSaltCell:  boolean=false;
@@ -88,6 +90,9 @@ export class Technique{
 	public productGalet: string="";
 	public productSel: string="";
 	public productFloculent: string="";
+	public productBrome: string ="";
+	public productChloreChoc: string ="";
+	public productHypochlorite: string ="";
 	public productOther: string ="";
 	public pHMinusPowder: string ="";
 	public hydrochloricAcid: string ="";

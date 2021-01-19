@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { CustomersPage } from './customers.page';
 
 const routes: Routes = [

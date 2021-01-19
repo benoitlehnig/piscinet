@@ -95,7 +95,7 @@
 				<ion-label>{{'VISIT.TLCleaningRoom' | translate}}</ion-label>
 				<ion-toggle slot="start" [(ngModel)]="visit.maintenance.TLCleaningRoom" (ionChange)="saveMaintenance()"></ion-toggle>
 			</ion-item>
-			<ion-item >
+			<ion-item lines="none">
 				<ion-label >
 					<div><ion-text>{{'VISIT.TLChloreLVL' | translate}}</ion-text></div>
 					<div>
@@ -107,6 +107,10 @@
 						</ion-range>
 					</div>
 				</ion-label>
+			</ion-item>
+			<ion-item >
+				<ion-text>{{'VISIT.ChloreCanDelivered' | translate}}</ion-text>
+				<ion-input slot="end" class="ion-float-end borderInput" name="chloreCanDelivered" type="number"  [(ngModel)]="visit.maintenance.chloreCanDelivered" (ionChange)="saveMaintenance()"></ion-input>
 			</ion-item>
 			<ion-item >
 				<ion-label >
@@ -121,6 +125,7 @@
 					</div>
 				</ion-label>
 			</ion-item>
+			
 
 			<ion-item >
 				<ion-text>{{'VISIT.TLWaterMeter' | translate}}</ion-text>
@@ -163,6 +168,10 @@
 						<ion-label>{{'VISIT.TLProjectorModeManual' | translate}}</ion-label>
 					</ion-segment-button>
 				</ion-segment>
+			</ion-item>
+			<ion-item *ngIf="visit.typeOfVisit !=='maintenance'" >
+				<ion-text>{{'VISIT.ProjectorSettingHours' | translate}}</ion-text>
+				<ion-input slot="end" class="ion-float-end borderInput" name="projectorSettingHours" type="number"  [(ngModel)]="visit.maintenance.projectorSettingHours" (ionChange)="saveMaintenance()"></ion-input>
 			</ion-item>
 
 		</div>

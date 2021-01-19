@@ -126,20 +126,24 @@
 			<ion-text *ngIf="visit.maintenance.TLRobotMode ==='manual'" class="ion-margin-start">{{'VISIT.TLRobotModeManual' | translate}}</ion-text>
 		</ion-item>
 		<ion-item >
-			<ion-text >{{'VISIT.TLProjectorMode' | translate}}</ion-text>
-			<ion-text *ngIf="visit.maintenance.TLProjectorMode ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
-			<ion-text *ngIf="visit.maintenance.TLProjectorMode ==='automatic'" class="ion-margin-start">{{'VISIT.TLProjectorModeAutomatic' | translate}}</ion-text>
-			<ion-text *ngIf="visit.maintenance.TLProjectorMode ==='manual'" class="ion-margin-start">{{'VISIT.TLProjectorModeManual' | translate}}</ion-text>
+			<ion-text >{{'VISIT.ProjectorSettingHours' | translate}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.projectorSettingHours ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.projectorSettingHours !==''" class="ion-margin-start">{{visit.maintenance.projectorSettingHours}}</ion-text>
 		</ion-item>
 		<ion-item >
 			<ion-label>{{'VISIT.TLCleaningRoom' | translate}}</ion-label>
 			<ion-icon name="checkmark" class="statusOK" slot="start" *ngIf="visit.maintenance.TLCleaningRoom === true"  ></ion-icon>
 			<ion-icon name="close" class="statusKO" slot="start" *ngIf="visit.maintenance.TLCleaningRoom ===false"  ></ion-icon>
 		</ion-item>
-		<ion-item >
+		<ion-item lines="none">
 			<ion-text position="stacked">{{'VISIT.TLChloreLVL' | translate}}</ion-text>
 			<ion-text *ngIf="visit.maintenance.TLChloreLVL !==''" class="ion-margin-start">{{visit.maintenance.TLChloreLVL}}</ion-text>
 			<ion-text *ngIf="visit.maintenance.TLChloreLVL ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
+		<ion-item >
+			<ion-text position="stacked">{{'VISIT.ChloreCanDelivered' | translate}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.chloreCanDelivered !==''" class="ion-margin-start">{{visit.maintenance.chloreCanDelivered}}</ion-text>
+			<ion-text *ngIf="visit.maintenance.chloreCanDelivered ===''" class="unknown">{{'COMMON.Unknown' | translate}}</ion-text>
 		</ion-item>
 		<ion-item >
 			<ion-text position="stacked">{{'VISIT.TLPHLVL' | translate}}</ion-text>

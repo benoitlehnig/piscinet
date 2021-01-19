@@ -318,7 +318,7 @@
 		"LoopHoles": "Lacunes dans les écumoires nettoyées",
 		"PassageLandingSurface": "Epuisette à la surface passée",
 		"PassageLandingDepth": "Epuisette en profondeur passée",
-		"BottomDrain": "Drain de fond en bon état",
+		"BottomDrain": "Bonde de fond en bon état",
 		"VacuumCleaner": "Aspirateur dans le coffre du volet roulant passé",
 		"CurtainVacuumCleaner": "Poutre de rideau nettoyée",
 		"AlarmSystemTitle": "Systeme d'alarme",
@@ -376,8 +376,11 @@
 		"WaterTemperature": "Temperature de l'eau",
 		"IntroducedProductsTitle": "Produits introduits",
 		"IntroducedProductChlore": "Chlore",
-		"IntroducedProductPH": "PH",
-		"IntroducedProductSalt": "Sel",
+		"IntroducedProductChloreChoc": "Chlore Choc",
+		"IntroducedProductBrome": "Brome (nombre de pastilles)",
+		"IntroducedProductPH": "PH  (kg)",
+		"IntroducedProductSalt": "Sel (nombre de sacs)",
+		"IntroducedProductHypochlorite": "Hypochlorite de calcium (kg)",
 		"IntroducedProductGalet": "Galet",
 		"IntroducedProductOther": "Autres produits",
 		"IntroducedProductFloculent": "Floculants",
@@ -401,7 +404,9 @@
 		"NewInterventionRequired": "Nouvelle intervention nécessaire",
 		"PHMinusPowder": "PH minus poudre (bisulfate de sodium)",
 		"HydrochloricAcid": "Acide chlorhydrique",
-		"PHMinusLiquid": "PH minus liquide (acide sulfurique)"
+		"PHMinusLiquid": "PH minus liquide (acide sulfurique)",
+		"ProjectorSettingHours": "Réglage des projecteurs (Nbres d’heures)",
+		"ChloreCanDelivered": "Nombre de bidons livrés"
 	},
 	"ADDVISIT":{
 		"SuccessAdd": " - nouvelle visite ajoutée ! ",
