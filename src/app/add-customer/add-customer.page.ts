@@ -32,6 +32,8 @@ export class AddCustomerPage implements OnInit {
 	public autocompleteItems: any[];
 	public location: any;
 	public loading ;
+
+	public contractTypes=[];
 	
 	constructor(
 		private functions: AngularFireFunctions,
@@ -71,6 +73,10 @@ export class AddCustomerPage implements OnInit {
 				this.successUpdateText = value['ADDCUSTOMER.SuccessUpdate'];
 				this.loadingText = value['COMMON.Loading'];
 			});
+		this.translateService.get('CUSTOMER.CONTRACTTYPES').subscribe(
+			value=>{
+				this.contractTypes = this.returnArray(value);
+			})
 	}
 
 	addCustomer(){
@@ -152,6 +158,14 @@ export class AddCustomerPage implements OnInit {
 		})
 		this.autocomplete = { input: this.customer.googleAddress};
 		this.autocompleteItems = [];
+	}
+	returnArray(input){
+		let arr=[];
+		Object.keys(input).map(function(key){  
+			arr.push({index: key, text:input[key]})  
+			return arr;  
+		});
+		return arr 
 	}
 
 }

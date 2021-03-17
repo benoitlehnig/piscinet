@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSharingService } from '../../services/data-sharing.service'
+import { Subscription } from 'rxjs';
+
 
 @Component({
 	selector: 'app-list-view',
@@ -11,13 +13,16 @@ export class ListViewPage implements OnInit {
 	public searchTerm:string ="";
 	public customers;
 
+	public customersChangesSub: Subscription = new Subscription();
+
+
 	constructor(
 		public dataSharingService:DataSharingService
 
 		) { }
 
 	ngOnInit() {
-		let sub = this.dataSharingService.getCustomersChanges().subscribe(
+		this.customersChangesSub = this.dataSharingService.getCustomersChanges().subscribe(
 			data => {
 				if(data){
 					this.customers = data;
@@ -28,6 +33,10 @@ export class ListViewPage implements OnInit {
 
 	async filterList(evt) {
 		this.searchTerm = evt.srcElement.value;
+	}
+
+	ngOnDestroy(){
+		this.customersChangesSub.unsubscribe();
 	}
 
 }

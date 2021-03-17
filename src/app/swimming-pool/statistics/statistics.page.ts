@@ -16,6 +16,7 @@ export class StatisticsPage implements OnInit {
 	@ViewChild('phChart') phChart;
 	@ViewChild('chloreChart') chloreChart;
 	@ViewChild('TACChart') TACChart;
+	@ViewChild('waterMeterChart') waterMeterChart;
 	bars: any;
 	colorArray: any;
 	poolData:any;
@@ -35,6 +36,10 @@ export class StatisticsPage implements OnInit {
 		data:[]
 	}
 	TACArray={
+		labels:[],
+		data:[]
+	}
+	waterMeterArray={
 		labels:[],
 		data:[]
 	}
@@ -93,6 +98,15 @@ export class StatisticsPage implements OnInit {
 								this.TACArray.data.push(obj.value);
 							});
 							this.createBarChart(this.TACChart, "TAC", this.TACArray);
+						})
+					this.poolServicesService.getSwimmingPoolStatistics(this.poolId,"waterMeter").subscribe(
+						data=>{
+							this.waterMeterArray ={	labels:[],data:[]};
+							data.forEach((obj,index) =>{
+								this.waterMeterArray.labels.push(moment(obj.label).format('DD-MMM-YY'));
+								this.waterMeterArray.data.push(obj.value);
+							});
+							this.createBarChart(this.waterMeterChart, "waterMeter", this.waterMeterArray);
 						})
 					
 				}

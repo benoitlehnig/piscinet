@@ -1,5 +1,7 @@
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { DataSharingService } from '../../services/data-sharing.service'
+import { Subscription } from 'rxjs';
+
 
 
 @Component({
@@ -9,9 +11,10 @@ import { DataSharingService } from '../../services/data-sharing.service'
 })
 export class MapViewPage implements OnInit {
 
-	zoom = 8;
-	center: google.maps.LatLngLiteral;
-	options: google.maps.MapOptions = {
+	//Google Maps parameters
+	public zoom = 8;
+	public center: google.maps.LatLngLiteral = {lat:43.810522, lng:4.827776}
+	public options: google.maps.MapOptions = {
 		zoom : 8,
 		center: this.center,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -21,25 +24,27 @@ export class MapViewPage implements OnInit {
 		rotateControl:false
 	}
 	@ViewChild('Map') mapElement: ElementRef;
-	map: any;
 
+
+	public map: any;
 	public customers;
 	public markers=[];
 
+
+	public customersChangesSub: Subscription = new Subscription();
+
+	
 	constructor(
 		public dataSharingService:DataSharingService
 		) { }
 
 
 	ngOnInit() {
-
-		this.center = {lat:43.810522, lng:4.827776}
-		let sub = this.dataSharingService.getCustomersChanges().subscribe(
+		this.customersChangesSub = this.dataSharingService.getCustomersChanges().subscribe(
 			data => {
 				if(data){
 					this.customers = data;
 					this.customers.forEach(obj => {
-						console.log(obj)
 						const newMarker={
 							position: {
 								lat: obj.data.location.lat + ((Math.random() - 0.5) * 2) / 10,
@@ -48,13 +53,12 @@ export class MapViewPage implements OnInit {
 							title: obj.data.firstName +" "+ obj.data.lastName						}
 						this.markers.push(newMarker)
 					})
-				
-					console.log(this.customers);
 				}
-				
-			});	sub.unsubscribe();
-
+			});
 	}
 
+	ngOnDestroy(){
+		this.customersChangesSub.unsubscribe();
+	}
 
 }

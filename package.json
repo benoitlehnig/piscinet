@@ -43,7 +43,6 @@
     "cordova-plugin-actionsheet": "^2.3.3",
     "cordova-plugin-dialogs": "^2.0.2",
     "cordova-plugin-google-analytics": "^1.9.0",
-    "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git#multiple_maps",
     "firebase": "^7.14.4",
     "intersection-observer": "^0.11.0",
     "lodash": "^4.17.15",
@@ -62,7 +61,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.5",
-    "@angular/cli": "~9.1.5",
+    "@angular/cli": "^9.1.15",
     "@angular/compiler": "~9.1.6",
     "@angular/compiler-cli": "~9.1.6",
     "@angular/language-service": "~9.1.6",
@@ -84,10 +83,5 @@
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
   },
-  "description": "An Ionic project",
-  "cordova": {
-    "plugins": {
-      "cordova-plugin-googlemaps": {}
-    }
-  }
+  "description": "An Ionic project"
 }

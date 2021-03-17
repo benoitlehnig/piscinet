@@ -47,7 +47,7 @@
 				</div>
 			</ion-label>
 		</ion-item>
-		<ion-item>
+		<div>
 			<ion-grid>
 				<ion-row>
 					<ion-col class="ion-text-center">
@@ -55,7 +55,7 @@
 							<ion-text >{{'VISIT.AnalyseSalt' | translate}}</ion-text>
 						</div>
 						<div>
-							<ion-input class="borderInput inlineAnalyseBorder" name="sel" type="number" [(ngModel)]="visit.technique.sel" readonly></ion-input>
+							<ion-input class="borderInput inlineAnalyseBorder" readOnly name="sel" type="number" [(ngModel)]="visit.technique.sel" readonly></ion-input>
 						</div>
 					</ion-col>
 					<ion-col class="ion-text-center">
@@ -63,7 +63,7 @@
 							<ion-text >{{'VISIT.AnalyseTAC' | translate}}</ion-text>
 						</div>
 						<div>
-							<ion-input class="borderInput inlineAnalyseBorder" name="TAC" type="number"  [(ngModel)]="visit.technique.TAC" readonly></ion-input>
+							<ion-input class="borderInput inlineAnalyseBorder" readOnly name="TAC" type="number"  [(ngModel)]="visit.technique.TAC" readonly></ion-input>
 						</div>
 					</ion-col>
 					<ion-col class="ion-text-center">
@@ -71,14 +71,30 @@
 							<ion-text >{{'VISIT.AnalyseStabiliser' | translate}}</ion-text>
 						</div>
 						<div>
-							<ion-input  class="borderInput inlineAnalyseBorder" name="stabilisant" type="number"  [(ngModel)]="visit.technique.stabilisant"></ion-input>
+							<ion-input  class="borderInput inlineAnalyseBorder" readOnly name="stabilisant" type="number"  [(ngModel)]="visit.technique.stabilisant"></ion-input>
+						</div>
+					</ion-col>
+					<ion-col class="ion-text-center">
+						<div>
+							<ion-text >{{'VISIT.AnalyseTH' | translate}}</ion-text>
+						</div>
+						<div>
+							<ion-input  class="borderInput inlineAnalyseBorder" readOnly name="th" type="number"  [(ngModel)]="visit.technique.th"></ion-input>
 						</div>
 					</ion-col>
 				</ion-row>
 			</ion-grid>
 
+		</div>
+		<ion-item lines="none">
+			<ion-label>{{'VISIT.SettingOrderModification' | translate}}</ion-label>
+			<ion-checkbox slot="start" disabled="true" [(ngModel)]="visit.technique.settingOrderModification"></ion-checkbox>
 		</ion-item>
-
+		<ion-item>
+			<ion-text>{{'VISIT.WaterMeterLevel' | translate}}</ion-text>
+			<ion-text *ngIf="visit.technique.waterMeter !==''" class="ion-margin-start">{{visit.technique.waterMeter}}</ion-text> 
+			<ion-text *ngIf="visit.technique.waterMeter ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
+		</ion-item>
 	</ion-list>
 	<ion-list>
 		<ion-list-header>
@@ -93,11 +109,6 @@
 			<ion-text>{{'VISIT.IntroducedProductPH' | translate}}</ion-text>
 			<ion-text *ngIf="visit.technique.productPH !==''" class="ion-margin-start">{{visit.technique.productPH}}</ion-text> 
 			<ion-text *ngIf="visit.technique.productPH ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
-		</ion-item>
-		<ion-item>
-			<ion-text>{{'VISIT.IntroducedProductGalet' | translate}}</ion-text>
-			<ion-text *ngIf="visit.technique.productGalet !==''" class="ion-margin-start">{{visit.technique.productGalet}}</ion-text> 
-			<ion-text *ngIf="visit.technique.productGalet ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
 		</ion-item>
 		<ion-item>
 			<ion-text>{{'VISIT.IntroducedProductSalt' | translate}}</ion-text>

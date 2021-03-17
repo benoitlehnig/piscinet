@@ -49,6 +49,7 @@ export class CustomerPage implements OnInit {
 	public eligibilityToAddPool:boolean = true;
 	public visitTypeFullText:string = "";
 	public visitTypeMaintenanceText:string = "";
+	public visitTypeTechnicalText:string = "";
 	public newVisitCancelText:string = "";
 	public nextComeBackDisplay:boolean = false;
 
@@ -73,13 +74,14 @@ export class CustomerPage implements OnInit {
 	ngOnInit() {
 		this.uid = this.activatedRoute.snapshot.paramMap.get('id');
 		this.claims = this.authenticationService.getClaims();
-		this.translateService.get(['CUSTOMER.EmailSent','COMMON.Loading','CUSTOMER.VisitTypeFull','CUSTOMER.VisitTypeMaintenance','CUSTOMER.NewVisitCancel'] ).subscribe(
+		this.translateService.get(['CUSTOMER.EmailSent','COMMON.Loading','CUSTOMER.VisitTypeFull','CUSTOMER.VisitTypeMaintenance','CUSTOMER.VisitTypeTechnical','CUSTOMER.NewVisitCancel'] ).subscribe(
 			value => {
 				this.emailSentText = value['CUSTOMER.EmailSent'];
 				this.loadingText = value['COMMON.Loading'];
 				this.successDeleteText = value['CUSTOMER.SuccessDeleteText'];
 				this.visitTypeFullText =  value['CUSTOMER.VisitTypeFull'];
 				this.visitTypeMaintenanceText =  value['CUSTOMER.VisitTypeMaintenance'];
+				this.visitTypeTechnicalText =  value['CUSTOMER.VisitTypeTechnical'];
 				this.newVisitCancelText =  value['CUSTOMER.NewVisitCancel'];
 			});	
 		this.accountServicesService.getAccount(this.claims['accountId']).subscribe(
@@ -186,34 +188,54 @@ export class CustomerPage implements OnInit {
 	}
 
 	async presentActionSheet(swimmingPool) {
+		let buttons= [{
+			text: this.visitTypeFullText,
+			icon: 'shield-checkmark',
+			handler: () => {
+				const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
+				this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
+					swimmingPoolName:swimmingPool.name,visitType:'full',swimmingPoolStringified:swimmingPoolStringified }])
+			}
+		}, {
+			text:  this.visitTypeMaintenanceText,
+			icon: 'shield-checkmark',
+			handler: () => {
+				const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
+				this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
+					swimmingPoolName:swimmingPool.name,visitType:'maintenance',swimmingPoolStringified:swimmingPoolStringified }])
+			}
+		},
+		{
+			text: this.newVisitCancelText,
+			icon: 'close',
+			role: 'cancel',
+			handler: () => {
+				console.log('Cancel clicked');
+			}
+		}];
+		if(this.customer.typeOfContract === "technical"){
+			buttons =[{
+			text: this.visitTypeTechnicalText,
+			icon: 'shield-checkmark',
+			handler: () => {
+				const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
+				this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
+					swimmingPoolName:swimmingPool.name,visitType:'technical',swimmingPoolStringified:swimmingPoolStringified }])
+			}
+		}, 
+		{
+			text: this.newVisitCancelText,
+			icon: 'close',
+			role: 'cancel',
+			handler: () => {
+				console.log('Cancel clicked');
+			}
+		}]
+		}
 		const actionSheet = await this.actionSheetController.create({
 			header: 'Nouvelle visite',
 			cssClass: 'my-custom-class',
-			buttons: [{
-				text: this.visitTypeFullText,
-				icon: 'shield-checkmark',
-				handler: () => {
-					const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
-					this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
-						swimmingPoolName:swimmingPool.name,visitType:'full',swimmingPoolStringified:swimmingPoolStringified }])
-				}
-			}, {
-				text:  this.visitTypeMaintenanceText,
-				icon: 'shield-checkmark',
-				handler: () => {
-					const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
-					this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
-						swimmingPoolName:swimmingPool.name,visitType:'maintenance',swimmingPoolStringified:swimmingPoolStringified }])
-				}
-			},
-			 {
-				text: this.newVisitCancelText,
-				icon: 'close',
-				role: 'cancel',
-				handler: () => {
-					console.log('Cancel clicked');
-				}
-			}]
+			buttons: buttons
 		});
 		await actionSheet.present();
 	}

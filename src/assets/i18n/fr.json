@@ -43,6 +43,11 @@
 		"MapView": "Carte"
 	},
 	"CUSTOMER":{
+		"CONTRACTTYPES":{
+			"full": "Contrat complet",
+			"technical": "Contrat technique",
+			"seasonal": "Contrat saisonnier"
+		},
 		"MOBILEPHONENUMBER": "Telephone mobile",
 		"FIXEDPHONENUMBER": "Telephone fixe",
 		"GUARDIANPHONENUMBER": "Telephone du gardien",
@@ -70,7 +75,7 @@
 		"ReceivePushNotif": "Je veux recevoir des push notifications apres chaque visite.",
 		"ActivateAccount": "Activer le compte client",
 		"VisitTypeFull": "Visite complète",
-		"VisitTypeControl": "Visite de controle",
+		"VisitTypeTechnical": "Visite technique",
 		"VisitTypeMaintenance": "Visite de maintenance",
 		"NoPool": "Aucune piscine n'est associée à ce client",
 		"NewVisit": "Effectuer une nouvelle visite",
@@ -303,10 +308,10 @@
 		"ObservationsTitle": "Observations",
 		"VisitType": "Type de visite",
 		"VisitTypeFull": "Complete",
-		"VisitTypeControl": "Controle",
+		"VisitTypeTechnical": "Technique",
 		"VisitTypeMaintenance": "Maintenance",
 		"VisitTypeFullButton": "Visite Complete",
-		"VisitTypeControlButton": "Visite Controle",
+		"VisitTypeTechnicalButton": "Visite Technique",
 		"VisitTypeMaintenanceButton": "Visite Maintenance",
 		"Cleaning": "Nettoyage",
 		"CleaningCurtain": "Rideau nettoyé",
@@ -373,7 +378,10 @@
 		"AnalyseStabiliserShort": "Stab.",
 		"AnalyseSalt": "Sel",
 		"AnalyseTAC": "TAC",
-		"WaterTemperature": "Temperature de l'eau",
+		"AnalyseTH": "TH",
+		"SettingOrderModification": "Réglage du point de consigne effectué",
+		"WaterMeterLevel": "Lecture du compteur d'eau",
+		"WaterTemperature": "Température de l'eau",
 		"IntroducedProductsTitle": "Produits introduits",
 		"IntroducedProductChlore": "Chlore",
 		"IntroducedProductChloreChoc": "Chlore Choc",
@@ -473,7 +481,8 @@
 		"EvolutionPH": "Evolution PH",
 		"EvolutionChlore": "Evolution Chlore ",
 		"EvolutionTemperature": "Evolution Temperature",
-		"EvolutionAlca": "Evolution Alcalinomètrique complet"
+		"EvolutionAlca": "Evolution Alcalinomètrique complet",
+		"WaterMeterEvolution": "Evolution des relevés du compteur d'eau"
 	},
 	"GDPRMODAL":{
 		"Title": "Politique de confientialité des données",

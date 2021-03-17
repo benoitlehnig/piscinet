@@ -64,11 +64,8 @@
 
 
 	<ion-item >
-		<ion-chip color="primary" *ngIf="customer.typeOfContract ==='technical'">
-			<ion-label>{{'CUSTOMER.CONTRACTTYPETECHNICAL' | translate}}</ion-label>
-		</ion-chip>
-		<ion-chip color="primary" *ngIf="customer.typeOfContract ==='full'">
-			<ion-label>{{'CUSTOMER.CONTRACTTYPEFULL' | translate}}</ion-label>
+		<ion-chip color="primary">
+			<ion-label >{{'CUSTOMER.CONTRACTTYPES.'+customer.typeOfContract | translate}}</ion-label>
 		</ion-chip>
 		<ion-chip color="primary" *ngIf="customer.contractOfProduct ==='included'">
 			<ion-label>{{'CUSTOMER.CONTRACTPRODUCTINCLUDED' | translate}}</ion-label>

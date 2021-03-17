@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import {Customer} from '../models/customer';
-import { map } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
 import { DataSharingService } from '../services/data-sharing.service'
 import { CustomerServicesService } from '../services/customer-services.service'
+import { Subscription } from 'rxjs';
+
 
 
 @Component({
@@ -13,24 +12,32 @@ import { CustomerServicesService } from '../services/customer-services.service'
 	styleUrls: ['./customers.page.scss'],
 })
 export class CustomersPage implements OnInit {
+	
 	public customers;
 	public claims;
+
+	public customersChangesSub: Subscription = new Subscription();
 
 	constructor(
 		public authenticationService:AuthenticationService,
 		public dataSharingService:DataSharingService,
 		public customerServicesService:CustomerServicesService
-
 		) { 
 
 	}
 
 	ngOnInit() {
-		this.customers = this.customerServicesService.getCustomers();
-		this.customers.subscribe(
-			data=> this.dataSharingService.currentCustomers(data));
+		this.customersChangesSub = this.customerServicesService.getCustomers().subscribe(
+			data=> {
+				this.dataSharingService.currentCustomers(data);
+				this.customers = data;
+			}
+		);
 		this.claims = this.authenticationService.getClaims();
 
+	}
+	ngOnDestroy(){
+		this.customersChangesSub.unsubscribe();
 	}
 
 	

@@ -19,7 +19,7 @@ export class OfflineVisitsPage implements OnInit {
 
   public visits= [];
   public alertText ={header:'',message:'', buttonCancel: '', buttonOK:'' };
-  public visitTypeText= {visitTypeFull: '',visitTypeControl:'', visitTypeMaintenance:'' };
+  public visitTypeText= {visitTypeFull: '',visitTypeTechnical:'', visitTypeMaintenance:'' };
   public claims={};
   public isOnline:boolean=true;
   public customer: Customer= new Customer()
@@ -48,7 +48,7 @@ export class OfflineVisitsPage implements OnInit {
           buttonOK:value['OFFLINEVISITS.AlertOK'] 
         }
         this.visitTypeText.visitTypeFull = value['VISIT.VisitTypeFull'];
-        this.visitTypeText.visitTypeControl = value['VISIT.VisitTypeControl'];
+        this.visitTypeText.visitTypeTechnical = value['VISIT.VisitTypeTechnical'];
         this.visitTypeText.visitTypeMaintenance = value['VISIT.VisitTypeMaintenance'];
 
       });

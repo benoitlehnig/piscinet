@@ -4,11 +4,11 @@
 			<ion-back-button defaultHref="visits"></ion-back-button>
 		</ion-buttons>
 		<ion-avatar slot="start" class="avatarListVisits"  [ngClass]="{'full': visit.typeOfVisit ==='full' , 
-		'controle': visit.typeOfVisit ==='controle' , 'maintenance': visit.typeOfVisit ==='maintenance' }">
+		'technical': visit.typeOfVisit ==='technical' , 'maintenance': visit.typeOfVisit ==='maintenance' }">
 		<ion-icon name="shield-checkmark"></ion-icon>
 		<span *ngIf="visit.maintenance">
 			<span *ngIf="visit.typeOfVisit ==='full'">{{'VISIT.VisitTypeFull' | translate}}</span>
-			<span *ngIf="visit.typeOfVisit ==='controle'">{{'VISIT.VisitTypeControl' | translate}}</span>
+			<span *ngIf="visit.typeOfVisit ==='technical'">{{'VISIT.VisitTypeTechnical' | translate}}</span>
 			<span *ngIf="visit.typeOfVisit ==='maintenance'">{{'VISIT.VisitTypeMaintenance' | translate}}</span>
 		</span>
 		

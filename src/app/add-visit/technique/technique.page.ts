@@ -3,6 +3,8 @@ import { DataSharingService } from '../../services/data-sharing.service'
 import {Visit} from '../../models/visit';
 import {AppConstants } from '../../app-constants';
 import {SwimmingPool} from '../../models/swimming-pool';
+import { Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 
 @Component({
@@ -20,6 +22,9 @@ export class TechniquePage implements OnInit {
 	chloreSteps=this.appConstants.chloreSteps;
 	PHSteps=this.appConstants.PHSteps;
 
+	public visitChangesSub: Subscription = new Subscription();
+
+
 	constructor(
 		public dataSharingService:DataSharingService,
 		public appConstants:AppConstants
@@ -27,7 +32,7 @@ export class TechniquePage implements OnInit {
 
 
 	ngOnInit() {
-		this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
+		this.visitChangesSub = this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
 			console.log("visit technique:", visit)
 			this.visit = visit;
 		});
@@ -41,6 +46,9 @@ export class TechniquePage implements OnInit {
 			}
 			
 		})	
+	}
+	ngOnDestroy(){
+		this.visitChangesSub.unsubscribe();
 	}
 
 	ionViewWillLeave(){
@@ -56,6 +64,12 @@ export class TechniquePage implements OnInit {
 	}
 	savePH(value){
 		this.visit.technique.PH =value;
+		this.saveTechnical();
+	}
+	saveTemperature(event){
+		console.log(" saveTemperature", event)
+		this.visit.technique.waterTemperature = event.detail.value ;
+		console.log(" saveTemperature", this.visit.technique.waterTemperature)
 		this.saveTechnical();
 	}
 	saveTechnical(){

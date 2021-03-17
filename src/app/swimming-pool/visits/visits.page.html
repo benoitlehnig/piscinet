@@ -3,11 +3,11 @@
 	<ion-list>
 		<ion-item *ngFor="let visit of visits | async" [routerLink]="['/visits/' + visit.visitKey]">
 			<ion-avatar slot="start" class="avatarListVisits" [ngClass]="{'full': visit.typeOfVisit ==='full' , 
-			'controle': visit.typeOfVisit ==='controle' , 'maintenance': visit.typeOfVisit ==='maintenance' }">
+			'technical': visit.typeOfVisit ==='technical' , 'maintenance': visit.typeOfVisit ==='maintenance' }">
 			<ion-icon name="shield-checkmark"></ion-icon>
 			<div *ngIf="visit.maintenance" class="typeOfVisitWrapper">
 				<span *ngIf="visit.typeOfVisit ==='full'">{{'VISIT.VisitTypeFull' | translate}}</span>
-				<span *ngIf="visit.typeOfVisit ==='controle'">{{'VISIT.VisitTypeControl' | translate}}</span>
+				<span *ngIf="visit.typeOfVisit ==='technical'">{{'VISIT.VisitTypeTechnical' | translate}}</span>
 				<span *ngIf="visit.typeOfVisit ==='maintenance'">{{'VISIT.VisitTypeMaintenance' | translate}}</span>
 			</div>
 		</ion-avatar>

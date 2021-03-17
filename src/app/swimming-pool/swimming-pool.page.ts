@@ -22,7 +22,7 @@ export class SwimmingPoolPage implements OnInit {
 	public swimmingPoolStringified:string="";
 	public customer:Customer = new Customer();
 	public customerStringified = "";
-	public visitTypeText= {visitTypeFull: '',visitTypeControl:'', visitTypeMaintenance:'' };
+	public visitTypeText= {visitTypeFull: '',visitTypeTechnical:'', visitTypeMaintenance:'' };
 	public visitTypeFullText:string = "";
 	public visitTypeMaintenanceText:string = "";
 	public newVisitCancelText:string = "";
@@ -44,7 +44,7 @@ export class SwimmingPoolPage implements OnInit {
 		this.translateService.get(['VISIT.VisitTypeFullButton', 'VISIT.VisitTypeControlButton', 'VISIT.VisitTypeMaintenanceButton','CUSTOMER.VisitTypeFull','CUSTOMER.VisitTypeMaintenance','CUSTOMER.NewVisitCancel']).subscribe(
 			value => {
 				this.visitTypeText.visitTypeFull = value['VISIT.VisitTypeFullButton'];
-				this.visitTypeText.visitTypeControl = value['VISIT.VisitTypeControlButton'];
+				this.visitTypeText.visitTypeTechnical = value['VISIT.VisitTypeTechnicalButton'];
 				this.visitTypeText.visitTypeMaintenance = value['VISIT.VisitTypeMaintenanceButton'];
 				this.visitTypeFullText =  value['CUSTOMER.VisitTypeFull'];
 				this.visitTypeMaintenanceText =  value['CUSTOMER.VisitTypeMaintenance'];

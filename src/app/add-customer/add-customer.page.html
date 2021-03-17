@@ -59,16 +59,10 @@
 					<ion-list-header>
 						<ion-label>{{'ADDCUSTOMER.ContractType' | translate}}</ion-label>
 					</ion-list-header>
-					<ion-item>
-						<ion-label>{{'ADDCUSTOMER.ContractTypeComplete' | translate}}</ion-label>
-						<ion-radio slot="start" value="full"></ion-radio>
-					</ion-item>
-					<ion-item>
-						<ion-label>{{'ADDCUSTOMER.ContractTypeTechnical' | translate}}</ion-label>
-						<ion-radio slot="start" value="technical"></ion-radio>
-					</ion-item>
-
-					
+					<ion-item lines="none" *ngFor="let contractType of contractTypes">
+						<ion-label>{{contractType.text}}</ion-label>
+						<ion-radio slot="start" [value]="contractType.index"></ion-radio>
+					</ion-item>				
 				</ion-radio-group>
 			</ion-col>
 			<ion-col>
@@ -77,7 +71,7 @@
 						<ion-label>{{'ADDCUSTOMER.ContractTypeProduct' | translate}}</ion-label>
 					</ion-list-header>
 
-					<ion-item>
+					<ion-item lines="none">
 						<ion-label>{{'ADDCUSTOMER.ContractTypeProductIncluded' | translate}}</ion-label>
 						<ion-radio slot="start" value="included"></ion-radio>
 					</ion-item>
