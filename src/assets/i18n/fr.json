@@ -511,10 +511,12 @@
 		"Title": "Piscine"
 	},
 	"OFFLINEVISITS":{
-		"AlertHeader": "Suppression de toutes les visites hors ligne",
-		"AlertMesssage": "Etes-vous sur de vouloir supprimer toutes vos visites hors-lignes ? ",
-		"AlertCancel": "Annuler",
-		"AlertOK": "Supprimer"
+		"REMOVEALERT":{
+			"Header": "Suppression de toutes les visites hors ligne",
+			"Messsage": "Etes-vous sur de vouloir supprimer toutes vos visites hors-lignes ? ",
+			"Cancel": "Annuler",
+			"OK": "Supprimer"
+		}
 	},
 	"NOTIFICATIONS":{
 		"Title": "Alarmes",

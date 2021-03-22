@@ -32,8 +32,8 @@ import { ModalController } from '@ionic/angular';
 })
 export class VisitPage implements OnInit {
 
-	visit:Visit = new Visit();
-	visitId:string="";
+	public visit:Visit = new Visit();
+	public visitId:string="";
 	public claims:{[key: string]: any}={'admin':false}
 	public customerStringified = "";
 	public swimmingPoolStringified = "";
@@ -44,7 +44,7 @@ export class VisitPage implements OnInit {
 	public employeeUid:string="";
 	public employee:Employee= new Employee()
 	public poolId:string="";
-	swimmingPool:SwimmingPool = new SwimmingPool();
+	public swimmingPool:SwimmingPool = new SwimmingPool();
 	public swimmingPoolName:string="";
 	public successUploadText:string="";
 	public loadingText:string="";

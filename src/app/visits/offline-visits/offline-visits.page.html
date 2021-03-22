@@ -20,16 +20,12 @@
 			'technical': visit.typeOfVisit ==='technical' , 'maintenance': visit.typeOfVisit ==='maintenance' }">
 			<ion-icon name="shield-checkmark"></ion-icon>
 			<div *ngIf="visit" class="typeOfVisitWrapper">
-				<span *ngIf="visit.typeOfVisit ==='full'">{{'VISIT.VisitTypeFull' | translate}}</span>
-				<span *ngIf="visit.typeOfVisit ==='technical'">{{'VISIT.VisitTypeTechnical' | translate}}</span>
-				<span *ngIf="visit.typeOfVisit ==='maintenance'">{{'VISIT.VisitTypeMaintenance' | translate}}</span>
+				<span >{{'VISIT.TYPES.'+visit.typeOfVisit+'.Short' | translate}}</span>
 			</div>
 		</ion-avatar>
 		<ion-label>
 			<h2 *ngIf="visit.dateTime">{{ visit.dateTime | date:'medium' }} </h2>
 			<h2  *ngIf="visit.customerInfo" >{{'VISIT.Customer' | translate}} : {{ visit.customerInfo.firstName }} </h2>
-
-
 		</ion-label>
 	</ion-item>
 </ion-list>
@@ -40,13 +36,13 @@
 	<ion-fab-list>
 		<ion-fab-button color="primary" class="full" [attr.data-desc]="visitTypeText.visitTypeFull" 
 		[routerLink]="['/customers/null/swimming-pool/null/add-visit',{ mode: 'add', customer: '',swimmingPoolName:'',visitType:'full',offline:true }]">
-			<ion-icon name="shield-checkmark" fill="solid"></ion-icon>
-		</ion-fab-button>
-		<ion-fab-button color="success" class="maintenance"  [attr.data-desc]="visitTypeText.visitTypeMaintenance"
-		 [routerLink]="['/customers/null/swimming-pool/null/add-visit',{ mode: 'add', customer: '',swimmingPoolName:'',visitType:'maintenance',offline:true }]">
-			<ion-icon name="shield-checkmark" ></ion-icon>
-		</ion-fab-button>
-	</ion-fab-list>
+		<ion-icon name="shield-checkmark" fill="solid"></ion-icon>
+	</ion-fab-button>
+	<ion-fab-button color="success" class="maintenance"  [attr.data-desc]="visitTypeText.visitTypeMaintenance"
+	[routerLink]="['/customers/null/swimming-pool/null/add-visit',{ mode: 'add', customer: '',swimmingPoolName:'',visitType:'maintenance',offline:true }]">
+	<ion-icon name="shield-checkmark" ></ion-icon>
+</ion-fab-button>
+</ion-fab-list>
 </ion-fab>
 
 </ion-content>

@@ -47,13 +47,7 @@ const routes: Routes = [
 {
   path: 'visits',
   loadChildren: () => import('./visits/visits.module').then( m => m.VisitsPageModule),
-  canActivate: [AngularFireAuthGuard]
-
-},
-{
-  path: 'offlineVisits',
-  loadChildren: () => import('./offline-visits/offline-visits.module').then( m => m.OfflineVisitsPageModule),
-  canActivate: [AngularFireAuthGuard]
+  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminEmployeeOnly },
 
 },
 {
