@@ -39,7 +39,9 @@ export class MapViewPage implements OnInit {
 		) { }
 
 
-	ngOnInit() {
+	ngOnInit() {}
+	
+	ionViewWillEnter() {
 		this.customersChangesSub = this.dataSharingService.getCustomersChanges().subscribe(
 			data => {
 				if(data){
@@ -57,7 +59,7 @@ export class MapViewPage implements OnInit {
 			});
 	}
 
-	ngOnDestroy(){
+	ionViewWillLeave(){
 		this.customersChangesSub.unsubscribe();
 	}
 

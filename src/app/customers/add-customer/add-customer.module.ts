@@ -8,7 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { AddCustomerPageRoutingModule } from './add-customer-routing.module';
 
 import { AddCustomerPage } from './add-customer.page';
-import {MyCommonDirectivesModule} from '../directives/common/common.module';
+import {MyCommonDirectivesModule} from '../../directives/common/common.module';
 
 
 @NgModule({

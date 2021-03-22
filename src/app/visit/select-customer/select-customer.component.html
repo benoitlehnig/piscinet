@@ -1,5 +1,5 @@
 <ion-content class="ion-padding"> 
-	<div>
+	<div *ngIf="step ===0" >
 		<ion-text><h2>{{"ADDVISIT.SelectCustomerAndPool"| translate}}</h2></ion-text>
 		<ion-searchbar    showcancelbutton="" placeholder="{{'CUSTOMERS.Filter' | translate}}"
 		(ionInput)="filterList($event)"
@@ -17,5 +17,25 @@
 
 			</ion-item>
 		</ion-list>
+	</div>
+	<div *ngIf="step ===1" >
+		<ion-item lines="none">
+			<ion-icon slot="start"name="arrow-back-outline" (click)="customerSelection()"></ion-icon>
+			<ion-label><h2>{{selectedCustomer.firstName}} {{selectedCustomer.lastName}}</h2></ion-label>
+		</ion-item>
+		<p>{{"ADDVISIT.SelectVisitType"| translate}}</p>
+
+		<ion-grid>
+			<ion-row>
+				<ion-col (click)="startVisitCreation('full')" class="ion-text-center"> 
+					<ion-icon name="shield-checkmark" class="visitTypeIcon full"></ion-icon>
+					<div class="ion-text-center">{{'VISIT.TYPES.full.Long'  | translate}}</div>
+				</ion-col>
+				<ion-col (click)="startVisitCreation('maintenance')" class="ion-text-center">
+					<ion-icon name="shield-checkmark"  class="visitTypeIcon maintenance"></ion-icon>
+					<div class="ion-text-center">{{'VISIT.TYPES.maintenance.Long'  | translate}}</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
 	</div>
 </ion-content>

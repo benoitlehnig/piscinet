@@ -21,7 +21,9 @@ export class ListViewPage implements OnInit {
 
 		) { }
 
-	ngOnInit() {
+	ngOnInit() {}
+	
+	ionViewWillEnter() {
 		this.customersChangesSub = this.dataSharingService.getCustomersChanges().subscribe(
 			data => {
 				if(data){
@@ -35,7 +37,7 @@ export class ListViewPage implements OnInit {
 		this.searchTerm = evt.srcElement.value;
 	}
 
-	ngOnDestroy(){
+	ionViewWillLeave(){
 		this.customersChangesSub.unsubscribe();
 	}
 

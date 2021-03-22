@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import {Company} from '../models/company';
 import { AuthenticationService } from '../services/authentication.service';
-import { EmployeeServicesService } from '../services/employee-services.service'
+import { EmployeeService } from '../services/employee.service'
 import {Employee} from '../models/employee';
 import { AngularFireFunctions } from '@angular/fire/functions';
 
@@ -20,7 +20,7 @@ export class AdminPage implements OnInit {
 	constructor(
 		private afs: AngularFirestore,
 		public authService:AuthenticationService,
-		public employeeServicesService:EmployeeServicesService,
+		public employeeService:EmployeeService,
 		private functions: AngularFireFunctions,
 
 		) { }
@@ -35,7 +35,7 @@ export class AdminPage implements OnInit {
 		this.authService.userDetails().subscribe( (data)=>{
 			this.uid = data.uid;
 			console.log(this.uid)
-			this.employeeServicesService.getEmployee(this.uid).subscribe(
+			this.employeeService.getEmployee(this.uid).subscribe(
 				employee =>{
 					if( employee !==null){
 						this.pushNotifAllVisitSubscription = employee.pushNotifAllVisitSubscription;

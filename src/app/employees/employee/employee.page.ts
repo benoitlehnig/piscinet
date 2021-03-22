@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireFunctions } from '@angular/fire/functions';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 import { PopoverController } from '@ionic/angular';
-
-import { EmployeeServicesService } from '../services/employee-services.service'
+import { EmployeeService } from '../../services/employee.service'
 import { Observable } from 'rxjs';
-import {Employee} from '../models/employee';
+import {Employee} from '../../models/employee';
 import { PopoverComponent } from './popover/popover.component';
 import {TranslateService} from '@ngx-translate/core';
 import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
-import { AngularFireMessaging } from '@angular/fire/messaging';
-
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -24,7 +22,7 @@ import { AngularFireMessaging } from '@angular/fire/messaging';
 export class EmployeePage implements OnInit {
 
 	public uid:string;
-	public claims;
+	public claims:{[key: string]: any}={'admin':false}
 	employee: Employee = new Employee();
 	center: google.maps.LatLngLiteral;
 	options: google.maps.MapOptions = {
@@ -38,23 +36,25 @@ export class EmployeePage implements OnInit {
 	public mapOK = false;
 	public loadingText:string="" ;
 
+	public employeesChangesSub: Subscription = new Subscription();
+
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
-		public employeeServicesService: EmployeeServicesService,
+		public employeeService: EmployeeService,
 		private functions: AngularFireFunctions,
 		public authenticationService:AuthenticationService,
 		public popoverController: PopoverController,
 		public translateService : TranslateService,
 		public navCtrl: NavController,
 		public toastController: ToastController,
-		public loadingController: LoadingController,
-		private afMessaging: AngularFireMessaging,
-
-
+		public loadingController: LoadingController
 		) { }
 
 	ngOnInit() {
+		
+	}
+	ionViewWillEnter(){
 		this.uid = this.activatedRoute.snapshot.paramMap.get('id');
 		this.claims = this.authenticationService.getClaims();
 		this.translateService.get(['EMPLOYEE.EmailSent', 'EMPLOYEE.SuccessDeleteText','COMMON.Loading']).subscribe(
@@ -63,10 +63,7 @@ export class EmployeePage implements OnInit {
 				this.successDeleteText = value['EMPLOYEE.SuccessDeleteText'];
 				this.loadingText = value['COMMON.Loading'];
 			});
-		
-	}
-	ionViewWillEnter(){
-		this.employeeServicesService.getEmployee(this.uid).subscribe(
+		this.employeesChangesSub = this.employeeService.getEmployee(this.uid).subscribe(
 			(data) =>{
 				if(data){
 					this.employee = data;
@@ -74,6 +71,9 @@ export class EmployeePage implements OnInit {
 					this.mapOK = true;
 				}
 			})
+	}
+	ionViewWillLeave(){
+		this.employeesChangesSub.unsubscribe();
 	}
 
 	setAdmin(){
@@ -96,18 +96,7 @@ export class EmployeePage implements OnInit {
 	dismissPopover(){
 		this.popoverController.dismiss();
 	}
-	removeEmployee(){
-		const callable = this.functions.httpsCallable('deleteEmployee');
-		const obs = callable(this.uid);
-		obs.subscribe(async res => {
-			this.popoverController.dismiss();
-			this.navCtrl.navigateRoot(['employees/']);
-			this.presentToast();
-			this.loading.dismiss();
-		});
-	}
-
-
+	
 	async presentToast() {
 		let message = this.employee.firstName +" "+ this.employee.lastName +" "+ this.successDeleteText;
 		
@@ -129,21 +118,21 @@ export class EmployeePage implements OnInit {
 		});
 	}
 
-	async removeCustomer(){
+	async removeEmployee(){
 		this.loading = await this.loadingController.create({
 			cssClass: 'my-custom-class',
 			message: this.loadingText,
 			duration: 5000
 		});
 		this.loading.present();
-		this.navCtrl.navigateRoot(['employees/']);
-
 		const callable = this.functions.httpsCallable('deleteEmployee');
 		const obs = callable(this.uid);
 		obs.subscribe(async res => {
 			this.popoverController.dismiss();
 			this.presentToast();
 			this.loading.dismiss();
+			this.navCtrl.navigateRoot(['employees/']);
+
 		});
 
 	}

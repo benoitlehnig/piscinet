@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
 import {DataSharingService} from './data-sharing.service';
-import {CustomerServicesService} from './customer-services.service';
+import {CustomerService} from './customer.service';
+import { AngularFireFunctions } from '@angular/fire/functions';
 
 @Injectable({
 	providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthenticationService {
 
 	public authState=new Observable(state => {return state})
 	public user: Observable<firebase.User>;
-	public claims={};
+	public claims:{[key: string]: any}
 	private claimsDataSource = new BehaviorSubject(null);
 	private claimsChanges = this.claimsDataSource.asObservable();
 	constructor(
@@ -24,7 +25,8 @@ export class AuthenticationService {
 		public router:Router,
 		public angularFireAnalytics:AngularFireAnalytics,
 		public dataSharingService:DataSharingService,
-		public customerServicesService:CustomerServicesService,
+		public customerService:CustomerService,
+		private functions: AngularFireFunctions,
 
 		) { 
 		this.user = this.afAuth.authState;
@@ -33,17 +35,16 @@ export class AuthenticationService {
 			if (user) {
 				user.getIdTokenResult().then(
 					result=> {
-						console.log("result",result);
+					
 						this.claims = result.claims;
 						this.claimsDataSource.next(this.claims);
 						this.storage.set('accountId', result.claims['accountId']);
 						this.dataSharingService.currentAccountID(result.claims['accountId']);
 						this.angularFireAnalytics.logEvent('login', {accountId:  result.claims['accountId']});
-						this.customerServicesService
 						this.storage.set('claims', result.claims);
 						this.storage.set('loggedIn', true); 
 						if(this.claims['customer']){
-							this.customerServicesService.getCustomerFromUid(result.claims.user_id).subscribe(
+							this.customerService.getCustomerFromUid(result.claims.user_id).subscribe(
 								data=>{
 									console.log("onAuthStateChanged", data)
 									if(data[0]){

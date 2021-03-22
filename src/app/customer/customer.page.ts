@@ -13,7 +13,7 @@ import {TranslateService} from '@ngx-translate/core';
 import { NavController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
-import { CustomerServicesService } from '../services/customer-services.service'
+import { CustomerService } from '../services/customer.service'
 import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps'
 import { ActionSheetController } from '@ionic/angular';
 import * as moment from 'moment';
@@ -26,16 +26,18 @@ import * as moment from 'moment';
 })
 export class CustomerPage implements OnInit {
 
-	zoom = 18;
-	center: google.maps.LatLngLiteral
-	options: google.maps.MapOptions = {
+	//google map parameters
+	public zoom = 18;
+	public center: google.maps.LatLngLiteral
+	public options: google.maps.MapOptions = {
 		mapTypeId: 'hybrid',
 		zoomControl: false,
 		scrollwheel: true,
 		disableDoubleClickZoom: true,
 		rotateControl:false
 	}
-	public claims;
+	public claims:{[key: string]: any}={'admin':false}
+
 	public emailSentText:string="";
 
 	public uid:string;
@@ -47,9 +49,7 @@ export class CustomerPage implements OnInit {
 	public successDeleteText:string="";
 	public mapOK = false;
 	public eligibilityToAddPool:boolean = true;
-	public visitTypeFullText:string = "";
-	public visitTypeMaintenanceText:string = "";
-	public visitTypeTechnicalText:string = "";
+	public visitTypesText=[];
 	public newVisitCancelText:string = "";
 	public nextComeBackDisplay:boolean = false;
 
@@ -65,7 +65,7 @@ export class CustomerPage implements OnInit {
 		public navCtrl: NavController,
 		public loadingController: LoadingController,
 		public toastController: ToastController,	
-		public customerServicesService:CustomerServicesService,
+		public customerService:CustomerService,
 		public accountServicesService:AccountServicesService,
 		public actionSheetController: ActionSheetController
 
@@ -74,14 +74,12 @@ export class CustomerPage implements OnInit {
 	ngOnInit() {
 		this.uid = this.activatedRoute.snapshot.paramMap.get('id');
 		this.claims = this.authenticationService.getClaims();
-		this.translateService.get(['CUSTOMER.EmailSent','COMMON.Loading','CUSTOMER.VisitTypeFull','CUSTOMER.VisitTypeMaintenance','CUSTOMER.VisitTypeTechnical','CUSTOMER.NewVisitCancel'] ).subscribe(
+		this.translateService.get(['CUSTOMER.EmailSent','COMMON.Loading','CUSTOMER.NewVisitCancel','VISIT.TYPES'] ).subscribe(
 			value => {
 				this.emailSentText = value['CUSTOMER.EmailSent'];
 				this.loadingText = value['COMMON.Loading'];
 				this.successDeleteText = value['CUSTOMER.SuccessDeleteText'];
-				this.visitTypeFullText =  value['CUSTOMER.VisitTypeFull'];
-				this.visitTypeMaintenanceText =  value['CUSTOMER.VisitTypeMaintenance'];
-				this.visitTypeTechnicalText =  value['CUSTOMER.VisitTypeTechnical'];
+				this.visitTypesText = value['VISIT.TYPES'];
 				this.newVisitCancelText =  value['CUSTOMER.NewVisitCancel'];
 			});	
 		this.accountServicesService.getAccount(this.claims['accountId']).subscribe(
@@ -94,14 +92,13 @@ export class CustomerPage implements OnInit {
 	}
 
 	ionViewWillEnter(){
-		this.customerServicesService.getCustomer(this.uid).subscribe(
+		this.customerService.getCustomer(this.uid).subscribe(
 			(data) =>{
 				if(data!==null){
 					console.log(data);
 					this.customer = data;
 					if(this.customer.nextComeBack){
 						var now = moment();
-						console.log("now.diff(moment(this.customer.nextComeBack.returnDate)) ", now.diff(moment(this.customer.nextComeBack.returnDate)) );
 						if(now.diff(moment(this.customer.nextComeBack.returnDate)) <0){
 							this.nextComeBackDisplay = true;
 						}
@@ -111,7 +108,7 @@ export class CustomerPage implements OnInit {
 					this.mapOK = true;
 				}
 			})
-		this.swimmingPools = this.customerServicesService.getCustomerPools(this.uid);
+		this.swimmingPools = this.customerService.getCustomerPools(this.uid);
 		
 	}
 	async presentPopover(ev: any) {
@@ -189,7 +186,7 @@ export class CustomerPage implements OnInit {
 
 	async presentActionSheet(swimmingPool) {
 		let buttons= [{
-			text: this.visitTypeFullText,
+			text: this.visitTypesText['full'].Long,
 			icon: 'shield-checkmark',
 			handler: () => {
 				const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
@@ -197,7 +194,7 @@ export class CustomerPage implements OnInit {
 					swimmingPoolName:swimmingPool.name,visitType:'full',swimmingPoolStringified:swimmingPoolStringified }])
 			}
 		}, {
-			text:  this.visitTypeMaintenanceText,
+			text:  this.visitTypesText['maintenance'].Long,
 			icon: 'shield-checkmark',
 			handler: () => {
 				const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
@@ -215,12 +212,31 @@ export class CustomerPage implements OnInit {
 		}];
 		if(this.customer.typeOfContract === "technical"){
 			buttons =[{
-			text: this.visitTypeTechnicalText,
+			text:  this.visitTypesText['technical'].Long,
 			icon: 'shield-checkmark',
 			handler: () => {
 				const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
 				this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
 					swimmingPoolName:swimmingPool.name,visitType:'technical',swimmingPoolStringified:swimmingPoolStringified }])
+			}
+		}, 
+		{
+			text: this.newVisitCancelText,
+			icon: 'close',
+			role: 'cancel',
+			handler: () => {
+				console.log('Cancel clicked');
+			}
+		}]
+		}
+		if(this.customer.typeOfContract === "seasonal"){
+			buttons =[{
+			text:  this.visitTypesText['adhoc'].Long,
+			icon: 'shield-checkmark',
+			handler: () => {
+				const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
+				this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
+					swimmingPoolName:swimmingPool.name,visitType:'adhoc',swimmingPoolStringified:swimmingPoolStringified }])
 			}
 		}, 
 		{

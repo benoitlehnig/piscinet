@@ -2,12 +2,13 @@ import { Component, OnInit,NgZone } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
-import {Employee} from '../models/employee';
+import {Employee} from '../../models/employee';
 import { ActivatedRoute } from '@angular/router';
-import { EmployeeServicesService } from '../services/employee-services.service'
+import { EmployeeService } from '../../services/employee.service'
 import { ToastController } from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
 import { LoadingController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -19,6 +20,9 @@ export class AddEmployeePage implements OnInit {
 
 	public mode:string="add";
 	public employee:Employee = new Employee();
+
+	public employeesChangesSub: Subscription = new Subscription();
+
 	public uid:string="";
 	public successAddText:string="";
 	public successUpdateText:string="";
@@ -35,7 +39,7 @@ export class AddEmployeePage implements OnInit {
 		public navCtrl: NavController,
 		private afAuth: AngularFireAuth,
 		private activatedRoute: ActivatedRoute,
-		public employeeServicesService: EmployeeServicesService,
+		public employeeService: EmployeeService,
 		public toastController: ToastController,
 		public translateService : TranslateService,
 		public zone: NgZone,
@@ -47,12 +51,15 @@ export class AddEmployeePage implements OnInit {
 		this.autocompleteItems = [];
 	}
 
-	ngOnInit() {
+	ngOnInit(){}
+
+	ionViewWillEnter() {
+		
 		this.activatedRoute.params.subscribe(params => {
 			this.mode =  params['mode'];
 			if(this.mode ==="update"){
 				this.uid = params['uid'];
-				this.employeeServicesService.getEmployee(this.uid).subscribe(
+				this.employeesChangesSub = this.employeeService.getEmployee(this.uid).subscribe(
 					(data) =>{
 						this.employee = data;
 						this.autocomplete = { input: this.employee.googleAddress};
@@ -61,12 +68,14 @@ export class AddEmployeePage implements OnInit {
 		});
 		this.translateService.get(['ADDEMPLOYEE.SuccessAdd', 'ADDEMPLOYEE.SuccessUpdate','COMMON.Loading']).subscribe(
 			value => {
-				// value is our translated string
-				console.log(value);
 				this.successAddText = value['ADDEMPLOYEE.SuccessAdd']
 				this.successUpdateText = value['ADDEMPLOYEE.SuccessUpdate'];
 				this.loadingText = value['COMMON.Loading'];
 			});
+	}
+
+	ionViewWillLeave(){
+		this.employeesChangesSub.unsubscribe();
 	}
 
 
@@ -82,7 +91,6 @@ export class AddEmployeePage implements OnInit {
 	}
 
 	updateEmployee(){
-		console.log("employee", this.employee);
 		let employeeToUpdatee={'uid':this.uid, 'value' : this.employee};
 		const callable = this.functions.httpsCallable('updateEmployee');
 		const obs = callable(employeeToUpdatee);

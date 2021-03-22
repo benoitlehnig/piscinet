@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
-import { CustomerServicesService } from '../../services/customer-services.service'
 import {Customer} from '../../models/customer';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { AngularFireFunctions } from '@angular/fire/functions';
@@ -19,8 +17,6 @@ export class MyProfilePage implements OnInit {
 	public receivePushNotif:boolean=false;
 
 	constructor( 
-		public authService:AuthenticationService,
-		public customerServicesService: CustomerServicesService,
 		private afMessaging: AngularFireMessaging,
 		private functions: AngularFireFunctions,
 		private dataSharingService: DataSharingService,

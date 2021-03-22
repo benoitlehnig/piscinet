@@ -92,8 +92,8 @@
 		</ion-item>
 		<ion-item>
 			<ion-text>{{'VISIT.WaterMeterLevel' | translate}}</ion-text>
-			<ion-text *ngIf="visit.technique.waterMeter !==''" class="ion-margin-start">{{visit.technique.waterMeter}}</ion-text> 
-			<ion-text *ngIf="visit.technique.waterMeter ===''" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
+			<ion-text *ngIf="visit.technique.waterMeter !== 0" class="ion-margin-start">{{visit.technique.waterMeter}}</ion-text> 
+			<ion-text *ngIf="visit.technique.waterMeter === 0" class="unknown ion-margin-start">{{'COMMON.Unknown' | translate}}</ion-text>
 		</ion-item>
 	</ion-list>
 	<ion-list>

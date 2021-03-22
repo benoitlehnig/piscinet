@@ -22,26 +22,10 @@ const routes: Routes = [
   loadChildren: () => import('./landing-page/landing-page.module').then( m => m.LandingPagePageModule)
 },
 {
-  path: 'customers',
-  loadChildren: () => import('./customers/customers.module').then( m => m.CustomersPageModule),
-  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminEmployeeOnly },
+  path: 'cgu',
+  loadChildren: () => import('./cgu/cgu.module').then( m => m.CGUPageModule)
 },
-{
-  path: 'customers/:id',
-  loadChildren: () => import('./customer/customer.module').then( m => m.CustomerPageModule),
-  canActivate: [AngularFireAuthGuard]
 
-},
-{
-  path: 'edit-customer',
-  loadChildren: () => import('./add-customer/add-customer.module').then( m => m.AddCustomerPageModule),
-  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminOnly }
-},
-{
-  path: 'customers/:id/edit-swimming-pool',
-  loadChildren: () => import('./add-swimming-pool/add-swimming-pool.module').then( m => m.AddSwimmingPoolPageModule),
-  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminEmployeeOnly }
-},
 {
   path: 'login',
   loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
@@ -51,9 +35,9 @@ const routes: Routes = [
   loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
 },
 {
-  path: 'edit-employee',
-  loadChildren: () => import('./add-employee/add-employee.module').then( m => m.AddEmployeePageModule),
-  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminOnly }
+  path: 'customers',
+  loadChildren: () => import('./customers/customers.module').then( m => m.CustomersPageModule),
+  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminEmployeeOnly },
 },
 {
   path: 'employees',
@@ -61,33 +45,31 @@ const routes: Routes = [
   canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminOnly }
 },
 {
-  path: 'employees/:id',
-  loadChildren: () => import('./employee/employee.module').then( m => m.EmployeePageModule),
-  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminOnly }
-},
-
-{
-  path: 'customers/:id/swimming-pool/:sid',
-  loadChildren: () => import('./swimming-pool/swimming-pool.module').then( m => m.SwimmingPoolPageModule),
-  canActivate: [AngularFireAuthGuard]
-},
-{
-  path: 'customers/:id/swimming-pool/:sid/edit-swimming-pool',
-  loadChildren: () => import('./add-swimming-pool/add-swimming-pool.module').then( m => m.AddSwimmingPoolPageModule),
-  canActivate: [AngularFireAuthGuard]
-
-},
-{
-  path: 'customers/:id/swimming-pool/:sid/add-visit',
-  loadChildren: () => import('./add-visit/add-visit.module').then( m => m.AddVisitPageModule),
-  canActivate: [AngularFireAuthGuard]
-
-},
-{
   path: 'visits',
   loadChildren: () => import('./visits/visits.module').then( m => m.VisitsPageModule),
   canActivate: [AngularFireAuthGuard]
 
+},
+{
+  path: 'offlineVisits',
+  loadChildren: () => import('./offline-visits/offline-visits.module').then( m => m.OfflineVisitsPageModule),
+  canActivate: [AngularFireAuthGuard]
+
+},
+{
+  path: 'alarms',
+  loadChildren: () => import('./alarms/alarms.module').then( m => m.AlarmsPageModule),
+  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminEmployeeOnly },
+},
+{
+  path: 'admin',
+  loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule),
+  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminOnly }
+},
+{
+  path: 'super-admin',
+  loadChildren: () => import('./super-admin/super-admin.module').then( m => m.SuperAdminPageModule),
+  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: superAdminOnly }
 },
 {
   path: 'visits/:vid',
@@ -118,29 +100,9 @@ const routes: Routes = [
   canActivate: [AngularFireAuthGuard]
 
 },
-{
-  path: 'offlineVisits',
-  loadChildren: () => import('./offline-visits/offline-visits.module').then( m => m.OfflineVisitsPageModule),
-  canActivate: [AngularFireAuthGuard]
 
-},
-{
-  path: 'alarms',
-  loadChildren: () => import('./alarms/alarms.module').then( m => m.AlarmsPageModule)
-},
-{
-  path: 'admin',
-  loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
-},
-{
-  path: 'super-admin',
-  loadChildren: () => import('./super-admin/super-admin.module').then( m => m.SuperAdminPageModule),
-  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: superAdminOnly }
-},
-  {
-    path: 'cgu',
-    loadChildren: () => import('./cgu/cgu.module').then( m => m.CGUPageModule)
-  }
+
+
 
 
 ];

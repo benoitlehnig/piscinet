@@ -1,6 +1,6 @@
 
 <ion-list>
-	<ion-item button [routerLink]="['/edit-employee' ,{ mode: 'update', uid:uid }]" (click)="dismissPopover()">
+	<ion-item button [routerLink]="['employees/edit-employee' ,{ mode: 'update', uid:uid }]" (click)="dismissPopover()">
 		<ion-icon name="pencil" ></ion-icon>
 		<span class="spanButton">{{'EMPLOYEE.Edit' | translate}}</span>
 	</ion-item>

@@ -1,21 +1,45 @@
 <ion-content>
+	<h2 class="ion-margin-start">{{'VISIT.AUTOMATICFILL.Title' | translate}}</h2>
 	<ion-list>
 		<ion-item>
-			<ion-label>{{'VISIT.ClearWater' | translate}}</ion-label>
+			<ion-label>{{'VISIT.AUTOMATICFILL.BlockedStatus.InputLabel' | translate}}</ion-label>
+			<ion-toggle slot="start" [(ngModel)]="visit.observation.automaticFill.notBlocked" (ionChange)="saveObservation()"></ion-toggle>
+		</ion-item>
+		<ion-item>
+			<ion-label>{{'VISIT.AUTOMATICFILL.SetStatus.InputLabel' | translate}}</ion-label>
+			<ion-toggle slot="start" [(ngModel)]="visit.observation.automaticFill.set" (ionChange)="saveObservation()"></ion-toggle>
+		</ion-item>
+		<ion-item>
+			<ion-label>{{'VISIT.AUTOMATICFILL.ClosedValvesStatus.InputLabel' | translate}}</ion-label>
+			<ion-toggle slot="start" [(ngModel)]="visit.observation.automaticFill.closedValves" (ionChange)="saveObservation()"></ion-toggle>
+		</ion-item>
+	</ion-list>
+	<h2 class="ion-margin-start">{{'VISIT.OBSERVATIONS.OtherObservationTitle' | translate}}</h2>
+	<ion-list>
+		<ion-item>
+			<ion-label>{{'VISIT.OBSERVATIONS.WaterClarityStatus.InputLabel' | translate}}</ion-label>
 			<ion-toggle slot="start" [(ngModel)]="visit.observation.waterBadClarity" (ionChange)="saveObservation()"></ion-toggle>
 		</ion-item>
 		<ion-item>
-			<ion-label>{{'VISIT.AlgeaOnWall' | translate}}</ion-label>
+			<ion-label>{{'VISIT.OBSERVATIONS.AlgeaOnWallStatus.InputLabel' | translate}}</ion-label>
 			<ion-toggle slot="start" [(ngModel)]="visit.observation.algeaOnWall" (ionChange)="saveObservation()"></ion-toggle>
 		</ion-item>
 		<ion-item>
-			<ion-label>{{'VISIT.BottomDrain' | translate}}</ion-label>
-			<ion-toggle slot="start" [(ngModel)]="visit.observation.bottomDrain" (ionChange)="saveObservation()"></ion-toggle>
+			<ion-label>{{'VISIT.OBSERVATIONS.BlockerForSkimmerStatus.InputLabel' | translate}}</ion-label>
+			<ion-toggle slot="start" [(ngModel)]="visit.observation.blockerForSkimmer" (ionChange)="saveObservation()"></ion-toggle>
 		</ion-item>
-
+		<ion-item>
+			<ion-label>{{'VISIT.OBSERVATIONS.BlockedShutterSkimmerStatus.InputLabel' | translate}}</ion-label>
+			<ion-toggle slot="start" [(ngModel)]="visit.observation.blockedShutterSkimmer" (ionChange)="saveObservation()"></ion-toggle>
+		</ion-item>
+		<ion-item>
+			<ion-label>{{'VISIT.OBSERVATIONS.BadStateBottomDrainStatus.InputLabel' | translate}}</ion-label>
+			<ion-toggle slot="start" [(ngModel)]="visit.observation.badStateBottomDrain" (ionChange)="saveObservation()"></ion-toggle>
+		</ion-item>
 	</ion-list>
+	
 	<ion-item>
-		<ion-label position="stacked">{{'VISIT.OtherObservation' | translate}}</ion-label>
+		<ion-label position="stacked">{{'VISIT.OBSERVATIONS.OtherObservation' | translate}}</ion-label>
 		<ion-textarea name="otherObservation" type="text" [(ngModel)]="visit.observation.otherObservation" (ionChange)="saveObservation()"></ion-textarea>
 	</ion-item>
 </ion-content>

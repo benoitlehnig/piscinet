@@ -14,7 +14,7 @@
 </ion-fab>
 <ion-content>
 	<ion-list>
-		<ion-item *ngFor="let employee of employees | async" [routerLink]="['/employees/' + employee.key]">
+		<ion-item *ngFor="let employee of employees" [routerLink]="['/employees/' + employee.key]">
 			<ion-avatar slot="start" class="avatar">
 				<ngx-avatar name="{{ employee.data.firstName }} {{ employee.data.lastName}}"></ngx-avatar>
 			</ion-avatar>

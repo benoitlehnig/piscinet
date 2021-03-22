@@ -9,7 +9,7 @@ import {DataSharingService} from './data-sharing.service';
 @Injectable({
   providedIn: 'root'
 })
-export class EmployeeServicesService {
+export class EmployeeService {
 
   public accountId:string="piscinet";
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { DataSharingService } from '../services/data-sharing.service'
-import { CustomerServicesService } from '../services/customer-services.service'
+import { CustomerService } from '../services/customer.service'
 import { Subscription } from 'rxjs';
 
 
@@ -14,29 +14,32 @@ import { Subscription } from 'rxjs';
 export class CustomersPage implements OnInit {
 	
 	public customers;
-	public claims;
+	public claims:any=[];
 
 	public customersChangesSub: Subscription = new Subscription();
 
 	constructor(
 		public authenticationService:AuthenticationService,
 		public dataSharingService:DataSharingService,
-		public customerServicesService:CustomerServicesService
+		public customerService:CustomerService
 		) { 
 
 	}
+	ngOnInit(){}
 
-	ngOnInit() {
-		this.customersChangesSub = this.customerServicesService.getCustomers().subscribe(
+	ionViewWillEnter() {
+		this.customersChangesSub = this.customerService.getCustomers().subscribe(
 			data=> {
 				this.dataSharingService.currentCustomers(data);
 				this.customers = data;
 			}
 		);
+		
 		this.claims = this.authenticationService.getClaims();
 
 	}
-	ngOnDestroy(){
+	
+	ionViewWillLeave(){
 		this.customersChangesSub.unsubscribe();
 	}
 

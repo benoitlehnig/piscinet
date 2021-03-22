@@ -9,7 +9,7 @@ import {DataSharingService} from './data-sharing.service';
 @Injectable({
 	providedIn: 'root'
 })
-export class CustomerServicesService {
+export class CustomerService {
 
 	public accountId:string="piscinet";
 
@@ -19,7 +19,6 @@ export class CustomerServicesService {
 		) {
 		this.dataSharingService.getAccoundIDChanges().subscribe(
 			data=>{
-				console.log("accountId",data);
 				if(data !==null){
 					if(data['accountId'] !== null){
 						this.accountId=data;
@@ -37,7 +36,6 @@ export class CustomerServicesService {
 			);
 	}
 	getCustomer(uid){
-		console.log(this.accountId);
 		return this.afDatabase.object<Customer>(this.accountId+'/customers/'+uid).valueChanges()
 	}
 	getCustomerPools(uid){
@@ -54,7 +52,6 @@ export class CustomerServicesService {
 				changes.map(c => ({ key: c.payload.key, data: c.payload.val() }))
 				)
 			);
-
 	}
 
 

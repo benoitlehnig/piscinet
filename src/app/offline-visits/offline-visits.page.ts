@@ -6,7 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { OnlineCheckService } from '../services/online-check.service'
 import {Customer} from '../models/customer';
-import { CustomerServicesService } from '../services/customer-services.service'
+import { CustomerService } from '../services/customer.service'
 import { DataSharingService } from '../services/data-sharing.service'
 
 
@@ -32,7 +32,7 @@ export class OfflineVisitsPage implements OnInit {
     public translateService : TranslateService,
     public authenticationService:AuthenticationService,
     public onlineCheckService: OnlineCheckService,
-    public customerServicesService:CustomerServicesService,
+    public customerService:CustomerService,
     public dataSharingService:DataSharingService
     ) { }
 
@@ -110,7 +110,7 @@ export class OfflineVisitsPage implements OnInit {
           if(this.visits !== null){
             this.visits.forEach((obj, index) => {
             if(obj.customerUid !==""){
-              this.customerServicesService.getCustomer(obj.customerUid).subscribe(
+              this.customerService.getCustomer(obj.customerUid).subscribe(
                 (data3) =>{
                   this.visits[index].customerInfo = data3;
                 })

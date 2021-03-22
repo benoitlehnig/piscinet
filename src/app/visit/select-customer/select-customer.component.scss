@@ -1,0 +1,11 @@
+.visitTypeIcon{
+	font-size: 40px;
+}
+ion-col{
+		cursor: pointer;
+}
+ion-col:hover{
+	border:1px solid var(--ion-color-primary-tint);
+	background: var(--ion-color-light);
+	border-radius:5px;
+}

@@ -3,8 +3,8 @@ import {Visit} from '../../models/visit';
 import { DataSharingService } from '../../services/data-sharing.service'
 import {Customer} from '../../models/customer';
 import {Employee} from '../../models/employee';
-import { CustomerServicesService } from '../../services/customer-services.service'
-import { EmployeeServicesService } from '../../services/employee-services.service'
+import { CustomerService } from '../../services/customer.service'
+import { EmployeeService } from '../../services/employee.service'
 
 
 @Component({
@@ -22,8 +22,8 @@ export class GeneralPage implements OnInit {
 
 	constructor(
 		public dataSharingService:DataSharingService,
-		public customerServicesService: CustomerServicesService,
-		public employeeServicesService: EmployeeServicesService,
+		public customerService: CustomerService,
+		public employeeService: EmployeeService,
 		) {
 		this.visit = new Visit();	
 		this.customer= new Customer()
@@ -35,14 +35,14 @@ export class GeneralPage implements OnInit {
 	ionViewWillEnter(){
 		this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
 			this.visit = visit;
-			this.employeeServicesService.getEmployee(visit.employeeUid).subscribe(
+			this.employeeService.getEmployee(visit.employeeUid).subscribe(
 				(data2) =>{
 					if(data2!==null)
 					{
 						this.employee = data2
 					}
 				});
-			this.customerServicesService.getCustomer(visit.customerUid).subscribe(
+			this.customerService.getCustomer(visit.customerUid).subscribe(
 				(data3) =>{
 					this.customer = data3;
 				});

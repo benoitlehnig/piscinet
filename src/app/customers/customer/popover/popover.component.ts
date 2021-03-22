@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input  } from '@angular/core';
 import { NavParams} from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
@@ -10,54 +10,53 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class PopoverComponent implements OnInit {
 
+	public alertText;
+	constructor(
+		public navParams : NavParams,  
+		public alertController: AlertController,
+		public translateService : TranslateService,
+		) { }
+
 	@Input("homeref") value;
 	@Input("uid") uid;
-
-	public alertText;
-
-	constructor(
-		public navParams : NavParams,
-		public alertController: AlertController,
-		public translateService : TranslateService,) { }
+	@Input("isActivated") isActivated;
+	@Input("customerStringified") customerStringified;
+	@Input("eligibilityToAddPool") eligibilityToAddPool;
 
 	ngOnInit() {
-		this.translateService.get(['EMPLOYEE.AlertHeader', 'EMPLOYEE.AlertMesssage','EMPLOYEE.AlertCancel', 
-			'EMPLOYEE.AlertOK']).subscribe(
+		this.translateService.get('CUSTOMER.REMOVEALERT').subscribe(
 			value => {
-				this.alertText = {
-					header : value['EMPLOYEE.AlertHeader'],
-					message:value['EMPLOYEE.AlertMesssage'],
-					buttonCancel:value['EMPLOYEE.AlertCancel'], 
-					buttonOK:value['EMPLOYEE.AlertOK'] 
-				}
+				this.alertText = value
 			});
 		}
-
-
 		sendEmailUserCreation(){
+			this.dismissPopover();
 			this.navParams.get('homeref').sendEmailUserCreation();
 
 		}
 		dismissPopover(){
 			this.navParams.get('homeref').dismissPopover();
 		}
-		setAdmin(){
-			this.navParams.get('homeref').setAdmin();
+
+		activateAccount(){
+			this.dismissPopover();
+			this.navParams.get('homeref').activateAccount();
 		}
-		async removeEmployee() {
+
+		async removeCustomer() {
 			const alert = await this.alertController.create({
 				cssClass: 'my-custom-class',
-				header: this.alertText.header,
-				message: this.alertText.message,
+				header: this.alertText['Header'],
+				message: this.alertText['Messsage'],
 				buttons:  [
 				{
-					text: this.alertText.buttonCancel,
+					text: this.alertText['Cancel'],
 					role: 'cancel',
 					cssClass: 'secondary',
 					handler: (blah) => {
 					}
 				}, {
-					text: this.alertText.buttonOK,
+					text: this.alertText['OK'],
 					handler: () => {
 						this.navParams.get('homeref').removeCustomer();
 					}

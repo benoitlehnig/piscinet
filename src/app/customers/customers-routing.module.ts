@@ -34,13 +34,31 @@ const routes: Routes = [
   pathMatch: 'full'
 },
 {
-  path: 'list-view',
-  loadChildren: () => import('./list-view/list-view.module').then( m => m.ListViewPageModule)
+  path: 'edit-customer',
+  loadChildren: () => import('./add-customer/add-customer.module').then( m => m.AddCustomerPageModule),
+},
+
+{
+  path: ':id',
+  loadChildren: () => import('./customer/customer.module').then( m => m.CustomerPageModule),
 },
 {
-  path: 'map-view',
-  loadChildren: () => import('./map-view/map-view.module').then( m => m.MapViewPageModule)
-}
+  path: ':id/edit-swimming-pool',
+  loadChildren: () => import('../add-swimming-pool/add-swimming-pool.module').then( m => m.AddSwimmingPoolPageModule),
+},
+{
+  path: ':id/swimming-pool/:sid',
+  loadChildren: () => import('../swimming-pool/swimming-pool.module').then( m => m.SwimmingPoolPageModule),
+},
+{
+  path: ':id/swimming-pool/:sid/edit-swimming-pool',
+  loadChildren: () => import('../add-swimming-pool/add-swimming-pool.module').then( m => m.AddSwimmingPoolPageModule),
+
+},
+{
+  path: ':id/swimming-pool/:sid/add-visit',
+  loadChildren: () => import('../add-visit/add-visit.module').then( m => m.AddVisitPageModule),
+},
 ];
 
 @NgModule({

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeServicesService } from '../services/employee-services.service'
-import { Observable } from 'rxjs';
+import { EmployeeService } from '../services/employee.service'
 import {Employee} from '../models/employee';
-import { AngularFireFunctions } from '@angular/fire/functions';
-import { map } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-employees',
@@ -14,19 +12,28 @@ import { AuthenticationService } from '../services/authentication.service';
 export class EmployeesPage implements OnInit {
 
 
-	public employees: Observable<any>;
-	public claims;
+	public employees =[];
+	public claims:{[key: string]: any}={'admin':false}
+
+	public employeesChangesSub: Subscription = new Subscription();
+
 	constructor(
-		public employeeServicesService: EmployeeServicesService,
-		private functions: AngularFireFunctions,
+		public employeeService: EmployeeService,
 		public authenticationService:AuthenticationService
-
-
 		) { }
 
-	ngOnInit() {
-		this.employees = this.employeeServicesService.getEmployees();
+	ngOnInit(){}
+
+	ionViewWillEnter() {
+		this.employeesChangesSub = this.employeeService.getEmployees().subscribe(
+			data =>{
+				this.employees = data;
+			});
 		this.claims = this.authenticationService.getClaims();
+	}
+
+	ionViewWillLeave(){
+		this.employeesChangesSub.unsubscribe();
 	}
 
 }

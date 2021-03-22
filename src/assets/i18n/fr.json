@@ -67,16 +67,19 @@
 		"SendEmailForUserCreation": "Envoyer un email de creation de compte",
 		"EmailSent": "Email envoyé ! ",
 		"Remove": "Supprimer",
-		"AlertHeader": "Suppression du client",
-		"AlertMesssage": "Etes-vous sur de vouloir supprimer ce client ? ",
-		"AlertCancel": "Annuler",
-		"AlertOK": "Supprimer",
+		"REMOVEALERT":{
+			"Header": "Suppression du client",
+			"Messsage": "Etes-vous sur de vouloir supprimer ce client ? ",
+			"Cancel": "Annuler",
+			"OK": "Supprimer"
+		},
 		"SuccessDeleteText": " a bien ete supprimé.",
 		"ReceivePushNotif": "Je veux recevoir des push notifications apres chaque visite.",
 		"ActivateAccount": "Activer le compte client",
 		"VisitTypeFull": "Visite complète",
 		"VisitTypeTechnical": "Visite technique",
 		"VisitTypeMaintenance": "Visite de maintenance",
+		"VisitTypeAdhoc": "Visite occasionnelle",
 		"NoPool": "Aucune piscine n'est associée à ce client",
 		"NewVisit": "Effectuer une nouvelle visite",
 		"NewVisitCancel": "Annuler",
@@ -104,7 +107,8 @@
 		"AddCustomer": "Enregistrer",
 		"UpdateCustomer": "Enregister",
 		"SuccessAdd": "ajouté ! ",
-		"SuccessUpdate": "modifié ! "
+		"SuccessUpdate": "modifié ! ",
+		"Cancel": "Annuler"
 	},
 	"EMPLOYEES":{
 		"Title": "Employés"
@@ -118,11 +122,14 @@
 		"EmailSent": "Email envoyé ! ",
 		"SetAdmin": "Donner droits d'admin",
 		"Remove": "Supprimer",
-		"SuccessDeleteText": " a bien ete supprimé.",
-		"AlertHeader": "Suppression de l'employé",
-		"AlertMesssage": "Etes-vous sur de vouloir supprimer cet employé ? ",
-		"AlertCancel": "Annuler",
-		"AlertOK": "Supprimer"
+		"REMOVEALERT":{
+			"Header": "Suppression de l'employé",
+			"Messsage": "Etes-vous sur de vouloir supprimer cet employé ? ",
+			"Cancel": "Annuler",
+			"OK": "Supprimer"
+		},
+		"SuccessDeleteText": " a bien ete supprimé."
+		
 	},
 	"ADDEMPLOYEE":{
 		"TitleAdd": "Ajouter un nouvel employé",
@@ -307,9 +314,30 @@
 		"TechnicalTitle": "Entretien eau",
 		"ObservationsTitle": "Observations",
 		"VisitType": "Type de visite",
+		"TYPES":{
+			"full": {
+				"Long":"Visite complete",
+				"Short" :"Complete"
+			},
+			"technical": 
+			{
+				"Long":"Visite technique",
+				"Short" :"Technique"
+			},
+			"maintenance": 
+			{
+				"Long":"Visite de maintenance",
+				"Short" :"Maintenance"
+			},
+			"adhoc": {
+				"Long":"Visite occasionnelle",
+				"Short" :"Occasionnelle"
+			}
+		},
 		"VisitTypeFull": "Complete",
 		"VisitTypeTechnical": "Technique",
 		"VisitTypeMaintenance": "Maintenance",
+		"VisitTypeAdhoc": "Occasionnelle",
 		"VisitTypeFullButton": "Visite Complete",
 		"VisitTypeTechnicalButton": "Visite Technique",
 		"VisitTypeMaintenanceButton": "Visite Maintenance",
@@ -323,7 +351,6 @@
 		"LoopHoles": "Lacunes dans les écumoires nettoyées",
 		"PassageLandingSurface": "Epuisette à la surface passée",
 		"PassageLandingDepth": "Epuisette en profondeur passée",
-		"BottomDrain": "Bonde de fond en bon état",
 		"VacuumCleaner": "Aspirateur dans le coffre du volet roulant passé",
 		"CurtainVacuumCleaner": "Poutre de rideau nettoyée",
 		"AlarmSystemTitle": "Systeme d'alarme",
@@ -392,14 +419,7 @@
 		"IntroducedProductGalet": "Galet",
 		"IntroducedProductOther": "Autres produits",
 		"IntroducedProductFloculent": "Floculants",
-		"ClearWater": "Eau trouble",
-		"ClearWaterOK": "Eau claire",
-		"ClearWaterKO": "Eau trouble",
-		"AlgeaOnWall": "Algues sur les murs",
-		"AlgeaOnWallKO": "Algues sur les murs",
-		"AlgeaOnWallOK": "Pas d'algue sur les murs",
 		"Brossage": "Brossage",
-		"OtherObservation": "Autres observations",
 		"AddVisitSave": "Enregistrer",
 		"VisitPerformedBY": "Effectuée par ",
 		"DoneBy": "Effectuée par ",
@@ -414,13 +434,62 @@
 		"HydrochloricAcid": "Acide chlorhydrique",
 		"PHMinusLiquid": "PH minus liquide (acide sulfurique)",
 		"ProjectorSettingHours": "Réglage des projecteurs (Nbres d’heures)",
-		"ChloreCanDelivered": "Nombre de bidons livrés"
+		"ChloreCanDelivered": "Nombre de bidons livrés",
+		"OBSERVATIONS":{
+			"OtherObservationTitle": "Autres vérifications",
+			"OtherObservation": "Autres observations",
+			"WaterClarityStatus":{
+				"InputLabel":"Eau trouble",
+				"OK": "Eau claire",
+				"KO": "Eau trouble"
+			},
+			"AlgeaOnWallStatus":{
+				"InputLabel":"Algues sur les murs",
+				"OK": "Pas d'algues sur les murs",
+				"KO": "Algues sur les murs"
+			},
+			"BlockerForSkimmerStatus": {
+				"InputLabel":"Jouet ou objet qui bloque un skimmer",
+				"OK": "Pas de jouet ou objet qui bloque un skimmer",
+				"KO": "Jouet ou objet qui bloque un skimmer"
+			}, 
+			"BlockedShutterSkimmerStatus": {
+				"InputLabel":"Volet de skimmer bloqué",
+				"OK": "Volet de skimmer libre",
+				"KO": "Volet de skimmer bloqué"
+			}, 
+			"BadStateBottomDrainStatus": {
+				"InputLabel":"Bonde de fond en mauvais état",
+				"OK": "Bonde de fond en bon état",
+				"KO": "Bonde de fond en mauvais état"
+			}
+		},
+		"AUTOMATICFILL":{
+			"Title": "Remplissage automatique",
+			"BlockedStatus":{
+				"InputLabel":"Non Bloqué",
+				"Blocked" :"Bloqué",
+				"NotBlocked" :"Non Bloqué"
+			},
+			"SetStatus":{
+				"InputLabel":"Reglé",
+				"Set" :"Reglé",
+				"NotSet" :"Non Reglé"
+			},
+			"ClosedValvesStatus":{
+				"InputLabel":"Vanne Fermée",
+				"ClosedValves": "Vanne fermée",
+				"NotClosedValves" : "Vanne ouverte"
+			}
+		}
+
 	},
 	"ADDVISIT":{
 		"SuccessAdd": " - nouvelle visite ajoutée ! ",
 		"SuccessUpdate": "- visite modifiée ! ",
 		"SuccessUploadText": "Visite ajoutée ! ",
-		"SelectCustomerAndPool": "Selection du client : ",
+		"SelectCustomerAndPool": "Selectionnez le client : ",
+		"SelectVisitType": "Selectionnez le type de visite",
 		"PoolNameTitle": "Piscine",
 		"IssueDetected": "Problème technique détecté nécessitant une nouvelle intervention",
 		"IssueDescription": "Description du problème",

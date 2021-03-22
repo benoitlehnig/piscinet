@@ -1,13 +1,15 @@
 import { Component, OnInit ,NgZone } from '@angular/core';
-import {Customer} from '../models/customer';
+import {Customer} from '../../models/customer';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
-import { CustomerServicesService } from '../services/customer-services.service'
+import { CustomerService } from '../../services/customer.service'
 import { ToastController } from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
 import { LoadingController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
+
 
 
 @Component({
@@ -34,13 +36,17 @@ export class AddCustomerPage implements OnInit {
 	public loading ;
 
 	public contractTypes=[];
+
+	public activatedRouteChangesSub: Subscription = new Subscription();
+	public customerChangesSub: Subscription = new Subscription();
+
 	
 	constructor(
 		private functions: AngularFireFunctions,
 		public navCtrl: NavController,
 		private afAuth: AngularFireAuth,
 		private activatedRoute: ActivatedRoute,
-		public customerServicesService:CustomerServicesService,
+		public customerService:CustomerService,
 		public toastController: ToastController,	
 		public translateService : TranslateService,
 		public zone: NgZone,
@@ -53,12 +59,14 @@ export class AddCustomerPage implements OnInit {
 		this.autocompleteItems = [];
 	}
 
-	ngOnInit() {
-		this.activatedRoute.params.subscribe(params => {
+	ngOnInit() {}
+
+	ionViewWillEnter() {
+		this.activatedRouteChangesSub = this.activatedRoute.params.subscribe(params => {
 			this.mode =  params['mode'];
 			if(this.mode ==="update"){
 				this.uid = params['uid'];
-				this.customerServicesService.getCustomer(this.uid).subscribe(
+				this.customerChangesSub = this.customerService.getCustomer(this.uid).subscribe(
 					(data) =>{
 						this.customer = data;
 						this.typeOfContract = this.customer.typeOfContract;
@@ -67,16 +75,18 @@ export class AddCustomerPage implements OnInit {
 					})
 			}
 		});
-		this.translateService.get(['ADDCUSTOMER.SuccessAdd', 'ADDCUSTOMER.SuccessUpdate','COMMON.Loading']).subscribe(
+		this.translateService.get(['ADDCUSTOMER.SuccessAdd', 'ADDCUSTOMER.SuccessUpdate','COMMON.Loading,CUSTOMER.CONTRACTTYPES']).subscribe(
 			value => {
 				this.successAddText = value['ADDCUSTOMER.SuccessAdd']
 				this.successUpdateText = value['ADDCUSTOMER.SuccessUpdate'];
 				this.loadingText = value['COMMON.Loading'];
-			});
-		this.translateService.get('CUSTOMER.CONTRACTTYPES').subscribe(
-			value=>{
 				this.contractTypes = this.returnArray(value);
-			})
+
+			});
+	}
+	ionViewWillLeave(){
+		this.activatedRouteChangesSub.unsubscribe()
+		this.customerChangesSub.unsubscribe()
 	}
 
 	addCustomer(){
@@ -166,6 +176,16 @@ export class AddCustomerPage implements OnInit {
 			return arr;  
 		});
 		return arr 
+	}
+
+	cancel(){
+		if(this.mode ==='update'){
+			this.navCtrl.navigateRoot(['customers/'+this.uid]);
+		}
+		else{
+			this.navCtrl.navigateRoot(['customers/']);
+		}
+
 	}
 
 }

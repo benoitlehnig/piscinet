@@ -3,7 +3,7 @@ import {SwimmingPool} from '../models/swimming-pool';
 import {Customer} from '../models/customer';
 import {TranslateService} from '@ngx-translate/core';
 import { DataSharingService } from '../services/data-sharing.service';
-import { CustomerServicesService } from '../services/customer-services.service';
+import { CustomerService } from '../services/customer.service';
 import { PoolServicesService } from '../services/pool-services.service';
 import { ActionSheetController } from '@ionic/angular';
 import { ActivatedRoute,Router } from '@angular/router';
@@ -29,7 +29,7 @@ export class SwimmingPoolPage implements OnInit {
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
-		public customerServicesService: CustomerServicesService,
+		public customerService: CustomerService,
 		public translateService : TranslateService,
 		public dataSharingService:DataSharingService,
 		public poolServicesService: PoolServicesService,
@@ -56,7 +56,7 @@ export class SwimmingPoolPage implements OnInit {
 	ionViewWillEnter(){
 		this.uid = this.activatedRoute.snapshot.paramMap.get('id')
 		this.poolId = this.activatedRoute.snapshot.paramMap.get('sid');
-		this.customerServicesService.getCustomer(this.uid).subscribe(
+		this.customerService.getCustomer(this.uid).subscribe(
 			(data) =>{
 				this.customer = data;
 				this.customerStringified = JSON.stringify(data);

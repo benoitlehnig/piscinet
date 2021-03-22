@@ -6,6 +6,9 @@
 		<ion-title *ngIf="mode === 'add'">{{'ADDCUSTOMER.TitleAdd' | translate}}</ion-title>
 		<ion-title *ngIf="mode === 'update'">{{'ADDCUSTOMER.TitleUpdate' | translate}}</ion-title>
 		<ion-buttons slot="end">
+			<ion-button color="secondary" fill="solid" (click)="cancel()" >
+				<span  class="spanButton">{{'ADDCUSTOMER.Cancel' | translate}}</span>
+			</ion-button>
 			<ion-button color="primary" fill="solid" (click)="submitForm()" >
 				<span *ngIf="mode === 'update'" class="spanButton">{{'ADDCUSTOMER.UpdateCustomer' | translate}}</span>
 				<span *ngIf="mode === 'add'"  class="spanButton">{{'ADDCUSTOMER.AddCustomer' | translate}}</span>
@@ -76,7 +79,7 @@
 						<ion-radio slot="start" value="included"></ion-radio>
 					</ion-item>
 
-					<ion-item>
+					<ion-item lines="none">
 						<ion-label>{{'ADDCUSTOMER.ContractTypeProductNotIncluded' | translate}}</ion-label>
 						<ion-radio slot="start" value="notIncluded"></ion-radio>
 					</ion-item>

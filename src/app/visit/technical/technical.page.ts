@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Visit} from '../../models/visit';
 import { DataSharingService } from '../../services/data-sharing.service'
 import {AppConstants } from '../../app-constants';
+import { Subscription } from 'rxjs';
+
+
 
 
 @Component({
@@ -10,6 +13,9 @@ import {AppConstants } from '../../app-constants';
 	styleUrls: ['./technical.page.scss'],
 })
 export class TechnicalPage implements OnInit {
+
+	public visitChangesSub: Subscription = new Subscription();
+
 
 	public visit:Visit = new Visit();
 	public chloreSteps= this.appConstants.chloreSteps;
@@ -22,7 +28,7 @@ export class TechnicalPage implements OnInit {
 		) { }
 
 	ngOnInit() {
-		this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
+		this.visitChangesSub = this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
 			this.visit = visit;
 			console.log(this.visit)
 		});
@@ -30,5 +36,9 @@ export class TechnicalPage implements OnInit {
 	ionViewWillEnter(){
 		
 	}
+	ngOnDestroy(){
+		this.visitChangesSub.unsubscribe();
+	}
+
 
 }

@@ -6,8 +6,8 @@ import {SwimmingPool} from '../models/swimming-pool';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { NavController } from '@ionic/angular';
-import { CustomerServicesService } from '../services/customer-services.service'
-import { EmployeeServicesService } from '../services/employee-services.service'
+import { CustomerService } from '../services/customer.service'
+import { EmployeeService } from '../services/employee.service'
 import { PoolServicesService } from '../services/pool-services.service'
 import { VisitServicesService } from '../services/visit-services.service';
 
@@ -46,8 +46,8 @@ export class VisitPage implements OnInit {
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
-		public customerServicesService: CustomerServicesService,
-		public employeeServicesService: EmployeeServicesService,
+		public customerService: CustomerService,
+		public employeeService: EmployeeService,
 		public poolServicesService: PoolServicesService,
 		public visitServicesService: VisitServicesService,
 		private storage: Storage,
@@ -84,14 +84,14 @@ export class VisitPage implements OnInit {
 						this.claims['admin']===true || 
 						(this.claims['employee'] ===true && moment().diff(this.visit.dateTime,'hours') <3)
 						);
-					this.employeeServicesService.getEmployee(data.employeeUid).subscribe(
+					this.employeeService.getEmployee(data.employeeUid).subscribe(
 						(data2) =>{
 							if(data2!==null)
 							{
 								this.employee = data2
 							}
 						});
-					this.customerServicesService.getCustomer(data.customerUid).subscribe(
+					this.customerService.getCustomer(data.customerUid).subscribe(
 						(data3) =>{
 							this.customer = data3;
 							this.customerStringified = JSON.stringify(data3);
@@ -111,7 +111,7 @@ export class VisitPage implements OnInit {
 					let offlineVisits= JSON.parse(data);
 					this.visit = offlineVisits[this.visitId];
 					if(this.visit.customerUid !==""){
-						this.customerServicesService.getCustomer(this.visit.customerUid).subscribe(
+						this.customerService.getCustomer(this.visit.customerUid).subscribe(
 							(data3) =>{
 								this.customer = data3;
 								this.customerStringified = JSON.stringify(data3);

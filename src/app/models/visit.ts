@@ -70,8 +70,10 @@ export class Maintenance{
 export class Observation{
 	public waterBadClarity:boolean=false;
 	public algeaOnWall:boolean=false;
-	public  bottomDrain: boolean=false;
-
+	public badStateBottomDrain: boolean=false;
+	public automaticFill : AutomaticFill =new AutomaticFill();
+	public blockerForSkimmer: boolean = false;
+	public blockedShutterSkimmer : boolean = false;
 	public otherObservation: string;
 	deserialize(input: any) {
 		Object.assign(this, input);
@@ -103,4 +105,11 @@ export class Technique{
 		Object.assign(this, input);
 		return this;
 	}
+}
+
+export class AutomaticFill{
+	notBlocked:boolean=false;
+	set:boolean=false;
+	closedValves:boolean=false;
+
 }
