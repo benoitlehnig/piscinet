@@ -1,7 +1,7 @@
 import { Component, OnInit ,Input} from '@angular/core';
-import { CustomerService } from '../../services/customer.service'
+import { CustomerService } from '../../../services/customer.service'
 import { Observable } from 'rxjs';
-import {Customer} from '../../models/customer';
+import {Customer} from '../../../models/customer';
 import { map } from 'rxjs/operators';
 import { NavParams} from '@ionic/angular';
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DataSharingService } from '../../services/data-sharing.service'
-import {Visit} from '../../models/visit';
-import {AppConstants } from '../../app-constants';
-import {SwimmingPool} from '../../models/swimming-pool';
+import { DataSharingService } from '../../../services/data-sharing.service'
+import {Visit} from '../../../models/visit';
+import {AppConstants } from '../../../app-constants';
+import {SwimmingPool} from '../../../models/swimming-pool';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 

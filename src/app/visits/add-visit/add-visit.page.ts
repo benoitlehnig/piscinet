@@ -1,22 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import {Visit} from '../models/visit';
-import {Customer} from '../models/customer';
+
+import {Visit} from '../../models/visit';
+import {Customer} from '../../models/customer';
+import {SwimmingPool} from '../../models/swimming-pool';
+
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { NavController } from '@ionic/angular';
-import { AuthenticationService } from '../services/authentication.service';
 import { LoadingController } from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
 import { ToastController } from '@ionic/angular';
-import { VisitServicesService } from '../services/visit-services.service';
-import { DataSharingService } from '../services/data-sharing.service'
+
+import { AuthenticationService } from '../../services/authentication.service';
+import { VisitService } from '../../services/visit.service';
+import { DataSharingService } from '../../services/data-sharing.service'
+
 import { Observable, Observer, fromEvent, merge } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
-import {SwimmingPool} from '../models/swimming-pool';
 
 
 @Component({
@@ -48,7 +52,7 @@ export class AddVisitPage implements OnInit {
 		public loadingController: LoadingController,
 		public translateService : TranslateService,
 		public toastController: ToastController,
-		public visitServicesService: VisitServicesService,
+		public visitService: VisitService,
 		public dataSharingService:DataSharingService,
 		public modalController: ModalController
 		) {
@@ -96,7 +100,7 @@ export class AddVisitPage implements OnInit {
 						this.dataSharingService.someDataChanges(this.newVisit);					
 					}
 					else{
-						this.visitServicesService.getVisit(this.visitId).subscribe(
+						this.visitService.getVisit(this.visitId).subscribe(
 							(data) =>{
 								this.newVisit = data;
 							});

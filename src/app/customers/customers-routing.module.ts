@@ -57,7 +57,7 @@ const routes: Routes = [
 },
 {
   path: ':id/swimming-pool/:sid/add-visit',
-  loadChildren: () => import('../add-visit/add-visit.module').then( m => m.AddVisitPageModule),
+  loadChildren: () => import('../visits/add-visit/add-visit.module').then( m => m.AddVisitPageModule),
 },
 ];
 

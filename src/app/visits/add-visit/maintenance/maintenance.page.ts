@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DataSharingService } from '../../services/data-sharing.service'
-import {Visit} from '../../models/visit';
-import {SwimmingPool} from '../../models/swimming-pool';
-import {AppConstants } from '../../app-constants';
+import { DataSharingService } from '../../../services/data-sharing.service'
+import {Visit} from '../../../models/visit';
+import {SwimmingPool} from '../../../models/swimming-pool';
+import {AppConstants } from '../../../app-constants';
 
 @Component({
 	selector: 'app-maintenance',

@@ -1,7 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { NavParams} from '@ionic/angular';
-import { DataSharingService } from '../../services/data-sharing.service'
-import {Visit} from '../../models/visit';
+import { DataSharingService } from '../../../services/data-sharing.service'
+import {Visit} from '../../../models/visit';
 
 
 @Component({

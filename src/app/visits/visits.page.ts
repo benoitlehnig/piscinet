@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { VisitServicesService } from '../services/visit-services.service';
-import {Visit} from '../models/visit';
 import { ActivatedRoute,Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { SelectCustomerComponent } from '../visit/select-customer/select-customer.component';
-import { ActionSheetController } from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
+
+import {Visit} from '../models/visit';
+
+import { VisitService } from '../services/visit.service';
 import { CustomerService } from '../services/customer.service';
 import { PoolServicesService } from '../services/pool-services.service';
 import { DataSharingService } from '../services/data-sharing.service';
+
+import { SelectCustomerComponent } from './visit/select-customer/select-customer.component';
 
 @Component({
 	selector: 'app-visits',
@@ -20,16 +23,21 @@ export class VisitsPage implements OnInit {
 	public visits;
   public offlinevisitMode :boolean = false;
 
-    public visitTypesText=[];
+  public visitTypesText=[];
 
   public newVisitCancelText:string = "";
 
+  public visitsChangesSub: Subscription = new Subscription();
+  public activatedRouteChangesSub: Subscription = new Subscription();
+  public customerChangesSub: Subscription = new Subscription();
+  public poolChangesSub: Subscription = new Subscription();
+
+
 
   constructor(
-    public visitServicesService: VisitServicesService,
+    public visitService: VisitService,
     public activatedRoute:ActivatedRoute,
     public modalController: ModalController,
-    public actionSheetController: ActionSheetController,
     public translateService : TranslateService,
     public customerService: CustomerService,
     public poolServicesService: PoolServicesService,
@@ -39,8 +47,10 @@ export class VisitsPage implements OnInit {
     ) 
   { }
 
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
+  ngOnInit(){}
+
+  ionViewWillEnter() {
+    this.activatedRouteChangesSub = this.activatedRoute.params.subscribe(params => {
       this.initLiverData()
     });
     this.translateService.get(['VISIT.VisitTypeMaintenanceButton','VISIT.TYPES','CUSTOMER.NewVisitCancel']).subscribe(
@@ -50,8 +60,19 @@ export class VisitsPage implements OnInit {
       });
 
   }
+
+  ionViewWillLeave(){
+    this.activatedRouteChangesSub.unsubscribe();
+    this.visitsChangesSub.unsubscribe();
+    this.customerChangesSub.unsubscribe();
+    this.poolChangesSub.unsubscribe();
+  }
+  
   initLiverData(){
-    this.visits = this.visitServicesService.getVisitsSinceMonth(1,100);
+    this.visitsChangesSub = this.visitService.getVisitsSinceMonth(1,100).subscribe(
+      (data)=>{
+        this.visits = data;
+      })
   }
 
   async presentCustomerSelectionModal() {
@@ -70,10 +91,10 @@ export class VisitsPage implements OnInit {
     if(customerUid !=="" && poolId !==""){
       let customerStringified="";
       let swimmingPoolStringified="";
-      this.customerService.getCustomer(customerUid).subscribe(
+      this.customerChangesSub = this.customerService.getCustomer(customerUid).subscribe(
         (customer) =>{
           customerStringified = JSON.stringify(customer);
-          this.poolServicesService.getSwimmingPool(poolId).subscribe(
+          this.poolChangesSub = this.poolServicesService.getSwimmingPool(poolId).subscribe(
             (swimmingPool) =>{
 
               swimmingPoolStringified = JSON.stringify(swimmingPool);
@@ -88,38 +109,5 @@ export class VisitsPage implements OnInit {
     
     
   }
-  /*
-  async presentActionSheet() {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Nouvelle visite',
-      cssClass: 'my-custom-class',
-      buttons: [{
-        text: this.visitTypeFullText,
-        icon: 'shield-checkmark',
-        handler: () => {
-          this.newVisitType = 'full';
-          this.presentModal()
-          
-        }
-      }, {
-        text:  this.visitTypeMaintenanceText,
-        icon: 'shield-checkmark',
-        handler: () => {
-          this.newVisitType = 'maintenane';
-          this.presentModal()
-        }
-      },
-      {
-        text: this.newVisitCancelText,
-        icon: 'close',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    await actionSheet.present();
-  }
-  */
 
 }

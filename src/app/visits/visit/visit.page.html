@@ -17,7 +17,7 @@
 	{{ visit.dateTime | date:'d MMM y' }}
 	</ion-title>
 	<ion-buttons slot="end" >
-		<ion-button [routerLink]="['/edit-visit' ,{ visitID:visitId, mode: 'update',customer: customerStringified,swimmingPoolName:swimmingPoolName}]" *ngIf="editEligibility === true && mode !== 'offline'">
+		<ion-button [routerLink]="['/visits/edit-visit' ,{ visitID:visitId, mode: 'update',customer: customerStringified,swimmingPoolName:swimmingPoolName}]" *ngIf="editEligibility === true && mode !== 'offline'">
 			<ion-icon name="pencil" ></ion-icon>
 		</ion-button>
 		<ion-button (click)="uploadVisit()" *ngIf="(claims['admin']===true || claims['employee'] ===true) && mode !=='online'">

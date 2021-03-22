@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Visit} from '../../models/visit';
-import { DataSharingService } from '../../services/data-sharing.service'
-import {AppConstants } from '../../app-constants';
+import {Visit} from '../../../models/visit';
+import { DataSharingService } from '../../../services/data-sharing.service'
+import {AppConstants } from '../../../app-constants';
 import { Subscription } from 'rxjs';
-
-
-
 
 @Component({
 	selector: 'app-technical',
@@ -28,15 +25,15 @@ export class TechnicalPage implements OnInit {
 		) { }
 
 	ngOnInit() {
-		this.visitChangesSub = this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
-			this.visit = visit;
-			console.log(this.visit)
-		});
-	}
-	ionViewWillEnter(){
 		
 	}
-	ngOnDestroy(){
+	ionViewWillEnter(){
+		this.visitChangesSub = this.dataSharingService.currentSomeDataChanges.subscribe(visit => {
+			this.visit = visit;
+		});
+		
+	}
+	ionViewWillLeave(){
 		this.visitChangesSub.unsubscribe();
 	}
 

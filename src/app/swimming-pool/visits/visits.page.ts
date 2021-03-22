@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VisitServicesService } from '../../services/visit-services.service';
+import { VisitService } from '../../services/visit.service';
 import {Visit} from '../../models/visit';
 import { DataSharingService } from '../../services/data-sharing.service'
 
@@ -15,7 +15,7 @@ export class VisitsPage implements OnInit {
 	public uid:string;
 
 	constructor(
-		public visitServicesService: VisitServicesService,
+		public visitService: VisitService,
 		public dataSharingService:DataSharingService
 
 		) 
@@ -37,7 +37,7 @@ export class VisitsPage implements OnInit {
 		
 	}
 	init(){
-		this.visits = this.visitServicesService.getVisitsByPool(this.poolId,100);
+		this.visits = this.visitService.getVisitsByPool(this.poolId,100);
 	}
 
 

@@ -1,6 +1,5 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
 import { Chart } from 'chart.js';
-import { VisitServicesService } from '../../services/visit-services.service';
 import { DataSharingService } from '../../services/data-sharing.service'
 import { PoolServicesService } from '../../services/pool-services.service';
 import * as moment from 'moment';
@@ -46,7 +45,6 @@ export class StatisticsPage implements OnInit {
 
 
 	constructor(
-		public visitServicesService: VisitServicesService,
 		public dataSharingService:DataSharingService,
 		public poolServicesService: PoolServicesService
 

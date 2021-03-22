@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import {Visit} from '../models/visit';
-import {Customer} from '../models/customer';
-import {Employee} from '../models/employee';
-import {SwimmingPool} from '../models/swimming-pool';
+import { Subscription } from 'rxjs';
+
+
+
+import {Visit} from '../../models/visit';
+import {Customer} from '../../models/customer';
+import {Employee} from '../../models/employee';
+import {SwimmingPool} from '../../models/swimming-pool';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { NavController } from '@ionic/angular';
-import { CustomerService } from '../services/customer.service'
-import { EmployeeService } from '../services/employee.service'
-import { PoolServicesService } from '../services/pool-services.service'
-import { VisitServicesService } from '../services/visit-services.service';
+import { CustomerService } from '../../services/customer.service'
+import { EmployeeService } from '../../services/employee.service'
+import { PoolServicesService } from '../../services/pool-services.service'
+import { VisitService } from '../../services/visit.service';
 
 import { Storage } from '@ionic/storage';
-import { AuthenticationService } from '../services/authentication.service';
-import { DataSharingService } from '../services/data-sharing.service'
+import { AuthenticationService } from '../../services/authentication.service';
+import { DataSharingService } from '../../services/data-sharing.service'
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { LoadingController } from '@ionic/angular';
 import { TranslateService} from '@ngx-translate/core';
@@ -29,19 +33,27 @@ import { ModalController } from '@ionic/angular';
 export class VisitPage implements OnInit {
 
 	visit:Visit = new Visit();
-	swimmingPool:SwimmingPool = new SwimmingPool();
 	visitId:string="";
-	public claims;
+	public claims:{[key: string]: any}={'admin':false}
 	public customerStringified = "";
 	public swimmingPoolStringified = "";
 	public mode = "online";
 	public loading;
+	public customerUid:string="";
 	public customer:Customer= new Customer()
+	public employeeUid:string="";
 	public employee:Employee= new Employee()
+	public poolId:string="";
+	swimmingPool:SwimmingPool = new SwimmingPool();
 	public swimmingPoolName:string="";
 	public successUploadText:string="";
 	public loadingText:string="";
 	public editEligibility : boolean=true;
+
+	public poolChangesSub: Subscription = new Subscription();
+	public employeeChangesSub: Subscription = new Subscription();
+	public customerChangesSub: Subscription = new Subscription();
+
 
 
 	constructor(
@@ -49,7 +61,7 @@ export class VisitPage implements OnInit {
 		public customerService: CustomerService,
 		public employeeService: EmployeeService,
 		public poolServicesService: PoolServicesService,
-		public visitServicesService: VisitServicesService,
+		public visitService: VisitService,
 		private storage: Storage,
 		public authenticationService:AuthenticationService,
 		public dataSharingService:DataSharingService,
@@ -60,49 +72,44 @@ export class VisitPage implements OnInit {
 		public toastController: ToastController,
 		public modalController: ModalController
 		) {
-		this.visit = new Visit();
-		this.customer= new Customer()
-		this.employee= new Employee()
 		this.dataSharingService.someDataChanges(this.visit);
 	}
 
-	ngOnInit() {
+	ngOnInit(){}
+
+	ionViewWillEnter() {
 		this.activatedRoute.params.subscribe(params => {
 			if( params['mode']){
-				console.log("parms", params['mode'])
 				this.mode =  params['mode'];
 			}
 			
 		});
 		this.visitId = this.activatedRoute.snapshot.paramMap.get('vid');
 		this.claims = this.authenticationService.getClaims();
-		if(this.mode ==='online'){
-			this.visitServicesService.getVisit(this.visitId).subscribe(
+		if(this.mode ==='online'){;
+			this.visitService.getVisit(this.visitId).subscribe(
 				(data) =>{
 					this.visit = data;
+					this.employeeUid = data.employeeUid;
+					console.log(" data, this.customerUid", data.customerUid)
+					this.customerUid = data.customerUid;
+					this.poolId = data.poolId;
 					this.editEligibility = (
 						this.claims['admin']===true || 
 						(this.claims['employee'] ===true && moment().diff(this.visit.dateTime,'hours') <3)
 						);
-					this.employeeService.getEmployee(data.employeeUid).subscribe(
+					this.employeeChangesSub = this.employeeService.getEmployee(this.employeeUid).subscribe(
 						(data2) =>{
-							if(data2!==null)
-							{
-								this.employee = data2
-							}
+							this.employee = data2
 						});
-					this.customerService.getCustomer(data.customerUid).subscribe(
-						(data3) =>{
-							this.customer = data3;
-							this.customerStringified = JSON.stringify(data3);
-						});
-					this.poolServicesService.getSwimmingPool(data.poolId).subscribe(
+					this.poolChangesSub = this.poolServicesService.getSwimmingPool(this.poolId).subscribe(
 						(data4) =>{
-							console.log("pool", data4)
 							this.swimmingPool = data4;
 							this.dataSharingService.currentPool(this.swimmingPool);
 						});
 					this.dataSharingService.someDataChanges(this.visit);
+
+					this.getCustomerData();
 				})
 		}
 		else{
@@ -110,30 +117,35 @@ export class VisitPage implements OnInit {
 				data => {
 					let offlineVisits= JSON.parse(data);
 					this.visit = offlineVisits[this.visitId];
-					if(this.visit.customerUid !==""){
-						this.customerService.getCustomer(this.visit.customerUid).subscribe(
-							(data3) =>{
-								this.customer = data3;
-								this.customerStringified = JSON.stringify(data3);
-							});
-					}
-					this.dataSharingService.someDataChanges(this.visit);
+					this.customerUid = this.visit.customerUid;
+					this.getCustomerData();
+					this.dataSharingService.someDataChanges(this.visit);					
 				}) 
 		}
+
 		this.translateService.get(['ADDVISIT.SuccessUploadText','COMMON.Loading']).subscribe(
 			value => {
-				// value is our translated string
 				this.loadingText = value['COMMON.Loading'];
 				this.successUploadText = value['ADDVISIT.SuccessUploadText'];
 			});
 
 	}
-	ionViewWillEnter(){
-
-		
-
+	ionViewWillLeave(){
+		this.poolChangesSub.unsubscribe();
+		this.employeeChangesSub.unsubscribe();
+		this.customerChangesSub.unsubscribe();
 	}
 
+	getCustomerData(){
+		if(this.customerUid !==""){
+			this.customerChangesSub = this.customerService.getCustomer(this.customerUid).subscribe(
+				(data3) =>{
+					console.log(" this.customerUid", data3)
+					this.customer = data3;
+					this.customerStringified = JSON.stringify(data3);
+				});
+		}
+	}
 	async uploadVisit(){
 		if(this.visit.customerUid !=="" && this.visit.poolId !==""){
 
@@ -192,8 +204,6 @@ export class VisitPage implements OnInit {
 		if(this.visit.customerUid !=="" && this.visit.poolId !==""){
 			this.uploadVisit()
 		}
-		
-		
 	}
 
 	

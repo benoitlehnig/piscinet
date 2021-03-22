@@ -8,18 +8,20 @@ import {SwimmingPool} from '../models/swimming-pool';
 import {Visit} from '../models/visit';
 import * as moment from 'moment';
 import {DataSharingService} from './data-sharing.service';
+import {EmployeeService} from './employee.service';
 
 
 @Injectable({
 	providedIn: 'root'
 })
-export class VisitServicesService {
+export class VisitService {
 
 	public accountId:string="piscinet";
 
 	constructor(
 		public afDatabase: AngularFireDatabase,
 		public dataSharingService: DataSharingService,
+		public employeeService: EmployeeService,
 		) {
 		
 		this.dataSharingService.getAccoundIDChanges().subscribe(
@@ -35,7 +37,8 @@ export class VisitServicesService {
 
 
 	getVisitsByPool(poolId,visitNumber){
-		return this.afDatabase.list<Visit>(this.accountId+'/visits',ref => ref.orderByChild('poolId').equalTo(poolId).limitToLast(visitNumber)).snapshotChanges()
+		return this.afDatabase.list<Visit>(this.accountId+'/visits',ref => ref.orderByChild('poolId').equalTo(poolId).limitToLast(visitNumber))
+		.snapshotChanges()
 		.pipe(
 			switchMap(visits => {
 				const customerUids = uniq(visits.map(visit  => visit.payload.val().customerUid));
@@ -72,8 +75,10 @@ export class VisitServicesService {
 	}
 
 	getVisit(visitId){
-		return this.afDatabase.object<Visit>(this.accountId+'/visits/'+visitId).valueChanges();
+		return this.afDatabase.object<Visit>(this.accountId+'/visits/'+visitId).valueChanges()
 	}
+	
+	
 
 	getVisitsSinceMonth(numberOfMonth,visitNumber){
 		let lastMonth = moment().subtract(numberOfMonth, 'months').format();

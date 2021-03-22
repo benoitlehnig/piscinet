@@ -72,17 +72,6 @@ const routes: Routes = [
   canActivate: [AngularFireAuthGuard], data: { authGuardPipe: superAdminOnly }
 },
 {
-  path: 'visits/:vid',
-  loadChildren: () => import('./visit/visit.module').then( m => m.VisitPageModule),
-  canActivate: [AngularFireAuthGuard]
-
-},
-{
-  path: 'edit-visit',
-  loadChildren: () => import('./add-visit/add-visit.module').then( m => m.AddVisitPageModule),
-  canActivate: [AngularFireAuthGuard]
-},
-{
   path: 'myProfile',
   loadChildren: () => import('./customer/my-profile/my-profile.module').then( m => m.MyProfilePageModule),
   canActivate: [AngularFireAuthGuard]
