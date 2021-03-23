@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { ActivatedRoute } from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+
+import { LoadingController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
-import {TranslateService} from '@ngx-translate/core';
 import { Storage } from '@ionic/storage';
-import { LoadingController } from '@ionic/angular';
-import {SwimmingPool} from '../models/swimming-pool';
-import {Customer} from '../models/customer';
-import { PoolServicesService } from '../services/pool-services.service';
-import {AppConstants } from '../app-constants';
+
+import {SwimmingPool} from '../../models/swimming-pool';
+import {Customer} from '../../models/customer';
+
+import { PoolServicesService } from '../../services/pool-services.service';
+import {AppConstants } from '../../app-constants';
 
 @Component({
 	selector: 'app-add-swimming-pool',
@@ -23,11 +26,11 @@ export class AddSwimmingPoolPage implements OnInit {
 	public poolId:string;
 	public mode:string='add';
 	public swimmingPool:SwimmingPool= new SwimmingPool();
+	public customer:Customer=new Customer();
 	public successAddText:string="";
 	public successUpdateText:string="";
 	public loadingText:string="";
 	public loading;
-	public customer:Customer=new Customer();
 	public sandfilterPressureSteps = this.appConstants.sandfilterPressureSteps;
 
 	constructor(
@@ -56,41 +59,34 @@ export class AddSwimmingPoolPage implements OnInit {
 					})
 			}
 		});
-		this.translateService.get('COMMON.Loading').subscribe(
+		this.translateService.get(['ADDSWIMMINGPOOL.SuccessAdd', 'ADDSWIMMINGPOOL.SuccessUpdate','COMMON.Loading']).subscribe(
 			value => {
-				this.loadingText = value;
+				this.successAddText = value['ADDSWIMMINGPOOL.SuccessAdd']
+				this.successUpdateText = value['ADDSWIMMINGPOOL.SuccessUpdate'];
+				this.loadingText = value['COMMON.Loading'];
 			});
+
 
 	}
 	ngOnInit() {
 
-		this.translateService.get(['ADDSWIMMINGPOOL.SuccessAdd', 'ADDSWIMMINGPOOL.SuccessUpdate']).subscribe(
-			value => {
-				// value is our translated string
-				console.log(value);
-				this.successAddText = value['ADDSWIMMINGPOOL.SuccessAdd']
-				this.successUpdateText = value['ADDSWIMMINGPOOL.SuccessUpdate'];
-			});
 	}
 
 	addSwimmingPool(){
 		this.swimmingPool.customerUid = this.uid;
 		const callable = this.functions.httpsCallable('addSwimmingPool');
 		const obs = callable(this.swimmingPool);
-
 		obs.subscribe(res => {
 			this.presentToast();
 			this.navCtrl.navigateRoot(['customers/'+this.uid]);
 			this.loading.dismiss();
-		});
-		
+		});	
 	}
 
 	updateSwimmingPool(){
 		let swimmingPoolToUpdate={'customerUid':this.uid, 'poolId':this.poolId, 'value' : this.swimmingPool};
 		const callable = this.functions.httpsCallable('updateSwimmingPool');
 		const obs = callable(swimmingPoolToUpdate);
-
 		obs.subscribe(async res => {
 			this.presentToast();
 			this.loading.dismiss();
@@ -126,9 +122,7 @@ export class AddSwimmingPoolPage implements OnInit {
 	}
 
 	savePressure(value){
-		console.log("savePressure" , value)
 		this.swimmingPool.cleanFilterPressure =value;
-	
 	}
 }
 

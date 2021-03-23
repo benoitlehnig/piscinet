@@ -54,7 +54,7 @@ export class AuthenticationService {
 									}
 								})
 						}
-						else if(this.claims['admin'] ===true || this.claims['employee'] ===true || this.claims['superAdmin'] ===true){
+						if(this.claims['admin'] ===true || this.claims['employee'] ===true || this.claims['superAdmin'] ===true){
 							this.router.navigateByUrl('/customers');
 						}
 					})

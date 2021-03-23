@@ -44,7 +44,7 @@ const routes: Routes = [
 },
 {
   path: ':id/edit-swimming-pool',
-  loadChildren: () => import('../add-swimming-pool/add-swimming-pool.module').then( m => m.AddSwimmingPoolPageModule),
+  loadChildren: () => import('../swimming-pool/add-swimming-pool/add-swimming-pool.module').then( m => m.AddSwimmingPoolPageModule),
 },
 {
   path: ':id/swimming-pool/:sid',
@@ -52,7 +52,7 @@ const routes: Routes = [
 },
 {
   path: ':id/swimming-pool/:sid/edit-swimming-pool',
-  loadChildren: () => import('../add-swimming-pool/add-swimming-pool.module').then( m => m.AddSwimmingPoolPageModule),
+  loadChildren: () => import('../swimming-pool/add-swimming-pool/add-swimming-pool.module').then( m => m.AddSwimmingPoolPageModule),
 
 },
 {

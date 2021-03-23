@@ -39,22 +39,10 @@ const routes: Routes = [
 	]
 },
 {
-	path: 'information',
-	loadChildren: () => import('./information/information.module').then( m => m.InformationPageModule)
-},
-{
-	path: 'visits',
-	loadChildren: () => import('./visits/visits.module').then( m => m.VisitsPageModule)
-},
-{
 	path: '',
 	redirectTo: 'tab/information',
 	pathMatch: 'full'
-},
-  {
-    path: 'statistics',
-    loadChildren: () => import('./statistics/statistics.module').then( m => m.StatisticsPageModule)
-  }
+}
 ];
 
 @NgModule({

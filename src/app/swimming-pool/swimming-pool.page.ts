@@ -41,6 +41,11 @@ export class SwimmingPoolPage implements OnInit {
 	}
 
 	ngOnInit() {
+		
+
+	}
+
+	ionViewWillEnter(){
 		this.translateService.get(['VISIT.VisitTypeFullButton', 'VISIT.VisitTypeControlButton', 'VISIT.VisitTypeMaintenanceButton','CUSTOMER.VisitTypeFull','CUSTOMER.VisitTypeMaintenance','CUSTOMER.NewVisitCancel']).subscribe(
 			value => {
 				this.visitTypeText.visitTypeFull = value['VISIT.VisitTypeFullButton'];
@@ -50,10 +55,7 @@ export class SwimmingPoolPage implements OnInit {
 				this.visitTypeMaintenanceText =  value['CUSTOMER.VisitTypeMaintenance'];
 				this.newVisitCancelText =  value['CUSTOMER.NewVisitCancel'];
 			});
-
-	}
-
-	ionViewWillEnter(){
+		
 		this.uid = this.activatedRoute.snapshot.paramMap.get('id')
 		this.poolId = this.activatedRoute.snapshot.paramMap.get('sid');
 		this.customerService.getCustomer(this.uid).subscribe(
