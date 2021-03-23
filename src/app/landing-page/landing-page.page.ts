@@ -20,7 +20,7 @@ export class LandingPagePage implements OnInit {
 	public col1Config: NgsRevealConfig;
 
 	constructor(
-		analytics: AngularFireAnalytics,
+		public analytics: AngularFireAnalytics,
 		public popoverController:PopoverController,
 		private revealService: NgsRevealService
 
@@ -29,13 +29,14 @@ export class LandingPagePage implements OnInit {
 		}
 
 	ngOnInit() {
+		
+	}
+
+	ionViewDidEnter(){
 		let beforeRevealSubscription = this.revealService.beforeReveal$.subscribe(
       (el: HTMLElement) => {
         console.log(`beforeReveal of '<${el.nodeName}>.${el.className}'`);
       });
-	}
-
-	ionViewDidEnter(){
 		this.revealService.sync();
 
 	}

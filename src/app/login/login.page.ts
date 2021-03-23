@@ -69,8 +69,6 @@ export class LoginPage implements OnInit {
 		});
 		
 		
-
-		
 		this.translateService.get(['LOGIN.SuccessEmailSent','LOGIN.invalidemail','LOGIN.wrongpassword','LOGIN.usernot-found',]).subscribe(
 			value => {
 				console.log(value)
@@ -86,23 +84,8 @@ export class LoginPage implements OnInit {
 		this.authService.loginUser(form)
 		.then(res => {
 			console.log(res);
-			this.errorMessage = "";
-			let claims = this.authService.getClaims();
-			if(claims['customer'] ===true){
-				this.navCtrl.navigateForward('/myPools');
-			}
-			if(claims['admin'] ===true){
-				this.navCtrl.navigateForward('/customers');
-			}
-			if(claims['employee'] ===true){
-				this.navCtrl.navigateForward('/customers');
-			}
-			
 			
 		}, err => {
-			console.log(err);
-			console.log(err.code.split("/")[1].replace("-",""));
-			console.log(this.errorMessages['invalidemail'])
 			this.errorMessage = this.errorMessages[String(err.code.split("/")[1].replace("-",""))];
 		})
 	}
@@ -132,10 +115,8 @@ export class LoginPage implements OnInit {
 	}
 
 	retrieveAccountCustomization(){
-		console.log(this.accountId);
 		this.accountServicesService.getAccount(this.accountId).subscribe(
 			(account) => {
-				console.log(account);
 				this.landingPageLogo = account.configuration.logoPictureUrl;
 				this.landingPageName =  account.configuration.nameLoginPage
 			})
