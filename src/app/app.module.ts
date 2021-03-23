@@ -39,6 +39,27 @@ import { AngularFireAnalyticsModule,ScreenTrackingService,UserTrackingService  }
 
 import {NgsRevealModule} from 'ngx-scrollreveal';
 
+import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
+
+const cookieConfig:NgcCookieConsentConfig = {
+  autoOpen:false,
+  cookie: {
+    domain: environment.cookieDomain
+  },
+  palette: {
+    popup: {
+      background: '#000'
+    },
+    button: {
+      background: '#f1d600'
+    }
+  },
+  "content": {
+    "href": "https:/checkmypool.com/cgu",
+  },
+  theme: 'edgeless',
+  type: 'opt-out'
+};
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -62,6 +83,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   AngularFireModule.initializeApp(environment.firebaseConfig),
   AngularFireMessagingModule,
   AngularFireAnalyticsModule,
+  NgcCookieConsentModule.forRoot(cookieConfig),
+
   TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,

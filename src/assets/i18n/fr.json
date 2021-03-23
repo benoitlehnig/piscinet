@@ -635,6 +635,15 @@
 		"ShortDescriptionTitle": "Réalisez votre suivi en ligne en seulement 30 secondes par piscine ",
 		"CGU": "Conditions générales d'utilisation"
 	},
+	"cookie": {
+		"header": "Des cookies sont utilisés sur ce site",
+		"message": "CheckMyPool utilise des cookies pour améliorer l'experience du site.",
+		"dismiss": "OK !",
+		"allow": "Accepter les cookies",
+		"deny": "Refuser",
+		"link": "En savoir plus",
+		"policy": "Politique des cookies"
+	},
 	"REGISTER":{
 		"Title": "Créer son compte pisciniste GRATUITEMENT",
 		"Text":"Veuillez remplir les éléments ci-dessous. Un email de confirmation vous sera envoyé lorsque votre compte sera activé.",

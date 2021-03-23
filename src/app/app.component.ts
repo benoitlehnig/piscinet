@@ -21,6 +21,9 @@ import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { GdprmodalComponent } from './gdprmodal/gdprmodal.component';
 
+import { NgcCookieConsentService } from 'ngx-cookieconsent';
+ import { Subscription }   from 'rxjs';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -36,6 +39,13 @@ export class AppComponent implements OnInit {
   public isOnline:boolean=true;
   public offlineVisits=[];
 
+   private popupOpenSubscription: Subscription;
+   private popupCloseSubscription: Subscription;
+   private initializeSubscription: Subscription;
+   private statusChangeSubscription: Subscription;
+   private revokeChoiceSubscription: Subscription;
+   private noCookieLawSubscription: Subscription;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -50,7 +60,9 @@ export class AppComponent implements OnInit {
     public onlineCheckService: OnlineCheckService,
     private router: Router,
     private afMessaging: AngularFireMessaging,
-    public popoverController: PopoverController
+    public popoverController: PopoverController,
+    private ccService: NgcCookieConsentService,
+
 
     ) {
     this.initializeApp();
@@ -61,11 +73,12 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.translate.setDefaultLang('fr');
+      this.initCookiePopup();
       this.afMessaging.messages.subscribe((message) => { console.log(message); });
       this.afMessaging.messages.subscribe(
         (messaging: any) => {
           messaging.onMessageCallback = (payload: any) => {
-           console.log(payload.notification.title)
+            console.log(payload.notification.title)
           };
           messaging.onTokenRefresh = messaging.onTokenRefresh.bind(messaging);
         });
@@ -113,10 +126,10 @@ export class AppComponent implements OnInit {
               }
               if(this.claims['customer'] ===true){
                 this.appPages = this.appConstants.appCustomerPages;
-                 this.displayName = this.dataSharingService.getCustomersChanges().subscribe(
-                   data2=>{
-                     console.log("getCustomersChanges", data2);
-                   })
+                this.displayName = this.dataSharingService.getCustomersChanges().subscribe(
+                  data2=>{
+                    console.log("getCustomersChanges", data2);
+                  })
                 this.router.navigateByUrl('/myProfile');
               }
               if(this.claims['admin'] ===true){
@@ -188,6 +201,35 @@ export class AppComponent implements OnInit {
       );
 
   }
+
+   initCookiePopup(){
+     this.translate//
+     .get(['cookie.header', 'cookie.message', 'cookie.dismiss', 'cookie.allow', 'cookie.deny', 'cookie.link', 'cookie.policy'])
+     .subscribe(data => {
+         console.log("initCookiePopup");
+       this.ccService.getConfig().content = this.ccService.getConfig().content || {} ;
+       // Override default messages with the translated ones
+       this.ccService.getConfig().content.header = data['cookie.header'];
+       this.ccService.getConfig().content.message = data['cookie.message'];
+       this.ccService.getConfig().content.dismiss = data['cookie.dismiss'];
+       this.ccService.getConfig().content.allow = data['cookie.allow'];
+       this.ccService.getConfig().content.deny = data['cookie.deny'];
+       this.ccService.getConfig().content.link = data['cookie.link'];
+       this.ccService.getConfig().content.policy = data['cookie.policy'];
+
+       this.ccService.destroy(); // remove previous cookie bar (with default messages)
+       this.ccService.init(this.ccService.getConfig()); // update config with translated messages
+     });
+     this.popupOpenSubscription = this.ccService.popupOpen$.subscribe(
+       () => {
+         // you can use this.ccService.getConfig() to do stuff...
+       });
+
+     this.popupCloseSubscription = this.ccService.popupClose$.subscribe(
+       () => {
+         // you can use this.ccService.getConfig() to do stuff...
+       });
+   }
 
 
   async presentGDPRPopover() {
