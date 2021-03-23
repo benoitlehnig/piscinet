@@ -34,11 +34,11 @@
 		<ion-icon  name="shield-checkmark"></ion-icon>
 	</ion-fab-button>
 	<ion-fab-list>
-		<ion-fab-button color="primary" class="full" [attr.data-desc]="visitTypeText.visitTypeFull" 
+		<ion-fab-button color="primary" class="full" [attr.data-desc]="visitTypesText['full']['short']" 
 		[routerLink]="['/customers/null/swimming-pool/null/add-visit',{ mode: 'add', customer: '',swimmingPoolName:'',visitType:'full',offline:true }]">
 		<ion-icon name="shield-checkmark" fill="solid"></ion-icon>
 	</ion-fab-button>
-	<ion-fab-button color="success" class="maintenance"  [attr.data-desc]="visitTypeText.visitTypeMaintenance"
+	<ion-fab-button color="success" class="maintenance"   [attr.data-desc]="visitTypesText['maintenance']['short']" 
 	[routerLink]="['/customers/null/swimming-pool/null/add-visit',{ mode: 'add', customer: '',swimmingPoolName:'',visitType:'maintenance',offline:true }]">
 	<ion-icon name="shield-checkmark" ></ion-icon>
 </ion-fab-button>

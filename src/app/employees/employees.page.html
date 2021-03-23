@@ -7,7 +7,7 @@
 	</ion-toolbar>
 </ion-header>
 
-<ion-fab vertical="top" horizontal="end" slot="fixed"  [routerLink]="['/edit-employee',{ mode: 'add'}]">
+<ion-fab vertical="top" horizontal="end" slot="fixed"  [routerLink]="['/employees/edit-employee',{ mode: 'add'}]">
 	<ion-fab-button *ngIf="claims['admin']">
 		<ion-icon name="add"></ion-icon>
 	</ion-fab-button>

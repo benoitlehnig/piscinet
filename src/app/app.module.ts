@@ -7,6 +7,7 @@ import { FormsModule,ReactiveFormsModule,FormControl } from '@angular/forms'
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -76,6 +77,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   SplashScreen,
   ScreenTrackingService,
   UserTrackingService ,
+  Camera,
   { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   { provide: LOCALE_ID, useValue: "fr-FR" }
   ],

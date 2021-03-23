@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SwimmingPool} from '../../models/swimming-pool';
 import { DataSharingService } from '../../services/data-sharing.service'
 import {AppConstants } from '../../app-constants';
+import { PhotoService } from '../../services/photo.service';
 
 @Component({
 	selector: 'app-information',
@@ -19,7 +20,8 @@ export class InformationPage implements OnInit {
 
 	constructor(
 		public dataSharingService:DataSharingService,
-		public appConstants:AppConstants
+		public appConstants:AppConstants,
+		private photoService: PhotoService
 
 		) { 
 		this.swimmingPool= new SwimmingPool();
@@ -33,6 +35,11 @@ export class InformationPage implements OnInit {
 		console.log(this.swimmingPool.shape)
 		this.initData();
 
+		
+
+	}
+	takePicture(){
+		this.photoService.addNewToGallery();
 	}
 
 	initData(){

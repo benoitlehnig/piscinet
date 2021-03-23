@@ -7,16 +7,20 @@ import { IonicModule } from '@ionic/angular';
 
 import { InformationPageRoutingModule } from './information-routing.module';
 
-import { InformationPage } from './information.page';
 
+
+import { InformationPage } from './information.page';
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    TranslateModule,
-    InformationPageRoutingModule
-  ],
-  declarations: [InformationPage]
+	imports: [
+	CommonModule,
+	FormsModule,
+	IonicModule,
+	TranslateModule,
+	InformationPageRoutingModule
+	],
+	declarations: [InformationPage],
+	providers:[
+	
+	]
 })
 export class InformationPageModule {}
