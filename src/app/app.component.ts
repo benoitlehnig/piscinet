@@ -79,7 +79,6 @@ export class AppComponent implements OnInit {
       this.afMessaging.messages.subscribe(
         (messaging: any) => {
           messaging.onMessageCallback = (payload: any) => {
-            console.log(payload.notification.title)
           };
           messaging.onTokenRefresh = messaging.onTokenRefresh.bind(messaging);
         });
@@ -99,8 +98,6 @@ export class AppComponent implements OnInit {
             this.offlineVisits = data
           }
         });
-
-        
       });
 
     });
@@ -197,10 +194,8 @@ export class AppComponent implements OnInit {
       this.ccService.getConfig().content.deny = data['cookie.deny'];
       this.ccService.getConfig().content.link = data['cookie.link'];
       this.ccService.getConfig().content.policy = data['cookie.policy'];
-      console.log( data['cookie.policy'])
       this.ccService.destroy(); // remove previous cookie bar (with default messages)
       this.ccService.init(this.ccService.getConfig()); // update config with translated messages
-      console.log("initCookiePopup",this.ccService.getConfig());
 
     });
 
