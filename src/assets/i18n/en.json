@@ -1,3 +1,12 @@
 {
-  "TITLE": "Piscinet"
+  "TITLE": "Piscinet",
+  "cookie": {
+		"header": "Des cookies sont utilisés sur ce site",
+		"message": "CheckMyPool utilise des cookies pour améliorer l'experience du site.",
+		"dismiss": "OK !",
+		"allow": "Accepter les cookies",
+		"deny": "Refuser",
+		"link": "En savoir plus",
+		"policy": "Politique des cookies"
+	}
 }

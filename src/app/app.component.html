@@ -1,4 +1,4 @@
-<ion-app *ngIf="isUserLogged ===true">
+<ion-app *ngIf="isUserLogged ===true && claims['customer'] ===false">
   <ion-split-pane contentId="main-content" >
     <ion-menu contentId="main-content" type="push" class="mainMenu">
       <ion-content>
@@ -24,6 +24,11 @@
       <ion-router-outlet id="main-content"></ion-router-outlet>
     </ion-split-pane>
   </ion-app>
+
+  <ion-app *ngIf="isUserLogged ===true && claims['customer'] === true">
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-app>
+
 
   <ion-app *ngIf="isUserLogged ===false" >
     <ion-router-outlet id="main-content"></ion-router-outlet>

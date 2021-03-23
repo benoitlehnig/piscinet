@@ -22,7 +22,7 @@ import { PopoverController } from '@ionic/angular';
 import { GdprmodalComponent } from './gdprmodal/gdprmodal.component';
 
 import { NgcCookieConsentService } from 'ngx-cookieconsent';
- import { Subscription }   from 'rxjs';
+import { Subscription }   from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -39,12 +39,12 @@ export class AppComponent implements OnInit {
   public isOnline:boolean=true;
   public offlineVisits=[];
 
-   private popupOpenSubscription: Subscription;
-   private popupCloseSubscription: Subscription;
-   private initializeSubscription: Subscription;
-   private statusChangeSubscription: Subscription;
-   private revokeChoiceSubscription: Subscription;
-   private noCookieLawSubscription: Subscription;
+  private popupOpenSubscription: Subscription;
+  private popupCloseSubscription: Subscription;
+  private initializeSubscription: Subscription;
+  private statusChangeSubscription: Subscription;
+  private revokeChoiceSubscription: Subscription;
+  private noCookieLawSubscription: Subscription;
 
   constructor(
     private platform: Platform,
@@ -74,7 +74,8 @@ export class AppComponent implements OnInit {
       this.splashScreen.hide();
       this.translate.setDefaultLang('fr');
       this.initCookiePopup();
-      this.afMessaging.messages.subscribe((message) => { console.log(message); });
+
+      this.afMessaging.messages.subscribe((message) => { console.log("afMessaging :",message); });
       this.afMessaging.messages.subscribe(
         (messaging: any) => {
           messaging.onMessageCallback = (payload: any) => {
@@ -87,7 +88,6 @@ export class AppComponent implements OnInit {
       console.log("mobileweb",this.platform.is('mobileweb'))
       this.onlineCheckService.onlineCheck().subscribe(isOnline => {
         this.isOnline = isOnline;
-
         this.storage.get('offlineVisits').then(
           data =>{
             if(data !==null){
@@ -110,11 +110,8 @@ export class AppComponent implements OnInit {
 
     this.afAuth.user.subscribe(
       data =>{
-        console.log("user >>", data);
-
         if(data){
-          console.log("lastSignInTime : ", data.metadata.lastSignInTime)
-          
+
           this.uid = data.uid;
           this.isUserLogged =true;
           this.displayName = data.email;
@@ -124,25 +121,16 @@ export class AppComponent implements OnInit {
               if(data.metadata.lastSignInTime ==='' || data.metadata.lastSignInTime===null){
                 this.presentGDPRPopover();
               }
-              if(this.claims['customer'] ===true){
-                this.appPages = this.appConstants.appCustomerPages;
-                this.displayName = this.dataSharingService.getCustomersChanges().subscribe(
-                  data2=>{
-                    console.log("getCustomersChanges", data2);
-                  })
-                this.router.navigateByUrl('/myProfile');
-              }
+
+
               if(this.claims['admin'] ===true){
                 this.appPages = this.appConstants.appAdminPages;
-                this.router.navigateByUrl('/customers');
               }
               if(this.claims['employee'] ===true){
                 this.appPages = this.appConstants.appEmployeePages;
-                this.router.navigateByUrl('/customers');
               }
-              if(this.claims['superAdmin'] ===true || this.claims.user_id ==='lQbe5AiDp8NSC0fWuhYwkdMBArw2'){
+              if(this.claims['superAdmin'] ===true){
                 this.appPages = this.appConstants.appASuperAdminPages;
-                this.router.navigateByUrl('/customers');
               }
               this.selectTabNavigation();
               this.requestPermission();
@@ -150,14 +138,9 @@ export class AppComponent implements OnInit {
         }
         else{
           this.isUserLogged =false;
-          
         }
       }
       );
-
-  }
-
-  ngAfterViewInit() {
 
   }
 
@@ -202,35 +185,35 @@ export class AppComponent implements OnInit {
 
   }
 
-   initCookiePopup(){
-     this.translate//
-     .get(['cookie.header', 'cookie.message', 'cookie.dismiss', 'cookie.allow', 'cookie.deny', 'cookie.link', 'cookie.policy'])
-     .subscribe(data => {
-         console.log("initCookiePopup");
-       this.ccService.getConfig().content = this.ccService.getConfig().content || {} ;
-       // Override default messages with the translated ones
-       this.ccService.getConfig().content.header = data['cookie.header'];
-       this.ccService.getConfig().content.message = data['cookie.message'];
-       this.ccService.getConfig().content.dismiss = data['cookie.dismiss'];
-       this.ccService.getConfig().content.allow = data['cookie.allow'];
-       this.ccService.getConfig().content.deny = data['cookie.deny'];
-       this.ccService.getConfig().content.link = data['cookie.link'];
-       this.ccService.getConfig().content.policy = data['cookie.policy'];
+  initCookiePopup(){
+    this.translate.get(['cookie.header', 'cookie.message', 'cookie.dismiss', 'cookie.allow', 'cookie.deny', 'cookie.link', 'cookie.policy'])
+    .subscribe(data => {
+      this.ccService.getConfig().content = this.ccService.getConfig().content || {} ;
+      // Override default messages with the translated ones
+      this.ccService.getConfig().content.header = data['cookie.header'];
+      this.ccService.getConfig().content.message = data['cookie.message'];
+      this.ccService.getConfig().content.dismiss = data['cookie.dismiss'];
+      this.ccService.getConfig().content.allow = data['cookie.allow'];
+      this.ccService.getConfig().content.deny = data['cookie.deny'];
+      this.ccService.getConfig().content.link = data['cookie.link'];
+      this.ccService.getConfig().content.policy = data['cookie.policy'];
+      console.log( data['cookie.policy'])
+      this.ccService.destroy(); // remove previous cookie bar (with default messages)
+      this.ccService.init(this.ccService.getConfig()); // update config with translated messages
+      console.log("initCookiePopup",this.ccService.getConfig());
 
-       this.ccService.destroy(); // remove previous cookie bar (with default messages)
-       this.ccService.init(this.ccService.getConfig()); // update config with translated messages
-     });
-     this.popupOpenSubscription = this.ccService.popupOpen$.subscribe(
-       () => {
-         // you can use this.ccService.getConfig() to do stuff...
-       });
+    });
 
-     this.popupCloseSubscription = this.ccService.popupClose$.subscribe(
-       () => {
-         // you can use this.ccService.getConfig() to do stuff...
-       });
-   }
+  }
 
+  ngOnDestroy(){
+    this.popupOpenSubscription.unsubscribe();
+    this.popupCloseSubscription.unsubscribe();
+    this.initializeSubscription.unsubscribe();
+    this.statusChangeSubscription.unsubscribe();
+    this.revokeChoiceSubscription.unsubscribe();
+    this.noCookieLawSubscription.unsubscribe()
+  }
 
   async presentGDPRPopover() {
 

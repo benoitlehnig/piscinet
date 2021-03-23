@@ -16,7 +16,7 @@ export const environment = {
 		vapidKey: 'BDo2zWS28DWEY944DP0IctD3PAmrn5C_tU1IJ_fx1VZhtwy474tvw_Gux2E-g5b3pKHeSyTNLP-FrQcDjE8FkPs'
 
 	},
-	cookieDomain: "checkmypool.com",
+	cookieDomain: "checkmypool.net",
 
 };
 

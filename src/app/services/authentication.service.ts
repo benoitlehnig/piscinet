@@ -35,7 +35,7 @@ export class AuthenticationService {
 			if (user) {
 				user.getIdTokenResult().then(
 					result=> {
-					
+
 						this.claims = result.claims;
 						this.claimsDataSource.next(this.claims);
 						this.storage.set('accountId', result.claims['accountId']);
@@ -49,8 +49,13 @@ export class AuthenticationService {
 									console.log("onAuthStateChanged", data)
 									if(data[0]){
 										this.dataSharingService.currentCustomer(data[0]);
+										this.router.navigateByUrl('/customerPortal');
+
 									}
 								})
+						}
+						else if(this.claims['admin'] ===true || this.claims['employee'] ===true || this.claims['superAdmin'] ===true){
+							this.router.navigateByUrl('/customers');
 						}
 					})
 			} else {

@@ -42,7 +42,8 @@ import {NgsRevealModule} from 'ngx-scrollreveal';
 import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
 
 const cookieConfig:NgcCookieConsentConfig = {
-  autoOpen:false,
+  autoOpen:true,
+  revokable : false,
   cookie: {
     domain: environment.cookieDomain
   },
@@ -55,7 +56,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     }
   },
   "content": {
-    "href": "https:/checkmypool.com/cgu",
+    "href": "https:/checkmypool.net/cgu",
   },
   theme: 'edgeless',
   type: 'opt-out'

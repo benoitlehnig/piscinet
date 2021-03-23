@@ -1,0 +1,18 @@
+<ion-split-pane contentId="main-content" >
+	<ion-menu contentId="main-content" type="push" class="mainMenu">
+		<ion-content>
+			<div ><h2>{{'COMMON.Hello' | translate}} <ion-text color="primary">{{customer.firstName}} !</ion-text></h2></div>
+
+			<ion-button class="submit-btn" (click)="logout()" fill="outline" >{{'COMMON.Logout' | translate}}</ion-button>
+			<ion-list id="inbox-list">
+				<ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index;" >
+					<ion-item (click)="selectedIndex = i" (click)="redirectTo(p.url)" lines="none" detail="false" [class.selected]="selectedIndex == i">
+						<ion-icon color="primary" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+						<ion-label> {{'COMMON.'+ p.title | translate}} </ion-label>
+					</ion-item>
+				</ion-menu-toggle>
+			</ion-list>
+		</ion-content>
+	</ion-menu>
+	<ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-split-pane>

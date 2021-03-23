@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const adminOnly = () => pipe(customClaims, map(claims => claims.admin === true));
+const customerOnly = () => pipe(customClaims, map(claims => claims.customer === true));
 const superAdminOnly = () => pipe(customClaims, map(claims => claims.superAdmin === true));
 const adminEmployeeOnly = () => pipe(customClaims, map(claims => (claims.admin === true || claims.employee ===true)));
 
@@ -66,23 +67,12 @@ const routes: Routes = [
   canActivate: [AngularFireAuthGuard], data: { authGuardPipe: superAdminOnly }
 },
 {
-  path: 'myProfile',
-  loadChildren: () => import('./customer/my-profile/my-profile.module').then( m => m.MyProfilePageModule),
-  canActivate: [AngularFireAuthGuard]
+  path: 'customerPortal',
+  loadChildren: () => import('./customer-portal/customer-portal.module').then( m => m.CustomerPortalPageModule),
+  canActivate: [AngularFireAuthGuard],data: { authGuardPipe: customerOnly }
 
-},
-{
-  path: 'myPools',
-  loadChildren: () => import('./customer/my-pools/my-pools.module').then( m => m.MyPoolsPageModule),
-  canActivate: [AngularFireAuthGuard]
+}
 
-},
-{
-  path: 'contact',
-  loadChildren: () => import('./customer/contact/contact.module').then( m => m.ContactPageModule),
-  canActivate: [AngularFireAuthGuard]
-
-},
 
 
 

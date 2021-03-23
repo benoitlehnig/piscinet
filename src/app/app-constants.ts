@@ -69,17 +69,17 @@ export class AppConstants {
 	public appCustomerPages = [
 	{
 		title: 'myPools',
-		url: 'myPools',
+		url: 'customerPortal/pools',
 		icon: 'tablet-landscape'
 	},
 	{
 		title: 'MyProfile',
-		url: 'myProfile',
+		url: 'customerPortal/profile',
 		icon: 'person'
 	},
 	{
 		title: 'Contact',
-		url: 'contact',
+		url: 'customerPortal/contact',
 		icon: 'chatbox-ellipses' 
 	}
 	];
