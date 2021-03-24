@@ -4,14 +4,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { LandingPagePage } from './landing-page.page';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: LandingPagePage
-  }
+{
+	path: '',
+	component: LandingPagePage
+},
+{
+	path: 'cgu',
+	loadChildren: () => import('./cgu/cgu.module').then( m => m.CGUPageModule)
+},
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule],
 })
 export class LandingPagePageRoutingModule {}

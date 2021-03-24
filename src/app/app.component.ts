@@ -30,9 +30,9 @@ import { Subscription }   from 'rxjs';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
- 
+ ;
   public uid;
-
+  public claims:any={email: ''};
 
   private popupOpenSubscription: Subscription;
   private popupCloseSubscription: Subscription;
@@ -93,12 +93,10 @@ export class AppComponent implements OnInit {
           this.uid = data.uid;
           data.getIdTokenResult().then(
             result=> {
+              this.claims = result.claims;
               if(data.metadata.lastSignInTime ==='' || data.metadata.lastSignInTime===null){
                 this.presentGDPRPopover();
-              }
-
-
-              
+              }             
               this.requestPermission();
             })
         }

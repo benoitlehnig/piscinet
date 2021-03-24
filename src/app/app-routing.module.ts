@@ -23,43 +23,12 @@ const routes: Routes = [
   loadChildren: () => import('./landing-page/landing-page.module').then( m => m.LandingPagePageModule)
 },
 {
-  path: 'cgu',
-  loadChildren: () => import('./cgu/cgu.module').then( m => m.CGUPageModule)
-},
-
-{
   path: 'login',
   loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
 },
 {
   path: 'login/:accountId',
   loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-},
-{
-  path: 'customers',
-  loadChildren: () => import('./customers/customers.module').then( m => m.CustomersPageModule),
-  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminEmployeeOnly },
-},
-{
-  path: 'visits',
-  loadChildren: () => import('./visits/visits.module').then( m => m.VisitsPageModule),
-  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminEmployeeOnly },
-
-},
-{
-  path: 'alarms',
-  loadChildren: () => import('./alarms/alarms.module').then( m => m.AlarmsPageModule),
-  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminEmployeeOnly },
-},
-{
-  path: 'admin',
-  loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule),
-  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminOnly }
-},
-{
-  path: 'super-admin',
-  loadChildren: () => import('./super-admin/super-admin.module').then( m => m.SuperAdminPageModule),
-  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: superAdminOnly }
 },
 {
   path: 'customerPortal',
@@ -69,9 +38,8 @@ const routes: Routes = [
 },
 {
   path: 'piscinistPortal',
-  loadChildren: () => import('./piscinit-portal/piscinit-portal.module').then( m => m.PiscinitPortalPageModule),
+  loadChildren: () => import('./piscinist-portal/piscinist-portal.module').then( m => m.PiscinistPortalPageModule),
   canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminEmployeeOnly },
-
 }
 
 

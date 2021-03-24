@@ -46,15 +46,9 @@ export class CustomerPortalPage implements OnInit {
 		this.customerChangesSub.unsubscribe();
 	}
 	
-	redirectTo(url){
+	redirectTo(url,index){
 		this.router.navigate([url]);
-	}
-
-	selectTabNavigation(){
-		const path = window.location.pathname;
-		if (path !== undefined) {
-			this.selectedIndex = this.appPages.findIndex(page => page.url.toLowerCase() === path.toLowerCase().split("/")[1]);
-		}
+		this.selectedIndex = index;
 	}
 	logout(){
 		this.authenticationService.logoutUser();

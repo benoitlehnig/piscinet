@@ -13,7 +13,7 @@ const routes: Routes = [
 		children: [
 		{
 			path: '',
-			loadChildren: () => import('../../swimming-pool/information/information.module').then( m => m.InformationPageModule)
+			loadChildren: () => import('../../piscinist-portal/swimming-pool/information/information.module').then( m => m.InformationPageModule)
 		}
 		]
 	},
@@ -22,24 +22,13 @@ const routes: Routes = [
 		children: [
 		{
 			path: '',
-	loadChildren: () => import('../../swimming-pool/visits/visits.module').then( m => m.VisitsPageModule)
+			loadChildren: () => import('../../piscinist-portal/swimming-pool/visits/visits.module').then( m => m.VisitsPageModule)
 		}
 		]
 	}
 	]
 },
-{
-	path: 'information',
-	loadChildren: () => import('../../swimming-pool/information/information.module').then( m => m.InformationPageModule)
-},
-{
-	path: 'visits',
-	loadChildren: () => import('../../swimming-pool/visits/visits.module').then( m => m.VisitsPageModule)
-},
-{
-	path: 'statistics',
-	// loadChildren: () => import('../../swimming-poolstatistics/statistics.module').then( m => m.StatisticsPageModule)
-},
+
 {
 	path: '',
 	redirectTo: 'tab/information',

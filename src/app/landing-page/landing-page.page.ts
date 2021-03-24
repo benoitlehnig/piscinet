@@ -35,7 +35,6 @@ export class LandingPagePage implements OnInit {
 	ionViewDidEnter(){
 		let beforeRevealSubscription = this.revealService.beforeReveal$.subscribe(
       (el: HTMLElement) => {
-        console.log(`beforeReveal of '<${el.nodeName}>.${el.className}'`);
       });
 		this.revealService.sync();
 

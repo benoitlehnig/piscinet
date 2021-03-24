@@ -1,0 +1,23 @@
+
+<ion-list>
+	<ion-item button [routerLink]="['piscinistPortal/customers/edit-customer' ,{ mode: 'update', uid:uid, customer:customerStringified }]" (click)="dismissPopover()">
+		<ion-icon name="pencil" ></ion-icon>
+		<span class="spanButton">{{'CUSTOMER.Edit' | translate}}</span>
+	</ion-item>
+	<ion-item button *ngIf="eligibilityToAddPool ===true" [routerLink]="['piscinistPortal/customers/'+uid+'/edit-swimming-pool',{ mode: 'add',customer:customerStringified}]" (click)="dismissPopover()">
+		<ion-icon name="add" ></ion-icon>
+		<span class="spanButton">{{'CUSTOMER.AddPool' | translate}}</span>
+	</ion-item>
+	<ion-item  button (click)="sendEmailUserCreation()" *ngIf="isActivated ===true">
+		<ion-icon name="mail-outline" ></ion-icon>
+		<span class="spanButton">{{'CUSTOMER.SendEmailForUserCreation' | translate}}</span>
+	</ion-item>
+	<ion-item  button (click)="activateAccount()" *ngIf="isActivated === false">
+		<ion-icon name="flash-outline" ></ion-icon>
+		<span class="spanButton">{{'CUSTOMER.ActivateAccount' | translate}}</span>
+	</ion-item>
+	<ion-item lines="none" button (click)="removeCustomer()">
+		<ion-icon name="trash" ></ion-icon>
+		<span class="spanButton">{{'CUSTOMER.Remove' | translate}}</span>
+	</ion-item>
+</ion-list>
