@@ -1,0 +1,90 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title *ngIf="mode === 'add'">{{'ADDCUSTOMER.TitleAdd' | translate}}</ion-title>
+		<ion-title *ngIf="mode === 'update'">{{'ADDCUSTOMER.TitleUpdate' | translate}}</ion-title>
+		<ion-buttons slot="end">
+			<ion-button color="secondary" fill="solid" (click)="cancel()" >
+				<span  class="spanButton">{{'ADDCUSTOMER.Cancel' | translate}}</span>
+			</ion-button>
+			<ion-button color="primary" fill="solid" (click)="submitForm()" >
+				<span *ngIf="mode === 'update'" class="spanButton">{{'ADDCUSTOMER.UpdateCustomer' | translate}}</span>
+				<span *ngIf="mode === 'add'"  class="spanButton">{{'ADDCUSTOMER.AddCustomer' | translate}}</span>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+	<ion-item>
+		<ion-label position="stacked">{{'ADDCUSTOMER.FirstName' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input  name="firstName" type="text" appTitleCase  autocapitalize="sentences" [(ngModel)]="customer.firstName"  required></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="stacked">{{'ADDCUSTOMER.LastName' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input  name="lastName" type="text" appTitleCase  autocapitalize="sentences" [(ngModel)]="customer.lastName" required></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="stacked">{{'CUSTOMER.ADDRESS' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="{{'COMMON.AddressSearch' | translate}}" required></ion-input>
+		<ion-list [hidden]="autocompleteItems.length == 0" class="autocomplete">
+			<ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)" lines="none">
+				{{ item.description }}
+			</ion-item>
+		</ion-list>
+	</ion-item>
+
+	<ion-item>
+		<ion-label position="stacked">{{'ADDCUSTOMER.MobilePhoneNumber' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+		<ion-input  name="telPhoneNumber" type="tel"  [(ngModel)]="customer.telPhoneNumber" required></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="stacked">{{'ADDCUSTOMER.FixedPhoneNumber' | translate}}</ion-label>
+		<ion-input  name="telFixNumber" type="tel" [(ngModel)]="customer.telFixNumber"  ></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="stacked">{{'ADDCUSTOMER.GardianPhoneMumber' | translate}}</ion-label>
+		<ion-input  name="guardianNumber" type="tel" [(ngModel)]="customer.guardianNumber"></ion-input>
+	</ion-item>
+	
+	<ion-item>
+		<ion-label position="stacked">{{'ADDCUSTOMER.Email' | translate}}</ion-label>
+		<ion-input name="email" type="email" pattern="email" [disabled]="(mode==='update' && (customer.userRecordUid!==''))" [(ngModel)]="customer.email"  ></ion-input>
+	</ion-item>
+
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<ion-radio-group name="typeOfContract" [(ngModel)]="typeOfContract" >
+					<ion-list-header>
+						<ion-label>{{'ADDCUSTOMER.ContractType' | translate}}</ion-label>
+					</ion-list-header>
+					<ion-item lines="none" *ngFor="let contractType of contractTypes">
+						<ion-label>{{contractType.text}}</ion-label>
+						<ion-radio slot="start" [value]="contractType.index"></ion-radio>
+					</ion-item>				
+				</ion-radio-group>
+			</ion-col>
+			<ion-col>
+				<ion-radio-group name="contractOfProduct" [(ngModel)]="contractOfProduct" >
+					<ion-list-header>
+						<ion-label>{{'ADDCUSTOMER.ContractTypeProduct' | translate}}</ion-label>
+					</ion-list-header>
+
+					<ion-item lines="none">
+						<ion-label>{{'ADDCUSTOMER.ContractTypeProductIncluded' | translate}}</ion-label>
+						<ion-radio slot="start" value="included"></ion-radio>
+					</ion-item>
+
+					<ion-item lines="none">
+						<ion-label>{{'ADDCUSTOMER.ContractTypeProductNotIncluded' | translate}}</ion-label>
+						<ion-radio slot="start" value="notIncluded"></ion-radio>
+					</ion-item>
+				</ion-radio-group>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

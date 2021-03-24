@@ -41,11 +41,6 @@ const routes: Routes = [
   canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminEmployeeOnly },
 },
 {
-  path: 'employees',
-  loadChildren: () => import('./employees/employees.module').then( m => m.EmployeesPageModule),
-  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminOnly }
-},
-{
   path: 'visits',
   loadChildren: () => import('./visits/visits.module').then( m => m.VisitsPageModule),
   canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminEmployeeOnly },
@@ -71,7 +66,14 @@ const routes: Routes = [
   loadChildren: () => import('./customer-portal/customer-portal.module').then( m => m.CustomerPortalPageModule),
   canActivate: [AngularFireAuthGuard],data: { authGuardPipe: customerOnly }
 
+},
+{
+  path: 'piscinistPortal',
+  loadChildren: () => import('./piscinit-portal/piscinit-portal.module').then( m => m.PiscinitPortalPageModule),
+  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminEmployeeOnly },
+
 }
+
 
 ];
 

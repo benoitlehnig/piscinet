@@ -1,0 +1,45 @@
+.contractOfProduct{
+	margin-left:1em;
+}
+
+.options{
+	float:left;
+	height:68px;
+	color:#FFFFFF;
+	padding-top:20px;
+	text-align: center;
+	ion-icon{
+		font-size:2em;
+	}
+	.visitType{
+		width: 70px;
+		
+	}
+}
+.optionFull{
+	background-color:var(--ion-color-primary)
+}
+.optionFull:hover{
+	background-color:var(--ion-color-primary-tint);
+	cursor: pointer
+}
+
+.optionControle{
+	background-color:var(--ion-color-secondary);
+}
+.optionControle{
+	background-color:var(--ion-color-secondary-tint);
+	cursor: pointer
+}
+.optionMaintenance{
+	background-color:var(--ion-color-success-tint);
+	cursor: pointer;
+}
+.noPool{
+	border-bottom:1px solid var(--ion-color-medium-tint);
+}
+
+.message{
+	--background:var(--ion-color-primary);
+	color:var(--ion-color-primary-contrast);
+}

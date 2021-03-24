@@ -55,7 +55,7 @@ export class AuthenticationService {
 								})
 						}
 						if(this.claims['admin'] ===true || this.claims['employee'] ===true || this.claims['superAdmin'] ===true){
-							this.router.navigateByUrl('/customers');
+							this.router.navigateByUrl('/piscinistPortal');
 						}
 					})
 			} else {

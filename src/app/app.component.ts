@@ -30,14 +30,9 @@ import { Subscription }   from 'rxjs';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public selectedIndex = 0;
-  public isUserLogged:boolean= false;
+ 
   public uid;
-  public displayName;
-  public claims:any={email: ''};
-  public appPages =[];
-  public isOnline:boolean=true;
-  public offlineVisits=[];
+
 
   private popupOpenSubscription: Subscription;
   private popupCloseSubscription: Subscription;
@@ -85,21 +80,7 @@ export class AppComponent implements OnInit {
       console.log("desktop",this.platform.is('desktop'))
       console.log("pwa",this.platform.is('pwa'))
       console.log("mobileweb",this.platform.is('mobileweb'))
-      this.onlineCheckService.onlineCheck().subscribe(isOnline => {
-        this.isOnline = isOnline;
-        this.storage.get('offlineVisits').then(
-          data =>{
-            if(data !==null){
-              this.dataSharingService.offlineVisitNumberDataChanges( JSON.parse(data));
-            }
-          });
-        this.dataSharingService.currentOfflineVisitNumberChanges.subscribe(data => {
-          if(data !==null){
-            this.offlineVisits = data
-          }
-        });
-      });
-
+      
     });
   }
 
@@ -110,47 +91,24 @@ export class AppComponent implements OnInit {
         if(data){
 
           this.uid = data.uid;
-          this.isUserLogged =true;
-          this.displayName = data.email;
           data.getIdTokenResult().then(
             result=> {
-              this.claims = result.claims;
               if(data.metadata.lastSignInTime ==='' || data.metadata.lastSignInTime===null){
                 this.presentGDPRPopover();
               }
 
 
-              if(this.claims['admin'] ===true){
-                this.appPages = this.appConstants.appAdminPages;
-              }
-              if(this.claims['employee'] ===true){
-                this.appPages = this.appConstants.appEmployeePages;
-              }
-              if(this.claims['superAdmin'] ===true){
-                this.appPages = this.appConstants.appASuperAdminPages;
-              }
-              this.selectTabNavigation();
+              
               this.requestPermission();
             })
         }
         else{
-          this.isUserLogged =false;
         }
       }
       );
 
   }
-
-  selectTabNavigation(){
-    const path = window.location.pathname;
-    if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(page => page.url.toLowerCase() === path.toLowerCase().split("/")[1]);
-    }
-  }
-
-  logout(){
-    this.authService.logoutUser();
-  }
+ 
 
 
   requestPermission() {

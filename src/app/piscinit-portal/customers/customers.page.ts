@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../services/authentication.service';
-import { DataSharingService } from '../services/data-sharing.service'
-import { CustomerService } from '../services/customer.service'
+import { AuthenticationService } from '../../services/authentication.service';
+import { DataSharingService } from '../../services/data-sharing.service'
+import { CustomerService } from '../../services/customer.service'
 import { Subscription } from 'rxjs';
 
 

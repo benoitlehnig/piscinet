@@ -9,27 +9,27 @@ export class AppConstants {
 
 	{
 		title: 'Customers',
-		url: 'customers',
+		url: 'piscinistPortal/customers',
 		icon: 'person'
 	},
 	{
 		title: 'Visits',
-		url: 'visits',
+		url: 'piscinistPortal/visits',
 		icon: 'shield-checkmark'
 	},
 	{
 		title: 'Employes',
-		url: 'employees',
+		url: 'piscinistPortal/employees',
 		icon: 'people-circle'
 	},
 	{
 		title: 'Alarms',
-		url: 'alarms',
+		url: 'piscinistPortal/alarms',
 		icon: 'notifications'
 	},
 	{
 		title: 'Admin',
-		url: 'admin',
+		url: 'piscinistPortal/admin',
 		icon: 'hammer'
 	}
 	];
@@ -37,32 +37,32 @@ export class AppConstants {
 
 	{
 		title: 'Customers',
-		url: 'customers',
+		url: 'piscinistPortal/customers',
 		icon: 'person'
 	},
 	{
 		title: 'Visits',
-		url: 'visits',
+		url: 'piscinistPortal/visits',
 		icon: 'shield-checkmark'
 	},
 	{
 		title: 'Employes',
-		url: 'employees',
+		url: 'piscinistPortal/employees',
 		icon: 'people-circle'
 	},
 	{
 		title: 'Alarms',
-		url: 'alarms',
+		url: 'piscinistPortal/alarms',
 		icon: 'notifications'
 	},
 	{
 		title: 'Admin',
-		url: 'admin',
+		url: 'piscinistPortal/admin',
 		icon: 'hammer'
 	},
 	{
 		title: 'SuperAdmin',
-		url: 'super-admin',
+		url: 'piscinistPortal/super-admin',
 		icon: 'barbell'
 	}
 	];
@@ -86,13 +86,13 @@ export class AppConstants {
 	public appEmployeePages = [
 	{
 		title: 'Customers',
-		url: 'customers',
+		url: 'piscinistPortal/customers',
 		icon: 'person'
 	},
 
 	{
 		title: 'Visits',
-		url: 'visits',
+		url: 'piscinistPortal/visits',
 		icon: 'shield-checkmark'
 	}
 	];
