@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
-import {Customer} from '../../models/customer';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { Subscription } from 'rxjs';
+
+
+import { AuthenticationService } from '../../services/authentication.service';
+import {Customer} from '../../models/customer';
 import { DataSharingService } from '../../services/data-sharing.service'
+
 
 
 @Component({
@@ -16,6 +20,9 @@ export class MyProfilePage implements OnInit {
 	public uid:string="";
 	public customer:Customer=new Customer();
 	public receivePushNotif:boolean=false;
+
+	public customerChangesSub: Subscription = new Subscription();
+
 
 	constructor( 
 		public authService:AuthenticationService,
@@ -32,18 +39,17 @@ export class MyProfilePage implements OnInit {
 	}
 
 	ionViewWillEnter(){
-		this.dataSharingService.getCustomerChanges().subscribe(
-			data=>{
-				if(data){
-					console.log("ionViewWillEnter", data.data)
-					this.customer = data.data
-				}
-				
+		this.customerChangesSub = this.dataSharingService.getCustomerChanges().subscribe(
+			data =>{
+				this.customer = data.data;
 			})
-
 	}
+
+	ionViewWillLeave(){
+		this.customerChangesSub.unsubscribe();
+	}
+
 	updatePushNotifRequest(){
-		console.log(" this.receivePushNotif" ,this.receivePushNotif);
 		if(this.receivePushNotif ===false){
 
 		}
@@ -52,7 +58,6 @@ export class MyProfilePage implements OnInit {
 		}
 	}
 	requestPermission() {
-
 		this.afMessaging.requestToken
 		.subscribe(
 			(token) => { 

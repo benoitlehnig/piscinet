@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { Subscription }   from 'rxjs';
 
-import {CmsServicesService} from '../../services/cms-services.service';
+import {CmsService} from '../../services/cms.service';
 
 @Component({
 	selector: 'app-cgu',
@@ -17,7 +17,7 @@ export class CGUPage implements OnInit {
 
 
 	constructor(
-		public cmsServicesService:CmsServicesService
+		public cmsServicesService:CmsService
 		) { }
 
 	ngOnInit() {

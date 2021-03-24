@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
 	providedIn: 'root'
 })
-export class CmsServicesService {
+export class CmsService {
 
 	constructor(
 		private afs: AngularFirestore

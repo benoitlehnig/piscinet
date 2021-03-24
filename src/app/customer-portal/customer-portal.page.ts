@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {AppConstants } from '../app-constants';
 import { Router } from '@angular/router';
-import {Customer} from '../models/customer';
 import { Subscription } from 'rxjs';
+
+import {Customer} from '../models/customer';
+import {AppConstants } from '../app-constants';
 import {DataSharingService} from '../services/data-sharing.service';
 import {CustomerService} from '../services/customer.service';
 import { AuthenticationService } from '../services/authentication.service';

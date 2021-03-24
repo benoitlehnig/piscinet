@@ -40,9 +40,11 @@ const routes: Routes = [
   path: 'piscinistPortal',
   loadChildren: () => import('./piscinist-portal/piscinist-portal.module').then( m => m.PiscinistPortalPageModule),
   canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminEmployeeOnly },
+},
+{
+  path: 'common-pages',
+  loadChildren: () => import('./common-pages/common-pages.module').then( m => m.CommonPagesPageModule)
 }
-
-
 ];
 
 @NgModule({

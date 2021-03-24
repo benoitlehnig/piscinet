@@ -68,14 +68,14 @@ export class AppConstants {
 	];
 	public appCustomerPages = [
 	{
-		title: 'myPools',
-		url: 'customerPortal/pools',
-		icon: 'tablet-landscape'
-	},
-	{
 		title: 'MyProfile',
 		url: 'customerPortal/profile',
 		icon: 'person'
+	},
+	{
+		title: 'myPools',
+		url: 'customerPortal/pools',
+		icon: 'tablet-landscape'
 	},
 	{
 		title: 'Contact',

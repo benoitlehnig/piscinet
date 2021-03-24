@@ -14,6 +14,7 @@ export class VisitsPage implements OnInit {
 	public visits;
 	public poolId:string;
 	public uid:string;
+	public routerLink:string="";
 
 	constructor(
 		public visitService: VisitService,
