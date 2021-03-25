@@ -197,20 +197,20 @@ export class CustomerPage implements OnInit {
 	}
 
 	async presentActionSheet(swimmingPool) {
+		const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
+
 		let buttons= [{
 			text: this.visitTypesText['full'].Long,
 			icon: 'shield-checkmark',
 			handler: () => {
-				const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
-				this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
+				this.router.navigate(['piscinistPortal/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
 					swimmingPoolName:swimmingPool.name,visitType:'full',swimmingPoolStringified:swimmingPoolStringified }])
 			}
 		}, {
 			text:  this.visitTypesText['maintenance'].Long,
 			icon: 'shield-checkmark',
 			handler: () => {
-				const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
-				this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
+				this.router.navigate(['piscinistPortal/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
 					swimmingPoolName:swimmingPool.name,visitType:'maintenance',swimmingPoolStringified:swimmingPoolStringified }])
 			}
 		},
@@ -227,8 +227,7 @@ export class CustomerPage implements OnInit {
 				text:  this.visitTypesText['technical'].Long,
 				icon: 'shield-checkmark',
 				handler: () => {
-					const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
-					this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
+					this.router.navigate(['piscinistPortal/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
 						swimmingPoolName:swimmingPool.name,visitType:'technical',swimmingPoolStringified:swimmingPoolStringified }])
 				}
 			}, 
@@ -246,8 +245,7 @@ export class CustomerPage implements OnInit {
 				text:  this.visitTypesText['adhoc'].Long,
 				icon: 'shield-checkmark',
 				handler: () => {
-					const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
-					this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
+					this.router.navigate(['piscinistPortal/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
 						swimmingPoolName:swimmingPool.name,visitType:'adhoc',swimmingPoolStringified:swimmingPoolStringified }])
 				}
 			}, 

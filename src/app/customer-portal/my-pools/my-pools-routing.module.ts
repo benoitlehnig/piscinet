@@ -4,14 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { MyPoolsPage } from './my-pools.page';
 
 const routes: Routes = [
-{
-	path: '',
-	component: MyPoolsPage,
-	
-},
 
 {
-	path: ':sid',
+	path: '',
 	component: MyPoolsPage,
 	children: [
 	{

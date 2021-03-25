@@ -32,8 +32,6 @@ export class VisitsPage implements OnInit {
   public customerChangesSub: Subscription = new Subscription();
   public poolChangesSub: Subscription = new Subscription();
 
-
-
   constructor(
     public visitService: VisitService,
     public activatedRoute:ActivatedRoute,
@@ -43,7 +41,6 @@ export class VisitsPage implements OnInit {
     public poolServicesService: PoolServicesService,
     public dataSharingService:DataSharingService,
     public router:Router
-
     ) 
   { }
 

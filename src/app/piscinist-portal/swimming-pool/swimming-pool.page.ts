@@ -11,6 +11,9 @@ import { CustomerService } from '../../services/customer.service';
 import { PoolServicesService } from '../../services/pool-services.service';
 
 
+import { Subscription } from 'rxjs';
+
+
 @Component({
 	selector: 'app-swimming-pool',
 	templateUrl: './swimming-pool.page.html',
@@ -28,6 +31,14 @@ export class SwimmingPoolPage implements OnInit {
 	public visitTypeFullText:string = "";
 	public visitTypeMaintenanceText:string = "";
 	public newVisitCancelText:string = "";
+
+		public visitTypesText=[];
+
+
+
+	public customerChangesSub: Subscription = new Subscription();
+	public poolChangesSub: Subscription = new Subscription();
+
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -48,8 +59,10 @@ export class SwimmingPoolPage implements OnInit {
 	}
 
 	ionViewWillEnter(){
-		this.translateService.get(['VISIT.VisitTypeFullButton', 'VISIT.VisitTypeControlButton', 'VISIT.VisitTypeMaintenanceButton','CUSTOMER.VisitTypeFull','CUSTOMER.VisitTypeMaintenance','CUSTOMER.NewVisitCancel']).subscribe(
+		this.translateService.get(['VISIT.TYPES','VISIT.VisitTypeFullButton', 'VISIT.VisitTypeControlButton', 'VISIT.VisitTypeMaintenanceButton','CUSTOMER.VisitTypeFull','CUSTOMER.VisitTypeMaintenance','CUSTOMER.NewVisitCancel']).subscribe(
 			value => {
+				this.visitTypesText = value['VISIT.TYPES'];
+
 				this.visitTypeText.visitTypeFull = value['VISIT.VisitTypeFullButton'];
 				this.visitTypeText.visitTypeTechnical = value['VISIT.VisitTypeTechnicalButton'];
 				this.visitTypeText.visitTypeMaintenance = value['VISIT.VisitTypeMaintenanceButton'];
@@ -60,41 +73,58 @@ export class SwimmingPoolPage implements OnInit {
 		
 		this.uid = this.activatedRoute.snapshot.paramMap.get('id')
 		this.poolId = this.activatedRoute.snapshot.paramMap.get('sid');
-		this.customerService.getCustomer(this.uid).subscribe(
+		this.customerChangesSub = this.customerService.getCustomer(this.uid).subscribe(
 			(data) =>{
 				this.customer = data;
 				this.customerStringified = JSON.stringify(data);
 			})
-		this.poolServicesService.getSwimmingPool(this.poolId).subscribe(
+		this.poolChangesSub = this.poolServicesService.getSwimmingPool(this.poolId).subscribe(
 			(data) =>{
 				this.swimmingPool = data;
 				this.swimmingPoolStringified = JSON.stringify(this.swimmingPool);
 				this.dataSharingService.currentPool({uid:this.uid, poolId:this.poolId,swimmingPool:this.swimmingPool })
 			})
 	}
+	ionViewWillLeave(){
+		this.customerChangesSub.unsubscribe();
+		this.poolChangesSub.unsubscribe();
+	}
 
 
 	async presentActionSheet() {
-		const actionSheet = await this.actionSheetController.create({
-			header: 'Nouvelle visite',
-			cssClass: 'my-custom-class',
-			buttons: [{
-				text: this.visitTypeFullText,
+		let buttons= [{
+			text: this.visitTypesText['full'].Long,
+			icon: 'shield-checkmark',
+			handler: () => {
+				this.router.navigate(['piscinistPortal/customers/'+this.uid+'/swimming-pool/' +this.poolId+'/add-visit',{ mode: 'add', customer: this.customerStringified,
+					swimmingPoolName:this.swimmingPool.name,visitType:'full',swimmingPoolStringified:this.swimmingPoolStringified }])
+			}
+		}, {
+			text:  this.visitTypesText['maintenance'].Long,
+			icon: 'shield-checkmark',
+			handler: () => {
+				this.router.navigate(['piscinistPortal/customers/'+this.uid+'/swimming-pool/' +this.poolId+'/add-visit',{ mode: 'add', customer: this.customerStringified,
+					swimmingPoolName:this.swimmingPool.name,visitType:'maintenance',swimmingPoolStringified:this.swimmingPoolStringified }])
+			}
+		},
+		{
+			text: this.newVisitCancelText,
+			icon: 'close',
+			role: 'cancel',
+			handler: () => {
+				console.log('Cancel clicked');
+			}
+		}];
+		if(this.customer.typeOfContract === "technical"){
+			buttons =[{
+				text:  this.visitTypesText['technical'].Long,
 				icon: 'shield-checkmark',
 				handler: () => {
-					
-					this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +this.poolId+'/add-visit',{ mode: 'add', customer: this.customerStringified,
-						swimmingPoolName:this.swimmingPool.name,visitType:'full',swimmingPoolStringified:this.swimmingPoolStringified }])
+					this.router.navigate(['piscinistPortal/customers/'+this.uid+'/swimming-pool/' +this.poolId+'/add-visit',{ mode: 'add', customer: this.customerStringified,
+						swimmingPoolName:this.swimmingPool.name,visitType:'technical',swimmingPoolStringified:this.swimmingPoolStringified }])
 				}
-			}, {
-				text:  this.visitTypeMaintenanceText,
-				icon: 'shield-checkmark',
-				handler: () => {
-						this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +this.poolId+'/add-visit',{ mode: 'add', customer: this.customerStringified,
-						swimmingPoolName:this.swimmingPool.name,visitType:'maintenance',swimmingPoolStringified:this.swimmingPoolStringified }])
-				}
-			},
-			 {
+			}, 
+			{
 				text: this.newVisitCancelText,
 				icon: 'close',
 				role: 'cancel',
@@ -102,6 +132,29 @@ export class SwimmingPoolPage implements OnInit {
 					console.log('Cancel clicked');
 				}
 			}]
+		}
+		if(this.customer.typeOfContract === "seasonal"){
+			buttons =[{
+				text:  this.visitTypesText['adhoc'].Long,
+				icon: 'shield-checkmark',
+				handler: () => {
+					this.router.navigate(['piscinistPortal/customers/'+this.uid+'/swimming-pool/' +this.poolId+'/add-visit',{ mode: 'add', customer: this.customerStringified,
+						swimmingPoolName:this.swimmingPool.name,visitType:'adhoc',swimmingPoolStringified:this.swimmingPoolStringified }])
+				}
+			}, 
+			{
+				text: this.newVisitCancelText,
+				icon: 'close',
+				role: 'cancel',
+				handler: () => {
+					console.log('Cancel clicked');
+				}
+			}]
+		}
+		const actionSheet = await this.actionSheetController.create({
+			header: 'Nouvelle visite',
+			cssClass: 'my-custom-class',
+			buttons: buttons
 		});
 		await actionSheet.present();
 	}

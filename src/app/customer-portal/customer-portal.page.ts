@@ -39,7 +39,6 @@ export class CustomerPortalPage implements OnInit {
 		this.appPages = this.appConstants.appCustomerPages;
 		this.customerChangesSub = this.customerService.getCustomerChanges().subscribe(
 			data =>{
-				console.log("customer", data)
 				this.customer = data.data;
 			})
 	}
