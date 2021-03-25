@@ -135,7 +135,7 @@ export class AddVisitPage implements OnInit {
 					const callable = this.functions.httpsCallable('addVisit');
 					const obs = callable(visit);
 					obs.subscribe(res => {
-						this.navCtrl.navigateRoot(['customers/'+this.newVisit.customerUid +'/swimming-pool/'+this.newVisit.poolId]);
+						this.navCtrl.navigateRoot(['piscinistPortal/customers/'+this.newVisit.customerUid +'/swimming-pool/'+this.newVisit.poolId]);
 						this.presentToast();
 						this.loading.dismiss();
 						sub.unsubscribe();
@@ -168,7 +168,9 @@ export class AddVisitPage implements OnInit {
 					const callable = this.functions.httpsCallable('updateVisit');
 					const obs = callable(visitToUpdate);
 					obs.subscribe(res => {
-						this.navCtrl.navigateRoot(['customers/'+this.newVisit.customerUid +'/swimming-pool/'+this.newVisit.poolId]);
+						this.modalController.dismiss();
+
+						this.navCtrl.navigateRoot(['piscinistPortal/customers/'+this.newVisit.customerUid +'/swimming-pool/'+this.newVisit.poolId]);
 						this.presentToast();
 						sub.unsubscribe();
 						this.loading.dismiss();

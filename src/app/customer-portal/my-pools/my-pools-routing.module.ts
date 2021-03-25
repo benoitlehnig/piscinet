@@ -5,7 +5,13 @@ import { MyPoolsPage } from './my-pools.page';
 
 const routes: Routes = [
 {
-	path: 'tab',
+	path: '',
+	component: MyPoolsPage,
+	
+},
+
+{
+	path: ':sid',
 	component: MyPoolsPage,
 	children: [
 	{
@@ -13,7 +19,7 @@ const routes: Routes = [
 		children: [
 		{
 			path: '',
-			loadChildren: () => import('../../piscinist-portal/swimming-pool/information/information.module').then( m => m.InformationPageModule)
+			loadChildren: () => import('../../common-pages/swimming-pool-read-only/information/information.module').then( m => m.InformationPageModule)
 		}
 		]
 	},
@@ -22,17 +28,16 @@ const routes: Routes = [
 		children: [
 		{
 			path: '',
-			loadChildren: () => import('../../piscinist-portal/swimming-pool/visits/visits.module').then( m => m.VisitsPageModule)
+			loadChildren: () => import('../../common-pages/swimming-pool-read-only/visits/visits.module').then( m => m.VisitsPageModule)
 		}
 		]
-	}
+	},
+	{
+		path: '',
+		redirectTo: 'information',
+		pathMatch: 'full'
+	},
 	]
-},
-
-{
-	path: '',
-	redirectTo: 'tab/information',
-	pathMatch: 'full'
 }
 ];
 

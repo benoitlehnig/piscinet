@@ -44,7 +44,11 @@ const routes: Routes = [
 {
   path: 'common-pages',
   loadChildren: () => import('./common-pages/common-pages.module').then( m => m.CommonPagesPageModule)
-}
+},  {
+    path: 'swimming-pool-read-only',
+    loadChildren: () => import('./common/swimming-pool-read-only/swimming-pool-read-only.module').then( m => m.SwimmingPoolReadOnlyPageModule)
+  }
+
 ];
 
 @NgModule({

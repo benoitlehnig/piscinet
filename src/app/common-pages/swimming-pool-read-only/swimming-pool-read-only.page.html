@@ -1,0 +1,18 @@
+<ion-tabs >
+	<ion-tab-bar slot="top" class="marginForFabButton">
+		<ion-tab-button tab="information" selected >
+			<ion-icon name="information-circle"></ion-icon>
+			<ion-label>{{'SWIMMINGPOOL.Information' | translate}} </ion-label>
+		</ion-tab-button>
+
+		<ion-tab-button tab="visits"> 
+			<ion-icon name="shield-checkmark"></ion-icon>
+			<ion-label>{{'SWIMMINGPOOL.Visits' | translate}} </ion-label>
+			<ion-badge color="primary">{{swimmingPool.numberOfVisits}}</ion-badge>
+		</ion-tab-button>
+		<ion-tab-button tab="statistics"> 
+			<ion-icon name="bar-chart"></ion-icon>
+			<ion-label>{{'SWIMMINGPOOL.Statistics' | translate}} </ion-label>
+		</ion-tab-button>
+	</ion-tab-bar>
+</ion-tabs>

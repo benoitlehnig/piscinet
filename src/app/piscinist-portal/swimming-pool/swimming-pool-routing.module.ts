@@ -13,7 +13,8 @@ const routes: Routes = [
 		children: [
 		{
 			path: '',
-			loadChildren: () => import('./information/information.module').then( m => m.InformationPageModule)
+			loadChildren: () => import('../../common-pages/swimming-pool-read-only/information/information.module').then( m => m.InformationPageModule)
+
 		}
 		]
 	},
@@ -22,7 +23,7 @@ const routes: Routes = [
 		children: [
 		{
 			path: '',
-			loadChildren: () => import('./visits/visits.module').then( m => m.VisitsPageModule)
+			loadChildren: () => import('../../common-pages/swimming-pool-read-only/visits/visits.module').then( m => m.VisitsPageModule)
 		}
 		]
 	},   

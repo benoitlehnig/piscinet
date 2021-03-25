@@ -91,7 +91,7 @@ export class AddSwimmingPoolPage implements OnInit {
 			this.presentToast();
 			this.loading.dismiss();
 			this.storage.set('currentPool',{uid:this.uid, poolId:this.poolId,swimmingPool:this.swimmingPool }); 
-			this.navCtrl.navigateRoot(['/customers/'+this.uid+'/swimming-pool/'+this.poolId]);
+			this.navCtrl.navigateRoot(['/piscinistPortal/customers/'+this.uid+'/swimming-pool/'+this.poolId]);
 		});
 		
 	}

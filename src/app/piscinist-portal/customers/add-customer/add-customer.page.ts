@@ -75,12 +75,12 @@ export class AddCustomerPage implements OnInit {
 					})
 			}
 		});
-		this.translateService.get(['ADDCUSTOMER.SuccessAdd', 'ADDCUSTOMER.SuccessUpdate','COMMON.Loading,CUSTOMER.CONTRACTTYPES']).subscribe(
+		this.translateService.get(['ADDCUSTOMER.SuccessAdd', 'ADDCUSTOMER.SuccessUpdate','COMMON.Loading','CUSTOMER.CONTRACTTYPES']).subscribe(
 			value => {
 				this.successAddText = value['ADDCUSTOMER.SuccessAdd']
 				this.successUpdateText = value['ADDCUSTOMER.SuccessUpdate'];
 				this.loadingText = value['COMMON.Loading'];
-				this.contractTypes = this.returnArray(value);
+				this.contractTypes = this.returnArray(value['CUSTOMER.CONTRACTTYPES']);
 
 			});
 	}

@@ -15,7 +15,7 @@ const routes: Routes = [
     children: [
     {
       path: '',
-      loadChildren: () => import('./general/general.module').then( m => m.GeneralPageModule)
+      loadChildren: () => import('../../../common-pages/visit-read-only/general/general.module').then( m => m.GeneralPageModule)
     }
     ]
   },
@@ -24,7 +24,8 @@ const routes: Routes = [
     children: [
     {
       path: '',
-      loadChildren: () => import('./maintenance/maintenance.module').then( m => m.MaintenancePageModule)
+      loadChildren: () => import('../../../common-pages/visit-read-only/maintenance/maintenance.module').then( m => m.MaintenancePageModule)
+
     }
     ]
   },
@@ -33,7 +34,7 @@ const routes: Routes = [
     children: [
     {
       path: '',
-      loadChildren:  () => import('./observation/observation.module').then( m => m.ObservationPageModule)
+      loadChildren: () => import('../../../common-pages/visit-read-only/observation/observation.module').then( m => m.ObservationPageModule)
     }
     ]
   },
@@ -42,7 +43,7 @@ const routes: Routes = [
     children: [
     {
       path: '',
-      loadChildren: () => import('./technical/technical.module').then( m => m.TechnicalPageModule)
+      loadChildren: () => import('../../../common-pages/visit-read-only/technical/technical.module').then( m => m.TechnicalPageModule)
     }
     ]
   },

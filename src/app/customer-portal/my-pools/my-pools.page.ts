@@ -5,6 +5,9 @@
 	import { DataSharingService } from '../../services/data-sharing.service'
 	import { CustomerService } from '../../services/customer.service'
 	import { PoolServicesService } from '../../services/pool-services.service'
+	import { Router } from '@angular/router';
+
+
 
 	@Component({
 		selector: 'app-my-pools',
@@ -24,43 +27,41 @@
 			public authService:AuthenticationService,
 			public customerService: CustomerService,
 			public poolServicesService: PoolServicesService,
-			public dataSharingService:DataSharingService
+			public dataSharingService:DataSharingService,
+			private router: Router
+
 
 			) { }
 
 		ngOnInit() {
-			this.authService.user.subscribe(
-				result =>
-				{
-					if(result){
-						this.uid = result.uid;
-						this.dataSharingService.getCustomerChanges().subscribe(
-							(data) =>{
-								console.log("customer", data)
-								if(data){
-									this.swimmingPools = this.customerService.getCustomerPools(data.key);
-									this.swimmingPools.subscribe(
-										swimmingPools=>{
-											console.log("swimmingPools, ", swimmingPools)
-											if( swimmingPools[0]){
-												this.selectedSwimmingPool = swimmingPools[0];
-												this.selectedSwimmingPoolKey = swimmingPools[0].key;
-												this.selectedSwimmingPoolName = this.selectedSwimmingPool.data.name;
-												this.dataSharingService.currentPool({uid:this.uid, poolId:this.selectedSwimmingPoolKey,swimmingPool:this.selectedSwimmingPool.data })
-												if(swimmingPools.length > 1){
-													this.mode ='multiple';
-												}
-											}
-										});
-								}
-							})
-						
-					}
-				})
+			
 		}
 
 
 		ionViewWillEnter(){
+			this.dataSharingService.getCustomerChanges().subscribe(
+				(data) =>{
+					this.uid = data.ukeyid;
+					console.log("customer", data)
+					if(data){
+						this.swimmingPools = this.customerService.getCustomerPools(data.key);
+						this.swimmingPools.subscribe(
+							swimmingPools=>{
+								console.log("swimmingPools, ", swimmingPools)
+								if( swimmingPools[0]){
+									this.selectedSwimmingPool = swimmingPools[0];
+									this.selectedSwimmingPoolKey = swimmingPools[0].key;
+
+									this.selectedSwimmingPoolName = this.selectedSwimmingPool.data.name;
+									this.router.navigate(['/customerPortal/pools/'+this.selectedSwimmingPoolKey])
+									this.dataSharingService.currentPool({uid:this.uid, poolId:this.selectedSwimmingPoolKey,swimmingPool:this.selectedSwimmingPool.data })
+									if(swimmingPools.length > 1){
+										this.mode ='multiple';
+									}
+								}
+							});
+					}
+				})
 			
 
 		}
