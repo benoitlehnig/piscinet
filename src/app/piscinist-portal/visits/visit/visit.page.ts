@@ -158,7 +158,7 @@ export class VisitPage implements OnInit {
 			const callable = this.functions.httpsCallable('addVisit');
 			const obs = callable(this.visit);
 			obs.subscribe(res => {
-				this.navCtrl.navigateRoot(['customers/'+this.visit.customerUid +'/swimming-pool/'+this.visit.poolId]);
+				this.navCtrl.navigateRoot(['piscinistPortal/customers/'+this.visit.customerUid +'/swimming-pool/'+this.visit.poolId]);
 				this.storage.get('offlineVisits').then(
 					data =>{
 						const outputArray = []
@@ -196,6 +196,7 @@ export class VisitPage implements OnInit {
 		});
 		return await modal.present();
 	}
+	
 	selectCustomer(customerUid, poolId){
 		this.modalController.dismiss();
 		this.visit.customerUid = customerUid;

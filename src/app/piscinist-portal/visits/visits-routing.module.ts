@@ -13,13 +13,13 @@ const routes: Routes = [
 	loadChildren: () => import('./add-visit/add-visit.module').then( m => m.AddVisitPageModule),
 },
 {
+  path: 'offlineVisits',
+  loadChildren: () => import('./offline-visits/offline-visits.module').then( m => m.OfflineVisitsPageModule),
+},
+{
 	path: ':vid',
 	loadChildren: () => import('./visit/visit.module').then( m => m.VisitPageModule),
 
-},
-{
-  path: 'offlineVisits',
-  loadChildren: () => import('./offline-visits/offline-visits.module').then( m => m.OfflineVisitsPageModule),
 },
 ];
 

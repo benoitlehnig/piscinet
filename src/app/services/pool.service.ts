@@ -3,6 +3,7 @@ import { AngularFireDatabase, AngularFireList,AngularFireObject  } from '@angula
 import { Observable, combineLatest, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 import { uniq, flatten } from 'lodash'
+
 import {SwimmingPool} from '../models/swimming-pool';
 import {DataSharingService} from './data-sharing.service';
 
@@ -20,7 +21,6 @@ export class PoolService {
 		) { 
 		this.dataSharingService.getAccoundIDChanges().subscribe(
 			data=>{
-				console.log("accountId",data);
 				if(data !==null){
 					if(data['accountId'] !== null){
 						this.accountId=data;

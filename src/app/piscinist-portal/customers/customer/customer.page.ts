@@ -168,7 +168,7 @@ export class CustomerPage implements OnInit {
 			duration: 5000
 		});
 		this.loading.present();
-		this.navCtrl.navigateRoot(['customers/']);
+		this.navCtrl.navigateRoot(['piscinistPortal/customers/']);
 
 		const callable = this.functions.httpsCallable('deleteCustomer');
 		const obs = callable(customer);
@@ -190,11 +190,6 @@ export class CustomerPage implements OnInit {
 		toast.present();
 	}
 
-	startVisit(type:string,swimmingPool){
-		const swimmingPoolStringified = JSON.stringify(swimmingPool.data);
-		this.router.navigate(['/customers/'+this.uid+'/swimming-pool/' +swimmingPool.key+'/add-visit',{ mode: 'add', customer: this.customerStringified,
-			swimmingPoolName:swimmingPool.name,visitType:type,swimmingPoolStringified:swimmingPoolStringified }])
-	}
 
 	async presentActionSheet(swimmingPool) {
 		const swimmingPoolStringified = JSON.stringify(swimmingPool.data);

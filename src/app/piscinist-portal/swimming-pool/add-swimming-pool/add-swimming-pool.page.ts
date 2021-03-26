@@ -78,7 +78,7 @@ export class AddSwimmingPoolPage implements OnInit {
 		const obs = callable(this.swimmingPool);
 		obs.subscribe(res => {
 			this.presentToast();
-			this.navCtrl.navigateRoot(['customers/'+this.uid]);
+			this.navCtrl.navigateRoot(['piscinistPortal/customers/'+this.uid]);
 			this.loading.dismiss();
 		});	
 	}

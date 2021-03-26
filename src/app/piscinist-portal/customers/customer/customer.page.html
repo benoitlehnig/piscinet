@@ -38,17 +38,7 @@
 			<ion-label>
 				<h2 >{{swimmingPool.data.name}} <ion-badge color="secondary">{{swimmingPool.data.numberOfVisits}} {{'CUSTOMER.VisitsPerfomed' | translate}}</ion-badge></h2>
 				<h3><ion-text  color="primary" *ngIf="swimmingPool.data.lastVisitDate != ''">Derniere visite effectuee le {{swimmingPool.data.lastVisitDate | date:'mediumDate'}}</ion-text></h3>
-				<div class="ion-hide">
-					<ion-button color="primary"  (click)="startVisit('full',swimmingPool)">
-						<ion-icon name="add" ></ion-icon>
-						<div class="visitType">{{'CUSTOMER.VisitTypeFull' | translate}}</div>
-					</ion-button>
-
-					<ion-button color="success" (click)="startVisit('maintenance',swimmingPool)">	
-						<ion-icon name="add"></ion-icon>
-						<div class="visitType">{{'CUSTOMER.VisitTypeMaintenance' | translate}}</div>
-					</ion-button>
-				</div>
+	
 				<ion-button color="primary"  (click)="presentActionSheet(swimmingPool)">
 					<ion-icon name="add" ></ion-icon>
 					<div class="visitType">{{'CUSTOMER.NewVisit' | translate}}</div>

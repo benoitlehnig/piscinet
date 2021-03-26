@@ -154,7 +154,7 @@ export class AddVisitPage implements OnInit {
 						}
 						this.loading.dismiss();
 						sub.unsubscribe();
-						this.navCtrl.navigateRoot(['offlineVisits']);
+						this.navCtrl.navigateRoot(['piscinistPortal/visits/offlineVisits']);
 					});
 				}
 				

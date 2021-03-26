@@ -15,12 +15,11 @@
 
 <ion-content>
 	<ion-list>
-		<ion-item *ngFor="let visit of visits; let i = index"  [routerLink]="['/visits/'+i, {mode:'offline' }]">
-			<ion-avatar slot="start" class="avatarListVisits"  [ngClass]="{'full': visit.typeOfVisit ==='full' , 
-			'technical': visit.typeOfVisit ==='technical' , 'maintenance': visit.typeOfVisit ==='maintenance' }">
+		<ion-item *ngFor="let visit of visits; let i = index"  [routerLink]="['/piscinistPortal/visits/'+i, {mode:'offline' }]">
+			<ion-avatar slot="start" class="avatarListVisits" >
 			<ion-icon name="shield-checkmark"></ion-icon>
 			<div *ngIf="visit" class="typeOfVisitWrapper">
-				<span >{{'VISIT.TYPES.'+visit.typeOfVisit+'.Short' | translate}}</span>
+				<span *ngIf="visit.typeOfVisit" >{{'VISIT.TYPES.'+visit.typeOfVisit+'.Short' | translate}}</span>
 			</div>
 		</ion-avatar>
 		<ion-label>
@@ -33,13 +32,13 @@
 	<ion-fab-button   color="warning" *ngIf="isOnline ===false && (claims['admin'] || claims['employee'])">
 		<ion-icon  name="shield-checkmark"></ion-icon>
 	</ion-fab-button>
-	<ion-fab-list>
+	<ion-fab-list *ngIf="visitTypesText.length>0">
 		<ion-fab-button color="primary" class="full" [attr.data-desc]="visitTypesText['full']['short']" 
-		[routerLink]="['/customers/null/swimming-pool/null/add-visit',{ mode: 'add', customer: '',swimmingPoolName:'',visitType:'full',offline:true }]">
+		[routerLink]="['/piscinistPortal/customers/null/swimming-pool/null/add-visit',{ mode: 'add', customer: '',swimmingPoolName:'',visitType:'full',offline:true }]">
 		<ion-icon name="shield-checkmark" fill="solid"></ion-icon>
 	</ion-fab-button>
 	<ion-fab-button color="success" class="maintenance"   [attr.data-desc]="visitTypesText['maintenance']['short']" 
-	[routerLink]="['/customers/null/swimming-pool/null/add-visit',{ mode: 'add', customer: '',swimmingPoolName:'',visitType:'maintenance',offline:true }]">
+	[routerLink]="['/piscinistPortal/customers/null/swimming-pool/null/add-visit',{ mode: 'add', customer: '',swimmingPoolName:'',visitType:'maintenance',offline:true }]">
 	<ion-icon name="shield-checkmark" ></ion-icon>
 </ion-fab-button>
 </ion-fab-list>

@@ -4,10 +4,12 @@ import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
 
+import { Subscription } from 'rxjs';
 
+
+import {Customer} from '../../../models/customer';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { OnlineCheckService } from '../../../services/online-check.service'
-import {Customer} from '../../../models/customer';
 import { CustomerService } from '../../../services/customer.service'
 import { DataSharingService } from '../../../services/data-sharing.service'
 
@@ -21,10 +23,14 @@ export class OfflineVisitsPage implements OnInit {
 
   public visits= [];
   public alertText ={header:'',message:'', buttonCancel: '', buttonOK:'' };
-  public visitTypesText= [];
+  public visitTypesText=[];  
   public claims={};
   public isOnline:boolean=true;
   public customer: Customer= new Customer()
+
+  public onlineChangesSub: Subscription = new Subscription();
+  public customerChangesSub: Subscription = new Subscription();
+
 
   constructor(
   	public storage:Storage,
@@ -39,23 +45,28 @@ export class OfflineVisitsPage implements OnInit {
 
 
   ngOnInit() {
-    
-    
+
+
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter(){  
+
     this.translateService.get(['OFFLINEVISITS.REMOVEALERT', 'VISIT.TYPES']).subscribe(
       value => {
         this.alertText = value['OFFLINEVISITS.REMOVEALERT']
         this.visitTypesText =  value['VISIT.TYPES'];
       });
     
-    this.onlineCheckService.onlineCheck().subscribe(isOnline => {
+    this.onlineChangesSub = this.onlineCheckService.onlineCheck().subscribe(isOnline => {
       this.isOnline = isOnline;
     })
     this.initData();
     this.claims = this.authenticationService.getClaims();
 
+  }
+  ionViewWillLeave(){
+     this.onlineChangesSub.unsubscribe();
+     this.customerChangesSub.unsubscribe();
   }
 
 
@@ -101,9 +112,9 @@ export class OfflineVisitsPage implements OnInit {
         if(this.visits !== null){
           this.visits.forEach((obj, index) => {
             if(obj.customerUid !==""){
-              this.customerService.getCustomer(obj.customerUid).subscribe(
-                (data3) =>{
-                  this.visits[index].customerInfo = data3;
+              this.customerChangesSub = this.customerService.getCustomer(obj.customerUid).subscribe(
+                (data) =>{
+                  this.visits[index].customerInfo = data;
                 })
             }
           });
