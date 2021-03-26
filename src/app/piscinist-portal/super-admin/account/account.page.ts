@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Company} from '../../../models/company';
-import {AccountServicesService} from '../../../services/account-services.service'
+import {AccountService} from '../../../services/account.service'
+import { Subscription } from 'rxjs';
+
 
 @Component({
 	selector: 'app-account',
@@ -12,21 +14,27 @@ export class AccountPage implements OnInit {
 
 	public accountId:string="";
 	public account:Company = new Company();
+	public accountChangesSub: Subscription = new Subscription();
+
 	constructor(
-		public  accountServicesService: AccountServicesService,
+		public  accountService: AccountService,
 		public  activatedRoute: ActivatedRoute,
 		) { }
 
 	ngOnInit() {
-		this.accountId = this.activatedRoute.snapshot.paramMap.get('id');
 	}
 
-	ionViewWillEnter(){
-		this.accountServicesService.getAccount(this.accountId).subscribe(
+	ionViewWillEnter() {
+		this.accountId = this.activatedRoute.snapshot.paramMap.get('id');
+		this.accountChangesSub  = this.accountService.getAccount(this.accountId).subscribe(
 			(data) =>{
 				console.log("account : ", data);
 				this.account = data;
 			})		
+	}
+
+	ionViewWillLeave(){
+		this.accountChangesSub.unsubscribe()
 	}
 
 	saveAccount(){

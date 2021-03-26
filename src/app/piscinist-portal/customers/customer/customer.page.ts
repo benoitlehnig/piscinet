@@ -5,7 +5,7 @@ import {SwimmingPool} from '../../../models/swimming-pool';
 import { Observable, combineLatest, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 import { AuthenticationService } from '../../../services/authentication.service';
-import {AccountServicesService}  from '../../../services/account-services.service'; 
+import {AccountService}  from '../../../services/account.service'; 
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from './popover/popover.component';
@@ -72,7 +72,7 @@ export class CustomerPage implements OnInit {
 		public loadingController: LoadingController,
 		public toastController: ToastController,	
 		public customerService:CustomerService,
-		public accountServicesService:AccountServicesService,
+		public accountService:AccountService,
 		public actionSheetController: ActionSheetController
 
 		) { }
@@ -89,7 +89,7 @@ export class CustomerPage implements OnInit {
 				this.visitTypesText = value['VISIT.TYPES'];
 				this.newVisitCancelText =  value['CUSTOMER.NewVisitCancel'];
 			});	
-		this.accountChangesSub = this.accountServicesService.getAccount(this.claims['accountId']).subscribe(
+		this.accountChangesSub = this.accountService.getAccount(this.claims['accountId']).subscribe(
 			(account) => {
 				if(account.plan ==='free' && account.numberOfSwimmingPools >=5){
 					this.eligibilityToAddPool = false;

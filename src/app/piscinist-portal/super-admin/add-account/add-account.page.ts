@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
+
 
 import {Company} from '../../../models/company';
-import {AccountServicesService} from '../../../services/account-services.service'
+import {AccountService} from '../../../services/account.service'
 
 @Component({
 	selector: 'app-add-account',
@@ -16,26 +18,33 @@ export class AddAccountPage implements OnInit {
 	public mode:string="add";
 	public account:Company = new Company();
 	public accountId:string="";
+		public accountChangesSub: Subscription = new Subscription();
+
 
 	constructor(
 		private functions: AngularFireFunctions,
 		public activatedRoute:ActivatedRoute,
 		public navCtrl: NavController,
-		public accountServicesService:AccountServicesService
+		public accountService:AccountService
 
 		) { }
 
 	ngOnInit() {
+	}
+
+	ionViewWillEnter() {
 		this.activatedRoute.params.subscribe(params => {
 			this.mode =  params['mode'];
 			if(this.mode ==='update'){
 				this.accountId = params['id'];
-				this.accountServicesService.getAccount(this.accountId).subscribe(
+				this.accountChangesSub = this.accountService.getAccount(this.accountId).subscribe(
 					(data)=>
 					this.account = data);
 			}
 		});
-
+	}
+	ionViewWillLeave(){
+		this.accountChangesSub.unsubscribe()
 	}
 
 	addAccount(){

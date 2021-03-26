@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
+import { FileUploadModule } from 'ng2-file-upload';
+
 
 import { IonicModule } from '@ionic/angular';
 
@@ -15,6 +17,7 @@ import { AdminPage } from './admin.page';
     FormsModule,
     IonicModule,
     TranslateModule,
+    FileUploadModule,
     AdminPageRoutingModule
   ],
   declarations: [AdminPage]

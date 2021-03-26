@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/functions';
 
-import {AccountServicesService} from '../../services/account-services.service'
+import {AccountService} from '../../services/account.service'
 import {Company} from '../../models/company';
 
 @Component({
@@ -13,12 +13,12 @@ export class SuperAdminPage implements OnInit {
 
 	public accounts:Array<Company>=[];
 	constructor(
-		public  accountServicesService: AccountServicesService,
+		public  accountService: AccountService,
 		public functions:AngularFireFunctions
 		) { }
 
 	ngOnInit() {
-		this.accountServicesService.getAcccounts().subscribe(
+		this.accountService.getAcccounts().subscribe(
 			
 			(data)=> {console.log(data);this.accounts = data});
 		

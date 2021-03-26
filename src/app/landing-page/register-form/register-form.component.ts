@@ -4,6 +4,10 @@ import { NavParams} from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
 
+import {Company} from '../../models/company';
+import {Employee} from '../../models/employee';
+
+
 @Component({
 	selector: 'app-register-form',
 	templateUrl: './register-form.component.html',
@@ -39,9 +43,33 @@ export class RegisterFormComponent implements OnInit {
 		}
 
 		submitForm(){
-			const callable = this.functions.httpsCallable('newAccountRequest');
+			/*const callable = this.functions.httpsCallable('newAccountRequest');
 			const obs = callable(this.accountRequest);
 			obs.subscribe(async res => {
+				this.navParams.get('homeref').dismissRegisterPopover();
+				const toast = await this.toastController.create({
+					message: this.accountRequestSentText ,
+					position:'top' ,
+					duration: 5000
+				});
+				toast.present();
+			});
+			*/
+
+			const callable2 = this.functions.httpsCallable('createSelfAccount');
+			let account:Company = new Company(); 
+			account.email = this.accountRequest.emailAddress
+			account.siretNumber = this.accountRequest.siretNumber;
+			account.name = this.accountRequest.companyName;
+
+			let admin:Employee = new Employee();
+
+			admin.firstName = this.accountRequest.firstName;
+			admin.lastName = this.accountRequest.lastName;
+			const data = {account: account, admin:admin }
+
+			const obs2 = callable2(data);
+			obs2.subscribe(async res => {
 				this.navParams.get('homeref').dismissRegisterPopover();
 				const toast = await this.toastController.create({
 					message: this.accountRequestSentText ,

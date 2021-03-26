@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
 	providedIn: 'root'
 })
-export class AccountServicesService {
+export class AccountService {
 
 
 	constructor(
@@ -29,6 +29,11 @@ export class AccountServicesService {
 
 	accountExists(account:Company){
 		return this.afs.collection<Company>('accounts', ref => ref.where('account', '==', account.siretNumber) )   
+	}
+
+	saveAccount(accountID,account){
+		this.afs.collection<Company>('accounts').doc(accountID).set(JSON.parse( JSON.stringify(account)));
+
 	}
 
 }

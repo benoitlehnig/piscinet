@@ -530,13 +530,19 @@
 	},	
 	"ADMIN":{
 		"Title": "Configuration",
+		"Save": "Sauvegarder",
 		"GeneralConfiguration": "Parametres généraux",
+		"Address": "Addresse",
 		"Name": "Nom de la société de pisciniste (apparait sur les emails ainsi que sur le site) : ",
 		"Email": "Contact email de la société : ",
 		"TelNumber": "Contact telephonique de la société : ",
-		"NotificationConfig": "Configuration des notifications : ",
-		"SendMailAfterVisit": "Envoyer un email au client après chaque visite ( payant) ",
+		"NotificationConfig": "Configuration des notifications",
+		"SendMailAfterVisit": "Envoyer un email au client après chaque visite ",
 		"NameSecondaryVisit": "En cas de visite supplementaire necessaire, nom de la personne qui effectuera la visite: ",
+		"LogoWeb": "Image affichée sur le site web (page de login)",
+		"LogoNotification": "Image affichée sur les notifications",
+		"ChooseLogButton": "Importez une image",
+		"ChooseLogoSubTitle": "Importez une image",
 		"SendMePushNotif": "M'envoyer une notification push après chaque visite"
 	},
 	"ADDACCOUNT":{

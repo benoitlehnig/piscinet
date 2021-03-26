@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NavController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
+
+
+
 import { AuthenticationService } from '../services/authentication.service';
 import {TranslateService} from '@ngx-translate/core';
 import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { ActivatedRoute } from '@angular/router';
-import {AccountServicesService}  from '../services/account-services.service'; 
+import {AccountService}  from '../services/account.service'; 
 
 @Component({
 	selector: 'app-login',
@@ -34,6 +38,9 @@ export class LoginPage implements OnInit {
 		]
 	};
 
+	public accountChangesSub: Subscription = new Subscription();
+
+
 	constructor(
 		public authService:AuthenticationService,
 		public navCtrl: NavController,
@@ -41,7 +48,7 @@ export class LoginPage implements OnInit {
 		public toastController: ToastController,
 		private storage: Storage,
 		private activatedRoute: ActivatedRoute,
-		private accountServicesService: AccountServicesService,
+		private accountService: AccountService,
 		) { }
 
 	ngOnInit() {
@@ -69,6 +76,7 @@ export class LoginPage implements OnInit {
 		});
 		
 		
+		
 		this.translateService.get(['LOGIN.SuccessEmailSent','LOGIN.invalidemail','LOGIN.wrongpassword','LOGIN.usernot-found',]).subscribe(
 			value => {
 				console.log(value)
@@ -78,6 +86,9 @@ export class LoginPage implements OnInit {
 				this.errorMessages['usernot-found'] = value['LOGIN.usernot-found'];
 			});
 	}
+	ionViewWillLeave(){
+	 	this.accountChangesSub.unsubscribe()
+	 }
 
 	
 	loginUser(form) {
@@ -115,7 +126,7 @@ export class LoginPage implements OnInit {
 	}
 
 	retrieveAccountCustomization(){
-		this.accountServicesService.getAccount(this.accountId).subscribe(
+		this.accountChangesSub = this.accountService.getAccount(this.accountId).subscribe(
 			(account) => {
 				this.landingPageLogo = account.configuration.logoPictureUrl;
 				this.landingPageName =  account.configuration.nameLoginPage

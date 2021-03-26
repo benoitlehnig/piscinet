@@ -4,39 +4,116 @@
 			<ion-menu-button></ion-menu-button>
 		</ion-buttons>
 		<ion-title>{{'ADMIN.Title' | translate}}</ion-title>
+		<ion-buttons slot="end">
+
+			<ion-button (click)="saveConfiguration()">{{'ADMIN.Save' | translate}}</ion-button>
+		</ion-buttons>
+
 	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-	<ion-list>
-		<ion-list-header>{{'ADMIN.GeneralConfiguration' | translate}}</ion-list-header>
-		<ion-item>
-			<ion-label  position="floating">{{'ADMIN.Name' | translate}}</ion-label>
-			<ion-input type="text" [(ngModel)]="company.name" ></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label  position="floating">{{'ADMIN.Email' | translate}}</ion-label>
-			<ion-input type="text" [(ngModel)]="company.email" ></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label  position="floating">{{'ADMIN.TelNumber' | translate}}</ion-label>
-			<ion-input type="text" [(ngModel)]="company.telPhoneNumber" ></ion-input>
-		</ion-item>
-		<ion-list-header>{{'ADMIN.NotificationConfig' | translate}}</ion-list-header>
-		<ion-item>
-			<ion-label >{{'ADMIN.SendMailAfterVisit' | translate}}</ion-label>
-			<ion-toggle slot="start" [(ngModel)]="company.configuration.emailConfiguration.sendEmailAfterVisit" ></ion-toggle>
-		</ion-item>
-		<ion-item>
-			<ion-label  position="floating">{{'ADMIN.NameSecondaryVisit' | translate}}</ion-label>
-			<ion-input type="text" [(ngModel)]="company.nameSecondaryVisit" ></ion-input>
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>{{'ADMIN.GeneralConfiguration' | translate}}</ion-card-title>
+		</ion-card-header>
+		<ion-card-content>
+			<ion-item>
+				<ion-label  position="floating">{{'ADMIN.Name' | translate}}</ion-label>
+				<ion-input type="text" [(ngModel)]="company.name" ></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label  position="floating">{{'ADMIN.Email' | translate}}</ion-label>
+				<ion-input type="text" [(ngModel)]="company.email" ></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label  position="floating">{{'ADMIN.TelNumber' | translate}}</ion-label>
+				<ion-input type="text" [(ngModel)]="company.telPhoneNumber" ></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label position="stacked">{{'ADMIN.Address' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+				<ion-input [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="{{'COMMON.AddressSearch' | translate}}" required></ion-input>
+				<ion-list [hidden]="autocompleteItems.length == 0" class="autocomplete">
+					<ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)" lines="none">
+						{{ item.description }}
+					</ion-item>
+				</ion-list>
+			</ion-item>
+			<ion-item lines="none">
+				<ion-label position="stacked">{{'ADMIN.LogoWeb' | translate}} <ion-text color="danger">*</ion-text></ion-label>
 
-		</ion-item>
-		<ion-item >
-			<ion-label >{{'ADMIN.SendMePushNotif' | translate}}</ion-label>
-			<ion-toggle slot="start" [(ngModel)]="pushNotifAllVisitSubscription" (ionChange)="subscribeNewVisit()"></ion-toggle>
-		</ion-item>
-	</ion-list>
+				<label for="files">
+					<div class="parent">
+						<img  [src]="company.configuration.logoPictureUrl" *ngIf="company.configuration.logoPictureUrl !==''" class=" logo ion-margin-end" />
+						<div class="child">
+							<div>
+								<ion-icon size="large "color="light" name="images-outline"></ion-icon>
+							</div>
+							<ion-text color="light">{{'ADMIN.ChooseLogoSubTitle' | translate}}</ion-text>
+						</div>
+					</div>
+				</label>
+				<input type="file" ng2FileSelect [uploader]="uploader"  (onFileSelected)="uploadFile('web')"  id="files" class="ion-hide"/>
+				<div class="uploadFileWrap ion-padding"  *ngIf="company.configuration.logoPictureUrl ==='' || company.configuration.logoPictureUrl === null ||  company.configuration.logoPictureUrl === 'undefined'"  >
+					<label for="files">
+						<div>
+							<ion-icon size="large "color="medium" name="images-outline"></ion-icon>
+						</div>
+						<ion-text color="medium">{{'ADMIN.ChooseLogoSubTitle' | translate}}</ion-text>
+						<div class="ion-margin-top">
+							<ion-button color="light" size="small"><label for="files" class="ion-text-wrap">{{'ADMIN.ChooseLogButton' | translate}}</label></ion-button>
+						</div>
+					</label>
+				</div>
 
-	<ion-button (click)="saveConfiguration()">Save</ion-button>
+			</ion-item>
+			<ion-item lines="none">
+				<ion-label position="stacked">{{'ADMIN.LogoNotification' | translate}} <ion-text color="danger">*</ion-text></ion-label>
+				<label for="files2">
+					<div class="parent">
+						<img  [src]="company.configuration.logoPictureForNotifUrl" *ngIf="company.configuration.logoPictureForNotifUrl !==''" class=" logo ion-margin-end" />
+						<div class="child">
+							<div>
+								<ion-icon size="large "color="light" name="images-outline"></ion-icon>
+							</div>
+							<ion-text color="light">{{'ADMIN.ChooseLogoSubTitle' | translate}}</ion-text>
+						</div>
+					</div>
+				</label>
+				<input type="file" ng2FileSelect [uploader]="uploader"  (onFileSelected)="uploadFile('notification')"  id="files2" class="ion-hide"/>
+				<div class="uploadFileWrap ion-padding"  *ngIf="!(company.configuration.logoPictureForNotifUrl !=='')"  >
+					<label for="files2">
+						<div>
+							<ion-icon size="large "color="medium" name="images-outline"></ion-icon>
+						</div>
+						<ion-text color="medium">{{'ADMIN.ChooseLogoSubTitle' | translate}}</ion-text>
+						<div class="ion-margin-top">
+							<ion-button color="light" size="small"><label for="files2" class="ion-text-wrap">{{'ADMIN.ChooseLogButton' | translate}}</label></ion-button>
+						</div>
+					</label>
+				</div>
+			</ion-item>
+		</ion-card-content>
+	</ion-card>
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>{{'ADMIN.NotificationConfig' | translate}}</ion-card-title>
+		</ion-card-header>
+		<ion-card-content>
+
+			<ion-item >
+				<ion-label  position="floating">{{'ADMIN.NameSecondaryVisit' | translate}}</ion-label>
+				<ion-input type="text" [(ngModel)]="company.nameSecondaryVisit" ></ion-input>
+			</ion-item>
+			<ion-item lines="none">
+				<ion-label >{{'ADMIN.SendMailAfterVisit' | translate}}</ion-label>
+				<ion-toggle slot="start" [(ngModel)]="company.configuration.emailConfiguration.sendEmailAfterVisit" ></ion-toggle>
+			</ion-item>
+			<ion-item lines="none">
+				<ion-label >{{'ADMIN.SendMePushNotif' | translate}}</ion-label>
+				<ion-toggle slot="start" [(ngModel)]="pushNotifAllVisitSubscription" (ionChange)="subscribeNewVisit()"></ion-toggle>
+			</ion-item>
+		</ion-card-content>
+	</ion-card>
+
 </ion-content>
