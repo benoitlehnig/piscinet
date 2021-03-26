@@ -9,7 +9,7 @@ import {DataSharingService} from './data-sharing.service';
 @Injectable({
 	providedIn: 'root'
 })
-export class PoolServicesService {
+export class PoolService {
 
 	public accountId:string="";
 

@@ -3,7 +3,7 @@ import { Chart } from 'chart.js';
 import * as moment from 'moment';
 
 import { DataSharingService } from '../../../services/data-sharing.service'
-import { PoolServicesService } from '../../../services/pool-services.service';
+import { PoolService } from '../../../services/pool.service';
 
 @Component({
 	selector: 'app-statistics',
@@ -47,7 +47,7 @@ export class StatisticsPage implements OnInit {
 
 	constructor(
 		public dataSharingService:DataSharingService,
-		public poolServicesService: PoolServicesService
+		public poolService: PoolService
 
 		) { }
 
@@ -61,7 +61,7 @@ export class StatisticsPage implements OnInit {
 					this.poolData = data.swimmingPool;
 					this.uid = data.uid;
 					this.poolId = data.poolId;
-					this.poolServicesService.getSwimmingPoolStatistics(this.poolId,"chlore").subscribe(
+					this.poolService.getSwimmingPoolStatistics(this.poolId,"chlore").subscribe(
 						data=>{ 
 							this.chloreDataArray ={	labels:[],data:[]};
 							data.forEach((obj,index) =>{
@@ -70,7 +70,7 @@ export class StatisticsPage implements OnInit {
 							});
 							this.createBarChart(this.chloreChart,"chlore",this.chloreDataArray);
 						})
-					this.poolServicesService.getSwimmingPoolStatistics(this.poolId,"temperature").subscribe(
+					this.poolService.getSwimmingPoolStatistics(this.poolId,"temperature").subscribe(
 						data=>{ 
 							this.temperatureDataArray ={	labels:[],data:[]};
 
@@ -80,7 +80,7 @@ export class StatisticsPage implements OnInit {
 							});
 							this.createBarChart(this.temperatureChart, "temperature", this.temperatureDataArray);
 						})
-					this.poolServicesService.getSwimmingPoolStatistics(this.poolId,"PH").subscribe(
+					this.poolService.getSwimmingPoolStatistics(this.poolId,"PH").subscribe(
 						data=>{
 							this.PHDataArray ={	labels:[],data:[]};
 							data.forEach((obj,index) =>{
@@ -89,7 +89,7 @@ export class StatisticsPage implements OnInit {
 							});
 							this.createBarChart(this.phChart, "PH", this.PHDataArray);
 						})
-					this.poolServicesService.getSwimmingPoolStatistics(this.poolId,"TAC").subscribe(
+					this.poolService.getSwimmingPoolStatistics(this.poolId,"TAC").subscribe(
 						data=>{
 							this.TACArray ={	labels:[],data:[]};
 							data.forEach((obj,index) =>{
@@ -98,7 +98,7 @@ export class StatisticsPage implements OnInit {
 							});
 							this.createBarChart(this.TACChart, "TAC", this.TACArray);
 						})
-					this.poolServicesService.getSwimmingPoolStatistics(this.poolId,"waterMeter").subscribe(
+					this.poolService.getSwimmingPoolStatistics(this.poolId,"waterMeter").subscribe(
 						data=>{
 							this.waterMeterArray ={	labels:[],data:[]};
 							data.forEach((obj,index) =>{

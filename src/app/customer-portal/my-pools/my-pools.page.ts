@@ -4,7 +4,7 @@ import {SwimmingPool} from '../../models/swimming-pool';
 import { map } from 'rxjs/operators'
 import { DataSharingService } from '../../services/data-sharing.service'
 import { CustomerService } from '../../services/customer.service'
-import { PoolServicesService } from '../../services/pool-services.service'
+import { PoolService } from '../../services/pool.service'
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -34,7 +34,7 @@ export class MyPoolsPage implements OnInit {
 	constructor(
 		public authService:AuthenticationService,
 		public customerService: CustomerService,
-		public poolServicesService: PoolServicesService,
+		public poolService: PoolService,
 		public dataSharingService:DataSharingService,
 		private router: Router
 
@@ -58,7 +58,6 @@ export class MyPoolsPage implements OnInit {
 							if( this.swimmingPools[0]){
 								this.selectedSwimmingPool = this.swimmingPools[0];
 								this.selectedSwimmingPoolKey = this.swimmingPools[0].key;
-
 								this.selectedSwimmingPoolName = this.selectedSwimmingPool.data.name;
 								this.dataSharingService.currentPool(
 									{
@@ -82,7 +81,7 @@ export class MyPoolsPage implements OnInit {
 	}
 
 	onSelectPoolChange(event){
-		this.poolChangesSub = this.poolServicesService.getSwimmingPool(event.detail.value).subscribe(
+		this.poolChangesSub = this.poolService.getSwimmingPool(event.detail.value).subscribe(
 			(data) =>{
 				this.selectedSwimmingPool = {key:event.detail.value, data :  data};
 				this.selectedSwimmingPoolName = data.name;

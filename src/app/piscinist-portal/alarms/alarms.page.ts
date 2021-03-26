@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import {SwimmingPool} from '../../models/swimming-pool';
 
 import { AuthenticationService } from '../../services/authentication.service';
-import { PoolServicesService } from '../../services/pool-services.service'
+import { PoolService } from '../../services/pool.service'
 
 @Component({
 	selector: 'app-alarms',
@@ -19,12 +19,12 @@ export class AlarmsPage implements OnInit {
 	public claims;
 	constructor(
 		public authenticationService:AuthenticationService,
-		public poolServicesService: PoolServicesService,
+		public poolService: PoolService,
 
 		) { }
 
 	ngOnInit() {
-		this.swimmingPool = this.poolServicesService.getPoolsWithCustomers();
+		this.swimmingPool = this.poolService.getPoolsWithCustomers();
 		this.swimmingPool.subscribe((data)=>{
 			data.forEach( (element:any) => {
 				this.checkCurtainRule(element);

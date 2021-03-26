@@ -18,7 +18,7 @@ import {Employee} from '../../../models/employee';
 import {SwimmingPool} from '../../../models/swimming-pool';
 import { CustomerService } from '../../../services/customer.service'
 import { EmployeeService } from '../../../services/employee.service'
-import { PoolServicesService } from '../../../services/pool-services.service'
+import { PoolService } from '../../../services/pool.service'
 import { VisitService } from '../../../services/visit.service';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { DataSharingService } from '../../../services/data-sharing.service'
@@ -59,7 +59,7 @@ export class VisitPage implements OnInit {
 		private activatedRoute: ActivatedRoute,
 		public customerService: CustomerService,
 		public employeeService: EmployeeService,
-		public poolServicesService: PoolServicesService,
+		public poolService: PoolService,
 		public visitService: VisitService,
 		private storage: Storage,
 		public authenticationService:AuthenticationService,
@@ -101,7 +101,7 @@ export class VisitPage implements OnInit {
 						(data2) =>{
 							this.employee = data2
 						});
-					this.poolChangesSub = this.poolServicesService.getSwimmingPool(this.poolId).subscribe(
+					this.poolChangesSub = this.poolService.getSwimmingPool(this.poolId).subscribe(
 						(data4) =>{
 							this.swimmingPool = data4;
 							this.dataSharingService.currentPool(this.swimmingPool);

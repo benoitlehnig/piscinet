@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {TranslateModule,TranslatePipe} from '@ngx-translate/core';
+import {TranslateModule} from '@ngx-translate/core';
 
 import { IonicModule } from '@ionic/angular';
 import { MaintenancePageRoutingModule } from './maintenance-routing.module';
@@ -16,6 +16,6 @@ import { MaintenancePage } from './maintenance.page';
     TranslateModule,
     MaintenancePageRoutingModule
   ],
-  declarations: [MaintenancePage,TranslatePipe]
+  declarations: [MaintenancePage]
 })
 export class MaintenancePageModule {}

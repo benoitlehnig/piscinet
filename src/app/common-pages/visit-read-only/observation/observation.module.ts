@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {TranslateModule,TranslatePipe} from '@ngx-translate/core';
+import {TranslateModule} from '@ngx-translate/core';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -17,6 +17,6 @@ import { ObservationPage } from './observation.page';
     TranslateModule,
     ObservationPageRoutingModule
   ],
-  declarations: [ObservationPage,TranslatePipe]
+  declarations: [ObservationPage]
 })
 export class ObservationPageModule {}

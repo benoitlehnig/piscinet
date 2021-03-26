@@ -8,7 +8,7 @@ import {SwimmingPool} from '../../models/swimming-pool';
 import {Customer} from '../../models/customer';
 import { DataSharingService } from '../../services/data-sharing.service';
 import { CustomerService } from '../../services/customer.service';
-import { PoolServicesService } from '../../services/pool-services.service';
+import { PoolService } from '../../services/pool.service';
 
 
 import { Subscription } from 'rxjs';
@@ -45,7 +45,7 @@ export class SwimmingPoolPage implements OnInit {
 		public customerService: CustomerService,
 		public translateService : TranslateService,
 		public dataSharingService:DataSharingService,
-		public poolServicesService: PoolServicesService,
+		public poolService: PoolService,
 		public actionSheetController: ActionSheetController,
 		private router: Router
 
@@ -78,7 +78,7 @@ export class SwimmingPoolPage implements OnInit {
 				this.customer = data;
 				this.customerStringified = JSON.stringify(data);
 			})
-		this.poolChangesSub = this.poolServicesService.getSwimmingPool(this.poolId).subscribe(
+		this.poolChangesSub = this.poolService.getSwimmingPool(this.poolId).subscribe(
 			(data) =>{
 				this.swimmingPool = data;
 				this.swimmingPoolStringified = JSON.stringify(this.swimmingPool);

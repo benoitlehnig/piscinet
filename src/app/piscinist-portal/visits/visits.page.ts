@@ -8,7 +8,7 @@ import {Visit} from '../../models/visit';
 
 import { VisitService } from '../../services/visit.service';
 import { CustomerService } from '../../services/customer.service';
-import { PoolServicesService } from '../../services/pool-services.service';
+import { PoolService } from '../../services/pool.service';
 import { DataSharingService } from '../../services/data-sharing.service';
 
 import { SelectCustomerComponent } from './visit/select-customer/select-customer.component';
@@ -38,7 +38,7 @@ export class VisitsPage implements OnInit {
     public modalController: ModalController,
     public translateService : TranslateService,
     public customerService: CustomerService,
-    public poolServicesService: PoolServicesService,
+    public poolService: PoolService,
     public dataSharingService:DataSharingService,
     public router:Router
     ) 
@@ -91,7 +91,7 @@ export class VisitsPage implements OnInit {
       this.customerChangesSub = this.customerService.getCustomer(customerUid).subscribe(
         (customer) =>{
           customerStringified = JSON.stringify(customer);
-          this.poolChangesSub = this.poolServicesService.getSwimmingPool(poolId).subscribe(
+          this.poolChangesSub = this.poolService.getSwimmingPool(poolId).subscribe(
             (swimmingPool) =>{
 
               swimmingPoolStringified = JSON.stringify(swimmingPool);

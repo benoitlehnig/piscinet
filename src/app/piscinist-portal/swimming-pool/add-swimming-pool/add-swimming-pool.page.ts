@@ -11,7 +11,7 @@ import { Storage } from '@ionic/storage';
 import {SwimmingPool} from '../../../models/swimming-pool';
 import {Customer} from '../../../models/customer';
 
-import { PoolServicesService } from '../../../services/pool-services.service';
+import { PoolService } from '../../../services/pool.service';
 import {AppConstants } from '../../../app-constants';
 
 @Component({
@@ -37,7 +37,7 @@ export class AddSwimmingPoolPage implements OnInit {
 		private functions: AngularFireFunctions,
 		public navCtrl: NavController,
 		private activatedRoute: ActivatedRoute,
-		public poolServicesService: PoolServicesService,
+		public poolService: PoolService,
 		public toastController: ToastController,
 		public translateService : TranslateService,
 		private storage: Storage,
@@ -53,7 +53,7 @@ export class AddSwimmingPoolPage implements OnInit {
 			this.customer =  JSON.parse(params['customer']);
 			if(this.mode ==="update"){
 				this.poolId = this.activatedRoute.snapshot.paramMap.get('sid')
-				this.poolServicesService.getSwimmingPool(this.poolId).subscribe(
+				this.poolService.getSwimmingPool(this.poolId).subscribe(
 					(data) =>{
 						this.swimmingPool = data;
 					})
