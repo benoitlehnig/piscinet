@@ -65,6 +65,7 @@ export class RegisterFormComponent implements OnInit {
 			account.email = this.accountRequest.emailAddress
 			account.siretNumber = this.accountRequest.siretNumber;
 			account.name = this.accountRequest.companyName;
+			account.configuration.nameLoginPage = this.accountRequest.companyName;
 
 			let admin:Employee = new Employee();
 

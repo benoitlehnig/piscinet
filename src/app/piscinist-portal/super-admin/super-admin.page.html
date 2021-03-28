@@ -11,11 +11,10 @@
 		</ion-fab-button>
 	</ion-fab>
 	<ion-list>
-		<ion-item *ngFor="let account of accounts" >
+		<ion-item *ngFor="let account of accounts" [routerLink]="['account/' + account.id]">
 			<ion-label>
 				<div><ion-text  ><h2>{{account.name}}</h2></ion-text></div>
-				<div><ion-text [routerLink]="['account/' + account.id]" class="linkStyle" >more details</ion-text></div>
-				<div><ion-text (click)="selectAccount(account)" class="linkStyle" >set as current account</ion-text></div>
+				<div><ion-text  class="linkStyle" >more details</ion-text></div>
 			</ion-label>
 		</ion-item>
 	</ion-list>

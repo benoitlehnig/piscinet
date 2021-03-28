@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireFunctions } from '@angular/fire/functions';
+import { Subscription } from 'rxjs';
+
 
 import {AccountService} from '../../services/account.service'
 import {Company} from '../../models/company';
@@ -12,25 +13,29 @@ import {Company} from '../../models/company';
 export class SuperAdminPage implements OnInit {
 
 	public accounts:Array<Company>=[];
+	public accountsChangesSub: Subscription = new Subscription();
+
+
 	constructor(
 		public  accountService: AccountService,
-		public functions:AngularFireFunctions
+
 		) { }
 
 	ngOnInit() {
-		this.accountService.getAcccounts().subscribe(
-			
-			(data)=> {console.log(data);this.accounts = data});
+	}
+
+	ionViewWillEnter() {
+		this.accountsChangesSub  = this.accountService.getAcccounts().subscribe(
+			(data)=> {
+				this.accounts = data});
 		
 	}
 
-
-	selectAccount(account){
-		console.log(account);
-		const callable = this.functions.httpsCallable('setSuperAdminDefaultAccount');
-		const obs = callable(account.id);
-		obs.subscribe(async res => {
-		});
+	ionViewWillLeave(){
+		this.accountsChangesSub.unsubscribe()
 	}
+
+
+
 
 }

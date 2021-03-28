@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AngularFireFunctions } from '@angular/fire/functions';
+
+
 import {Company} from '../../../models/company';
 import {AccountService} from '../../../services/account.service'
 import { Subscription } from 'rxjs';
@@ -19,6 +22,8 @@ export class AccountPage implements OnInit {
 	constructor(
 		public  accountService: AccountService,
 		public  activatedRoute: ActivatedRoute,
+		public functions:AngularFireFunctions,
+
 		) { }
 
 	ngOnInit() {
@@ -37,8 +42,15 @@ export class AccountPage implements OnInit {
 		this.accountChangesSub.unsubscribe()
 	}
 
-	saveAccount(){
-		
+	
+
+	selectDefaultAccount(){
+		console.log(this.accountId);
+		const callable = this.functions.httpsCallable('setSuperAdminDefaultAccount');
+		const obs = callable(this.accountId);
+		obs.subscribe(async res => {
+			alert("Please logout and then login")
+		});
 	}
 
 }

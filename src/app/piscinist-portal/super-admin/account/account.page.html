@@ -8,6 +8,9 @@
 			<ion-button [routerLink]="['edit-account',{ mode: 'update'}]">
 				<ion-icon name="pencil" ></ion-icon>
 			</ion-button>
+			<ion-button (click)="selectDefaultAccount()">
+					<ion-icon name="star-outline" ></ion-icon>
+			</ion-button>
 		</ion-buttons>
 	</ion-toolbar>
 </ion-header>
