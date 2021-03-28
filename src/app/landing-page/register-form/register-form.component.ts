@@ -36,13 +36,17 @@ export class RegisterFormComponent implements OnInit {
 		) { }
 
 	ngOnInit() {
+		
+	}
+
+	ionViewDidEnter(){
 		this.translateService.get('REGISTER.AccountRequestSentText').subscribe(
 			value => {
 				this.accountRequestSentText = value;
 			});
-		}
+	}
 
-		submitForm(){
+	submitForm(){
 			/*const callable = this.functions.httpsCallable('newAccountRequest');
 			const obs = callable(this.accountRequest);
 			obs.subscribe(async res => {

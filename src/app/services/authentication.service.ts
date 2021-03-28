@@ -8,6 +8,9 @@ import { AngularFireAnalytics } from '@angular/fire/analytics';
 import {DataSharingService} from './data-sharing.service';
 import {CustomerService} from './customer.service';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { AngularFireMessaging } from '@angular/fire/messaging';
+
+
 
 @Injectable({
 	providedIn: 'root'
@@ -27,6 +30,8 @@ export class AuthenticationService {
 		public dataSharingService:DataSharingService,
 		public customerService:CustomerService,
 		private functions: AngularFireFunctions,
+		private afMessaging: AngularFireMessaging,
+
 
 		) { 
 		this.user = this.afAuth.authState;
@@ -35,6 +40,7 @@ export class AuthenticationService {
 			if (user) {
 				user.getIdTokenResult().then(
 					result=> {
+						
 
 						this.claims = result.claims;
 						this.claimsDataSource.next(this.claims);
@@ -43,6 +49,7 @@ export class AuthenticationService {
 						this.angularFireAnalytics.logEvent('login', {accountId:  result.claims['accountId']});
 						this.storage.set('claims', result.claims);
 						this.storage.set('loggedIn', true); 
+						this.requestPermission(result.claims.user_id);
 						if(this.claims['customer']){
 							this.customerService.getCustomerFromUid(result.claims.user_id).subscribe(
 								data=>{
@@ -57,6 +64,7 @@ export class AuthenticationService {
 						if(this.claims['admin'] ===true || this.claims['employee'] ===true || this.claims['superAdmin'] ===true){
 							this.router.navigateByUrl('/piscinistPortal');
 						}
+
 					})
 			} else {
 				console.log("user not logged in auth")	 
@@ -120,7 +128,7 @@ export class AuthenticationService {
 					this.storage.set('loggedIn', false); 
 
 					this.router.navigate(['/login']);
-					resolve();
+					resolve(null);
 				}).catch((error) => {
 					reject();
 				});
@@ -134,6 +142,40 @@ export class AuthenticationService {
 	}
 	userDetails() {
 		return this.afAuth.user
+	}
+
+
+	requestPermission(uid) {
+		this.afMessaging.requestToken
+		.subscribe(
+			(token) => { 
+				this.storage.get('tokenRegistered').then(data =>{
+					let tokenToBeRegistered = false;
+					if(data ===null){
+						tokenToBeRegistered = true;
+					}
+					else{
+						if(data !== token){
+							tokenToBeRegistered = true;
+						}
+					}
+					if( tokenToBeRegistered === true){
+						console.log("tokenToBeRegistered", true)
+						const callable = this.functions.httpsCallable('addDevice');
+						const obs = callable({'uid':uid, 'token': token});
+						obs.subscribe(async res => {
+							this.storage.set('tokenRegistered',token);
+						});
+					}
+					else{
+						console.log("tokenToBeRegistered: ",false)
+
+					}
+				})
+			},
+			(error) => { console.error(error); },  
+			);
+
 	}
 
 	

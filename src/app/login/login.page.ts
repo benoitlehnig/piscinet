@@ -51,7 +51,10 @@ export class LoginPage implements OnInit {
 		private accountService: AccountService,
 		) { }
 
-	ngOnInit() {
+	ngOnInit() {}
+	
+	ionViewWillEnter() {
+
 		this.activatedRoute.queryParams.subscribe((params) => {
 			console.log("params:", params);
 			if(params.accountId !== undefined){
@@ -87,8 +90,8 @@ export class LoginPage implements OnInit {
 			});
 	}
 	ionViewWillLeave(){
-	 	this.accountChangesSub.unsubscribe()
-	 }
+		this.accountChangesSub.unsubscribe()
+	}
 
 	
 	loginUser(form) {

@@ -9,6 +9,7 @@ export class Employee {
 	public postalCode: string;
 	public telPhoneNumber: string;
 	public admin:boolean=false;
+	public onBoardingDone:boolean=false;
 	public pushNotifAllVisitSubscription:boolean=false;
 
 	deserialize(input: any) {
