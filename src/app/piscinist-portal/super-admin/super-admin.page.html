@@ -1,6 +1,6 @@
 <ion-header>
 	<ion-toolbar>
-		<ion-title>superAdmin</ion-title>
+		<ion-title>Super Admin page</ion-title>
 	</ion-toolbar>
 </ion-header>
 
@@ -13,9 +13,10 @@
 	<ion-list>
 		<ion-item *ngFor="let account of accounts" [routerLink]="['account/' + account.id]">
 			<ion-label>
-				<div><ion-text  ><h2>{{account.name}}</h2></ion-text></div>
-				<div><ion-text  class="linkStyle" >more details</ion-text></div>
+				<div><h1>{{account.name}}</h1></div>
+				<div><ion-badge>{{account.numberOfSwimmingPools}} </ion-badge> pools managed</div>
 			</ion-label>
+			<ion-note slot="end">{{account.plan}}</ion-note>
 		</ion-item>
 	</ion-list>
 
