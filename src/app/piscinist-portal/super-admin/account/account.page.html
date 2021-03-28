@@ -19,71 +19,71 @@
 	<ion-list>
 		<ion-list-header>General Configuration</ion-list-header>
 		<ion-item>
-			<ion-text position="floating">Url for landing page</ion-text>
-			<ion-text>{{account.configuration.logoPictureUrl}}</ion-text>
+			<ion-label position="stacked">Url for landing page</ion-label>
+			<ion-input readonly>{{account.configuration.logoPictureUrl}}</ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-text position="floating">Url for notification</ion-text>
-			<ion-text>{{account.configuration.logoPictureForNotifUrl}}</ion-text>
+			<ion-label position="stacked">Url for notification</ion-label>
+			<ion-input readonly>{{account.configuration.logoPictureForNotifUrl}}</ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-text position="floating">Name for landing page</ion-text>
-			<ion-text>{{account.configuration.nameLoginPage}}</ion-text>
+			<ion-label position="stacked">Name for landing page</ion-label>
+			<ion-input readonly>{{account.configuration.nameLoginPage}}</ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-label position="floating">Plan (free or premium)</ion-label>
-			<ion-text type="text">{{account.plan}}</ion-text>
+			<ion-label position="stacked">Plan (free or premium)</ion-label>
+			<ion-input readonly type="text">{{account.plan}}</ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-text position="floating">Number of swimming pools</ion-text>
-			<ion-text>{{account.numberOfSwimmingPools}}</ion-text>
+			<ion-label position="stacked">Number of swimming pools</ion-label>
+			<ion-input readonly>{{account.numberOfSwimmingPools}}</ion-input>
 		</ion-item>
 	</ion-list>
 	<ion-list>
 		<ion-list-header>Email Configuration</ion-list-header>
 		<ion-item>
-			<ion-label >Envoyer un email apres chaque visite</ion-label>
+			<ion-label position="stacked" >Envoyer un email apres chaque visite</ion-label>
 			<ion-toggle slot="start" disabled="true" name="sendEmailAfterVisit" [(ngModel)]="account.configuration.emailConfiguration.sendEmailAfterVisit" ></ion-toggle>
 		</ion-item>
 		<ion-item>
-			<ion-text position="floating">from Email</ion-text>
-			<ion-text >{{account.configuration.emailConfiguration.serverEmail.from.email}}</ion-text>
+			<ion-label position="stacked">from Email</ion-label>
+			<ion-input readonly>{{account.configuration.emailConfiguration.serverEmail.from.email}}</ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-text position="floating">from Name</ion-text>
-			<ion-text >{{account.configuration.emailConfiguration.serverEmail.from.name}}</ion-text>
+			<ion-label position="stacked">from Name</ion-label>
+			<ion-input readonly>{{account.configuration.emailConfiguration.serverEmail.from.name}}</ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-text position="floating">reply_to Email</ion-text>
-			<ion-text >{{account.configuration.emailConfiguration.serverEmail.reply_to.email}}</ion-text>
+			<ion-label position="stacked">reply_to Email</ion-label>
+			<ion-input readonly>{{account.configuration.emailConfiguration.serverEmail.reply_to.email}}</ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-text position="floating">reply_to Name</ion-text>
-			<ion-text >{{account.configuration.emailConfiguration.serverEmail.reply_to.name}}</ion-text>
+			<ion-label position="stacked">reply_to Name</ion-label>
+			<ion-input readonly>{{account.configuration.emailConfiguration.serverEmail.reply_to.name}}</ion-input>
 		</ion-item>
 		<ion-item >
-			<ion-text position="floating">Password Email </ion-text>
-			<ion-text>{{account.configuration.emailConfiguration.serverEmail.emailServerPassword}}</ion-text>
+			<ion-label position="stacked">Password Email </ion-label>
+			<ion-input readonly>{{account.configuration.emailConfiguration.serverEmail.emailServerPassword}}</ion-input>
 		</ion-item>
 		<ion-item >
-			<ion-text position="floating">visitKO template : </ion-text>
-			<ion-text >{{account.configuration.emailConfiguration.emailTemplates.visitKO}}</ion-text>
+			<ion-label position="stacked">visitKO template : </ion-label>
+			<ion-input readonly>{{account.configuration.emailConfiguration.emailTemplates.visitKO}}</ion-input>
 		</ion-item>
 		<ion-item >
-			<ion-text position="floating">visitOK template : </ion-text>
-			<ion-text >{{account.configuration.emailConfiguration.emailTemplates.visitOK}}</ion-text>
+			<ion-label position="stacked">visitOK template : </ion-label>
+			<ion-input readonly>{{account.configuration.emailConfiguration.emailTemplates.visitOK}}</ion-input>
 		</ion-item>
 		<ion-item >
-			<ion-text position="floating">welcomeCustomer template : </ion-text>
-			<ion-text >{{account.configuration.emailConfiguration.emailTemplates.welcomeCustomer}}</ion-text>
+			<ion-label position="stacked">welcomeCustomer template : </ion-label>
+			<ion-input readonly>{{account.configuration.emailConfiguration.emailTemplates.welcomeCustomer}}</ion-input>
 		</ion-item>
 		<ion-item >
-			<ion-text position="floating">welcomeEmployee template : </ion-text>
-			<ion-text >{{account.configuration.emailConfiguration.emailTemplates.welcomeEmployee}}</ion-text>
+			<ion-label position="stacked">welcomeEmployee template : </ion-label>
+			<ion-input readonly>{{account.configuration.emailConfiguration.emailTemplates.welcomeEmployee}}</ion-input>
 		</ion-item>
 		<ion-item >
-			<ion-text position="floating">welcomeEmployee template : </ion-text>
-			<ion-text >{{account.configuration.emailConfiguration.emailTemplates.welcomeEmployee}}</ion-text>
+			<ion-label position="stacked">welcomeEmployee template : </ion-label>
+			<ion-input readonly>{{account.configuration.emailConfiguration.emailTemplates.welcomeEmployee}}</ion-input>
 		</ion-item>
 
 	</ion-list>
