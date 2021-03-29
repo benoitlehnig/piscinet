@@ -57,6 +57,6 @@ export class SwimmingPool {
 export class Picture {
     name:string="";
     type:string="";
-    filepath: string;
-    webviewPath: string;
+    filepath: string="";
+    url: string="";
 }

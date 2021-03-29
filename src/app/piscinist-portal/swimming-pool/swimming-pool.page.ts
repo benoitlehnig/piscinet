@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute,Router,NavigationEnd   } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
 
 import {TranslateService} from '@ngx-translate/core';
@@ -31,6 +31,7 @@ export class SwimmingPoolPage implements OnInit {
 	public visitTypeFullText:string = "";
 	public visitTypeMaintenanceText:string = "";
 	public newVisitCancelText:string = "";
+	public pictureTabDisplayed:boolean=false;
 
 	public visitTypesText=[];
 
@@ -71,7 +72,19 @@ export class SwimmingPoolPage implements OnInit {
 				this.newVisitCancelText =  value['CUSTOMER.NewVisitCancel'];
 			});
 		
-		this.uid = this.activatedRoute.snapshot.paramMap.get('id')
+		this.uid = this.activatedRoute.snapshot.paramMap.get('id');
+
+		this.router.events
+		.subscribe(event => 
+		{
+
+			if(event instanceof NavigationEnd){
+				console.log("event",event.url)
+				if(event.url.indexOf('tab/pictures') !==-1){
+					this.pictureTabDisplayed =true;
+				}
+			}
+		});
 		this.poolId = this.activatedRoute.snapshot.paramMap.get('sid');
 		this.customerChangesSub = this.customerService.getCustomer(this.uid).subscribe(
 			(data) =>{

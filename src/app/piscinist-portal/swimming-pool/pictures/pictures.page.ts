@@ -46,7 +46,7 @@ export class PicturesPage implements OnInit {
 					this.poolId = data.poolId;
 					this.picturesChangesSub = this.poolService.getSwimmingPoolPictures(this.poolId).subscribe(
 						pictures =>{
-							console.log(pictures);
+							console.log("picturesChangesSub",pictures);
 							this.pictures = pictures;
 						})
 				}
@@ -58,7 +58,12 @@ export class PicturesPage implements OnInit {
 		this.poolChangesSub.unsubscribe();
 	}
 
-	addPhotoToGallery() {
+	addPicture() {
 		this.photoService.addNewToGallery(this.accountId,this.poolId);
+	}
+	removePicture(pictureId){
+		console.log("removePicture",pictureId)
+		this.photoService.removeFromGallery(this.accountId,this.poolId,pictureId);
+
 	}
 }

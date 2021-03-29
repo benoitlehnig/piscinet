@@ -3,13 +3,14 @@
 		<ion-row>
 			<ion-col size="6" 
 			*ngFor="let picture of pictures; index as position">
-			<ion-img [src]="picture.webviewPath"></ion-img>
+			<ion-img [src]="picture.data.url"></ion-img>
+			<ion-button (click)="removePicture(picture.id)">remove</ion-button>
 		</ion-col>
 	</ion-row>
 </ion-grid>
 
-<ion-fab vertical="bottom" horizontal="center" slot="fixed">
-	<ion-fab-button (click)="addPhotoToGallery()">
+<ion-fab vertical="top" horizontal="end" slot="fixed">
+	<ion-fab-button (click)="addPicture()">
 		<ion-icon name="camera"></ion-icon>
 	</ion-fab-button>
 </ion-fab>

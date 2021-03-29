@@ -4,6 +4,8 @@ import {
 	AngularFireStorage,
 	AngularFireUploadTask,
 } from '@angular/fire/storage';
+import { AngularFireFunctions } from '@angular/fire/functions';
+
 import { from, Observable } from 'rxjs';
 
 import { switchMap } from 'rxjs/operators';
@@ -15,7 +17,10 @@ export interface FilesUploadMetadata {
 	uploadProgress$: Observable<number>;
 	downloadUrl$: Observable<string>;
 }
-
+export interface Photo {
+	filepath: string;
+	webviewPath: string;
+}
 
 
 const { Camera, Filesystem, Storage } = Plugins;
@@ -23,12 +28,15 @@ const { Camera, Filesystem, Storage } = Plugins;
 @Injectable({
 	providedIn: 'root'
 })
+
 export class PhotoService {
 
-	public pictures: Picture[] = [];
+	public photos: Photo[] = [];
 
 	constructor(
-		private readonly storage: AngularFireStorage
+		private readonly storage: AngularFireStorage,
+		private functions: AngularFireFunctions,
+
 		) { }
 
 	public async addNewToGallery(poolId,accountId) {
@@ -40,12 +48,6 @@ export class PhotoService {
 		});
 		const savedImageFile = await this.savePicture(poolId,accountId,capturedPhoto);
 
-		this.pictures.unshift({
-			name:"",
-			type:"",
-			filepath: "soon...",
-			webviewPath: capturedPhoto.webPath
-		});
 	}
 
 	private async savePicture(poolId,accountId,cameraPhoto: CameraPhoto) {
@@ -53,23 +55,25 @@ export class PhotoService {
 		const base64Data = await this.readAsBase64(cameraPhoto);
 
 		// Write the file to the data directory
-		const fileName = new Date().getTime() + '.jpeg';
-		const savedFile = await Filesystem.writeFile({
-			path: fileName,
-			data: base64Data,
-			directory: FilesystemDirectory.Data
-		});
+		const fileName = new Date().getTime();
+		
 
 		console.log("fileName",fileName,base64Data);
-		const mediaFolderPath = accountId+'/pools/'+poolId+'/pictures/';
-			let returnData = this.uploadFileAndGetMetadata(
-				mediaFolderPath,
-				base64Data,
-				);
+		const mediaFolderPath = accountId+'/pools/'+poolId+'/pictures/'+fileName;
+		let returnData = this.uploadFileAndGetMetadata(
+			mediaFolderPath,
+			base64Data,
+			);
 
-			returnData.downloadUrl$.subscribe(data=>{
-				data;
-			});
+		returnData.downloadUrl$.subscribe(photoUrl=>{
+			console.log("returnData", photoUrl)
+			let picture:Picture=  new Picture();
+			picture.name="";
+			picture.type=""
+			picture.url=photoUrl;
+			picture.filepath=fileName.toString();
+			this.saveToFirebase(accountId,poolId,picture);
+		});
 		// Use webPath to display the new image instead of base64 since it's
 		// already loaded into memory
 		return {
@@ -110,6 +114,15 @@ export class PhotoService {
 		};
 	}
 
+	saveToFirebase(poolId,accountId,picture){
+		const callable = this.functions.httpsCallable('addPicture');
+		const obs = callable({accountId:accountId,poolId:poolId,picture:picture});
+		obs.subscribe(async res => {
+			
+		})
+
+	}
+
 	private getDownloadUrl$(
 		uploadTask: AngularFireUploadTask,
 		path: string,
@@ -119,5 +132,14 @@ export class PhotoService {
 			);
 	}
 
+
+	removeFromGallery(accountId,poolId,pictureId){
+		const callable = this.functions.httpsCallable('deletePicture');
+		const obs = callable({accountId:accountId,poolId:poolId,pictureId:pictureId});
+		obs.subscribe(async res => {
+			console.log(res);
+			
+		})
+	}
 
 }

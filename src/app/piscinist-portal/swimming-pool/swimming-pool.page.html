@@ -41,22 +41,8 @@
 			</ion-tab-button>
 		</ion-tab-bar>
 	</ion-tabs>
-	<div class="ion-hide">
-		<ion-fab  vertical="top" horizontal="end" slot="fixed" >
-			<ion-fab-button>
-				<ion-icon name="add"  size="large"></ion-icon>
-			</ion-fab-button>
-			<ion-fab-list>
-				<ion-fab-button color="primary" class="full" [attr.data-desc]="visitTypeText.visitTypeFull"  [routerLink]="['/customers/'+uid+'/swimming-pool/' +poolId+'/add-visit',{ mode: 'add', customer: customerStringified,swimmingPoolStringified:swimmingPoolStringified,visitType:'full' }]">
-					<ion-icon name="shield-checkmark" fill="solid"></ion-icon>
-				</ion-fab-button>
-				<ion-fab-button color="success" class="maintenance"  [attr.data-desc]="visitTypeText.visitTypeMaintenance" [routerLink]="['/customers/'+uid+'/swimming-pool/' +poolId+'/add-visit',{ mode: 'add', customer: customerStringified,swimmingPoolStringified:swimmingPoolStringified,visitType:'maintenance' }]">
-					<ion-icon name="shield-checkmark" ></ion-icon>
-				</ion-fab-button>
-			</ion-fab-list>
-		</ion-fab>
-	</div>
-	<ion-fab vertical="top" horizontal="end" slot="fixed">
+	
+	<ion-fab vertical="top" horizontal="end" slot="fixed" *ngIf="pictureTabDisplayed!==true">
 		<ion-fab-button (click)="presentActionSheet()">
 			<ion-icon name="add"  size="large"></ion-icon>
 		</ion-fab-button>
