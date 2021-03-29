@@ -5,6 +5,7 @@ import { map, switchMap } from 'rxjs/operators'
 import { uniq, flatten } from 'lodash'
 
 import {SwimmingPool} from '../models/swimming-pool';
+import {Picture} from '../models/swimming-pool';
 import {DataSharingService} from './data-sharing.service';
 
 @Injectable({
@@ -34,9 +35,17 @@ export class PoolService {
 	}
 
 	getSwimmingPoolStatistics(id,statisticName){
-		return this.afDatabase.list<any>(this.accountId+"/statistics/"+id+"/"+statisticName,ref => ref.orderByChild('date')).snapshotChanges().pipe(
+		return this.afDatabase.list<any>(this.accountId+"/statistics/"+id+"/"+statisticName,ref => ref.orderByChild('date'))
+		.snapshotChanges().pipe(
 			map(changes => 
 				changes.map(c => ({ label: c.payload.val().date, value: c.payload.val().value }))
+				)
+			);
+	}
+	getSwimmingPoolPictures(id){
+		return this.afDatabase.list<Picture>(this.accountId+'/pools/'+id+'/pictures/').snapshotChanges().pipe(
+			map(pictures => 
+				pictures.map(picture => ({ id: picture.payload.key, data: picture.payload.val() }))
 				)
 			);
 	}

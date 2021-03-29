@@ -46,9 +46,17 @@ export class SwimmingPool {
     lastCurtainCleaningDate:string="";
     lastTLCleaningDate:string="";
     lastMaintenanceDate:string="";
-        
+    mainPictureId:string="";
+    
     deserialize(input: any) {
         Object.assign(this, input);
         return this;
     }
+}
+
+export class Picture {
+    name:string="";
+    type:string="";
+    filepath: string;
+    webviewPath: string;
 }

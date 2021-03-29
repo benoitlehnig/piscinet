@@ -35,7 +35,16 @@ const routes: Routes = [
 			loadChildren: () => import('./statistics/statistics.module').then( m => m.StatisticsPageModule)
 		}
 		]
-	}    
+	}   ,
+	{
+		path: 'pictures',
+		children: [
+		{
+			path: '',
+			loadChildren: () => import('./pictures/pictures.module').then( m => m.PicturesPageModule)
+		}
+		]
+	}     
 	
 	]
 },
@@ -44,6 +53,7 @@ const routes: Routes = [
 	redirectTo: 'tab/information',
 	pathMatch: 'full'
 }
+
 ];
 
 @NgModule({

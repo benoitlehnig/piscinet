@@ -32,7 +32,7 @@ export class SwimmingPoolPage implements OnInit {
 	public visitTypeMaintenanceText:string = "";
 	public newVisitCancelText:string = "";
 
-		public visitTypesText=[];
+	public visitTypesText=[];
 
 
 

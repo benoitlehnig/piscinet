@@ -20,7 +20,7 @@ export class AlarmsPage implements OnInit {
 	public swimmingPool;
 	public claims;
 
-		public swimmingPoolChangesSub: Subscription = new Subscription();
+	public swimmingPoolChangesSub: Subscription = new Subscription();
 
 	constructor(
 		public authenticationService:AuthenticationService,
