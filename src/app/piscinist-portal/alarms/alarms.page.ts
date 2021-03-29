@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import { Subscription } from 'rxjs';
+
 
 import {SwimmingPool} from '../../models/swimming-pool';
 
@@ -17,6 +19,9 @@ export class AlarmsPage implements OnInit {
 	public alarms=[];
 	public swimmingPool;
 	public claims;
+
+		public swimmingPoolChangesSub: Subscription = new Subscription();
+
 	constructor(
 		public authenticationService:AuthenticationService,
 		public poolService: PoolService,
@@ -24,8 +29,11 @@ export class AlarmsPage implements OnInit {
 		) { }
 
 	ngOnInit() {
+	}
+
+	ionViewWillEnter() {
 		this.swimmingPool = this.poolService.getPoolsWithCustomers();
-		this.swimmingPool.subscribe((data)=>{
+		this.swimmingPoolChangesSub = this.swimmingPool.subscribe((data)=>{
 			data.forEach( (element:any) => {
 				this.checkCurtainRule(element);
 				this.checkMaintenanceRule(element);
@@ -34,6 +42,9 @@ export class AlarmsPage implements OnInit {
 		})
 		this.claims = this.authenticationService.getClaims();
 
+	}
+	ionViewWillLeave(){
+		this.swimmingPoolChangesSub.unsubscribe();
 	}
 
 	checkCurtainRule(element){

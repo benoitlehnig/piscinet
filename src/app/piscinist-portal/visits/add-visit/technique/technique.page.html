@@ -101,7 +101,7 @@
 			</ion-list-header>
 			<ion-item >
 				<ion-label >
-					<ion-text slot="start">{{'VISIT.IntroducedProductChloreChoc' | translate}}</ion-text>
+					<ion-text slot="start">{{'VISIT.IntroducedProductChloreChoc' | translate}} : {{visit.technique.productChloreChoc}}</ion-text>
 					<div>
 						<ion-range min="0" max="10" step="1" name="productChloreChoc" snaps [(ngModel)]="visit.technique.productChloreChoc" (ionChange)="saveTechnical()" pin="true">
 							<ion-icon size="small" color="primary" slot="start" name="ellipse-outline"></ion-icon>
@@ -114,7 +114,7 @@
 			</ion-item>
 			<ion-item >
 				<ion-label >
-					<ion-text slot="start">{{'VISIT.IntroducedProductHypochlorite' | translate}}</ion-text>
+					<ion-text slot="start">{{'VISIT.IntroducedProductHypochlorite' | translate}}: {{visit.technique.productHypochlorite}}</ion-text>
 					<div>
 						<ion-range min="0" max="10" step="1" name="productHypochlorite" snaps [(ngModel)]="visit.technique.productHypochlorite" (ionChange)="saveTechnical()" pin="true">
 							<ion-icon size="small" color="primary" slot="start" name="ellipse-outline"></ion-icon>
@@ -127,7 +127,7 @@
 			</ion-item>
 			<ion-item >
 				<ion-label >
-					<ion-text slot="start">{{'VISIT.IntroducedProductBrome' | translate}}</ion-text>
+					<ion-text slot="start">{{'VISIT.IntroducedProductBrome' | translate}}: {{visit.technique.productBrome}}</ion-text>
 					<div>
 						<ion-range min="0" max="50" step="1" name="productChloreChoc" snaps [(ngModel)]="visit.technique.productBrome" (ionChange)="saveTechnical()" pin="true">
 							<ion-icon size="small" color="primary" slot="start" name="ellipse-outline"></ion-icon>
@@ -144,7 +144,7 @@
 			</ion-item>
 			<ion-item>
 				<ion-label >
-					<ion-text slot="start">{{'VISIT.IntroducedProductPH' | translate}}</ion-text>
+					<ion-text slot="start">{{'VISIT.IntroducedProductPH' | translate}}: {{visit.technique.productPH}}</ion-text>
 					<div>
 						<ion-range min="0" max="50" step="1" name="productPH" snaps [(ngModel)]="visit.technique.productPH" (ionChange)="saveTechnical()" pin="true">
 							<ion-icon size="small" color="primary" slot="start" name="ellipse-outline"></ion-icon>
@@ -157,7 +157,7 @@
 			</ion-item>
 			<ion-item>
 				<ion-label >
-					<ion-text slot="start">{{'VISIT.IntroducedProductSalt' | translate}}</ion-text>
+					<ion-text slot="start">{{'VISIT.IntroducedProductSalt' | translate}}: {{visit.technique.productSel}}</ion-text>
 					<div>
 						<ion-range min="0" max="50" step="1" name="productSel" snaps [(ngModel)]="visit.technique.productSel" (ionChange)="saveTechnical()" pin="true">
 							<ion-icon size="small" color="primary" slot="start" name="bag-outline"></ion-icon>
