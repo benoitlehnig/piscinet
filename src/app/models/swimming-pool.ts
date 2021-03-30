@@ -59,4 +59,5 @@ export class Picture {
     type:string="";
     filepath: string="";
     url: string="";
+    dateTime:string="";
 }

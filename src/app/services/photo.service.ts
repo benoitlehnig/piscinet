@@ -10,6 +10,7 @@ import { from, Observable } from 'rxjs';
 
 import { switchMap } from 'rxjs/operators';
 
+import * as moment from 'moment';
 
 import {Picture} from '../models/swimming-pool';
 
@@ -39,18 +40,18 @@ export class PhotoService {
 
 		) { }
 
-	public async addNewToGallery(poolId,accountId) {
+	public async addNewToGallery(accountId,poolId) {
 		// Take a photo
 		const capturedPhoto = await Camera.getPhoto({
 			resultType: CameraResultType.Uri, 
 			source: CameraSource.Camera, 
 			quality: 100 
 		});
-		const savedImageFile = await this.savePicture(poolId,accountId,capturedPhoto);
+		const savedImageFile = await this.savePicture(accountId,poolId,capturedPhoto);
 
 	}
 
-	private async savePicture(poolId,accountId,cameraPhoto: CameraPhoto) {
+	private async savePicture(accountId,poolId,cameraPhoto: CameraPhoto) {
 		// Convert photo to base64 format, required by Filesystem API to save
 		const base64Data = await this.readAsBase64(cameraPhoto);
 
@@ -58,7 +59,7 @@ export class PhotoService {
 		const fileName = new Date().getTime();
 		
 
-		console.log("fileName",fileName,base64Data);
+		console.log("mediaFolderPath",accountId+'/pools/'+poolId+'/pictures/'+fileName);
 		const mediaFolderPath = accountId+'/pools/'+poolId+'/pictures/'+fileName;
 		let returnData = this.uploadFileAndGetMetadata(
 			mediaFolderPath,
@@ -71,8 +72,9 @@ export class PhotoService {
 			picture.name="";
 			picture.type=""
 			picture.url=photoUrl;
+			picture.dateTime = moment().toString()
 			picture.filepath=fileName.toString();
-			this.saveToFirebase(accountId,poolId,picture);
+			//this.saveToFirebase(accountId,poolId,picture);
 		});
 		// Use webPath to display the new image instead of base64 since it's
 		// already loaded into memory
@@ -114,7 +116,7 @@ export class PhotoService {
 		};
 	}
 
-	saveToFirebase(poolId,accountId,picture){
+	saveToFirebase(accountId,poolId,picture){
 		const callable = this.functions.httpsCallable('addPicture');
 		const obs = callable({accountId:accountId,poolId:poolId,picture:picture});
 		obs.subscribe(async res => {

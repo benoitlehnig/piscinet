@@ -4,7 +4,10 @@
 			<ion-col size="6" 
 			*ngFor="let picture of pictures; index as position">
 			<ion-img [src]="picture.data.url"></ion-img>
-			<ion-button (click)="removePicture(picture.id)">remove</ion-button>
+			<ion-item>
+				<ion-label>{{picture.data.dateTime |  date:'mediumDate' }}</ion-label>
+				<ion-note slot="end" (click)="removePicture(picture.id)"> <ion-icon name="trash-outline"></ion-icon></ion-note>
+			</ion-item>
 		</ion-col>
 	</ion-row>
 </ion-grid>
