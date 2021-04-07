@@ -49,6 +49,9 @@ export class PoolService {
 				)
 			);
 	}
+	
+
+		
 
 	getPoolsWithCustomers(){
 		return this.afDatabase.list<SwimmingPool>(this.accountId+'/pools').snapshotChanges()
