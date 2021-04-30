@@ -31,6 +31,7 @@ export class CustomersPage implements OnInit {
 	ionViewWillEnter() {
 		this.customersChangesSub = this.customerService.getCustomers().subscribe(
 			data=> {
+				console.log("CustomersPage >> ionViewWillEnter >>" ,data)
 				this.dataSharingService.currentCustomers(data);
 				this.customers = data;
 			}

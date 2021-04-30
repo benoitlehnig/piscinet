@@ -63,8 +63,7 @@ export class AdminPage implements OnInit {
 	}
 
 	ionViewWillEnter() {
-		
-		this.accountChangesSub = this.afs.doc<Company>('accounts/'+this.accountID).valueChanges().subscribe(
+		this.accountChangesSub = this.accountService.getAccount(null).subscribe(
 			(data)=>{
 				this.company = data;
 				this.autocomplete = { input: this.company.googleAddress};
@@ -121,7 +120,7 @@ export class AdminPage implements OnInit {
 	}
 
 	saveConfiguration(){
-		this.accountService.saveAccount(this.accountID, this.company);
+		this.accountService.saveAccount(null, this.company);
 	}
 
 	updateSearchResults(){

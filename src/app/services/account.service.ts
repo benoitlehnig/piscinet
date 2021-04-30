@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import {DataSharingService} from './data-sharing.service';
+
+
 import {Company} from '../models/company';
 import { map } from 'rxjs/operators';
 
@@ -7,11 +10,25 @@ import { map } from 'rxjs/operators';
 	providedIn: 'root'
 })
 export class AccountService {
+	public accountId:string="piscinet";
 
 
 	constructor(
-		private afs: AngularFirestore
-		) { }
+		private afs: AngularFirestore,
+		public dataSharingService: DataSharingService,
+
+		) {
+
+		this.dataSharingService.getAccoundIDChanges().subscribe(
+			data=>{
+				console.log("accountId",data);
+				if(data !==null){
+					if(data['accountId'] !== null){
+						this.accountId=data;
+					} 
+				}	
+			})
+	}
 
 	getAcccounts(){
 		const accountCollection = this.afs.collection<Company>('accounts');
@@ -23,8 +40,15 @@ export class AccountService {
 			})))
 	}
 
+
 	getAccount(id){
-		return this.afs.doc<Company>('accounts/'+id).valueChanges()
+		console.log("getAccount", id)
+		if(id !==null){
+			return this.afs.doc<Company>('accounts/'+id).valueChanges()
+		}
+		else{
+			return this.afs.doc<Company>('accounts/'+this.accountId).valueChanges()
+		}
 	}
 
 	accountExists(account:Company){
@@ -32,7 +56,12 @@ export class AccountService {
 	}
 
 	saveAccount(accountID,account){
-		this.afs.collection<Company>('accounts').doc(accountID).set(JSON.parse( JSON.stringify(account)));
+		if(accountID !==null){
+			this.afs.collection<Company>('accounts').doc(accountID).set(JSON.parse( JSON.stringify(account)));
+		}
+		else{
+			this.afs.collection<Company>('accounts').doc(this.accountId).set(JSON.parse( JSON.stringify(account)));
+		}
 
 	}
 
