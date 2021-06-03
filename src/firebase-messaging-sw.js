@@ -27,7 +27,6 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
-
 /*
 	
 importScripts('/__/firebase/7.15.0/firebase-app.js');
