@@ -17,7 +17,8 @@ $RECYCLE.BIN/
 log.txt
 npm-debug.log*
 
-
+src/index.html
+src/firebase-messaging-sw.js
 
 /.idea
 /.ionic
